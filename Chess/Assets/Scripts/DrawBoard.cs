@@ -10,7 +10,6 @@ public class DrawBoard : MonoBehaviour
     public Material tint1;
     public Material tint2;
 
-
     [SerializeField] [Range(1, 16)] int size;
     private int rows;
     private int columns;
@@ -27,6 +26,9 @@ public class DrawBoard : MonoBehaviour
     private List<int> triCopy1 = new List<int>();
     private List<int> triCopy2 = new List<int>();
 
+    private Vector2 squareClicked;
+    private int squareIndex;
+
     // Use this for initialization
     void Start()
     {
@@ -41,13 +43,18 @@ public class DrawBoard : MonoBehaviour
         InitBoard();
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        DetectClick();
+    }
+
     void InitBoard()
     {
         DrawMesh();
         TintMaterials();
         meshFilter.mesh = mesh;
     }
-
 
     void DrawMesh()
     {
@@ -97,6 +104,7 @@ public class DrawBoard : MonoBehaviour
 
     void TintMaterials()
     {
+        //applies ting to the tint material.
         tint1.color = meshRenderer.materials[2].color + tintColor;
         tint2.color = meshRenderer.materials[3].color + tintColor;
 
@@ -108,10 +116,10 @@ public class DrawBoard : MonoBehaviour
     {
         int[] tri;
         List<int> triCopy;
-        int index = ((int)pos.x * rows + (int)pos.y);
+        int index = (int)pos.x + (int)pos.y * size;
         int submesh;
 
-        if (index % 2 == 0)
+        if ((pos.x + pos.y) % 2 == 0)
         {
             tri = tri2;
             triCopy = triCopy1;
@@ -149,4 +157,37 @@ public class DrawBoard : MonoBehaviour
         mesh.SetTriangles(triCopy1, 1);
     }
 
+    void DetectClick()
+    {
+        //Checks for left mouse button down.
+        if (Input.GetButtonDown("Fire1"))
+        {
+            RaycastHit hit;
+
+            //create a ray from the camera through the mouse cursor.
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.transform.tag == "ChessBoard")
+                {
+                    int triangleInd = hit.triangleIndex;
+                    if (triangleInd > 125)
+                        squareIndex = (triangleInd - 128) / 2;
+                    else
+                        squareIndex = triangleInd / 2;
+                }
+            }
+        }
+    }
+
+    public Vector2 SquareClicked
+    {
+        get
+        {
+            int x = squareIndex % size;
+            int y = squareIndex / size;
+            return new Vector2(x, y);
+        }
+    }
 }

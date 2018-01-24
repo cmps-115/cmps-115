@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -113,85 +113,49 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &758186514
+--- !u!1 &918973863
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 758186518}
-  - component: {fileID: 758186517}
-  - component: {fileID: 758186516}
-  - component: {fileID: 758186515}
+  - component: {fileID: 918973865}
+  - component: {fileID: 918973864}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Draw Pieces
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!23 &758186515
-MeshRenderer:
+--- !u!114 &918973864
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 758186514}
+  m_GameObject: {fileID: 918973863}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!65 &758186516
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 758186514}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!33 &758186517
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 758186514}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &758186518
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74c23a2030257584d945750e388f4e35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  king: {fileID: 1697479962958710, guid: 2aa3212572485d34ebd1c7b02fee9d55, type: 2}
+  queen: {fileID: 1960596109958534, guid: b4c4c0171fa456e49af5d067bf3164d5, type: 2}
+  bishop: {fileID: 1878149368459616, guid: b9dda6af9bcd1a3479f6d9d50862dd66, type: 2}
+  knight: {fileID: 1276325296168924, guid: 8dad9960175a34a4cbdeed9b0a3ab563, type: 2}
+  castle: {fileID: 1487059702000314, guid: 7f7996a1351b28d4d9d4cb8d79f5366c, type: 2}
+  pawn: {fileID: 1802495202245792, guid: d968434a2bc11344ab3ba23c2c28c63c, type: 2}
+  firstTeam: {fileID: 2100000, guid: bd85ee64cd6833048965076a4ca55360, type: 2}
+  secondTeam: {fileID: 2100000, guid: c1f9b185a75ee2549b0ef2d358dc1958, type: 2}
+--- !u!4 &918973865
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 758186514}
+  m_GameObject: {fileID: 918973863}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 0.41261888, y: 2.6770694, z: 0.03125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -275,7 +239,7 @@ GameObject:
   - component: {fileID: 1200306488}
   - component: {fileID: 1200306490}
   m_Layer: 0
-  m_Name: Board
+  m_Name: Draw Board
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
