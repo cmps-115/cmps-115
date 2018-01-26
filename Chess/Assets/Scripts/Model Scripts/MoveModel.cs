@@ -55,6 +55,7 @@ public class MoveModel : MonoBehaviour {
     public void MovePiece(Vector2 from, Vector2 to, int height = 2)
     {
         if (height < 0)  throw new System.Exception("Error in MoveModel: MovePiece() height parameter must be greater than zero.");
+        if (from.x < 0 || to.x < 0 || from.y > 7 || to.y > 7) throw new System.Exception("Error in MoveModel: MovePiece() coordinates out of range.");
 
         if (!moving)
         {

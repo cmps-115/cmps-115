@@ -14,6 +14,7 @@ public class ObjMovementTest : MonoBehaviour {
     }
 	
 	// Update is called once per frame
+    //demo of moving pieces around the board.
 	void Update () {
 		
         if (Time.time >= 2 && Time.time <= 3)
