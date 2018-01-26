@@ -13,47 +13,57 @@ public class Piece
 {
     //Each piece name is represented by an number
     //Pawn = 0, rook = 1, knight = 2, bishop = 3, queen = 4, king = 5
-    enum PIECE_TYPES { pawn, rook, knight, bishop, queen, king };
-    int type;
-    bool taken;//represents if the piece still exists on the board
-    Position PiecePosition;
-    bool team; //0 for black 1 for white
+    public enum PIECE_TYPES { Pawn, Rook, Knight, Bishop, Queen, King };
+    public PIECE_TYPES type;
+    public bool taken;//represents if the piece still exists on the board
+    public Position PiecePosition;
+    public bool team; //0 for black 1 for white
 
-    public Piece(int p_type, Position pos, bool t)
+    
+    public Piece(PIECE_TYPES p_type, bool t)//Constructor for a piece, without a specified position
     {
         type = p_type;
         taken = false;
-        PiecePosition = pos;
+        PiecePosition = new Position();
         team = t;
     }
 
+    public Piece(PIECE_TYPES p_trype, bool t, string sqName, int Xcord, int Ycord)//Constructor for piece with a specific position
+    {
+        type = p_trype;
+        taken = false;
+        PiecePosition = new Position(sqName, Xcord, Ycord);
+        team = t;
+    }
     //returns cureent position on board of the given piece
     public Position GetPiecePosition()
     {
-        return PiecePosition;
-    }
-
-    //Sets the position of the piece
-    //Only sets the position of the prospected position change is a valid move
-    public void SetPosition(tuple pos)
-    {
-        position = pos;
+        return PiecePosition;  
     }
 
     //returns the type of piece
-    public PIECE_TYPES getType()
+    public PIECE_TYPES GetPieceType()
     {
         return type;
     }
-
-    public bool IsValidMove(PIECE_TYPES type, tuple move)
+    
+    public void PieceTaken()
     {
-
+        PiecePosition.SetPosition("Out", -1, -1);
+        taken = true;
     }
 
-    private Piece TookPiece()
+    public void Promote()//Promote turns a pawn that has reached rank 8 or 1 and it can be changed into another piece
     {
+        if (type == PIECE_TYPES.Pawn && ((PiecePosition.GetY() == 1) || (PiecePosition.GetY() == 8)))
+        {
+            //call a function that asks for a choice of promotion
+            //using queen as substitute
+            type = PIECE_TYPES.Queen;
+            //call a function that changes the model from a pawn, to the chosen promotion
 
+        }
+        else return;
     }
 }
 
