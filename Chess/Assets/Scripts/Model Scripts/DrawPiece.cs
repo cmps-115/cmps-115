@@ -129,10 +129,7 @@ public class DrawPiece : MonoBehaviour {
 
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.transform.tag == "ChessPiece")
-                {
-                    pieceClicked = new Vector2(hit.transform.position.x - 0.5f, hit.transform.position.z - 0.5f);
-                }
+                if (hit.transform.tag == "ChessPiece") pieceClicked = new Vector2(hit.transform.position.x - 0.5f, hit.transform.position.z - 0.5f);
             }
         }
     }

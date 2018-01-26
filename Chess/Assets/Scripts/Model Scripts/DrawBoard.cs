@@ -68,6 +68,7 @@ public class DrawBoard : MonoBehaviour
 
         Vector3[] vertices = new Vector3[numberOfVertices];
         Vector2[] uv = new Vector2[numberOfVertices];
+        Vector3[] normals = new Vector3[numberOfVertices];
         tri1 = new int[numberOfSquares * 6];
         tri2 = new int[numberOfSquares * 6];
         int[] tri = tri1;
@@ -76,6 +77,7 @@ public class DrawBoard : MonoBehaviour
             for (int j = 0; j <= columns; ++j)
             {
                 vertices[count] = new Vector3(j, 0, i);
+                normals[count] = -Vector3.forward;
                 uv[count] = new Vector2((j + rows) / rows, (i + columns) / columns);
                 if (i > 0 && j > 0)
                 {
@@ -94,6 +96,7 @@ public class DrawBoard : MonoBehaviour
             }
         }
         mesh.vertices = vertices;
+        mesh.normals = normals;
         mesh.SetTriangles(tri1, 2);
         mesh.SetTriangles(tri2, 3);
         mesh.uv = uv;
