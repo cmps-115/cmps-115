@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+//not done yet
+// have to the bishop
 public class Rules : MonoBehaviour
 {
 
