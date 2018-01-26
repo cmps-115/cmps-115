@@ -8,12 +8,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using ChessGlobals;
 
 public class Piece
 {
     //Each piece name is represented by an number
     //Pawn = 0, rook = 1, knight = 2, bishop = 3, queen = 4, king = 5
-    public enum PIECE_TYPES { Pawn, Rook, Knight, Bishop, Queen, King };
+    
     public PIECE_TYPES type;
     public bool taken;//represents if the piece still exists on the board
     public Position PiecePosition;

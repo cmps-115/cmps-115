@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ChessGlobals;
 
 public class SCRIPT_TESTING : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
         print("Test started");
-        Piece testPawn = new Piece(Piece.PIECE_TYPES.Pawn, true, "a2", 1, 2);
+        Piece testPawn = new Piece(PIECE_TYPES.Pawn, true, "a2", 1, 2);
         print("Pawn Created");
 
         print(testPawn.PiecePosition.GetX());
