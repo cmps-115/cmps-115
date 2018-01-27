@@ -205,7 +205,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-PIECE_TYPE: Enum",
+											"text": "-PieceType: Enum",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -347,7 +347,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Piece(type: PIECE_TYPES, t: bool)",
+											"text": "+Piece(type: PieceTypes, t: bool)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -405,7 +405,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getPosition(): Position",
+											"text": "+GetPosition(): Position",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -434,7 +434,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setPosition(pos: Position *): void",
+											"text": "+SetPosition(pos: Position): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -463,7 +463,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+isCaptured(): bool",
+											"text": "+IsCaptured(): bool",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -492,7 +492,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getType(): PIECE_TYPES",
+											"text": "+GetType(): PieceTypes",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -521,7 +521,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getTeam(): bool",
+											"text": "+GetTeam(): bool",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -550,7 +550,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getPieceType(): PIECE_TYPES",
+											"text": "+GetPieceType(): Piece_Types",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -579,7 +579,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+promote(): void",
+											"text": "+Promote(): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -958,7 +958,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+get_move(): Move",
+											"text": "+GetMove(): Move",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -987,7 +987,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+move_successfully_executed(move: Move): bool",
+											"text": "+MoveSuccessfullyExecuted(move: Move): bool",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1016,7 +1016,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+get_id(): int",
+											"text": "+GetId(): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1045,7 +1045,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+get_color(): char",
+											"text": "+GetColor(): char",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1395,7 +1395,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+mark(square * Position, piece: Piece*): void",
+											"text": "+Mark(square Position, piece: Piece): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1424,7 +1424,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+unmark(position*): void",
+											"text": "+Unmark(position: Position): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1453,7 +1453,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+is_occupied(square: Position*): bool",
+											"text": "+IsOccupied(square: Position): bool",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1482,7 +1482,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+is_occupied(coords: Vector2int): bool",
+											"text": "+IsOccupied(coords: Vector2): bool",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1777,7 +1777,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+game_mode: MODE_TYPE",
+											"text": "+game_mode: ModeType",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1806,7 +1806,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+games: ArrayList<Chess_Game>",
+											"text": "+games: ArrayList<ChessGame>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1861,7 +1861,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Mode(mode: MODE_TYPE)",
+											"text": "+Mode(mode: ModeType)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1890,7 +1890,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+add_player(p: Player*, game: Chess_Game*): void",
+											"text": "+AddPayer(p: Player, game: ChessGame): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1919,7 +1919,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+remove_player(p: Player*, game: Chess_Game*)",
+											"text": "+RemovePlayer(p: Player, game: ChessGame)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1948,7 +1948,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+get_player(id: int, game: Chess_Game*): Player *",
+											"text": "+GetPlayer(id: int, game: ChessGame): Player",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -2121,7 +2121,7 @@
 											"containerExtending": false,
 											"left": 557,
 											"top": 135,
-											"width": 95,
+											"width": 117,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
@@ -2193,7 +2193,7 @@
 									"containerExtending": false,
 									"left": 552,
 									"top": 128,
-									"width": 105,
+									"width": 127,
 									"height": 25,
 									"autoResize": false,
 									"stereotypeLabel": {
@@ -2239,11 +2239,11 @@
 											"containerExtending": false,
 											"left": 557,
 											"top": 158,
-											"width": 95,
+											"width": 117,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+mode: Mode*",
+											"text": "+mode: List<Mode>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -2260,7 +2260,7 @@
 									"containerExtending": false,
 									"left": 552,
 									"top": 153,
-									"width": 105,
+									"width": 127,
 									"height": 23,
 									"autoResize": false
 								},
@@ -2284,7 +2284,7 @@
 									"containerExtending": false,
 									"left": 552,
 									"top": 176,
-									"width": 105,
+									"width": 127,
 									"height": 10,
 									"autoResize": false
 								},
@@ -2348,7 +2348,7 @@
 							"containerExtending": false,
 							"left": 552,
 							"top": 128,
-							"width": 105,
+							"width": 127,
 							"height": 73,
 							"autoResize": false,
 							"stereotypeDisplay": "label",
@@ -2407,7 +2407,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 496,
-									"top": 147,
+									"top": 148,
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -2441,7 +2441,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 495,
-									"top": 132,
+									"top": 133,
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -2475,7 +2475,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 497,
-									"top": 176,
+									"top": 177,
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -2509,7 +2509,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 469,
-									"top": 148,
+									"top": 149,
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -2542,7 +2542,7 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 470,
+									"left": 471,
 									"top": 135,
 									"width": 0,
 									"height": 13,
@@ -2679,7 +2679,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 526,
-									"top": 173,
+									"top": 174,
 									"width": 7,
 									"height": 13,
 									"autoResize": false,
@@ -2760,7 +2760,7 @@
 								"$ref": "AAAAAAFhEBDIb22JRS0="
 							},
 							"lineStyle": 1,
-							"points": "444:171;551:166",
+							"points": "444:171;551:167",
 							"stereotypeDisplay": "label",
 							"showVisibility": true,
 							"showProperty": true,
@@ -2867,7 +2867,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "PIECE_TYPES",
+											"text": "PieceTypes",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3081,7 +3081,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "PAWN",
+											"text": "Pawn",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3110,7 +3110,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "KING",
+											"text": "King",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3139,7 +3139,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "KNIGHT",
+											"text": "Knight",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3168,7 +3168,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "BISHOP",
+											"text": "Bishop",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3197,7 +3197,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "QUEEN",
+											"text": "Queen",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3226,7 +3226,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "ROOK",
+											"text": "Rook",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3477,7 +3477,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-chess_game: Chess_Game",
+											"text": "-chessGame: ChessGame",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3532,7 +3532,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Rules(chess_game: Chess_Game)",
+											"text": "+Rules(chessGame: ChessGame)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3561,7 +3561,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+game_over(): bool",
+											"text": "+GameOver(): bool",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3590,7 +3590,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+legal_move(board: Board, move: Move): bool",
+											"text": "+LegalMove(board: Board, move: Move): bool",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3619,7 +3619,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+legal_pawn_move(move: Move): bool",
+											"text": "+LegalPawnMove(move: Move): bool",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3648,7 +3648,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+legal_king_move(move: Move): bool",
+											"text": "+LegalKingMove(move: Move): bool",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3677,7 +3677,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+legal_knight_move(move: Move): bool",
+											"text": "+LegalKnightMove(move: Move): bool",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3706,7 +3706,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+legal_bishop_move(move: Move): bool",
+											"text": "+LegalBishopMove(move: Move): bool",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3735,7 +3735,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+legal_queen_move(move: Move): bool",
+											"text": "+LegalQueenMove(move: Move): bool",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3764,7 +3764,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+legal_rook_move(move: Move): bool",
+											"text": "+LegalRookMove(move: Move): bool",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3793,7 +3793,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-are_pieces_blocking_move(move: Move): bool",
+											"text": "-ArePiecesBlockingMove(move: Move): bool",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3822,7 +3822,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-is_position_free(square: Position): bool",
+											"text": "-IsPositionFree(square: Position): bool",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3851,7 +3851,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-is_position_capturable(square: Position): bool",
+											"text": "-IsPositionCapturable(square: Position): bool",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3880,7 +3880,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+promote(pawn: Piece): void",
+											"text": "+Promote(pawn: Piece): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4259,7 +4259,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Move(Position src, Position  des)",
+											"text": "+Move(src: Position, des: Position)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4437,7 +4437,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "GAME_STATE",
+											"text": "GameState",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4651,7 +4651,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "CHECKMATE",
+											"text": "Checkmate",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4680,7 +4680,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "DRAW",
+											"text": "Draw",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4709,7 +4709,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "INPROGRESS",
+											"text": "InProgress",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4989,7 +4989,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-Vector2: coordinates",
+											"text": "-coordinates: Vector2",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -5102,7 +5102,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getPosition(): Position",
+											"text": "+GetPosition(): Position",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -5131,7 +5131,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setPosition(st: string, x: int, y: int): void",
+											"text": "+SetPosition(st: string, x: int, y: int): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -5160,7 +5160,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getRow(): int",
+											"text": "+GetRow(): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -5189,7 +5189,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getCol(): int",
+											"text": "+GetCol(): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -5218,7 +5218,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getX(): int",
+											"text": "+GetX(): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -5247,7 +5247,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getY(): int",
+											"text": "+GetY(): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -5276,7 +5276,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setX(int: x): int",
+											"text": "+SetX(int: x): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -5305,7 +5305,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setY(int: y): int",
+											"text": "+SetY(int: y): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -5334,7 +5334,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setSquareName(s: string): void",
+											"text": "+SetSquareName(s: string): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -5363,7 +5363,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getCoordinate(): Vector2Int",
+											"text": "+GetCoordinate(): Vector2Int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -6850,7 +6850,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Chess_Game",
+											"text": "ChessGame",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7026,7 +7026,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-player_one: Player",
+											"text": "-playerOne: Player",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7055,7 +7055,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-player_two: Player",
+											"text": "-playerTwo: Player",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7084,7 +7084,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-active_player: Player",
+											"text": "-activePayer: Player",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7142,7 +7142,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-captured_pieces: List<Piece>",
+											"text": "-capturePieces: List<Piece>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7197,7 +7197,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+set_player(player_one: Player, player_two: Player): void",
+											"text": "+SetPlayer(playerOne: Player, playerTwo: Player): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7226,7 +7226,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Chess_Game()",
+											"text": "+ChessGame()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7255,7 +7255,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+start_game(): void",
+											"text": "+startGame(): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7284,7 +7284,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-swap_active_player(): void",
+											"text": "-swapActivePlayer(): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7313,7 +7313,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+create_piece_and_add(piece_type: PIECE_TYPE): void",
+											"text": "+createPieceAndAdd(pieceType: PieceType): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7342,7 +7342,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+move_piece(move: *Move): move",
+											"text": "+movePece(move: Move): move",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7371,7 +7371,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-wait_for_move(): void",
+											"text": "-waitForMove(): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7400,7 +7400,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+undo_move(move: Move): void",
+											"text": "+undoMove(move: Move): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7429,7 +7429,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-end_condition_reached(): bool",
+											"text": "-endConditionReached(): bool",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7458,7 +7458,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+get_noncaptured_piece_at_position(pos: Position): Position",
+											"text": "+getNonCapturedPieceAtPosition(pos: Position): Position",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7487,7 +7487,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+is_non_captured_piece_at_position(pos: Position): bool",
+											"text": "+isNonCapturedPieceAtPosition(pos: Position): bool",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7516,7 +7516,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+get_game_state(): GAME_STATE",
+											"text": "+getGameState(): GameState",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7840,7 +7840,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-chess_game: Chess_Game*",
+											"text": "-chessGame: ChessGame",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7895,7 +7895,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+AI(chess_game: Chess_Game*, rules: Rules*, depth: int)",
+											"text": "+AI(chessGame: ChessGame, rules: Rules, depth: int)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7924,7 +7924,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+get_move(): Move*",
+											"text": "+GetMove(): Move",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7953,7 +7953,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+move_successfully_executed(move: Move*): bool",
+											"text": "+MoveSuccessfullyExecuted(move: Move): bool",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7982,7 +7982,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-get_best_move(): Move*",
+											"text": "-GetBestMove(): Move",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -8011,7 +8011,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-undo_move(move: *Move): void",
+											"text": "-UndoMove(move: Move): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -8040,7 +8040,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-do_move(move: *Move): void",
+											"text": "-DoMove(move: Move): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -8069,7 +8069,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-generate_moves(): List<Move*>",
+											"text": "-GenerateMoves(): List<Move>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -8098,7 +8098,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-evaluate_game_state(): int",
+											"text": "-EvaluateGameState(): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -8127,7 +8127,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-get_score_for_square(square: Position*): int",
+											"text": "-GetScoreForSquare(square: Position): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -8156,7 +8156,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-get_score_for_piece_type(type: PIECE_TYPE)",
+											"text": "-GetScoreForPieceType(type: PieceType)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -8185,7 +8185,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-neg_max(depth): int",
+											"text": "-NegMax(depth): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -8214,7 +8214,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+get_id(): int",
+											"text": "+GetId(): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -8243,7 +8243,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+get_color(): char",
+											"text": "+GetColor(): char",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -10222,7 +10222,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-last_move: Move",
+											"text": "-lastMove: Move",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -10251,7 +10251,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-current_move: Move",
+											"text": "-currentMove: Move",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -10306,7 +10306,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+get_move(): Move",
+											"text": "+GetMove(): Move",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -10335,7 +10335,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+move_successfully_executed(move: Move): bool",
+											"text": "+MoveSuccessfullyExecuted(move: Move): bool",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -10364,7 +10364,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+get_id(): int",
+											"text": "+GetId(): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -10393,7 +10393,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+get_color(): char",
+											"text": "+GetColor(): char",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13573,7 +13573,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "MODE_TYPES",
+											"text": "ModeType",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13787,7 +13787,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "PVP",
+											"text": "Pvp",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13816,7 +13816,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "PVC",
+											"text": "Pvc",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -14071,7 +14071,7 @@
 								"$ref": "AAAAAAFhEBHOOm69ock="
 							},
 							"lineStyle": 1,
-							"points": "603:127;602:74"
+							"points": "611:127;604:74"
 						},
 						{
 							"_type": "UMLDependencyView",
@@ -17206,7 +17206,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setPosition(Position pos): void",
+											"text": "+SetPosition(Position pos): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -17235,7 +17235,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setPiece(Piece p): void",
+											"text": "+SetPiece(Piece p): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -17264,7 +17264,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getPosition(): Position",
+											"text": "+GetPosition(): Position",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -17293,7 +17293,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getPiece(): Piece",
+											"text": "+GetPiece(): Piece",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -18047,7 +18047,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+CheckFrom(from: Vector2, des: Vector2, height: int)",
+											"text": "+CheckSrc(from: Vector2, des: Vector2, height: int)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -18076,7 +18076,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+CheckTo(des: Vector2)",
+											"text": "+CheckDes(des: Vector2)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -18450,7 +18450,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhD7QRdmM1L0Y="
 							},
-							"name": "PIECE_TYPE",
+							"name": "PieceType",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -18626,7 +18626,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhD7QRdmM1L0Y="
 							},
-							"name": "getPosition",
+							"name": "GetPosition",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -18659,7 +18659,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhD7QRdmM1L0Y="
 							},
-							"name": "setPosition",
+							"name": "SetPosition",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -18674,7 +18674,9 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "Position *",
+									"type": {
+										"$ref": "AAAAAAFhIUv7rW55Hpw="
+									},
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -18706,7 +18708,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhD7QRdmM1L0Y="
 							},
-							"name": "isCaptured",
+							"name": "IsCaptured",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -18737,7 +18739,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhD7QRdmM1L0Y="
 							},
-							"name": "getType",
+							"name": "GetType",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -18751,9 +18753,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": {
-										"$ref": "AAAAAAFhIRb9Ih+sCOw="
-									},
+									"type": "PieceTypes",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -18770,7 +18770,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhD7QRdmM1L0Y="
 							},
-							"name": "getTeam",
+							"name": "GetTeam",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -18801,7 +18801,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhD7QRdmM1L0Y="
 							},
-							"name": "getPieceType",
+							"name": "GetPieceType",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -18815,9 +18815,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": {
-										"$ref": "AAAAAAFhIRb9Ih+sCOw="
-									},
+									"type": "Piece_Types",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -18834,7 +18832,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhD7QRdmM1L0Y="
 							},
-							"name": "promote",
+							"name": "Promote",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -19940,7 +19938,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhD/wtEGkuR24="
 							},
-							"name": "get_move",
+							"name": "GetMove",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -19973,7 +19971,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhD/wtEGkuR24="
 							},
-							"name": "move_successfully_executed",
+							"name": "MoveSuccessfullyExecuted",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -20022,7 +20020,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhD/wtEGkuR24="
 							},
-							"name": "get_id",
+							"name": "GetId",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -20053,7 +20051,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhD/wtEGkuR24="
 							},
-							"name": "get_color",
+							"name": "GetColor",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -20243,7 +20241,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEATsQGse59M="
 							},
-							"name": "mark",
+							"name": "Mark",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -20254,11 +20252,10 @@
 									"_parent": {
 										"$ref": "AAAAAAFhEA6I4mzfdBM="
 									},
-									"name": "square * Position",
+									"name": "square Position",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -20289,7 +20286,9 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "Piece*",
+									"type": {
+										"$ref": "AAAAAAFhD7QRdmM1L0Y="
+									},
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -20306,7 +20305,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEATsQGse59M="
 							},
-							"name": "unmark",
+							"name": "Unmark",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -20317,11 +20316,13 @@
 									"_parent": {
 										"$ref": "AAAAAAFhEA8pc20Xg9o="
 									},
-									"name": "position*",
+									"name": "position",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "",
+									"type": {
+										"$ref": "AAAAAAFhIUv7rW55Hpw="
+									},
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -20353,7 +20354,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEATsQGse59M="
 							},
-							"name": "is_occupied",
+							"name": "IsOccupied",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -20368,7 +20369,9 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "Position*",
+									"type": {
+										"$ref": "AAAAAAFhIUv7rW55Hpw="
+									},
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -20400,7 +20403,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEATsQGse59M="
 							},
-							"name": "is_occupied",
+							"name": "IsOccupied",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -20415,7 +20418,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "Vector2int",
+									"type": "Vector2",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -20528,7 +20531,9 @@
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "MODE_TYPE",
+							"type": {
+								"$ref": "AAAAAAFhI+bl36wsD6w="
+							},
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -20546,7 +20551,7 @@
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "ArrayList<Chess_Game>",
+							"type": "ArrayList<ChessGame>",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -20577,7 +20582,9 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "MODE_TYPE",
+									"type": {
+										"$ref": "AAAAAAFhI+bl36wsD6w="
+									},
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -20594,7 +20601,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEBDIbm2HAGA="
 							},
-							"name": "add_player",
+							"name": "AddPayer",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -20609,7 +20616,9 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "Player*",
+									"type": {
+										"$ref": "AAAAAAFhD/obXGjWRhc="
+									},
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -20640,7 +20649,9 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "Chess_Game*",
+									"type": {
+										"$ref": "AAAAAAFhIjQf2p9+tPQ="
+									},
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -20657,7 +20668,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEBDIbm2HAGA="
 							},
-							"name": "remove_player",
+							"name": "RemovePlayer",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -20672,7 +20683,9 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "Player*",
+									"type": {
+										"$ref": "AAAAAAFhD/obXGjWRhc="
+									},
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -20688,7 +20701,9 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "Chess_Game*",
+									"type": {
+										"$ref": "AAAAAAFhIjQf2p9+tPQ="
+									},
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -20705,7 +20720,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhEBDIbm2HAGA="
 							},
-							"name": "get_player",
+							"name": "GetPlayer",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -20735,7 +20750,9 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "Player *",
+									"type": {
+										"$ref": "AAAAAAFhD/obXGjWRhc="
+									},
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -20751,7 +20768,9 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "Chess_Game*",
+									"type": {
+										"$ref": "AAAAAAFhIjQf2p9+tPQ="
+									},
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -20787,7 +20806,7 @@
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "Mode*",
+							"type": "List<Mode>",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -20830,7 +20849,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "PIECE_TYPES",
+					"name": "PieceTypes",
 					"ownedElements": [
 						{
 							"_type": "UMLDependency",
@@ -20858,7 +20877,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIRb9Ih+sCOw="
 							},
-							"name": "PAWN",
+							"name": "Pawn",
 							"visibility": "public"
 						},
 						{
@@ -20867,7 +20886,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIRb9Ih+sCOw="
 							},
-							"name": "KING",
+							"name": "King",
 							"visibility": "public"
 						},
 						{
@@ -20876,7 +20895,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIRb9Ih+sCOw="
 							},
-							"name": "KNIGHT",
+							"name": "Knight",
 							"visibility": "public"
 						},
 						{
@@ -20885,7 +20904,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIRb9Ih+sCOw="
 							},
-							"name": "BISHOP",
+							"name": "Bishop",
 							"visibility": "public"
 						},
 						{
@@ -20894,7 +20913,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIRb9Ih+sCOw="
 							},
-							"name": "QUEEN",
+							"name": "Queen",
 							"visibility": "public"
 						},
 						{
@@ -20903,7 +20922,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIRb9Ih+sCOw="
 							},
-							"name": "ROOK",
+							"name": "Rook",
 							"visibility": "public"
 						}
 					]
@@ -20984,7 +21003,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhISTS5DtIJ2o="
 							},
-							"name": "chess_game",
+							"name": "chessGame",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -21017,7 +21036,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhIm0iOTUlJ7Y="
 									},
-									"name": "chess_game",
+									"name": "chessGame",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -21040,7 +21059,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhISTS5DtIJ2o="
 							},
-							"name": "game_over",
+							"name": "GameOver",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -21071,7 +21090,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhISTS5DtIJ2o="
 							},
-							"name": "legal_move",
+							"name": "LegalMove",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -21138,7 +21157,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhISTS5DtIJ2o="
 							},
-							"name": "legal_pawn_move",
+							"name": "LegalPawnMove",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -21187,7 +21206,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhISTS5DtIJ2o="
 							},
-							"name": "legal_king_move",
+							"name": "LegalKingMove",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -21236,7 +21255,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhISTS5DtIJ2o="
 							},
-							"name": "legal_knight_move",
+							"name": "LegalKnightMove",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -21285,7 +21304,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhISTS5DtIJ2o="
 							},
-							"name": "legal_bishop_move",
+							"name": "LegalBishopMove",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -21334,7 +21353,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhISTS5DtIJ2o="
 							},
-							"name": "legal_queen_move",
+							"name": "LegalQueenMove",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -21383,7 +21402,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhISTS5DtIJ2o="
 							},
-							"name": "legal_rook_move",
+							"name": "LegalRookMove",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -21432,7 +21451,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhISTS5DtIJ2o="
 							},
-							"name": "are_pieces_blocking_move",
+							"name": "ArePiecesBlockingMove",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -21481,7 +21500,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhISTS5DtIJ2o="
 							},
-							"name": "is_position_free",
+							"name": "IsPositionFree",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -21530,7 +21549,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhISTS5DtIJ2o="
 							},
-							"name": "is_position_capturable",
+							"name": "IsPositionCapturable",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -21579,7 +21598,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhISTS5DtIJ2o="
 							},
-							"name": "promote",
+							"name": "Promote",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -22162,11 +22181,13 @@
 									"_parent": {
 										"$ref": "AAAAAAFhIf1RMi5e+rE="
 									},
-									"name": "Position src",
+									"name": "src",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "",
+									"type": {
+										"$ref": "AAAAAAFhIUv7rW55Hpw="
+									},
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -22178,11 +22199,13 @@
 									"_parent": {
 										"$ref": "AAAAAAFhIf1RMi5e+rE="
 									},
-									"name": "Position  des",
+									"name": "des",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "",
+									"type": {
+										"$ref": "AAAAAAFhIUv7rW55Hpw="
+									},
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -22205,7 +22228,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "GAME_STATE",
+					"name": "GameState",
 					"ownedElements": [
 						{
 							"_type": "UMLDependency",
@@ -22233,7 +22256,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhITfSp1Pyg2c="
 							},
-							"name": "CHECKMATE",
+							"name": "Checkmate",
 							"visibility": "public"
 						},
 						{
@@ -22242,7 +22265,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhITfSp1Pyg2c="
 							},
-							"name": "DRAW",
+							"name": "Draw",
 							"visibility": "public"
 						},
 						{
@@ -22251,7 +22274,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhITfSp1Pyg2c="
 							},
-							"name": "INPROGRESS",
+							"name": "InProgress",
 							"visibility": "public"
 						}
 					]
@@ -22471,11 +22494,11 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIUv7rW55Hpw="
 							},
-							"name": "Vector2",
+							"name": "coordinates",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "coordinates",
+							"type": "Vector2",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -22569,7 +22592,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIUv7rW55Hpw="
 							},
-							"name": "getPosition",
+							"name": "GetPosition",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -22602,7 +22625,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIUv7rW55Hpw="
 							},
-							"name": "setPosition",
+							"name": "SetPosition",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -22681,7 +22704,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIUv7rW55Hpw="
 							},
-							"name": "getRow",
+							"name": "GetRow",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -22712,7 +22735,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIUv7rW55Hpw="
 							},
-							"name": "getCol",
+							"name": "GetCol",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -22743,7 +22766,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIUv7rW55Hpw="
 							},
-							"name": "getX",
+							"name": "GetX",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -22774,7 +22797,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIUv7rW55Hpw="
 							},
-							"name": "getY",
+							"name": "GetY",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -22805,7 +22828,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIUv7rW55Hpw="
 							},
-							"name": "setX",
+							"name": "SetX",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -22852,7 +22875,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIUv7rW55Hpw="
 							},
-							"name": "setY",
+							"name": "SetY",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -22899,7 +22922,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIUv7rW55Hpw="
 							},
-							"name": "setSquareName",
+							"name": "SetSquareName",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -22946,7 +22969,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIUv7rW55Hpw="
 							},
-							"name": "getCoordinate",
+							"name": "GetCoordinate",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -23059,7 +23082,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Chess_Game",
+					"name": "ChessGame",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -23271,7 +23294,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjQf2p9+tPQ="
 							},
-							"name": "player_one",
+							"name": "playerOne",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -23291,7 +23314,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjQf2p9+tPQ="
 							},
-							"name": "player_two",
+							"name": "playerTwo",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -23311,7 +23334,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjQf2p9+tPQ="
 							},
-							"name": "active_player",
+							"name": "activePayer",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -23349,7 +23372,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjQf2p9+tPQ="
 							},
-							"name": "captured_pieces",
+							"name": "capturePieces",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -23369,7 +23392,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjQf2p9+tPQ="
 							},
-							"name": "set_player",
+							"name": "SetPlayer",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -23380,7 +23403,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhIkUt7rU6YbY="
 									},
-									"name": "player_one",
+									"name": "playerOne",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -23398,7 +23421,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFhIkUt7rU6YbY="
 									},
-									"name": "player_two",
+									"name": "playerTwo",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
@@ -23436,7 +23459,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjQf2p9+tPQ="
 							},
-							"name": "Chess_Game",
+							"name": "ChessGame",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -23450,7 +23473,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjQf2p9+tPQ="
 							},
-							"name": "start_game",
+							"name": "startGame",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -23481,7 +23504,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjQf2p9+tPQ="
 							},
-							"name": "swap_active_player",
+							"name": "swapActivePlayer",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -23512,7 +23535,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjQf2p9+tPQ="
 							},
-							"name": "create_piece_and_add",
+							"name": "createPieceAndAdd",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -23523,11 +23546,11 @@
 									"_parent": {
 										"$ref": "AAAAAAFhIkglKbkIo7s="
 									},
-									"name": "piece_type",
+									"name": "pieceType",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "PIECE_TYPE",
+									"type": "PieceType",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -23559,7 +23582,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjQf2p9+tPQ="
 							},
-							"name": "move_piece",
+							"name": "movePece",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -23574,7 +23597,9 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "*Move",
+									"type": {
+										"$ref": "AAAAAAFhIStawz7teQs="
+									},
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -23606,7 +23631,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjQf2p9+tPQ="
 							},
-							"name": "wait_for_move",
+							"name": "waitForMove",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -23637,7 +23662,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjQf2p9+tPQ="
 							},
-							"name": "undo_move",
+							"name": "undoMove",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -23686,7 +23711,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjQf2p9+tPQ="
 							},
-							"name": "end_condition_reached",
+							"name": "endConditionReached",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -23717,7 +23742,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjQf2p9+tPQ="
 							},
-							"name": "get_noncaptured_piece_at_position",
+							"name": "getNonCapturedPieceAtPosition",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -23768,7 +23793,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjQf2p9+tPQ="
 							},
-							"name": "is_non_captured_piece_at_position",
+							"name": "isNonCapturedPieceAtPosition",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -23817,7 +23842,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjQf2p9+tPQ="
 							},
-							"name": "get_game_state",
+							"name": "getGameState",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -23944,11 +23969,13 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjRm66H7bWU="
 							},
-							"name": "chess_game",
+							"name": "chessGame",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "Chess_Game*",
+							"type": {
+								"$ref": "AAAAAAFhIjQf2p9+tPQ="
+							},
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -23975,11 +24002,13 @@
 									"_parent": {
 										"$ref": "AAAAAAFhImw3nirOfeA="
 									},
-									"name": "chess_game",
+									"name": "chessGame",
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "Chess_Game*",
+									"type": {
+										"$ref": "AAAAAAFhIjQf2p9+tPQ="
+									},
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -23995,7 +24024,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "Rules*",
+									"type": "Rules",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -24028,7 +24057,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjRm66H7bWU="
 							},
-							"name": "get_move",
+							"name": "GetMove",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -24042,7 +24071,9 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "Move*",
+									"type": {
+										"$ref": "AAAAAAFhIStawz7teQs="
+									},
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -24059,7 +24090,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjRm66H7bWU="
 							},
-							"name": "move_successfully_executed",
+							"name": "MoveSuccessfullyExecuted",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -24074,7 +24105,9 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "Move*",
+									"type": {
+										"$ref": "AAAAAAFhIStawz7teQs="
+									},
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -24106,7 +24139,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjRm66H7bWU="
 							},
-							"name": "get_best_move",
+							"name": "GetBestMove",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -24120,7 +24153,9 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "Move*",
+									"type": {
+										"$ref": "AAAAAAFhIStawz7teQs="
+									},
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -24137,7 +24172,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjRm66H7bWU="
 							},
-							"name": "undo_move",
+							"name": "UndoMove",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -24152,7 +24187,9 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "*Move",
+									"type": {
+										"$ref": "AAAAAAFhIStawz7teQs="
+									},
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -24184,7 +24221,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjRm66H7bWU="
 							},
-							"name": "do_move",
+							"name": "DoMove",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -24199,7 +24236,9 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "*Move",
+									"type": {
+										"$ref": "AAAAAAFhIStawz7teQs="
+									},
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -24231,7 +24270,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjRm66H7bWU="
 							},
-							"name": "generate_moves",
+							"name": "GenerateMoves",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -24245,7 +24284,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "List<Move*>",
+									"type": "List<Move>",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -24262,7 +24301,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjRm66H7bWU="
 							},
-							"name": "evaluate_game_state",
+							"name": "EvaluateGameState",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -24293,7 +24332,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjRm66H7bWU="
 							},
-							"name": "get_score_for_square",
+							"name": "GetScoreForSquare",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -24308,7 +24347,9 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "Position*",
+									"type": {
+										"$ref": "AAAAAAFhIUv7rW55Hpw="
+									},
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -24340,7 +24381,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjRm66H7bWU="
 							},
-							"name": "get_score_for_piece_type",
+							"name": "GetScoreForPieceType",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -24355,7 +24396,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "PIECE_TYPE",
+									"type": "PieceType",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -24372,7 +24413,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjRm66H7bWU="
 							},
-							"name": "neg_max",
+							"name": "NegMax",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -24387,7 +24428,6 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -24419,7 +24459,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjRm66H7bWU="
 							},
-							"name": "get_id",
+							"name": "GetId",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -24450,7 +24490,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIjRm66H7bWU="
 							},
-							"name": "get_color",
+							"name": "GetColor",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -24557,7 +24597,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIl+auP3+HBw="
 							},
-							"name": "last_move",
+							"name": "lastMove",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -24577,7 +24617,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIl+auP3+HBw="
 							},
-							"name": "current_move",
+							"name": "currentMove",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -24599,7 +24639,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIl+auP3+HBw="
 							},
-							"name": "get_move",
+							"name": "GetMove",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -24632,7 +24672,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIl+auP3+HBw="
 							},
-							"name": "move_successfully_executed",
+							"name": "MoveSuccessfullyExecuted",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -24681,7 +24721,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIl+auP3+HBw="
 							},
-							"name": "get_id",
+							"name": "GetId",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -24712,7 +24752,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhIl+auP3+HBw="
 							},
-							"name": "get_color",
+							"name": "GetColor",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -24749,7 +24789,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "MODE_TYPES",
+					"name": "ModeType",
 					"visibility": "public",
 					"isAbstract": false,
 					"isFinalSpecialization": false,
@@ -24761,7 +24801,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhI+bl36wsD6w="
 							},
-							"name": "PVP",
+							"name": "Pvp",
 							"visibility": "public"
 						},
 						{
@@ -24770,7 +24810,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhI+bl36wsD6w="
 							},
-							"name": "PVC",
+							"name": "Pvc",
 							"visibility": "public"
 						}
 					]
@@ -26004,7 +26044,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhNJBl+0rmLPw="
 							},
-							"name": "setPosition",
+							"name": "SetPosition",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -26019,7 +26059,6 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -26051,7 +26090,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhNJBl+0rmLPw="
 							},
-							"name": "setPiece",
+							"name": "SetPiece",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -26066,7 +26105,6 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -26098,7 +26136,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhNJBl+0rmLPw="
 							},
-							"name": "getPosition",
+							"name": "GetPosition",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -26131,7 +26169,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhNJBl+0rmLPw="
 							},
-							"name": "getPiece",
+							"name": "GetPiece",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -26436,7 +26474,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhNUrrLETsov8="
 							},
-							"name": "CheckFrom",
+							"name": "CheckSrc",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -26500,7 +26538,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhNUrrLETsov8="
 							},
-							"name": "CheckTo",
+							"name": "CheckDes",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
