@@ -17934,7 +17934,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+MovementTime: float",
+											"text": "+movementTime: float",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -26321,7 +26321,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFhNUrrLETsov8="
 							},
-							"name": "MovementTime",
+							"name": "movementTime",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
