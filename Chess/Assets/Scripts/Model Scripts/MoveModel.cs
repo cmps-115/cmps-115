@@ -19,7 +19,7 @@ public class MoveModel : MonoBehaviour {
     private bool moving = false;
     private float timeStarted = 0;
 
-    private float movementTime;
+    private float movementTime = 1;
 
     /// <summary>
     /// Moves a piece from (x1, y1) to (x2, y2).
@@ -62,7 +62,7 @@ public class MoveModel : MonoBehaviour {
         {
             if (moving)
             {
-                float dTime = Time.time - timeStarted;
+                var dTime = Time.time - timeStarted;
                 var l1 = Vector3.Lerp(originalPos, midPoint, dTime / movementTime);
                 var l2 = Vector3.Lerp(midPoint, finalPos, dTime / movementTime);
                 var l3 = Vector3.Lerp(l1, l2, dTime / movementTime);
