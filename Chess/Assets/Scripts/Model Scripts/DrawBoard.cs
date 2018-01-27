@@ -29,8 +29,63 @@ public class DrawBoard : MonoBehaviour
     private Vector2 squareClicked;
     private int squareIndex;
 
+    public void HighLightGrid(Vector2 pos)
+    {
+        int[] tri;
+        List<int> triCopy;
+        int index = (int)pos.x + (int)pos.y * size;
+        int submesh;
+
+        if ((pos.x + pos.y) % 2 == 0)
+        {
+            tri = tri2;
+            triCopy = triCopy1;
+            submesh = 0;
+        }
+        else
+        {
+            tri = tri1;
+            triCopy = triCopy2;
+            submesh = 1;
+        }
+
+        for (int i = index * 6; i < index * 6 + 6; ++i)
+        {
+            triCopy.Add(tri[i]);
+        }
+
+        mesh.SetTriangles(triCopy, submesh);
+    }
+
+    public void HighLightGrid(Vector2[] positions)
+    {
+        foreach (Vector2 pos in positions)
+        {
+            HighLightGrid(pos);
+        }
+    }
+
+    public void ClearHighlights()
+    {
+        triCopy1.Clear();
+        triCopy2.Clear();
+
+        mesh.SetTriangles(triCopy1, 0);
+        mesh.SetTriangles(triCopy1, 1);
+    }
+
+    public Vector2 SquareClicked
+    {
+        get
+        {
+            int x = squareIndex % size;
+            int y = squareIndex / size;
+            return new Vector2(x, y);
+        }
+    }
+
     // Use this for initialization
-    void Start()
+    private void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
         meshCollider = GetComponent<MeshCollider>();
@@ -44,19 +99,19 @@ public class DrawBoard : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         DetectClick();
     }
 
-    void InitBoard()
+    private void InitBoard()
     {
         DrawMesh();
         TintMaterials();
         meshFilter.mesh = mesh;
     }
 
-    void DrawMesh()
+    private void DrawMesh()
     {
         mesh = new Mesh();
         int count = 0;
@@ -105,7 +160,7 @@ public class DrawBoard : MonoBehaviour
         meshCollider.sharedMesh = mesh;
     }
 
-    void TintMaterials()
+    private void TintMaterials()
     {
         //applies ting to the tint material.
         tint1.color = meshRenderer.materials[2].color + tintColor;
@@ -115,52 +170,7 @@ public class DrawBoard : MonoBehaviour
         meshRenderer.materials[1] = tint2;
     }
 
-    public void HighLightGrid(Vector2 pos)
-    {
-        int[] tri;
-        List<int> triCopy;
-        int index = (int)pos.x + (int)pos.y * size;
-        int submesh;
-
-        if ((pos.x + pos.y) % 2 == 0)
-        {
-            tri = tri2;
-            triCopy = triCopy1;
-            submesh = 0;
-        }
-        else
-        {
-            tri = tri1;
-            triCopy = triCopy2;
-            submesh = 1;
-        }
-
-        for (int i = index * 6; i < index * 6 + 6; ++i)
-        {
-            triCopy.Add(tri[i]); 
-        }
-
-        mesh.SetTriangles(triCopy, submesh);
-    }
-
-    public void HighLightGrid(Vector2[] positions)
-    {
-        foreach (Vector2 pos in positions)
-        {
-            HighLightGrid(pos);
-        }
-    }
-
-    public void ClearHighlights()
-    {
-        triCopy1.Clear();
-        triCopy2.Clear();
-
-        mesh.SetTriangles(triCopy1, 0);
-        mesh.SetTriangles(triCopy1, 1);
-    }
-
-    void DetectClick()
+    private void DetectClick()
     {
         //Checks for left mouse button down.
         if (Input.GetButtonDown("Fire1"))
@@ -181,16 +191,6 @@ public class DrawBoard : MonoBehaviour
                         squareIndex = triangleInd / 2;
                 }
             }
-        }
-    }
-
-    public Vector2 SquareClicked
-    {
-        get
-        {
-            int x = squareIndex % size;
-            int y = squareIndex / size;
-            return new Vector2(x, y);
         }
     }
 }
