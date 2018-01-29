@@ -1,0 +1,36 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+
+public class Pair
+{
+    private Position pos;
+    private Piece pie;
+
+	public Pair(Position pos, Piece p)
+	{
+        this.pos = pos;
+        this.pie = pie;
+	}
+
+    public void SetPosition(Position pos)
+    {
+        this.pos = pos;
+    }
+
+    public void setPiece(Piece p)
+    {
+        this.pie = p;
+    }
+
+    public Position GetPosition()
+    {
+        return pos;
+    }
+
+    public Piece GetPiece()
+    {
+        return pie;
+    }
+}
