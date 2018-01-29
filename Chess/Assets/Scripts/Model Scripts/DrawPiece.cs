@@ -19,26 +19,42 @@ public class DrawPiece : MonoBehaviour {
     public Material firstTeam;
     public Material secondTeam;
 
-    private Vector2 pieceClicked;
+    private Vector2 piecePosition;
+    private bool clicked;
 
-	// Use this for initialization
-	void Start () {
+    /// <summary>
+    /// Returns the positions of the last chess piece clicked.
+    /// </summary>
+    public Vector2 PiecePosition
+    {
+        get { return piecePosition; }
+    }
+
+    public bool isClicked
+    {
+        get { return clicked; }
+    }
+
+    // Use this for initialization
+    private void Start ()
+    {
         InitPieces();
     }
 	
 	// Update is called once per frame
-	void Update () {
+	private void Update ()
+    {
         DetectClick();
     }
 
-    void InitPieces()
+    private void InitPieces()
     {
         PlaceFirstTeam();
         PlaceSecondTeam();
     }
 
     #region Place Teams
-    void PlaceFirstTeam()
+    private void PlaceFirstTeam()
     {
         for (int y = 0; y < 2; ++y)
         {
@@ -77,7 +93,7 @@ public class DrawPiece : MonoBehaviour {
         }
     }
 
-    void PlaceSecondTeam()
+    private void PlaceSecondTeam()
     {
         for (int y = 7; y > 5; --y)
         {
@@ -117,7 +133,7 @@ public class DrawPiece : MonoBehaviour {
     }
     #endregion
 
-    void DetectClick()
+    private void DetectClick()
     {
         //Checks for left mouse button down.
         if (Input.GetButtonDown("Fire1"))
@@ -125,20 +141,20 @@ public class DrawPiece : MonoBehaviour {
             RaycastHit hit;
 
             //create a ray from the camera through the mouse cursor.
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.transform.tag == "ChessPiece") pieceClicked = new Vector2(hit.transform.position.x - 0.5f, hit.transform.position.z - 0.5f);
+                if (hit.transform.tag == "ChessPiece")
+                {
+                    piecePosition = new Vector2(hit.transform.position.x - 0.5f, hit.transform.position.z - 0.5f);
+                    clicked = true;
+                }
             }
         }
-    }
-
-    /// <summary>
-    /// Returns the positions of the last chess piece clicked.
-    /// </summary>
-    Vector2 PieceClicked
-    {
-        get { return pieceClicked; }
+        else
+        {
+            clicked = false;
+        }
     }
 }

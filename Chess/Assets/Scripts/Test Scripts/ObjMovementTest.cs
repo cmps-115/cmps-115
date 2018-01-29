@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class ObjMovementTest : MonoBehaviour {
 
-    MoveModel mm1;
-    MoveModel mm2;
+    private MoveModel mm1;
+    private MoveModel mm2;
 
 	// Use this for initialization
-	void Start () {
+	private void Start ()
+    {
         mm1 = gameObject.AddComponent<MoveModel>();
         mm2 = gameObject.AddComponent<MoveModel>();
     }
 	
 	// Update is called once per frame
-	void Update () {
+    //demo of moving pieces around the board.
+	private void Update () {
 		
         if (Time.time >= 2 && Time.time <= 3)
         {
