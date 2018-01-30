@@ -60,8 +60,8 @@ public class ObjMovementTest : MonoBehaviour {
         }
         else if (Time.time >= 20 && Time.time <= 21)
         {
-            mm1.MovePiece(new Vector2(3, 0), new Vector2(7, 0));
-            mm2.MovePiece(new Vector2(7, 0), new Vector2(3, 0), 0);
+            mm1.MovePiece(new Vector2(3, 0), new Vector2(5, 0));
+            mm2.MovePiece(new Vector2(7, 0), new Vector2(4, 0), 0);
         }
 
     }
