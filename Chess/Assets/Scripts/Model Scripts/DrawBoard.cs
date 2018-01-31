@@ -10,7 +10,7 @@ public class DrawBoard : MonoBehaviour
     public Material tint1;
     public Material tint2;
 
-    [SerializeField] [Range(1, 16)] int size;
+    [SerializeField] [Range(1, 16)] static int size = 8;
     private int rows;
     private int columns;
 
@@ -26,8 +26,9 @@ public class DrawBoard : MonoBehaviour
     private List<int> triCopy1 = new List<int>();
     private List<int> triCopy2 = new List<int>();
 
-    private Vector2 squareClicked;
-    private int squareIndex;
+    private static Vector2 squareClicked = new Vector2(-1, -1);
+    private static int squareIndex = -1;
+    private static bool clicked = false;
 
     public void HighLightGrid(Vector2 pos)
     {
@@ -74,13 +75,23 @@ public class DrawBoard : MonoBehaviour
         mesh.SetTriangles(triCopy1, 1);
     }
 
-    public Vector2 SquareClicked
+    public static Vector2 SquarePosition
     {
         get
         {
             int x = squareIndex % size;
             int y = squareIndex / size;
             return new Vector2(x, y);
+        }
+    }
+
+    public static bool IsClicked
+    {
+
+        get
+        {
+            DetectClick();
+            return clicked;
         }
     }
 
@@ -96,12 +107,6 @@ public class DrawBoard : MonoBehaviour
         columns = size;
 
         InitBoard();
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        DetectClick();
     }
 
     private void InitBoard()
@@ -163,14 +168,20 @@ public class DrawBoard : MonoBehaviour
     private void TintMaterials()
     {
         //applies ting to the tint material.
-        tint1.color = meshRenderer.materials[2].color + tintColor;
-        tint2.color = meshRenderer.materials[3].color + tintColor;
+        tint1.color = new Color(0, meshRenderer.materials[2].color.g + tintColor.g, 0);
+        tint2.color = new Color(0, meshRenderer.materials[3].color.g + tintColor.g, 0);
 
         meshRenderer.materials[0] = tint1;
         meshRenderer.materials[1] = tint2;
     }
 
-    private void DetectClick()
+
+    /// <summary>
+    /// Detects when a space on the board has been clicked on.
+    /// This method should be called in an update function.
+    /// If a click has been detected use SquareClicked to get the vector2.
+    /// </summary>
+    private static void DetectClick()
     {
         //Checks for left mouse button down.
         if (Input.GetButtonDown("Fire1"))
@@ -189,8 +200,12 @@ public class DrawBoard : MonoBehaviour
                         squareIndex = (triangleInd - 128) / 2;
                     else
                         squareIndex = triangleInd / 2;
+
+                    clicked =  true;
+                    return;
                 }
             }
         }
+        clicked =  false;
     }
 }

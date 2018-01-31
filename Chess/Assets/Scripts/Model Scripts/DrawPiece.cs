@@ -19,32 +19,31 @@ public class DrawPiece : MonoBehaviour {
     public Material firstTeam;
     public Material secondTeam;
 
-    private Vector2 piecePosition;
-    private bool clicked;
+    private static Vector2 piecePosition = new Vector2(-1, -1);
+    private static bool clicked = false;
 
     /// <summary>
     /// Returns the positions of the last chess piece clicked.
     /// </summary>
-    public Vector2 PiecePosition
+    public static Vector2 PiecePosition
     {
-        get { return piecePosition; }
+        get { return piecePosition;}
     }
 
-    public bool isClicked
+    public static bool IsClicked
     {
-        get { return clicked; }
+        
+        get
+        {
+            DetectClick();
+            return clicked;
+        }
     }
 
     // Use this for initialization
     private void Start ()
     {
         InitPieces();
-    }
-	
-	// Update is called once per frame
-	private void Update ()
-    {
-        DetectClick();
     }
 
     private void InitPieces()
@@ -133,7 +132,12 @@ public class DrawPiece : MonoBehaviour {
     }
     #endregion
 
-    private void DetectClick()
+
+    /// <summary>
+    /// Detects when a piece has been clicked on.
+    /// Should be called in an update function.
+    /// </summary>
+    private static void DetectClick()
     {
         //Checks for left mouse button down.
         if (Input.GetButtonDown("Fire1"))
@@ -149,12 +153,10 @@ public class DrawPiece : MonoBehaviour {
                 {
                     piecePosition = new Vector2(hit.transform.position.x - 0.5f, hit.transform.position.z - 0.5f);
                     clicked = true;
+                    return;
                 }
             }
         }
-        else
-        {
-            clicked = false;
-        }
+        clicked = false;
     }
 }
