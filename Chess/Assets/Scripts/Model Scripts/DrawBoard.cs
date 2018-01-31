@@ -168,8 +168,8 @@ public class DrawBoard : MonoBehaviour
     private void TintMaterials()
     {
         //applies ting to the tint material.
-        tint1.color = new Color(0, meshRenderer.materials[2].color.g + tintColor.g, 0);
-        tint2.color = new Color(0, meshRenderer.materials[3].color.g + tintColor.g, 0);
+        tint1.color = new Color(meshRenderer.materials[2].color.r, meshRenderer.materials[2].color.g + tintColor.g, meshRenderer.materials[2].color.b);
+        tint2.color = new Color(meshRenderer.materials[3].color.r, meshRenderer.materials[3].color.g + tintColor.g, meshRenderer.materials[3].color.b);
 
         meshRenderer.materials[0] = tint1;
         meshRenderer.materials[1] = tint2;
