@@ -40,6 +40,9 @@ public class MoveModel : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Sets how long it takes to move the piece in seconds.
+    /// </summary>
     public float MovementTime
     {
         set
