@@ -84,7 +84,7 @@ public class MoveModel : MonoBehaviour {
 
     private void CheckFrom(Vector2 from, Vector2 to, int height = 2)
     {
-        Collider[] cols = Physics.OverlapSphere(new Vector3(from.x + 0.5f, 1, from.y), 0.5f);
+        Collider[] cols = Physics.OverlapSphere(new Vector3(from.x + 0.5f, 0.5f, from.y + 0.5f), 0.5f);
         if (cols.Length > 0)
         {
             foreach (Collider c in cols)
