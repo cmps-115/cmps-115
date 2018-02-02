@@ -1,5 +1,5 @@
 ﻿//Rules.cs---to be concatinated with the other rules file to create one to store all the rules
-//Contains the legal move checks for the king, queen, and kinght
+//Contains the legal move checks for the king, queen, and Knight
 //currenty only looks for spaces a piece can move to without concideration of check
 //*****UNFINISHED*****
 using System.Collections;
@@ -10,9 +10,9 @@ public class Rules
 {
 
 
-    //Function for finding all the leagal moves for a kinght piece
+    //Function for finding all the leagal moves for a Knight piece
     //Checks all 8 possible squares, and only records the squares that arent occupied by a piece of the same team
-    static public List<Vector2> LegalKinghtMove(Piece P, Board B)
+    static public List<Vector2> LegalKnightMove(Piece P, Board B)
     {
         List<Vector2> poss = new List<Vector2>();
 

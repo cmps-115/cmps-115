@@ -58,8 +58,8 @@ public class SCRIPT_TESTING : MonoBehaviour {
 
         List<Vector2> king1Positions = Rules.LegalKingMove(testKing, testBoard);
         List<Vector2> king2Positions = Rules.LegalKingMove(testKing2, testBoard);
-        List<Vector2> knightPositions = Rules.LegalKinghtMove(testKnight, testBoard);
-        List<Vector2> knight2Positions = Rules.LegalKinghtMove(testKnight2, testBoard);
+        List<Vector2> knightPositions = Rules.LegalKnightMove(testKnight, testBoard);
+        List<Vector2> knight2Positions = Rules.LegalKnightMove(testKnight2, testBoard);
 
         print("knight 1 Moves");
         foreach(var Vector2 in knightPositions)
