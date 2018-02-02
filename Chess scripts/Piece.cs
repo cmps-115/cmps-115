@@ -18,7 +18,7 @@ public class Piece
     public PIECE_TYPES type;
     public bool taken;//represents if the piece still exists on the board
     public Position PiecePosition;
-    public bool team; //0 for black 1 for white
+    public bool team; //false for black ture for white
 
     
     public Piece(PIECE_TYPES p_type, bool t)//Constructor for a piece, without a specified position
