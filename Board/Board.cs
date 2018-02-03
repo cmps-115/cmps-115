@@ -5,7 +5,7 @@
 
 public class Board{
 
-    private Pair[][] squares;
+    private Pair[,] squares;
 
     public Board()
     {
@@ -14,22 +14,22 @@ public class Board{
         //initialze to null
         for (int i = 0; i < 8; i++)
             for (int j = 0; j < 8; j++)
-                sqaures[i][j] = null;
+                sqaures[i, j] = null;
     }
 
     public void Mark(Postion square, Piece piece)
     {
-        squares[square.GetX()][sqaure.GetY()] = new Pair(sqaure, piece);
+        squares[square.GetX(), square.GetY()] = new Pair(square, piece);
     }
 
     public void UnMark(Position position)
     {
-        squares[square.GetX()][sqaure.GetY()] = null;
+        squares[square.GetX(), square.GetY()] = null;
     }
 
     public bool IsOccupied (Position square)
     {
-        return squares[square.GetX()][sqaure.GetY()] != null;
+        return squares[square.GetX(), square.GetY()] != null;
     }
 
     public bool IsOccupied(Vector2Int coords)

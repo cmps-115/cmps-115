@@ -11,7 +11,7 @@ public class Pair
 	public Pair(Position pos, Piece p)
 	{
         this.pos = pos;
-        this.pie = pie;
+        this.pie = p;
 	}
 
     public void SetPosition(Position pos)
