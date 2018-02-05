@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tint1: {fileID: 2100000, guid: 8a5f7a5bcc22a4246b1ee41616deb668, type: 2}
   tint2: {fileID: 2100000, guid: 630a22d63b58d78419781ef1ec6e63ba, type: 2}
-  tintColor: {r: 0.0467128, g: 0.39705884, b: 0.06362609, a: 0}
+  tintColor: {r: 0.08245026, g: 0.44852942, b: 0.1304193, a: 0}
 --- !u!4 &1200306487
 Transform:
   m_ObjectHideFlags: 0
