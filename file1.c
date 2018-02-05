@@ -128,7 +128,6 @@ createPieceAndAdd(PieceType pieceType){
 	}
 	pieces[i].pieceType = pieceType;
         pieces[i].captured = false; 
-
 }
 
 isNonCapturedPieceAtPosition(Position pos){
@@ -137,11 +136,9 @@ isNonCapturedPieceAtPosition(Position pos){
 	while(pieces[i].position != pos){
 		i++;
 	}
-	if( pieces[i].captured == false ){ 
+	if( pieces[i].captured == false ) 
 		return true;
-	}
-	if( pieces[i].captured == true ){
+	if( pieces[i].captured == true )
 		return false;
-	}	
 }
 
