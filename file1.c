@@ -26,8 +26,7 @@ startGame(){
 	Player playerTwo = new Player();
 
 	setPlayer(playerOne, playerTwo);
-
-	/*
+	
 	for (i=0; i<=7; i++){
 		createPieceAndAdd(PieceType Pawn);
 	}
@@ -38,7 +37,7 @@ startGame(){
 	createPieceAndAdd(PieceType Bishop);
 	createPieceAndAdd(PieceType Queen);
 	createPieceAndAdd(PieceType Rook);
-	createPieceAndAdd(PieceType Rook);*/
+	createPieceAndAdd(PieceType Rook);
 
 	Pawn1-w = new Piece(0, 1, a2, 1, 2);
 	Pawn2-w = new Piece(0, 1, b2, 2, 2);
@@ -81,9 +80,17 @@ startGame(){
 createPieceAndAdd(PieceType pieceType){
 
 	int i = 0;
-	while (pieces[i] != NULL){
-		i++;
-	}
+
+	// new pieces are inserted in order into pieces array
+	// pawns, kings, knights, bishops, queens, rooks
+	if (pieceType == Pawn) i = 0;
+	if (pieceType == King) i = 16;
+	if (pieceType == Knight) i = 18;
+	if (pieceType == Bishop) i = 22;
+	if (pieceType == Queen) i = 26;
+	if (pieceType == Rook) i = 28;
+	while (pieces[i] != NULL) i++;
+	
 	pieces[i].pieceType = pieceType;
         pieces[i].captured = false; 
 }
