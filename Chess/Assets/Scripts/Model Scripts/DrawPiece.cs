@@ -1,7 +1,7 @@
-﻿//Programmer: Ari Berkson
+﻿// Programmer: Ari Berkson
 //
-//This module places the chess peices on the board.
-//This module also detects when the user clicks on a chess peice model.
+// This module places the chess peices on the board.
+// This module also detects when the user clicks on a chess peice model.
 
 using System.Collections;
 using System.Collections.Generic;
@@ -21,6 +21,11 @@ public class DrawPiece : MonoBehaviour {
 
     private static Vector2 piecePosition = new Vector2(-1, -1);
     private static bool clicked = false;
+
+    private const float MODEL_OFFSET = 0.5f;
+    private const int BOARD_MINIMUM = 0;
+    private const int BOARD_MAXIMUM = 7;
+    private const int TEAM_ROWS = 2;
 
     /// <summary>
     /// Returns the positions of the last chess piece clicked.
@@ -53,38 +58,43 @@ public class DrawPiece : MonoBehaviour {
     }
 
     #region Place Teams
+    private GameObject Spawn(int x, int y, GameObject model)
+    {
+        return Instantiate(model, new Vector3(x + MODEL_OFFSET, 0, y + MODEL_OFFSET), model.transform.rotation);
+    }
+
     private void PlaceFirstTeam()
     {
-        for (int y = 0; y < 2; ++y)
+        for (int y = BOARD_MINIMUM; y < TEAM_ROWS; ++y)
         {
             GameObject model = null;
-            for (int x = 0; x < 8; ++x)
+            for (int x = BOARD_MINIMUM; x <= BOARD_MAXIMUM; ++x)
             {
                 if (y == 1)
                 {
-                    model = Instantiate(pawn, new Vector3(x + 0.5f, 0, y + 0.5f), pawn.transform.rotation);
+                    model = Spawn(x, y, pawn);
                 }
                 else
                 {
                     if (x == 0 || x == 7)
                     {
-                        model = Instantiate(castle, new Vector3(x + 0.5f, 0, y + 0.5f), castle.transform.rotation);
+                        model = Spawn(x, y, castle);
                     }
                     else if (x == 1 || x == 6)
                     {
-                        model = Instantiate(knight, new Vector3(x + 0.5f, 0, y + 0.5f), knight.transform.rotation);
+                        model = Spawn(x, y, knight);
                     }
                     else if (x == 2 || x == 5)
                     {
-                        model = Instantiate(bishop, new Vector3(x + 0.5f, 0, y + 0.5f), bishop.transform.rotation);
+                        model = Spawn(x, y, bishop);
                     }
                     else if (x == 3)
                     {
-                        model = Instantiate(king, new Vector3(x + 0.5f, 0, y + 0.5f), king.transform.rotation);
+                        model = Spawn(x, y, king);
                     }
                     else if (x == 4)
                     {
-                        model = Instantiate(queen, new Vector3(x + 0.5f, 0, y + 0.5f), queen.transform.rotation);
+                        model = Spawn(x, y, queen);
                     }
                 }
                 model.GetComponent<MeshRenderer>().material = firstTeam;
@@ -94,36 +104,36 @@ public class DrawPiece : MonoBehaviour {
 
     private void PlaceSecondTeam()
     {
-        for (int y = 7; y > 5; --y)
+        for (int y = BOARD_MAXIMUM; y > BOARD_MAXIMUM - TEAM_ROWS; --y)
         {
             GameObject model = null;
-            for (int x = 0; x < 8; ++x)
+            for (int x = BOARD_MINIMUM; x <= 7; ++x)
             {
                 if (y == 6)
                 {
-                    model = Instantiate(pawn, new Vector3(x + 0.5f, 0, y + 0.5f), pawn.transform.rotation);
+                    model = Spawn(x, y, pawn);
                 }
                 else
                 {
                     if (x == 0 || x == 7)
                     {
-                        model = Instantiate(castle, new Vector3(x + 0.5f, 0, y + 0.5f), castle.transform.rotation);
+                        model = Spawn(x, y, castle);
                     }
                     else if (x == 1 || x == 6)
                     {
-                        model = Instantiate(knight, new Vector3(x + 0.5f, 0, y + 0.5f), Quaternion.Euler(-90, 225, 0));
+                        model = Spawn(x, y, knight);
                     }
                     else if (x == 2 || x == 5)
                     {
-                        model = Instantiate(bishop, new Vector3(x + 0.5f, 0, y + 0.5f), bishop.transform.rotation);
+                        model = Spawn(x, y, bishop);
                     }
                     else if (x == 3)
                     {
-                        model = Instantiate(king, new Vector3(x + 0.5f, 0, y + 0.5f), king.transform.rotation);
+                        model = Spawn(x, y, king);
                     }
                     else if (x == 4)
                     {
-                        model = Instantiate(queen, new Vector3(x + 0.5f, 0, y + 0.5f), queen.transform.rotation);
+                        model = Spawn(x, y, queen);
                     }
                 }
                 model.GetComponent<MeshRenderer>().material = secondTeam;
@@ -151,7 +161,7 @@ public class DrawPiece : MonoBehaviour {
             {
                 if (hit.transform.tag == "ChessPiece")
                 {
-                    piecePosition = new Vector2(hit.transform.position.x - 0.5f, hit.transform.position.z - 0.5f);
+                    piecePosition = new Vector2(hit.transform.position.x - MODEL_OFFSET, hit.transform.position.z - MODEL_OFFSET);
                     clicked = true;
                     return;
                 }
