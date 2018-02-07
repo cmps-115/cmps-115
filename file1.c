@@ -29,7 +29,7 @@ startGame(){
 	
 	for (i=0; i<=7; i++){
 		createPieceAndAdd(PieceType Pawn);
-	}
+	}	
 	createPieceAndAdd(PieceType King);
 	createPieceAndAdd(PieceType Knight);
 	createPieceAndAdd(PieceType Knight);
@@ -80,7 +80,6 @@ startGame(){
 createPieceAndAdd(PieceType pieceType){
 
 	int i = 0;
-
 	// new pieces are inserted in order into pieces array
 	// pawns, kings, knights, bishops, queens, rooks
 	if (pieceType == Pawn) i = 0;
@@ -92,7 +91,36 @@ createPieceAndAdd(PieceType pieceType){
 	while (pieces[i] != NULL) i++;
 	
 	pieces[i].pieceType = pieceType;
-        pieces[i].captured = false; 
+        pieces[i].captured = 0;
+	if ( i < 8 ) pieces[i].team == 1; //white pawns
+	if ( (i >= 8) && (i < 16) ) pieces[i].team == 0; //black pawns
+	if ( i == 16 ) pieces[i].team == 1; //white king
+	if ( i == 17 ) pieces[i].team == 0; //black king
+	if ( (i == 18) || (i == 19) ) //white knights
+		pieces[i].team == 1;
+	if ( (i == 20) || (i == 21) ) //black knights
+		pieces[i].team == 0;
+	if ( (i == 22) || (i == 23) ) //white bishops
+		pieces[i].team == 1;
+	if ( (i == 24) || (i == 25) ) //black bishops
+		pieces[i].team == 0;
+	if ( i == 26 ) pieces[i].team == 1; //white queen
+	if ( i == 27 ) pieces[i].team == 0; //black queen
+	if ( (i == 28) || (i == 29) ) //white rooks
+		pieces[i].team == 1;
+	if ( (i == 30) || (i == 31) ) //black rooks
+		pieces[i].team == 0;
+}
+
+endConditionReached(){
+	
+	boolean endCond = 0;
+	if(GameState == Checkmate || GameState == Draw){
+		endCond = 1; 
+	} else if(GameState == InProgress){
+		endCond = 0; 
+	}
+	return endCond;
 }
 
 isNonCapturedPieceAtPosition(Position pos){
