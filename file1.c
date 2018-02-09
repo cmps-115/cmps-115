@@ -125,8 +125,9 @@ endConditionReached(){
 }
 
 isNonCapturedPieceAtPosition(Position pos){
-
 	int PIECE_INT = 0;
+	
+	// go through pieces array to get piece with Position pos
 	while(pieces[PIECE_INT].position != pos){
 		PIECE_INT++;
 	}
