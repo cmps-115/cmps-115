@@ -17,4 +17,5 @@ setPlayer(Player playerOne, Player playerTwo){
 		playerOne.color = "b";
 		playerTwo.color = "w";
 	}
+	
 }
