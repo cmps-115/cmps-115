@@ -48,14 +48,14 @@ startGame(){
 	Pawn7-w = new Piece(0, 1, g2, 7, 2); Pawn7-b = new Piece(0, 0, g7, 7, 7);
 	Pawn8-w = new Piece(0, 1, h2, 8, 2); Pawn8-b = new Piece(0, 0, h7, 8, 7);
 
-	RookL-w = new Piece(1, 1, a1, 1, 1);   RookL-b = new Piece(0, 0, a8, 1, 8);
-	RookR-w = new Piece(1, 1, h1, 8, 1);   RookR-b = new Piece(0, 0, h8, 8, 8);
-	KnightL-w = new Piece(2, 1, b1, 2, 1); KnightL-b = new Piece(0, 0, b8, 2, 8);
-	KnightR-w = new Piece(2, 1, g1, 7, 1); KnightR-b = new Piece(0, 0, g8, 7, 8);
-	BishopL-w = new Piece(3, 1, c1, 3, 1); BishopL-b = new Piece(0, 0, c8, 3, 8);
-	BishopR-w = new Piece(3, 1, f1, 6, 1); BishopR-b = new Piece(0, 0, f8, 6, 8);
-	Queen-w = new Piece(4, 1, d1, 5, 1);   Queen-b = new Piece(0, 0, d8, 5, 8);
-	King-w = new Piece(5, 1, e1, 4, 1);    King-b = new Piece(0, 0, e8, 4, 8);
+	RookL-w = new Piece(1, 1, a1, 1, 1);   RookL-b = new Piece(1, 0, a8, 1, 8);
+	RookR-w = new Piece(1, 1, h1, 8, 1);   RookR-b = new Piece(1, 0, h8, 8, 8);
+	KnightL-w = new Piece(2, 1, b1, 2, 1); KnightL-b = new Piece(2, 0, b8, 2, 8);
+	KnightR-w = new Piece(2, 1, g1, 7, 1); KnightR-b = new Piece(2, 0, g8, 7, 8);
+	BishopL-w = new Piece(3, 1, c1, 3, 1); BishopL-b = new Piece(3, 0, c8, 3, 8);
+	BishopR-w = new Piece(3, 1, f1, 6, 1); BishopR-b = new Piece(3, 0, f8, 6, 8);
+	Queen-w = new Piece(4, 1, d1, 5, 1);   Queen-b = new Piece(4, 0, d8, 5, 8);
+	King-w = new Piece(5, 1, e1, 4, 1);    King-b = new Piece(5, 0, e8, 4, 8);
 
 	Mark(a2, Pawn1-w); 
 	Mark(b2, Pawn2-w);
