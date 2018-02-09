@@ -59,23 +59,23 @@ startGame(){
 	Queen-w = new Piece(4, 1, d1, 5, 1);   Queen-b = new Piece(4, 0, d8, 5, 8);
 	King-w = new Piece(5, 1, e1, 4, 1);    King-b = new Piece(5, 0, e8, 4, 8);
 
-	Mark(a2, Pawn1-w); 
-	Mark(b2, Pawn2-w);
-	Mark(c2, Pawn3-w);
-	Mark(d2, Pawn4-w);
-	Mark(e2, Pawn5-w);
-	Mark(f2, Pawn6-w);
-	Mark(g2, Pawn7-w);
-	Mark(h2, Pawn8-w);
+	Mark(a2, Pawn1-w); Mark(a7, Pawn1-b);
+	Mark(b2, Pawn2-w); Mark(b7, Pawn2-b);
+	Mark(c2, Pawn3-w); Mark(c7, Pawn3-b);
+	Mark(d2, Pawn4-w); Mark(d7, Pawn4-b);
+	Mark(e2, Pawn5-w); Mark(e7, Pawn5-b);
+	Mark(f2, Pawn6-w); Mark(f7, Pawn6-b);
+	Mark(g2, Pawn7-w); Mark(g7, Pawn7-b);
+	Mark(h2, Pawn8-w); Mark(h7, Pawn8-b);
 
-	Mark(a1, RookL-w); 
-	Mark(h1, RookR-w);
-	Mark(b1, KnightL-w); 
-	Mark(g1, KnightR-w);
-	Mark(c1, BishopL-w); 
-	Mark(f1, BishopR-w);
-	Mark(d1, Queen-w); 
-	Mark(e1, King-w);
+	Mark(a1, RookL-w);   Mark(a8, RookL-b);
+	Mark(h1, RookR-w);   Mark(h8, RookR-b);
+	Mark(b1, KnightL-w); Mark(b8, KnightL-b);
+	Mark(g1, KnightR-w); Mark(g8, KnightR-b);
+	Mark(c1, BishopL-w); Mark(c8, BishopL-b);
+	Mark(f1, BishopR-w); Mark(f8, BishopR-b);
+	Mark(d1, Queen-w);   Mark(d8, Queen-b);
+	Mark(e1, King-w);    Mark(e8, King-w);
 }
 
 createPieceAndAdd(PieceType pieceType){
