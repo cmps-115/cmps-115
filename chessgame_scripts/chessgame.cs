@@ -75,3 +75,51 @@ startGame(){
 	Mark(d1, Queen-w); 
 	Mark(e1, King-w);
 }
+
+createPieceAndAdd(PieceType pieceType){
+	int PIECE_INT = 0;
+	
+	// new pieces are inserted in order into pieces array
+	// pawns, kings, knights, bishops, queens, rooks
+	if (pieceType == Pawn) PIECE_INT = 0;
+	if (pieceType == King) PIECE_INT = 16;
+	if (pieceType == Knight) PIECE_INT = 18;
+	if (pieceType == Bishop) PIECE_INT = 22;
+	if (pieceType == Queen) PIECE_INT = 26;
+	if (pieceType == Rook) PIECE_INT = 28;
+	while (pieces[PIECE_INT] != NULL) PIECE_INT++;
+
+	pieces[PIECE_INT].pieceType = pieceType;
+        pieces[PIECE_INT].captured = 0;
+
+	// pieces are given a color
+	if ( PIECE_INT < 8 ) pieces[PIECE_INT].team == 1; //white pawns
+	if ( (PIECE_INT >= 8) && (PIECE_INT < 16) ) pieces[PIECE_INT].team == 0; //black pawns
+	if ( PIECE_INT == 16 ) pieces[PIECE_INT].team == 1; //white king
+	if ( PIECE_INT == 17 ) pieces[PIECE_INT].team == 0; //black king
+	if ( (PIECE_INT == 18) || (PIECE_INT == 19) ) //white knights
+		pieces[PIECE_INT].team == 1;
+	if ( (PIECE_INT == 20) || (PIECE_INT == 21) ) //black knights
+		pieces[PIECE_INT].team == 0;
+	if ( (PIECE_INT == 22) || (PIECE_INT == 23) ) //white bishops
+		pieces[PIECE_INT].team == 1;
+	if ( (PIECE_INT == 24) || (PIECE_INT == 25) ) //black bishops
+		pieces[PIECE_INT].team == 0;
+	if ( PIECE_INT == 26 ) pieces[PIECE_INT].team == 1; //white queen
+	if ( PIECE_INT == 27 ) pieces[PIECE_INT].team == 0; //black queen
+	if ( (PIECE_INT == 28) || (PIECE_INT == 29) ) //white rooks
+		pieces[PIECE_INT].team == 1;
+	if ( (PIECE_INT == 30) || (PIECE_INT == 31) ) //black rooks
+		pieces[PIECE_INT].team == 0;
+}
+
+endConditionReached(){
+
+	boolean endCond = 0;
+	if(GameState == Checkmate || GameState == Draw){
+		endCond = 1; 
+	} else if(GameState == InProgress){
+		endCond = 0; 
+	}
+	return endCond;
+}
