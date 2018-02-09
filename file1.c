@@ -93,6 +93,8 @@ createPieceAndAdd(PieceType pieceType){
 	
 	pieces[PIECE_INT].pieceType = pieceType;
         pieces[PIECE_INT].captured = 0;
+	
+	// pieces are given a color
 	if ( PIECE_INT < 8 ) pieces[PIECE_INT].team == 1; //white pawns
 	if ( (PIECE_INT >= 8) && (PIECE_INT < 16) ) pieces[PIECE_INT].team == 0; //black pawns
 	if ( PIECE_INT == 16 ) pieces[PIECE_INT].team == 1; //white king
