@@ -17,6 +17,7 @@ setPlayer(Player playerOne, Player playerTwo){
 	} else if (color == "b"){
 		playerOne.color = "b";
 		playerTwo.color = "w";
+
 	}
 }
 
@@ -27,19 +28,19 @@ startGame(){
 
 	setPlayer(playerOne, playerTwo);
 
-	for (i=0; i<=7; i++){
+	for (i=0; i<16; i++){
 		createPieceAndAdd(PieceType Pawn);
 	}	
-  
 	createPieceAndAdd(PieceType King);
-	createPieceAndAdd(PieceType Knight);
-	createPieceAndAdd(PieceType Knight);
-	createPieceAndAdd(PieceType Bishop);
-	createPieceAndAdd(PieceType Bishop);
+	createPieceAndAdd(PieceType King);
+	for (i=0; i<4; i++){
+		createPieceAndAdd(PieceType Knight);
+		createPieceAndAdd(PieceType Bishop);
+		createPieceAndAdd(PieceType Rook);
+	}
 	createPieceAndAdd(PieceType Queen);
-	createPieceAndAdd(PieceType Rook);
-	createPieceAndAdd(PieceType Rook);
-
+	createPieceAndAdd(PieceType Queen);
+	
 	Pawn1-w = new Piece(0, 1, a2, 1, 2);
 	Pawn2-w = new Piece(0, 1, b2, 2, 2);
 	Pawn3-w = new Piece(0, 1, c2, 3, 2);
@@ -86,8 +87,7 @@ createPieceAndAdd(PieceType pieceType){
 	if (pieceType == King) PIECE_INT = 16;
 	if (pieceType == Knight) PIECE_INT = 18;
 	if (pieceType == Bishop) PIECE_INT = 22;
-	if (pieceType == Queen) PIECE_INT = 26;
-	if (pieceType == Rook) PIECE_INT = 28;
+	if (pieceType == Queen) PIECE_INT = 26;	if (pieceType == Rook) PIECE_INT = 28;
 	while (pieces[PIECE_INT] != NULL) PIECE_INT++;
 
 	pieces[PIECE_INT].pieceType = pieceType;
@@ -126,7 +126,6 @@ endConditionReached(){
 }
 
 isNonCapturedPieceAtPosition(Position pos){
-
 	int PIECE_INT = 0;
 	
 	// go through pieces array to get piece with Position pos
