@@ -79,38 +79,38 @@ startGame(){
 }
 
 createPieceAndAdd(PieceType pieceType){
-
-	int i = 0;
+	int PIECE_INT = 0;
+	
 	// new pieces are inserted in order into pieces array
 	// pawns, kings, knights, bishops, queens, rooks
-	if (pieceType == Pawn) i = 0;
-	if (pieceType == King) i = 16;
-	if (pieceType == Knight) i = 18;
-	if (pieceType == Bishop) i = 22;
-	if (pieceType == Queen) i = 26;
-	if (pieceType == Rook) i = 28;
-	while (pieces[i] != NULL) i++;
+	if (pieceType == Pawn) PIECE_INT = 0;
+	if (pieceType == King) PIECE_INT = 16;
+	if (pieceType == Knight) PIECE_INT = 18;
+	if (pieceType == Bishop) PIECE_INT = 22;
+	if (pieceType == Queen) PIECE_INT = 26;
+	if (pieceType == Rook) PIECE_INT = 28;
+	while (pieces[PIECE_INT] != NULL) PIECE_INT++;
 	
-	pieces[i].pieceType = pieceType;
-        pieces[i].captured = 0;
-	if ( i < 8 ) pieces[i].team == 1; //white pawns
-	if ( (i >= 8) && (i < 16) ) pieces[i].team == 0; //black pawns
-	if ( i == 16 ) pieces[i].team == 1; //white king
-	if ( i == 17 ) pieces[i].team == 0; //black king
-	if ( (i == 18) || (i == 19) ) //white knights
-		pieces[i].team == 1;
-	if ( (i == 20) || (i == 21) ) //black knights
-		pieces[i].team == 0;
-	if ( (i == 22) || (i == 23) ) //white bishops
-		pieces[i].team == 1;
-	if ( (i == 24) || (i == 25) ) //black bishops
-		pieces[i].team == 0;
-	if ( i == 26 ) pieces[i].team == 1; //white queen
-	if ( i == 27 ) pieces[i].team == 0; //black queen
-	if ( (i == 28) || (i == 29) ) //white rooks
-		pieces[i].team == 1;
-	if ( (i == 30) || (i == 31) ) //black rooks
-		pieces[i].team == 0;
+	pieces[PIECE_INT].pieceType = pieceType;
+        pieces[PIECE_INT].captured = 0;
+	if ( PIECE_INT < 8 ) pieces[PIECE_INT].team == 1; //white pawns
+	if ( (PIECE_INT >= 8) && (PIECE_INT < 16) ) pieces[PIECE_INT].team == 0; //black pawns
+	if ( PIECE_INT == 16 ) pieces[PIECE_INT].team == 1; //white king
+	if ( PIECE_INT == 17 ) pieces[PIECE_INT].team == 0; //black king
+	if ( (PIECE_INT == 18) || (PIECE_INT == 19) ) //white knights
+		pieces[PIECE_INT].team == 1;
+	if ( (PIECE_INT == 20) || (PIECE_INT == 21) ) //black knights
+		pieces[PIECE_INT].team == 0;
+	if ( (PIECE_INT == 22) || (PIECE_INT == 23) ) //white bishops
+		pieces[PIECE_INT].team == 1;
+	if ( (PIECE_INT == 24) || (PIECE_INT == 25) ) //black bishops
+		pieces[PIECE_INT].team == 0;
+	if ( PIECE_INT == 26 ) pieces[PIECE_INT].team == 1; //white queen
+	if ( PIECE_INT == 27 ) pieces[PIECE_INT].team == 0; //black queen
+	if ( (PIECE_INT == 28) || (PIECE_INT == 29) ) //white rooks
+		pieces[PIECE_INT].team == 1;
+	if ( (PIECE_INT == 30) || (PIECE_INT == 31) ) //black rooks
+		pieces[PIECE_INT].team == 0;
 }
 
 endConditionReached(){
@@ -126,13 +126,13 @@ endConditionReached(){
 
 isNonCapturedPieceAtPosition(Position pos){
 
-	int i = 0;
-	while(pieces[i].position != pos){
-		i++;
+	int PIECE_INT = 0;
+	while(pieces[PIECE_INT].position != pos){
+		PIECE_INT++;
 	}
-	if( pieces[i].captured == false ) 
+	if( pieces[PIECE_INT].captured == false ) 
 		return true;
-	if( pieces[i].captured == true )
+	if( pieces[PIECE_INT].captured == true )
 		return false;
 }
 
