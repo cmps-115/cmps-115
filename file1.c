@@ -21,7 +21,6 @@ setPlayer(Player playerOne, Player playerTwo){
 }
 
 startGame(){
-
 	Player playerOne = new Player();
 	Player playerTwo = new Player();
 
@@ -40,25 +39,25 @@ startGame(){
 	createPieceAndAdd(PieceType Queen);
 	createPieceAndAdd(PieceType Queen);
 
-	Pawn1-w = new Piece(0, 1, a2, 1, 2);
-	Pawn2-w = new Piece(0, 1, b2, 2, 2);
-	Pawn3-w = new Piece(0, 1, c2, 3, 2);
-	Pawn4-w = new Piece(0, 1, d2, 4, 2);
-	Pawn5-w = new Piece(0, 1, e2, 5, 2);
-	Pawn6-w = new Piece(0, 1, f2, 6, 2);
-	Pawn7-w = new Piece(0, 1, g2, 7, 2);
-	Pawn8-w = new Piece(0, 1, h2, 8, 2);
+	Pawn1-w = new Piece(0, 1, a2, 1, 2); Pawn1-b = new Piece(0, 0, a7, 1, 7);
+	Pawn2-w = new Piece(0, 1, b2, 2, 2); Pawn2-b = new Piece(0, 0, b7, 2, 7);
+	Pawn3-w = new Piece(0, 1, c2, 3, 2); Pawn3-b = new Piece(0, 0, c7, 3, 7);
+	Pawn4-w = new Piece(0, 1, d2, 4, 2); Pawn4-b = new Piece(0, 0, d7, 4, 7);
+	Pawn5-w = new Piece(0, 1, e2, 5, 2); Pawn5-b = new Piece(0, 0, e7, 5, 7);
+	Pawn6-w = new Piece(0, 1, f2, 6, 2); Pawn6-b = new Piece(0, 0, f7, 6, 7);
+	Pawn7-w = new Piece(0, 1, g2, 7, 2); Pawn7-b = new Piece(0, 0, g7, 7, 7);
+	Pawn8-w = new Piece(0, 1, h2, 8, 2); Pawn8-b = new Piece(0, 0, h7, 8, 7);
 
-	RookL-w = new Piece(1, 1, a1, 1, 1);
-	RookR-w = new Piece(1, 1, h1, 8, 1);
-	KnightL-w = new Piece(2, 1, b1, 2, 1);
-	KnightR-w = new Piece(2, 1, g1, 7, 1);
-	BishopL-w = new Piece(3, 1, c1, 3, 1);
-	BishopR-w = new Piece(3, 1, f1, 6, 1);
-	Queen-w = new Piece(4, 1, d1, 5, 1);
-	King-w = new Piece(5, 1, e1, 4, 1);
+	RookL-w = new Piece(1, 1, a1, 1, 1);   RookL-b = new Piece(0, 0, a8, 1, 8);
+	RookR-w = new Piece(1, 1, h1, 8, 1);   RookR-b = new Piece(0, 0, h8, 8, 8);
+	KnightL-w = new Piece(2, 1, b1, 2, 1); KnightL-b = new Piece(0, 0, b8, 2, 8);
+	KnightR-w = new Piece(2, 1, g1, 7, 1); KnightR-b = new Piece(0, 0, g8, 7, 8);
+	BishopL-w = new Piece(3, 1, c1, 3, 1); BishopL-b = new Piece(0, 0, c8, 3, 8);
+	BishopR-w = new Piece(3, 1, f1, 6, 1); BishopR-b = new Piece(0, 0, f8, 6, 8);
+	Queen-w = new Piece(4, 1, d1, 5, 1);   Queen-b = new Piece(0, 0, d8, 5, 8);
+	King-w = new Piece(5, 1, e1, 4, 1);    King-b = new Piece(0, 0, e8, 4, 8);
 
-	Mark(a2, Pawn1-w);
+	Mark(a2, Pawn1-w); 
 	Mark(b2, Pawn2-w);
 	Mark(c2, Pawn3-w);
 	Mark(d2, Pawn4-w);
