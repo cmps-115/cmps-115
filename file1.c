@@ -31,7 +31,7 @@ startGame(){
 	}	
 	createPieceAndAdd(PieceType King);
 	createPieceAndAdd(PieceType King);
-	for (i=0; i<4; i++){
+	for (i=0; i<4; i++){	
 		createPieceAndAdd(PieceType Knight);
 		createPieceAndAdd(PieceType Bishop);
 		createPieceAndAdd(PieceType Rook);
