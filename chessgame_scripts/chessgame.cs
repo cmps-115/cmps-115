@@ -1,3 +1,4 @@
+
 setPlayer(Player playerOne, Player playerTwo){
 
 	Console.Write("PlayerOne, enter your id: ");
@@ -8,9 +9,9 @@ setPlayer(Player playerOne, Player playerTwo){
   
 	Console.WriteLine("Player One, choose a color: b or w");
   
-  char color = Console.ReadLine();
+  	char color = Console.ReadLine();
 
-  if (color == "w"){
+  	if (color == "w"){
 		playerOne.color = "w";
 		playerTwo.color = "b";
 	} else if (color == "b"){
@@ -123,3 +124,18 @@ endConditionReached(){
 	}
 	return endCond;
 }
+
+isNonCapturedPieceAtPosition(Position pos){
+
+	int PIECE_INT = 0;
+	
+	// go through pieces array to get piece with Position pos
+	while(pieces[PIECE_INT].position != pos){
+		PIECE_INT++;
+	}
+	if( pieces[PIECE_INT].captured == false ) 
+		return true;
+	if( pieces[PIECE_INT].captured == true )
+		return false;
+}
+
