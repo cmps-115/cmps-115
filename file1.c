@@ -27,17 +27,18 @@ startGame(){
 
 	setPlayer(playerOne, playerTwo);
 	
-	for (i=0; i<=7; i++){
+	for (i=0; i<16; i++){
 		createPieceAndAdd(PieceType Pawn);
 	}	
 	createPieceAndAdd(PieceType King);
-	createPieceAndAdd(PieceType Knight);
-	createPieceAndAdd(PieceType Knight);
-	createPieceAndAdd(PieceType Bishop);
-	createPieceAndAdd(PieceType Bishop);
+	createPieceAndAdd(PieceType King);
+	for (i=0; i<4; i++){
+		createPieceAndAdd(PieceType Knight);
+		createPieceAndAdd(PieceType Bishop);
+		createPieceAndAdd(PieceType Rook);
+	}
 	createPieceAndAdd(PieceType Queen);
-	createPieceAndAdd(PieceType Rook);
-	createPieceAndAdd(PieceType Rook);
+	createPieceAndAdd(PieceType Queen);
 
 	Pawn1-w = new Piece(0, 1, a2, 1, 2);
 	Pawn2-w = new Piece(0, 1, b2, 2, 2);
