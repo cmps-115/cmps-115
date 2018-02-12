@@ -87,31 +87,27 @@ createPieceAndAdd(PieceType pieceType){
 	if (pieceType == King) PIECE_INT = 16;
 	if (pieceType == Knight) PIECE_INT = 18;
 	if (pieceType == Bishop) PIECE_INT = 22;
-	if (pieceType == Queen) PIECE_INT = 26;	if (pieceType == Rook) PIECE_INT = 28;
+	if (pieceType == Queen) PIECE_INT = 26;	
+	if (pieceType == Rook) PIECE_INT = 28;
 	while (pieces[PIECE_INT] != NULL) PIECE_INT++;
 
 	pieces[PIECE_INT].pieceType = pieceType;
         pieces[PIECE_INT].captured = 0;
 
-	// pieces are given a color
-	if ( PIECE_INT < 8 ) pieces[PIECE_INT].team == 1; //white pawns
-	if ( (PIECE_INT >= 8) && (PIECE_INT < 16) ) pieces[PIECE_INT].team == 0; //black pawns
-	if ( PIECE_INT == 16 ) pieces[PIECE_INT].team == 1; //white king
-	if ( PIECE_INT == 17 ) pieces[PIECE_INT].team == 0; //black king
-	if ( (PIECE_INT == 18) || (PIECE_INT == 19) ) //white knights
-		pieces[PIECE_INT].team == 1;
-	if ( (PIECE_INT == 20) || (PIECE_INT == 21) ) //black knights
-		pieces[PIECE_INT].team == 0;
-	if ( (PIECE_INT == 22) || (PIECE_INT == 23) ) //white bishops
-		pieces[PIECE_INT].team == 1;
-	if ( (PIECE_INT == 24) || (PIECE_INT == 25) ) //black bishops
-		pieces[PIECE_INT].team == 0;
-	if ( PIECE_INT == 26 ) pieces[PIECE_INT].team == 1; //white queen
-	if ( PIECE_INT == 27 ) pieces[PIECE_INT].team == 0; //black queen
-	if ( (PIECE_INT == 28) || (PIECE_INT == 29) ) //white rooks
-		pieces[PIECE_INT].team == 1;
-	if ( (PIECE_INT == 30) || (PIECE_INT == 31) ) //black rooks
-		pieces[PIECE_INT].team == 0;
+	int team_color = 0;
+	// pieces are given a team
+	// black pieces: team_color = 0
+	// white pieces: team_color = 1
+	if ( PIECE_INT < 8 ) team_color++; //white pawns
+	else if ( PIECE_INT == 16 ) team_color++; //white king
+	else if ( (PIECE_INT == 18) || (PIECE_INT == 19) ) //white knights
+		team_color++;
+	else if ( (PIECE_INT == 22) || (PIECE_INT == 23) ) //white bishops
+		team_color++;
+	else if ( PIECE_INT == 26 ) team_color++; //white queen
+	else if ( (PIECE_INT == 28) || (PIECE_INT == 29) ) //white rooks
+		team_color++;
+	pieces[PIECE_INT].team == team_color;
 }
 
 endConditionReached(){
