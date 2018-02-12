@@ -47,7 +47,7 @@ startGame(){
 	Pawn6-w = new Piece(0, 1, f2, 6, 2); Pawn6-b = new Piece(0, 0, f7, 6, 7);
 	Pawn7-w = new Piece(0, 1, g2, 7, 2); Pawn7-b = new Piece(0, 0, g7, 7, 7);
 	Pawn8-w = new Piece(0, 1, h2, 8, 2); Pawn8-b = new Piece(0, 0, h7, 8, 7);
-
+	
 	RookL-w = new Piece(1, 1, a1, 1, 1);   RookL-b = new Piece(1, 0, a8, 1, 8);
 	RookR-w = new Piece(1, 1, h1, 8, 1);   RookR-b = new Piece(1, 0, h8, 8, 8);
 	KnightL-w = new Piece(2, 1, b1, 2, 1); KnightL-b = new Piece(2, 0, b8, 2, 8);
@@ -57,23 +57,23 @@ startGame(){
 	Queen-w = new Piece(4, 1, d1, 5, 1);   Queen-b = new Piece(4, 0, d8, 5, 8);
 	King-w = new Piece(5, 1, e1, 4, 1);    King-b = new Piece(5, 0, e8, 4, 8);
 
-	Mark(a2, Pawn1-w); 
-	Mark(b2, Pawn2-w);
-	Mark(c2, Pawn3-w);
-	Mark(d2, Pawn4-w);
-	Mark(e2, Pawn5-w);
-	Mark(f2, Pawn6-w);
-	Mark(g2, Pawn7-w);
-	Mark(h2, Pawn8-w);
+	Mark(a2, Pawn1-w); Mark(a7, Pawn1-b); 
+	Mark(b2, Pawn2-w); Mark(b7, Pawn2-b);
+	Mark(c2, Pawn3-w); Mark(c7, Pawn3-b);
+	Mark(d2, Pawn4-w); Mark(d7, Pawn4-b);
+	Mark(e2, Pawn5-w); Mark(e7, Pawn5-b);
+	Mark(f2, Pawn6-w); Mark(f7, Pawn6-b);
+	Mark(g2, Pawn7-w); Mark(g7, Pawn7-b);
+	Mark(h2, Pawn8-w); Mark(h7, Pawn8-w);
 	
-	Mark(a1, RookL-w); 
-	Mark(h1, RookR-w);
-	Mark(b1, KnightL-w); 
-	Mark(g1, KnightR-w);
-	Mark(c1, BishopL-w); 
-	Mark(f1, BishopR-w);
-	Mark(d1, Queen-w); 
-	Mark(e1, King-w);
+	Mark(a1, RookL-w);   Mark(a8, RookL-b);
+	Mark(h1, RookR-w);   Mark(h8, RookR-b);
+	Mark(b1, KnightL-w); Mark(b8, KnightL-b);
+	Mark(g1, KnightR-w); Mark(g8, KnightR-b);
+	Mark(c1, BishopL-w); Mark(c8, BishopL-b);
+	Mark(f1, BishopR-w); Mark(f8, BishopR-b);
+	Mark(d1, Queen-w);   Mark(d8, Queen-b);
+	Mark(e1, King-w);    Mark(e8, King-b);
 	
 }
 
@@ -88,15 +88,15 @@ createPieceAndAdd(PieceType pieceType){
 	if (pieceType == Bishop) PIECE_INT = 22;
 	if (pieceType == Queen) PIECE_INT = 26;
 	if (pieceType == Rook) PIECE_INT = 28;
-	while (pieces[PIECE_INT] != NULL) PIECE_INT++;
+	while (pieces[PIECE_INT].pieceType != null) PIECE_INT++;
 	
 	pieces[PIECE_INT].pieceType = pieceType;
         pieces[PIECE_INT].captured = 0;
 	
+	int team_color = 0;
 	// pieces are given a team
 	// black pieces: team_color = 0
 	// white pieces: team_color = 1
-	int team_color = 0;
 	
 	if ( PIECE_INT < 8 ) team_color++; //white pawns
 	else if ( PIECE_INT == 16 ) team_color++; //white king
