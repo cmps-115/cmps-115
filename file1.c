@@ -94,10 +94,10 @@ createPieceAndAdd(PieceType pieceType){
         pieces[PIECE_INT].captured = 0;
 	
 	int team_color = 0;
+	
 	// pieces are given a team
 	// black pieces: team_color = 0
 	// white pieces: team_color = 1
-	
 	if ( PIECE_INT < 8 ) team_color++; //white pawns
 	else if ( PIECE_INT == 16 ) team_color++; //white king
 	else if ( (PIECE_INT == 18) || (PIECE_INT == 19) ) //white knights
