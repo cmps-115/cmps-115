@@ -58,6 +58,7 @@ startGame(){
 	BishopR-w = new Piece(3, 1, f1, 6, 1); BishopR-b = new Piece(3, 0, f8, 6, 8);
 	Queen-w = new Piece(4, 1, d1, 5, 1);   Queen-b = new Piece(4, 0, d8, 5, 8);
 	King-w = new Piece(5, 1, e1, 4, 1);    King-b = new Piece(5, 0, e8, 4, 8)
+		
 	Mark(a2, Pawn1-w); Mark(a7, Pawn1-b);
 	Mark(b2, Pawn2-w); Mark(b7, Pawn2-b);
 	Mark(c2, Pawn3-w); Mark(c7, Pawn3-b);
