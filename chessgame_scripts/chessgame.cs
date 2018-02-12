@@ -95,6 +95,7 @@ createPieceAndAdd(PieceType pieceType){
         pieces[PIECE_INT].captured = 0;
 
 	int team_color = 0;
+	
 	// pieces are given a team
 	// black pieces: team_color = 0
 	// white pieces: team_color = 1
