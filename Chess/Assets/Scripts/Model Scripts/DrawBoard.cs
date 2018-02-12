@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿// Programmer: Ari Berkson
+//
+// Draws the board by placing vertices and drawing triangles.
+// Uses triangle to detect where on the board the user has clicked.
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,9 +31,14 @@ public class DrawBoard : MonoBehaviour
     private List<int> triCopy1 = new List<int>();
     private List<int> triCopy2 = new List<int>();
 
-    private static Vector2 squareClicked = new Vector2(-1, -1);
     private static int squareIndex = -1;
     private static bool clicked = false;
+
+    private const int NUMBER_OF_TRIS = 6;
+    private const int TRIANGLE_INDEX = 125;
+    private const int TRIANGLE_DIFFERENCE = 128;
+    private const int LAYER_ZERO = 0;
+    private const int LAYER_ONE = 1;
 
     public void HighLightGrid(Vector2 pos)
     {
@@ -50,7 +60,7 @@ public class DrawBoard : MonoBehaviour
             submesh = 1;
         }
 
-        for (int i = index * 6; i < index * 6 + 6; ++i)
+        for (int i = index * NUMBER_OF_TRIS; i < index * NUMBER_OF_TRIS + NUMBER_OF_TRIS; ++i)
         {
             triCopy.Add(tri[i]);
         }
@@ -71,8 +81,8 @@ public class DrawBoard : MonoBehaviour
         triCopy1.Clear();
         triCopy2.Clear();
 
-        mesh.SetTriangles(triCopy1, 0);
-        mesh.SetTriangles(triCopy1, 1);
+        mesh.SetTriangles(triCopy1, LAYER_ZERO);
+        mesh.SetTriangles(triCopy1, LAYER_ONE);
     }
 
     public static Vector2 SquarePosition
@@ -129,8 +139,8 @@ public class DrawBoard : MonoBehaviour
         Vector3[] vertices = new Vector3[numberOfVertices];
         Vector2[] uv = new Vector2[numberOfVertices];
         Vector3[] normals = new Vector3[numberOfVertices];
-        tri1 = new int[numberOfSquares * 6];
-        tri2 = new int[numberOfSquares * 6];
+        tri1 = new int[numberOfSquares * NUMBER_OF_TRIS];
+        tri2 = new int[numberOfSquares * NUMBER_OF_TRIS];
         int[] tri = tri1;
         for (int i = 0; i <= rows; ++i)
         {
@@ -171,8 +181,8 @@ public class DrawBoard : MonoBehaviour
         tint1.color = new Color(0, meshRenderer.materials[2].color.g + tintColor.g, 0);
         tint2.color = new Color(0, meshRenderer.materials[3].color.g + tintColor.g, 0);
 
-        meshRenderer.materials[0] = tint1;
-        meshRenderer.materials[1] = tint2;
+        meshRenderer.materials[LAYER_ZERO] = tint1;
+        meshRenderer.materials[LAYER_ONE] = tint2;
     }
 
 
@@ -196,8 +206,8 @@ public class DrawBoard : MonoBehaviour
                 if (hit.transform.tag == "ChessBoard")
                 {
                     int triangleInd = hit.triangleIndex;
-                    if (triangleInd > 125)
-                        squareIndex = (triangleInd - 128) / 2;
+                    if (triangleInd > TRIANGLE_INDEX)
+                        squareIndex = (triangleInd - TRIANGLE_DIFFERENCE) / 2;
                     else
                         squareIndex = triangleInd / 2;
 

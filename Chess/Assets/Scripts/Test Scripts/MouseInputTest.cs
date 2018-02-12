@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿// Programmer: Ari Berkson
+//
+// Tests various functions from DrawBoard, DrawPiece, and MoveModel.
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
