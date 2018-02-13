@@ -1,4 +1,4 @@
-public abstract class Player{
+﻿ public abstract class Player{
 	public int id;
 	public char color;
 	abstract public Move getMove ();
