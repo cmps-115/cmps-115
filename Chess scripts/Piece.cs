@@ -319,7 +319,7 @@ public class Queen : Piece
     {
     }
 
-    public List<Vector2Int> LegalMoves(Piece currentQueen, Board chessBoard)
+    public List<Vector2Int> LegalMoves(Board chessBoard)
     {
         Rook tempRook = new Rook(GetTeam(), GetPiecePosition().x, GetPiecePosition().y);
         Bishop tempBishop = new Bishop(GetTeam(), GetPiecePosition().x, GetPiecePosition().y);
@@ -342,7 +342,7 @@ public class Pawn : Piece
     {
     }
 
-    List<Vector2Int> LegalMoves(Board chessBoard)
+    public List<Vector2Int> LegalMoves(Board chessBoard)
     {
         bool team = GetTeam();
         List<Vector2Int> positions = new List<Vector2Int>();
@@ -480,7 +480,7 @@ public class Rook : Piece
             // check for moves in front
             int i1 = yCord + 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2Int(xCord, i1)) && i1 < 8)
+            while (i1 < 8 && !chessBoard.IsOccupied(new Vector2Int(xCord, i1)))
             {
                 positions.Add(new Vector2Int(xCord, i1));
                 i1++;
@@ -496,7 +496,7 @@ public class Rook : Piece
             // check for moves in back
             i1 = yCord - 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2Int(xCord, i1)) && i1 > 0)
+            while (i1 > 0 && !chessBoard.IsOccupied(new Vector2Int(xCord, i1)))
             {
                 positions.Add(new Vector2Int(xCord, i1));
                 i1--;
@@ -514,7 +514,7 @@ public class Rook : Piece
             // check for moves to the right
             i1 = xCord + 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2Int(i1, yCord)) && i1 < 8)
+            while (i1 < 8 && !chessBoard.IsOccupied(new Vector2Int(i1, yCord)) )
             {
                 positions.Add(new Vector2Int(i1, yCord));
                 i1++;
@@ -531,7 +531,7 @@ public class Rook : Piece
             // check for moves to the left
             i1 = xCord - 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2Int(i1, yCord)) && i1 > 0)
+            while (i1 > 0 && !chessBoard.IsOccupied(new Vector2Int(i1, yCord)) )
             {
                 positions.Add(new Vector2Int(i1, yCord));
                 i1--;
@@ -552,7 +552,7 @@ public class Rook : Piece
             // check for moves in back
             int i1 = yCord + 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2Int(xCord, i1)) && i1 < 8)
+            while (i1 < 8 && !chessBoard.IsOccupied(new Vector2Int(xCord, i1)))
             {
                 positions.Add(new Vector2Int(xCord, i1));
                 i1++;
@@ -568,7 +568,7 @@ public class Rook : Piece
             // check for moves in front
             i1 = yCord - 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2Int(xCord, i1)) && i1 > 0)
+            while (i1 > 0 && !chessBoard.IsOccupied(new Vector2Int(xCord, i1)) )
             {
                 positions.Add(new Vector2Int(xCord, i1));
                 i1--;
@@ -586,7 +586,7 @@ public class Rook : Piece
             // check for moves to the left
             i1 = xCord + 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2Int(i1, yCord)) && i1 < 8)
+            while (i1 < 8 && !chessBoard.IsOccupied(new Vector2Int(i1, yCord)))
             {
                 positions.Add(new Vector2Int(i1, yCord));
                 i1++;
@@ -603,7 +603,7 @@ public class Rook : Piece
             // check for moves to the right
             i1 = xCord - 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2Int(i1, yCord)) && i1 > 0)
+            while (i1 > 0 && !chessBoard.IsOccupied(new Vector2Int(i1, yCord)) )
             {
                 positions.Add(new Vector2Int(i1, yCord));
                 i1--;
@@ -647,7 +647,7 @@ public class Bishop : Piece
             int i1 = yc + 1;
             int i2 = xc + 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2Int(i2, i1)) && i1 < 8 && i2 < 8)
+            while (i1 < 8 && i2 < 8 && !chessBoard.IsOccupied(new Vector2Int(i2, i1)))
             {
                 positions.Add(new Vector2Int(i2, i1));
                 i1++;
@@ -665,7 +665,7 @@ public class Bishop : Piece
             i1 = yc - 1;
             i2 = xc - 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2Int(i2, i1)) && i1 > 0 && i2 > 0)
+            while (i1 > 0 && i2 > 0 && !chessBoard.IsOccupied(new Vector2Int(i2, i1)))
             {
                 positions.Add(new Vector2Int(i2, i1));
                 i1--;
@@ -685,7 +685,7 @@ public class Bishop : Piece
             i1 = xc + 1;
             i2 = yc - 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2Int(i1, i2)) && i1 < 8 && i2 > 0)
+            while (i1 < 8 && i2 > 0 && !chessBoard.IsOccupied(new Vector2Int(i1, i2)))
             {
                 positions.Add(new Vector2Int(i1, i2));
                 i1++;
@@ -704,7 +704,7 @@ public class Bishop : Piece
             i1 = xc - 1;
             i2 = yc - 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2Int(i1, i2)) && i1 > 0 && i2 > 0)
+            while (i1 > 0 && i2 > 0 && !chessBoard.IsOccupied(new Vector2Int(i1, i2)))
             {
                 positions.Add(new Vector2Int(i1, i2));
                 i1--;
@@ -727,7 +727,7 @@ public class Bishop : Piece
             int i1 = yc + 1;
             int i2 = xc + 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2Int(i2, i1)) && i1 < 8 && i2 < 8)
+            while (i1 < 8 && i2 < 8 && !chessBoard.IsOccupied(new Vector2Int(i2, i1)))
             {
                 positions.Add(new Vector2Int(i2, i1));
                 i1++;
@@ -745,7 +745,7 @@ public class Bishop : Piece
             i1 = yc - 1;
             i2 = xc - 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2Int(i2, i1)) && i1 > 0 && i2 > 0)
+            while (i1 > 0 && i2 > 0 && !chessBoard.IsOccupied(new Vector2Int(i2, i1)))
             {
                 positions.Add(new Vector2Int(i2, i1));
                 i1--;
@@ -765,7 +765,7 @@ public class Bishop : Piece
             i1 = xc + 1;
             i2 = yc - 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2Int(i1, i2)) && i1 < 8 && i2 > 0)
+            while (i1 < 8 && i2 > 0 && !chessBoard.IsOccupied(new Vector2Int(i1, i2)))
             {
                 positions.Add(new Vector2Int(i1, i2));
                 i1++;
@@ -785,7 +785,7 @@ public class Bishop : Piece
             i1 = xc - 1;
             i2 = yc - 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2Int(i1, i2)) && i1 > 0 && i2 > 0)
+            while (i1 > 0 && i2 > 0 && !chessBoard.IsOccupied(new Vector2Int(i1, i2)))
             {
                 positions.Add(new Vector2Int(i1, i2));
                 i1--;

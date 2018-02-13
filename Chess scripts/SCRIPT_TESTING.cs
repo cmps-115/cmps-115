@@ -7,84 +7,80 @@ public class SCRIPT_TESTING : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        print("Test started");
-       // Piece testPawn = new Piece(PIECE_TYPES.Pawn, true, "a2", 1, 2);
 
-        /*print("Pawn Created");
+        Board BTestBoard = new Board();
+        Board WTestBoard = new Board();
 
-        print(testPawn.PiecePosition.GetX());
-        print(testPawn.PiecePosition.GetY());
-        print(testPawn.PiecePosition.GetSquareName());
-        print(testPawn.GetPieceType());
+        //Black test Pieces
+        King BKing = new King(Globals.BLACK, 0, 0);
+        Queen BQueen = new Queen(Globals.BLACK, 6, 6);
+        Rook BRook = new Rook(Globals.BLACK, 5, 3);
+        Bishop BBishop = new Bishop(Globals.BLACK, 2, 2);
+        Knight BKnight = new Knight(Globals.BLACK, 6, 1);
+        Pawn BPawn1 = new Pawn(Globals.BLACK, 2, 4);
+        Pawn BPawn2 = new Pawn(Globals.BLACK, 7, 1);
 
-        testPawn.PiecePosition.SetPosition("a3", 1, 3);
-        print(testPawn.PiecePosition.GetX());
-        print(testPawn.PiecePosition.GetY());
-        print(testPawn.PiecePosition.GetSquareName());
-        print(testPawn.PiecePosition.GetCordinate());
+        Pawn WTestPawn1 = new Pawn(Globals.WHITE, 0, 1);
+        Pawn WTestPawn2 = new Pawn(Globals.WHITE, 3, 1);
+        Pawn WTestPawn3 = new Pawn(Globals.WHITE, 4, 2);
+        Pawn WTestPawn4 = new Pawn(Globals.WHITE, 3, 5);
 
-        testPawn.PiecePosition.SetPosition("a8", 1, 8);
-        testPawn.Promote();
-        print(testPawn.PiecePosition.GetX());
-        print(testPawn.PiecePosition.GetY());
-        print(testPawn.PiecePosition.GetSquareName());
-        print(testPawn.GetPieceType());
+        BTestBoard.Mark(BKing.GetPiecePosition(), BKing);
+        BTestBoard.Mark(BQueen.GetPiecePosition(), BQueen);
+        BTestBoard.Mark(BRook.GetPiecePosition(), BRook);
+        BTestBoard.Mark(BBishop.GetPiecePosition(), BBishop);
+        BTestBoard.Mark(BKnight.GetPiecePosition(), BKnight);
+        BTestBoard.Mark(BPawn1.GetPiecePosition(), BPawn1);
+        BTestBoard.Mark(BPawn2.GetPiecePosition(), BPawn2);
 
-        testPawn.PieceTaken();
-        print(testPawn.PiecePosition.GetX());
-        print(testPawn.PiecePosition.GetY());
-        print(testPawn.PiecePosition.GetSquareName());
-        */
-        //Test Section for Rules: King, Knight
-        Board testBoard = new Board();
+        BTestBoard.Mark(WTestPawn1.GetPiecePosition(), WTestPawn1);
+        BTestBoard.Mark(WTestPawn2.GetPiecePosition(), WTestPawn2);
+        BTestBoard.Mark(WTestPawn3.GetPiecePosition(), WTestPawn3);
+        BTestBoard.Mark(WTestPawn4.GetPiecePosition(), WTestPawn4);
 
-        Piece testKing = new Piece(PIECE_TYPES.King, true, "", 3, 3);
-        Piece testKnight = new Piece(PIECE_TYPES.Knight, true, "", 5, 5);
-        Piece testKing2 = new Piece(PIECE_TYPES.King, true, "", 0, 0);
-        Piece testKnight2 = new Piece(PIECE_TYPES.Knight, true, "", 7, 7);
-        Piece testPawn2 = new Piece(PIECE_TYPES.Pawn, false, "", 3, 6);
-        Piece testPawn3 = new Piece(PIECE_TYPES.Pawn, false, "", 2, 4);
-        Piece testPawn4 = new Piece(PIECE_TYPES.Pawn, true, "", 4, 2);
-        Piece testPawn5 = new Piece(PIECE_TYPES.Pawn, true, "", 6, 3);
+        List<Vector2Int> BKingMoves = BKing.LegalMoves(BTestBoard);
+        List<Vector2Int> BQeenMoves = BQueen.LegalMoves(BTestBoard);
+        List<Vector2Int> BKnightMoves = BKnight.LegalMoves(BTestBoard);
+        List<Vector2Int> BBishopsMoves = BBishop.LegalMoves(BTestBoard);
+        List<Vector2Int> BRookMoves = BRook.LegalMoves(BTestBoard);
+        List<Vector2Int> BPawn1Moves = BPawn1.LegalMoves(BTestBoard);
+        List<Vector2Int> BPawn2Moves = BPawn2.LegalMoves(BTestBoard);
 
-        testBoard.Mark(testKing.PiecePosition, testKing);
-        testBoard.Mark(testKing2.PiecePosition, testKing2);
-        testBoard.Mark(testKnight.PiecePosition, testKnight);
-        testBoard.Mark(testKnight2.PiecePosition, testKnight2);
-        testBoard.Mark(testPawn2.PiecePosition, testPawn2);
-        testBoard.Mark(testPawn3.PiecePosition, testPawn3);
-        testBoard.Mark(testPawn4.PiecePosition, testPawn4);
-        testBoard.Mark(testPawn5.PiecePosition, testPawn5);
-
-        List<Vector2> king1Positions = Rules.LegalKingMove(testKing, testBoard);
-        List<Vector2> king2Positions = Rules.LegalKingMove(testKing2, testBoard);
-        List<Vector2> knightPositions = Rules.LegalKnightMove(testKnight, testBoard);
-        List<Vector2> knight2Positions = Rules.LegalKnightMove(testKnight2, testBoard);
-
-        print("knight 1 Moves");
-        foreach(var Vector2 in knightPositions)
+        foreach(Vector2Int move in BKingMoves)
         {
-            print(Vector2.x);
-            print(Vector2.y);
+            print(move.ToString());
         }
-        print("knight 2 moves");
-        foreach (var Vector2 in knight2Positions)
+
+        foreach (Vector2Int move in BQeenMoves)
         {
-            print(Vector2.x);
-            print(Vector2.y);
+            print(move.ToString());
         }
-        print("King 1 moves");
-        foreach (var Vector2 in king1Positions)
+
+        foreach (Vector2Int move in BKnightMoves)
         {
-            print(Vector2.x);
-            print(Vector2.y);
+            print(move.ToString());
         }
-        print("King 2 moves");
-        foreach (var Vector2 in king2Positions)
+
+        foreach (Vector2Int move in BBishopsMoves)
         {
-            print(Vector2.x);
-            print(Vector2.y);
+            print(move.ToString());
         }
+
+        foreach (Vector2Int move in BRookMoves)
+        {
+            print(move.ToString());
+        }
+
+        foreach (Vector2Int move in BPawn1Moves)
+        {
+            print(move.ToString());
+        }
+
+        foreach (Vector2Int move in BPawn2Moves)
+        {
+            print(move.ToString());
+        }
+
     }
 	
 	// Update is called once per frame
