@@ -6,6 +6,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ChessGlobals;
 
 public class DrawPiece : MonoBehaviour {
 
@@ -51,10 +52,13 @@ public class DrawPiece : MonoBehaviour {
         //InitPieces();
     }
 
-    public void InitPieces()
+	public Tuple2<  List< Tuple2<PIECE_TYPES,Vector2> >, List< Tuple2<PIECE_TYPES,Vector2> >  > InitPieces()
     {
-        PlaceFirstTeam();
-        PlaceSecondTeam();
+		List< Tuple2<PIECE_TYPES,Vector2> > initialBlackTeamPositions;
+		List< Tuple2<PIECE_TYPES,Vector2> > initialWhiteTeamPositions;
+        initialBlackTeamPositions = PlaceBlackTeam();
+        initialWhiteTeamPositions = PlaceWhiteTeam();
+		return new Tuple2<  List< Tuple2<PIECE_TYPES,Vector2> >, List< Tuple2<PIECE_TYPES,Vector2> >  >(initialBlackTeamPositions, initialWhiteTeamPositions);
     }
 
     #region Place Teams
@@ -63,8 +67,9 @@ public class DrawPiece : MonoBehaviour {
         return Instantiate(model, new Vector3(x + MODEL_OFFSET, 0, y + MODEL_OFFSET), model.transform.rotation);
     }
 
-    private void PlaceFirstTeam()
+	private List< Tuple2<PIECE_TYPES,Vector2> > PlaceBlackTeam()
     {
+		List< Tuple2<PIECE_TYPES,Vector2> > positions = new List<Tuple2<PIECE_TYPES,Vector2>>();
         for (int y = BOARD_MINIMUM; y < TEAM_ROWS; ++y)
         {
             GameObject model = null;
@@ -73,37 +78,51 @@ public class DrawPiece : MonoBehaviour {
                 if (y == 1)
                 {
                     model = Spawn(x, y, pawn);
+					Tuple2<PIECE_TYPES,Vector2> typeAndPos = new Tuple2<PIECE_TYPES,Vector2> (PIECE_TYPES.PAWN, new Vector2 (x, y));
+					positions.Add (typeAndPos);
                 }
                 else
                 {
                     if (x == 0 || x == 7)
                     {
                         model = Spawn(x, y, castle);
+						Tuple2<PIECE_TYPES,Vector2> typeAndPos = new Tuple2<PIECE_TYPES,Vector2> (PIECE_TYPES.ROOK, new Vector2 (x, y));
+						positions.Add (typeAndPos);
                     }
                     else if (x == 1 || x == 6)
                     {
                         model = Spawn(x, y, knight);
+						Tuple2<PIECE_TYPES,Vector2> typeAndPos = new Tuple2<PIECE_TYPES,Vector2> (PIECE_TYPES.KNIGHT, new Vector2 (x, y));
+						positions.Add (typeAndPos);
                     }
                     else if (x == 2 || x == 5)
                     {
                         model = Spawn(x, y, bishop);
+						Tuple2<PIECE_TYPES,Vector2> typeAndPos = new Tuple2<PIECE_TYPES,Vector2> (PIECE_TYPES.BISHOP, new Vector2 (x, y));
+						positions.Add (typeAndPos);
                     }
                     else if (x == 3)
                     {
                         model = Spawn(x, y, king);
+						Tuple2<PIECE_TYPES,Vector2> typeAndPos = new Tuple2<PIECE_TYPES,Vector2> (PIECE_TYPES.KING, new Vector2 (x, y));
+						positions.Add (typeAndPos);
                     }
                     else if (x == 4)
                     {
                         model = Spawn(x, y, queen);
+						Tuple2<PIECE_TYPES,Vector2> typeAndPos = new Tuple2<PIECE_TYPES,Vector2> (PIECE_TYPES.PAWN, new Vector2 (x, y));
+						positions.Add (typeAndPos);
                     }
                 }
                 model.GetComponent<MeshRenderer>().material = firstTeam;
             }
         }
+		return positions;
     }
 
-    private void PlaceSecondTeam()
+	private List< Tuple2<PIECE_TYPES,Vector2> > PlaceWhiteTeam()
     {
+		List<Tuple2<PIECE_TYPES,Vector2>> positions = new List<Tuple2<PIECE_TYPES,Vector2>>();
         for (int y = BOARD_MAXIMUM; y > BOARD_MAXIMUM - TEAM_ROWS; --y)
         {
             GameObject model = null;
@@ -112,33 +131,46 @@ public class DrawPiece : MonoBehaviour {
                 if (y == 6)
                 {
                     model = Spawn(x, y, pawn);
+					Tuple2<PIECE_TYPES,Vector2> typeAndPos = new Tuple2<PIECE_TYPES,Vector2> (PIECE_TYPES.PAWN, new Vector2 (x, y));
+					positions.Add (typeAndPos);
                 }
                 else
                 {
                     if (x == 0 || x == 7)
                     {
                         model = Spawn(x, y, castle);
+						Tuple2<PIECE_TYPES,Vector2> typeAndPos = new Tuple2<PIECE_TYPES,Vector2> (PIECE_TYPES.ROOK, new Vector2 (x, y));
+						positions.Add (typeAndPos);
                     }
                     else if (x == 1 || x == 6)
                     {
                         model = Spawn(x, y, knight);
+						Tuple2<PIECE_TYPES,Vector2> typeAndPos = new Tuple2<PIECE_TYPES,Vector2> (PIECE_TYPES.KNIGHT, new Vector2 (x, y));
+						positions.Add (typeAndPos);
                     }
                     else if (x == 2 || x == 5)
                     {
                         model = Spawn(x, y, bishop);
+						Tuple2<PIECE_TYPES,Vector2> typeAndPos = new Tuple2<PIECE_TYPES,Vector2> (PIECE_TYPES.BISHOP, new Vector2 (x, y));
+						positions.Add (typeAndPos);
                     }
                     else if (x == 3)
                     {
                         model = Spawn(x, y, king);
+						Tuple2<PIECE_TYPES,Vector2> typeAndPos = new Tuple2<PIECE_TYPES,Vector2> (PIECE_TYPES.KING, new Vector2 (x, y));
+						positions.Add (typeAndPos);
                     }
                     else if (x == 4)
                     {
                         model = Spawn(x, y, queen);
+						Tuple2<PIECE_TYPES,Vector2> typeAndPos = new Tuple2<PIECE_TYPES,Vector2> (PIECE_TYPES.QUEEN, new Vector2 (x, y));
+						positions.Add (typeAndPos);
                     }
                 }
                 model.GetComponent<MeshRenderer>().material = secondTeam;
             }
         }
+		return positions;
     }
     #endregion
 
