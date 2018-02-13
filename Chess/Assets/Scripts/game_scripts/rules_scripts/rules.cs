@@ -1,6 +1,0 @@
-class Rules
-{
-	public Rules()
-	{
-	}
-}
