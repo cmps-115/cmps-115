@@ -2,7 +2,7 @@
  * Name: Akobir Khamidov
  * 
  * */
-
+using UnityEngine;
 public class Board{
 
     private Pair[,] squares;
@@ -14,27 +14,51 @@ public class Board{
         //initialze to null
         for (int i = 0; i < 8; i++)
             for (int j = 0; j < 8; j++)
-                sqaures[i, j] = null;
+                squares[i, j] = null;
     }
 
-    public void Mark(Postion square, Piece piece)
+    public void Mark(Vector2 position, Piece piece)
     {
-        squares[square.GetX(), square.GetY()] = new Pair(square, piece);
+		if (IsOccupied (position)) 
+		{
+			squares [(int)position.x, (int)position.y].SetPosition (position);
+			squares [(int)position.x, (int)position.y].setPiece (piece);
+		}
+		else
+			squares[(int)position.x, (int)position.y] = new Pair(position, piece);
     }
 
-    public void UnMark(Position position)
+    public void UnMark(Vector2 position)
     {
-        squares[square.GetX(), square.GetY()] = null;
+		
+		squares[(int)position.x, (int)position.y] = null;
     }
 
-    public bool IsOccupied (Position square)
+    public bool IsOccupied (Vector2 position)
     {
-        return squares[square.GetX(), square.GetY()] != null;
+		return squares[(int)position.x, (int)position.y] != null;
     }
+	public bool IsOccupied (int x, int y)
+	{
+		return squares[x, y] != null;
+	}
+	public Piece GetPieceAt(Vector2 pos)
+	{
+		if (IsOccupied (pos))
+			return squares [(int)pos.x, (int)pos.y].GetPiece ();
+		else
+			return null;
+	}
+	public Piece GetPieceAt(int x, int y)
+	{
+		Vector2 pos = new Vector2 (x, y);
+		return GetPieceAt (pos);
+	}
 
-    public bool IsOccupied(Vector2Int coords)
+
+   /* public bool IsOccupied(Vector2Int coords)
     {
         return squares[coords] != null; 
     }
-
+   */
 }

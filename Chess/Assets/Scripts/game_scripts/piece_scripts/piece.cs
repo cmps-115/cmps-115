@@ -14,8 +14,6 @@ using ChessGlobals;
 
 public class Piece
 {
-   
-    
     private bool taken;//represents if the piece still exists on the board
     private Vector2Int PiecePosition;
     private bool team; //false for black ture for white
@@ -61,9 +59,9 @@ public class King : Piece
     {
     }
 
-    public List<Vector2Int> LegalMoves(Board chessBoard)
+    public List<Vector2> LegalMoves(Board chessBoard)
     {
-        List<Vector2Int> positions = new List<Vector2Int>();
+        List<Vector2> positions = new List<Vector2Int>();
 
 
 
@@ -76,7 +74,7 @@ public class King : Piece
         {
             if (yCord + 1 <= 7)
             {
-                if (chessBoard.squares[xCord + 1, yCord + 1] == null)
+                /*if (chessBoard.squares[xCord + 1, yCord + 1] == null)
                 {
                     positions.Add(new Vector2Int(xCord + 1, yCord + 1));
                 }
@@ -84,29 +82,59 @@ public class King : Piece
                 {
                     if (chessBoard.squares[xCord + 1, yCord + 1].GetPiece().GetTeam() != GetTeam())
                         positions.Add(new Vector2Int(xCord + 1, yCord + 1));
-                }
+                }*/
+				if (chessBoard.IsOccupied (xCord + 1, yCord + 1) == false) 
+				{
+					positions.Add (new Vector2 (xCord + 1, yCord + 1));
+				} 
+				else 
+				{
+					if (chessBoard.GetPieceAt (xCord + 1, yCord + 1).GetTeam () != GetTeam ())
+						positions.Add (new Vector2 (xCord + 1, yCord + 1));
+				}
             }
 
             if (yCord - 1 >= 0)
             {
-                if (chessBoard.squares[xCord + 1, yCord - 1] == null)
+                /*if (chessBoard.squares[xCord + 1, yCord - 1] == null)
                 {
                     positions.Add(new Vector2Int(xCord + 1, yCord - 1));
                 }
                 else
                 {
-                    if (chessBoard.squares[xCord + 1, yCord - 1].GetPiece().GetTeam() != GetTeam()) positions.Add(new Vector2Int(xCord + 1, yCord - 1));
+                    if (chessBoard.squares[xCord + 1, yCord - 1].GetPiece().GetTeam() != GetTeam()) 
+                    positions.Add(new Vector2Int(xCord + 1, yCord - 1));
                 }
+                */
+				if (chessBoard.IsOccupied (xCord + 1, yCord - 1) == false) 
+				{
+					positions.Add (new Vector2 (xCord + 1, yCord - 1));
+				} 
+				else 
+				{
+					if (chessBoard.GetPieceAt (xCord + 1, yCord - 1).GetTeam () != GetTeam ())
+						positions.Add (new Vector2 (xCord + 1, yCord - 1));
+				}
+				
             }
 
-            if (chessBoard.squares[xCord + 1, yCord] == null)
+            /*if (chessBoard.squares[xCord + 1, yCord] == null)
             {
                 positions.Add(new Vector2Int(xCord + 1, yCord));
             }
             else
             {
                 if (chessBoard.squares[xCord + 1, yCord].GetPiece().GetTeam() != GetTeam()) positions.Add(new Vector2Int(xCord + 1, yCord));
-            }
+            }*/
+			if (chessBoard.IsOccupied (xCord + 1, yCord) == false) 
+			{
+				positions.Add (new Vector2 (xCord + 1, yCord));
+			} 
+			else 
+			{
+				if (chessBoard.GetPieceAt (xCord + 1, yCord).GetTeam () != GetTeam ())
+					positions.Add (new Vector2 (xCord + 1, yCord));
+			}
 
 
         }
@@ -116,53 +144,90 @@ public class King : Piece
         {
             if (yCord + 1 <= 7)
             {
-                if (chessBoard.squares[xCord - 1, yCord + 1] == null)
+                /*if (chessBoard.squares[xCord - 1, yCord + 1] == null)
                 {
                     positions.Add(new Vector2Int(xCord - 1, yCord + 1));
                 }
                 else
                 {
                     if (chessBoard.squares[xCord - 1, yCord + 1].GetPiece().GetTeam() != GetTeam()) positions.Add(new Vector2Int(xCord - 1, yCord + 1));
-                }
+                }*/
+				if (chessBoard.IsOccupied (xCord - 1, yCord + 1) == false) 
+				{
+					positions.Add (new Vector2 (xCord - 1, yCord + 1));
+				} 
+				else 
+				{
+					if (chessBoard.GetPieceAt (xCord - 1, yCord + 1).GetTeam () != GetTeam ())
+						positions.Add (new Vector2 (xCord - 1, yCord + 1));
+				}
             }
 
             if (yCord - 1 >= 0)
             {
-                if (chessBoard.squares[xCord - 1, yCord - 1] == null)
+                /*if (chessBoard.squares[xCord - 1, yCord - 1] == null)
                 {
                     positions.Add(new Vector2Int(xCord - 1, yCord - 1));
                 }
                 else
                 {
                     if (chessBoard.squares[xCord - 1, yCord - 1].GetPiece().GetTeam() != GetTeam()) positions.Add(new Vector2Int(xCord - 1, yCord - 1));
-                }
+                }*/
+				if (chessBoard.IsOccupied (xCord - 1, yCord - 1) == false) 
+				{
+					positions.Add (new Vector2 (xCord - 1, yCord - 1));
+				} 
+				else 
+				{
+					if (chessBoard.GetPieceAt (xCord - 1, yCord - 1).GetTeam () != GetTeam ())
+						positions.Add (new Vector2 (xCord - 1, yCord - 1));
+				}
             }
 
-            if (chessBoard.squares[xCord - 1, yCord] == null)
+            /*if (chessBoard.squares[xCord - 1, yCord] == null)
             {
                 positions.Add(new Vector2Int(xCord - 1, yCord));
             }
             else
             {
                 if (chessBoard.squares[xCord - 1, yCord].GetPiece().GetTeam() != GetTeam()) positions.Add(new Vector2Int(xCord - 1, yCord));
-            }
+            }*/
+			if (chessBoard.IsOccupied (xCord - 1, yCord) == false) 
+			{
+				positions.Add (new Vector2 (xCord - 1, yCord));
+			} 
+			else 
+			{
+				if (chessBoard.GetPieceAt (xCord - 1, yCord).GetTeam () != GetTeam ())
+					positions.Add (new Vector2 (xCord - 1, yCord));
+			}
+			
         }
 
         //Checks only the square +1 on the Y-axis from the kings posision
         if (yCord + 1 <= 7)
         {
-            if (chessBoard.squares[xCord, yCord + 1] == null)
+            /*if (chessBoard.squares[xCord, yCord + 1] == null)
             {
                 positions.Add(new Vector2Int(xCord, yCord + 1));
             }
             else
             {
                 if (chessBoard.squares[xCord, yCord + 1].GetPiece().GetTeam() != GetTeam()) positions.Add(new Vector2Int(xCord, yCord + 1));
-            }
+            }*/
+			if (chessBoard.IsOccupied (xCord, yCord + 1) == false) 
+			{
+				positions.Add (new Vector2 (xCord, yCord + 1));
+			} 
+			else 
+			{
+				if (chessBoard.GetPieceAt (xCord, yCord + 1).GetTeam () != GetTeam ())
+					positions.Add (new Vector2 (xCord, yCord + 1));
+			}
         }
 
         //Same as previous block, but -1 on the Y-axis from the kings position
-        if (yCord - 1 >= 0)
+        /*if (yCord - 1 >= 0)
         {
             if (chessBoard.squares[xCord, yCord - 1] == null)
             {
@@ -173,7 +238,16 @@ public class King : Piece
                 if (chessBoard.squares[xCord, yCord - 1].GetPiece().GetTeam() != GetTeam()) positions.Add(new Vector2Int(xCord, yCord - 1));
             }
 
-        }
+        }*/
+		if (chessBoard.IsOccupied (xCord, yCord - 1) == false) 
+		{
+			positions.Add (new Vector2 (xCord, yCord - 1));
+		} 
+		else 
+		{
+			if (chessBoard.GetPieceAt (xCord, yCord - 1).GetTeam () != GetTeam ())
+				positions.Add (new Vector2 (xCord, yCord - 1));
+		}
         return positions;
     }
 }
