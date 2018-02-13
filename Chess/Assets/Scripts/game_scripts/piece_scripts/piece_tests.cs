@@ -7,7 +7,7 @@ public class SCRIPT_TESTING : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        print("Test started");
+       /* print("Test started");
         Piece testPawn = new Piece(PIECE_TYPES.Pawn, true, "a2", 1, 2);
         print("Pawn Created");
 
@@ -32,7 +32,7 @@ public class SCRIPT_TESTING : MonoBehaviour {
         testPawn.PieceTaken();
         print(testPawn.PiecePosition.GetX());
         print(testPawn.PiecePosition.GetY());
-        print(testPawn.PiecePosition.GetSquareName());
+        print(testPawn.PiecePosition.GetSquareName());*/
 
     }
 	

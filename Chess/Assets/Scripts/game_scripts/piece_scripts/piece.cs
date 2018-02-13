@@ -15,22 +15,32 @@ using ChessGlobals;
 public class Piece
 {
     private bool taken;//represents if the piece still exists on the board
-    private Vector2Int PiecePosition;
+    private Vector2 PiecePosition;
     private bool team; //false for black ture for white
    
     
     public Piece(bool p_team, int xCord, int yCord)//Constructor for piece with a specific position
     {
-        PiecePosition = new Vector2Int( xCord, yCord);
+        PiecePosition = new Vector2( xCord, yCord);
         team = p_team;
+		taken = false;
     }
 
     //*****Accessors*****
     //returns cureent position on board of the given piece
-    public Vector2Int GetPiecePosition()
+    public Vector2 GetPiecePosition()
     {
         return PiecePosition;  
     }
+	//With GetXCoord and GetYCoord we will have the casting take place in one spot
+	public int GetPiecePositionX()
+	{
+		return (int)PiecePosition.x;
+	}
+	public int GetPiecePositionY()
+	{
+		return (int)PiecePosition.y;
+	}
 
     public bool GetTeam()
     {
@@ -40,14 +50,19 @@ public class Piece
     //*****manipulators*****
     public void TakePiece()
     {
-       PiecePosition = new Vector2Int(-1, -1);
+       PiecePosition = new Vector2(-1, -1);
         taken = true;
     }
 
     public void SetPosition(int xCord, int yCord)
     {
-        PiecePosition = new Vector2Int(xCord, yCord);
+        PiecePosition = new Vector2(xCord, yCord);
     }
+
+	public bool IsTaken()
+	{
+		return taken != false;
+	}
 
 }
 
@@ -65,8 +80,8 @@ public class King : Piece
 
 
 
-        int xCord = GetPiecePosition().x;
-        int yCord = GetPiecePosition().y;
+		int xCord = GetPiecePositionX();
+		int yCord = GetPiecePositionY();
 
 
         //Checks availability of the 3 posible squares to move to +1 on the X-axis of the board
@@ -265,8 +280,8 @@ public class Knight : Piece
 
 
 
-        int xCord = GetPiecePosition().x;
-        int yCord = GetPiecePosition().y;
+		int xCord = GetPiecePositionX();
+		int yCord = GetPiecePositionY();
 
         //Checks the 2 moves in the positive x direction
         //Does not record the position if the square is ocupied by another piece of the same team
@@ -469,8 +484,8 @@ public class Queen : Piece
 
     public List<Vector2> LegalMoves(Piece currentQueen, Board chessBoard)
     {
-        Rook tempRook = new Rook(GetTeam(), GetPiecePosition().x, GetPiecePosition().y);
-        Bishop tempBishop = new Bishop(GetTeam(), GetPiecePosition().x, GetPiecePosition().y);
+        Rook tempRook = new Rook(GetTeam(), GetPiecePositionX(), GetPiecePositionX());
+        Bishop tempBishop = new Bishop(GetTeam(), GetPiecePositionX(), GetPiecePositionY());
         List<Vector2> positions = new List<Vector2>();
 
         List<Vector2> rookPositions = tempRook.LegalMoves(chessBoard);
@@ -496,13 +511,13 @@ public class Pawn : Piece
         List<Vector2> positions = new List<Vector2>();
 
  
-        int xCord = GetPiecePosition().x;
-        int yCord = GetPiecePosition().y;
+		int xCord = GetPiecePositionX();
+		int yCord = GetPiecePositionY();
 
         //assuming for the board that 0 = free , 1 = black, = 2 = white
 
         //assuming that white starts at the rows 0,1
-        if (team == Globals.WHITE)//Where are you getting this from Austin?
+        if (team == ChessGlobals.COLOR.WHITE)//Where are you getting this from Austin?
         {
 
             //to make sure it doesnt go past 
@@ -560,7 +575,7 @@ public class Pawn : Piece
                 }*/
 				if (chessBoard.IsOccupied (xCord - 1, yCord + 1) == false) 
 				{
-					if (chessBoard.GetPieceAt (xCord - 1, yCord + 1).GetTeam () == Globals.Black)
+					if (chessBoard.GetPieceAt (xCord - 1, yCord + 1).GetTeam () == ChessGlobals.COLOR.BLACK)
 						positions.Add (new Vector2 (xCord - 1, yCord + 1));
 					positions.Add (new Vector2 (xCord - 1, yCord + 1));
 				} 
@@ -576,7 +591,7 @@ public class Pawn : Piece
                 }*/
 				if (chessBoard.IsOccupied (xCord + 1, yCord + 1) == false) 
 				{
-					if (chessBoard.GetPieceAt (xCord + 1, yCord + 1).GetTeam () == Globals.Black)
+					if (chessBoard.GetPieceAt (xCord + 1, yCord + 1).GetTeam () == ChessGlobals.COLOR.BLACK)
 						positions.Add (new Vector2 (xCord + 1, yCord + 1));
 					positions.Add (new Vector2 (xCord + 1, yCord + 1));
 				} 
@@ -602,7 +617,7 @@ public class Pawn : Piece
 				} 
 				else 
 				{
-					if (chessBoard.GetPieceAt (xCord, yCord - 1).GetTeam () != GetTeam ())
+					if (chessBoard.GetPieceAt (xCord, yCord - 1).GetTeam () == ChessGlobals.COLOR.WHITE)
 						positions.Add (new Vector2 (xCord, yCord - 1));
 				}
             }
@@ -624,7 +639,7 @@ public class Pawn : Piece
 				} 
 				else 
 				{
-					if (chessBoard.GetPieceAt (xCord, yCord - 2).GetTeam () != GetTeam ())
+					if (chessBoard.GetPieceAt (xCord, yCord - 2).GetTeam () == ChessGlobals.COLOR.WHITE && yCord == 6)
 						positions.Add (new Vector2 (xCord, yCord - 2));
 				}
             }
@@ -636,9 +651,9 @@ public class Pawn : Piece
                 {
                     positions.Add(new Vector2Int(xCord + 1, yCord - 1));
                 }*/
-				if (chessBoard.IsOccupied (xCord + 1, yCord - 1)) // not sure about this one Austin
+				if (chessBoard.IsOccupied (xCord + 1, yCord - 1))  
 				{
-					if(chessBoard.GetPieceAt(xCord + 1, yCord - 1).GetTeam() == Globals.WHITE)
+					if(chessBoard.GetPieceAt(xCord + 1, yCord - 1).GetTeam() == ChessGlobals.COLOR.WHITE)
 						positions.Add (new Vector2 (xCord + 1, yCord - 1));
 				} 
             }
@@ -653,7 +668,7 @@ public class Pawn : Piece
                 }*/
 				if (chessBoard.IsOccupied (xCord - 1, yCord - 1)) // not sure about this one Austin
 				{
-					if(chessBoard.GetPieceAt(xCord - 1, yCord - 1).GetTeam() == Globals.WHITE)
+					if(chessBoard.GetPieceAt(xCord - 1, yCord - 1).GetTeam() == ChessGlobals.COLOR.WHITE)
 						positions.Add (new Vector2 (xCord - 1, yCord - 1));
 				} 
 
@@ -671,26 +686,26 @@ public class Rook : Piece
     {
     }
 
-    public List<Vector2Int> LegalMoves(Board chessBoard)
+    public List<Vector2> LegalMoves(Board chessBoard)
     {
-        List<Vector2Int> positions = new List<Vector2Int>();
+        List<Vector2> positions = new List<Vector2>();
 
-        bool team = GetTeam();
+        //bool team = GetTeam();
         int xCord, yCord;
            
-        xCord = GetPiecePosition().x;
-        yCord = GetPiecePosition().y;
+		xCord = GetPiecePositionX();
+		yCord = GetPiecePositionY();
 
         // if its a white piece
-        if (GetTeam() == Globals.WHITE)
+        if (GetTeam() == ChessGlobals.COLOR.WHITE)
         {
 
             // check for moves in front
             int i1 = yCord + 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2Int(xCord, i1)) && i1 < 8)
+            while (!chessBoard.IsOccupied(new Vector2(xCord, i1)) && i1 < 8)
             {
-                positions.Add(new Vector2Int(xCord, i1));
+                positions.Add(new Vector2(xCord, i1));
                 i1++;
             }
             // if the next is occupied by a black piece
@@ -701,9 +716,9 @@ public class Rook : Piece
                     positions.Add(new Vector2Int(xCord, i1));
                 }*/
 				
-				if (chessBoard.IsOccupied (xCord, i1)) // not sure about this one Austin
+				if (chessBoard.IsOccupied (xCord, i1))  
 				{
-					if(chessBoard.GetPieceAt(xCord, i1).GetTeam() == Globals.WHITE)
+					if(chessBoard.GetPieceAt(xCord, i1).GetTeam() != GetTeam())
 						positions.Add (new Vector2 (xCord, i1));
 				} 
             }
@@ -795,7 +810,7 @@ public class Rook : Piece
                 }*/
 				if (chessBoard.IsOccupied (xCord, yCord - 1)) // not sure about this one Austin
 				{
-					if(chessBoard.GetPieceAt(xCord, yCord - 1).GetTeam() == GetTeam())
+					if(chessBoard.GetPieceAt(xCord, yCord - 1).GetTeam() != GetTeam())
 						positions.Add (new Vector2 (xCord, yCord - 1));
 				} 
             }
@@ -816,7 +831,7 @@ public class Rook : Piece
                 }*/
 				if (chessBoard.IsOccupied (xCord, i1)) // not sure about this one Austin
 				{
-					if(chessBoard.GetPieceAt(xCord, i1).GetTeam() == GetTeam())
+					if(chessBoard.GetPieceAt(xCord, i1).GetTeam() != GetTeam())
 						positions.Add (new Vector2 (xCord, i1));
 				} 
             }
@@ -839,7 +854,7 @@ public class Rook : Piece
                 }*/
 				if (chessBoard.IsOccupied (i1, yCord)) // not sure about this one Austin
 				{
-					if(chessBoard.GetPieceAt(i1, yCord).GetTeam() == GetTeam())
+					if(chessBoard.GetPieceAt(i1, yCord).GetTeam() != GetTeam())
 						positions.Add (new Vector2 (i1, yCord));
 				} 
             }
@@ -861,7 +876,7 @@ public class Rook : Piece
                 }*/
 				if (chessBoard.IsOccupied (i1, yCord)) // not sure about this one Austin
 				{
-					if(chessBoard.GetPieceAt(i1, yCord).GetTeam() == GetTeam())
+					if(chessBoard.GetPieceAt(i1, yCord).GetTeam() != GetTeam())
 						positions.Add (new Vector2 (i1, yCord));
 				} 
             }
@@ -877,19 +892,19 @@ public class Bishop : Piece
     {
     }
 
-    public List<Vector2Int> LegalMoves(Board chessBoard)
+    public List<Vector2> LegalMoves(Board chessBoard)
     {
-        bool team = GetTeam();
+        //bool team = GetTeam();
         int xc, yc;
-        List<Vector2Int> positions = new List<Vector2Int>();
+        List<Vector2> positions = new List<Vector2>();
 
 
 
-        xc = GetPiecePosition().x;
-        yc = GetPiecePosition().y;
+		xc = GetPiecePositionX();
+		yc = GetPiecePositionY();
 
         // if its a white piece
-        if (GetTeam() == Globals.WHITE)
+        if (GetTeam() == ChessGlobals.COLOR.WHITE)
         {
 
             // check for moves in diagonally to the right and up
@@ -909,9 +924,9 @@ public class Bishop : Piece
                 {
                     positions.Add(new Vector2Int(i2, i1));
                 }*/
-				if (chessBoard.IsOccupied (i2, i1)) // not sure about this one Austin
+				if (chessBoard.IsOccupied (i2, i1))  
 				{
-					if(chessBoard.GetPieceAt(i2, i1).GetTeam() == Globals.WHITE)
+					if(chessBoard.GetPieceAt(i2, i1).GetTeam() == ChessGlobals.COLOR.BLACK)
 						positions.Add (new Vector2 (i2, i1));
 				} 
             }
@@ -934,7 +949,7 @@ public class Bishop : Piece
                 }*/
 				if (chessBoard.IsOccupied (i2, i1)) // not sure about this one Austin
 				{
-					if(chessBoard.GetPieceAt(i2, i1).GetTeam() == Globals.WHITE)
+					if(chessBoard.GetPieceAt(i2, i1).GetTeam() != GetTeam())
 						positions.Add (new Vector2 (i2, i1));
 				} 
             }
@@ -959,7 +974,7 @@ public class Bishop : Piece
                 }*/
 				if (chessBoard.IsOccupied (i1, i2)) // not sure about this one Austin
 				{
-					if(chessBoard.GetPieceAt(i1, i2).GetTeam() == Globals.WHITE)
+					if(chessBoard.GetPieceAt(i1, i2).GetTeam() != GetTeam())
 						positions.Add (new Vector2 (i1, i2));
 				} 
             }
@@ -983,7 +998,7 @@ public class Bishop : Piece
                 }*/
 				if (chessBoard.IsOccupied (i1, i2)) // not sure about this one Austin
 				{
-					if(chessBoard.GetPieceAt(i1, i2).GetTeam() == Globals.WHITE)
+					if(chessBoard.GetPieceAt(i1, i2).GetTeam() != GetTeam())
 						positions.Add (new Vector2 (i1, i2));
 				} 
             }
@@ -1011,7 +1026,7 @@ public class Bishop : Piece
                 }*/
 				if (chessBoard.IsOccupied (i2, i1)) // not sure about this one Austin
 				{
-					if(chessBoard.GetPieceAt(i2, i1).GetTeam() == Globals.WHITE)
+					if(chessBoard.GetPieceAt(i2, i1).GetTeam() != GetTeam())
 						positions.Add (new Vector2 (i2, i1));
 				} 
             }
@@ -1034,7 +1049,7 @@ public class Bishop : Piece
                 }*/
 				if (chessBoard.IsOccupied (i2, i1)) // not sure about this one Austin
 				{
-					if(chessBoard.GetPieceAt(i2, i1).GetTeam() == Globals.WHITE)
+					if(chessBoard.GetPieceAt(i2, i1).GetTeam() != GetTeam())
 						positions.Add (new Vector2 (i2, i1));
 				} 
             }
@@ -1060,7 +1075,7 @@ public class Bishop : Piece
                 }*/
 				if (chessBoard.IsOccupied (i1, i2)) // not sure about this one Austin
 				{
-					if(chessBoard.GetPieceAt(i1, i2).GetTeam() == Globals.WHITE)
+					if(chessBoard.GetPieceAt(i1, i2).GetTeam() != GetTeam())
 						positions.Add (new Vector2 (i1, i2));
 				} 
             }
@@ -1084,7 +1099,7 @@ public class Bishop : Piece
                 }*/
 				if (chessBoard.IsOccupied (i1, i2)) // not sure about this one Austin
 				{
-					if(chessBoard.GetPieceAt(i1, i2).GetTeam() == Globals.WHITE)
+					if(chessBoard.GetPieceAt(i1, i2).GetTeam() != GetTeam())
 						positions.Add (new Vector2 (i1, i2));
 				} 
             }

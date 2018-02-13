@@ -36,7 +36,7 @@ public class Board{
 
     public bool IsOccupied (Vector2 position)
     {
-		return squares[(int)position.x, (int)position.y] != null;
+		return IsOccupied ((int)position.x, (int)position.y);
     }
 	public bool IsOccupied (int x, int y)
 	{
