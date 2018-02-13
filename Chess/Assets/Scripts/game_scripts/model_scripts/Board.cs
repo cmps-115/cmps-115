@@ -5,11 +5,11 @@
 using UnityEngine;
 public class Board{
 
-    private Pair[,] squares;
+    private Square[,] squares;
 
     public Board()
     {
-        squares = new Pair[8, 8];
+        squares = new Square[8, 8];
 
         //initialze to null
         for (int i = 0; i < 8; i++)
@@ -25,7 +25,7 @@ public class Board{
 			squares [(int)position.x, (int)position.y].setPiece (piece);
 		}
 		else
-			squares[(int)position.x, (int)position.y] = new Pair(position, piece);
+			squares[(int)position.x, (int)position.y] = new Square(position, piece);
     }
 
     public void UnMark(Vector2 position)

@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.Assertions;
 using ChessGlobals;
 
 
@@ -18,12 +19,20 @@ public class Piece
     private Vector2 PiecePosition;
     private bool team; //false for black ture for white
    
-    
+	public Piece()
+	{
+		taken = false;
+	}
+	public Piece(bool p_team)
+	{
+		taken = false;
+		team = p_team;
+	}
     public Piece(bool p_team, int xCord, int yCord)//Constructor for piece with a specific position
     {
-        PiecePosition = new Vector2( xCord, yCord);
-        team = p_team;
 		taken = false;
+		team = p_team;
+        PiecePosition = new Vector2( xCord, yCord);
     }
 
     //*****Accessors*****
@@ -51,14 +60,21 @@ public class Piece
     public void TakePiece()
     {
        PiecePosition = new Vector2(-1, -1);
-        taken = true;
+       taken = true;
     }
 
     public void SetPosition(int xCord, int yCord)
     {
         PiecePosition = new Vector2(xCord, yCord);
     }
-
+	public void SetPosition(Vector2 pos)
+	{
+		PiecePosition = pos;
+	}
+	public void SetTeam(bool team)
+	{
+		this.team = team;
+	}
 	public bool IsTaken()
 	{
 		return taken != false;
@@ -69,10 +85,11 @@ public class Piece
 
 public class King : Piece
 {
+	public King(){}
+	public King(bool p_team)
+		: base(p_team){}
     public King(bool p_team, int xCord, int yCord) 
-        : base(p_team,xCord,yCord)
-    {
-    }
+        : base(p_team,xCord,yCord){}
 
     public List<Vector2> LegalMoves(Board chessBoard)
     {
@@ -269,10 +286,11 @@ public class King : Piece
 
 public class Knight : Piece
 {
+	public Knight(){}
+	public Knight(bool p_team)
+		: base(p_team){}
     public Knight(bool p_team, int xCord, int yCord)
-        : base(p_team, xCord, yCord)
-    {
-    }
+        : base(p_team, xCord, yCord){}
 
     public List<Vector2> LegalMoves(Board chessBoard)
     {
@@ -477,11 +495,12 @@ public class Knight : Piece
 
 public class Queen : Piece
 {
+	public Queen(){}
+	public Queen(bool p_team)
+		: base(p_team){}
     public Queen(bool p_team, int xCord, int yCord)
         : base (p_team, xCord, yCord)
-    {
-    }
-
+    {}
     public List<Vector2> LegalMoves(Piece currentQueen, Board chessBoard)
     {
         Rook tempRook = new Rook(GetTeam(), GetPiecePositionX(), GetPiecePositionX());
@@ -500,10 +519,12 @@ public class Queen : Piece
 
 public class Pawn : Piece
 {
+	public Pawn(){}
+	public Pawn(bool p_team)
+		: base(p_team){}
     public Pawn(bool p_team, int xCord, int yCord)
         : base (p_team, xCord, yCord)
-    {
-    }
+    {}
 
     List<Vector2> LegalMoves(Board chessBoard)
     {
@@ -681,10 +702,12 @@ public class Pawn : Piece
 
 public class Rook : Piece
 {
+	public Rook(){}
+	public Rook(bool p_team)
+		: base(p_team){}
     public  Rook(bool p_team, int xCord, int yCord)
         : base (p_team,xCord,yCord)
-    {
-    }
+    {}
 
     public List<Vector2> LegalMoves(Board chessBoard)
     {
@@ -887,10 +910,12 @@ public class Rook : Piece
 
 public class Bishop : Piece
 {
+	public Bishop(){}
+	public Bishop(bool p_team)
+		: base(p_team){}
     public Bishop(bool p_team, int xCord, int yCord)
         :base(p_team,xCord,yCord)
-    {
-    }
+    {}
 
     public List<Vector2> LegalMoves(Board chessBoard)
     {
