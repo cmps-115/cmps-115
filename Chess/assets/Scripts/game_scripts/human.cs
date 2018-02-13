@@ -1,8 +1,17 @@
-class Human{
-  private Move lastMove;
-  private Move currentMove;
-  public Move getMove();
-  public bool moveSuccessfullyExcecuted();
-  public int getId();
-  public char getColor();
-}
+/*class Human: Player{
+	private Move lastMove;
+  	private Move currentMove;
+  	public override Move getMove()
+	{
+	}
+	public override bool moveSuccessfullyExcecuted()
+	{
+	}
+  	public override int getId()
+	{
+	}
+  	public override char getColor()
+	{
+		
+	}
+}*/

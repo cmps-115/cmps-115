@@ -48,10 +48,10 @@ public class DrawPiece : MonoBehaviour {
     // Use this for initialization
     private void Start ()
     {
-        InitPieces();
+        //InitPieces();
     }
 
-    private void InitPieces()
+    public void InitPieces()
     {
         PlaceFirstTeam();
         PlaceSecondTeam();

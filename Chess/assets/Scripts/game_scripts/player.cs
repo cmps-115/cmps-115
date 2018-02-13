@@ -1,9 +1,8 @@
-class Player{
-  private int id;
-  private char color;
-  public Move getMove();
-  public bool moveSuccessfullyExcecuted();
-  public int getId();
-  public char getColor();
-
+abstract class Player{
+	/*public int id;
+	public char color;
+	abstract public Move getMove ();
+	abstract public bool moveSuccessfullyExcecuted ();
+	abstract public int getId ();
+	abstract public char getColor ();*/
 }

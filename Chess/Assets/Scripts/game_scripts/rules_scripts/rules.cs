@@ -1,0 +1,6 @@
+class Rules
+{
+	public Rules()
+	{
+	}
+}

@@ -108,19 +108,21 @@ public class DrawBoard : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        meshRenderer = GetComponent<MeshRenderer>();
-        meshCollider = GetComponent<MeshCollider>();
-        meshFilter = GetComponent<MeshFilter>();
-        mesh = new Mesh();
+       
 
-        rows = size;
-        columns = size;
-
-        InitBoard();
+        //InitBoard();
     }
 
-    private void InitBoard()
+    public void InitBoard()
     {
+		meshRenderer = GetComponent<MeshRenderer>();
+		meshCollider = GetComponent<MeshCollider>();
+		meshFilter = GetComponent<MeshFilter>();
+		mesh = new Mesh();
+
+		rows = size;
+		columns = size;
+
         DrawMesh();
         TintMaterials();
         meshFilter.mesh = mesh;
