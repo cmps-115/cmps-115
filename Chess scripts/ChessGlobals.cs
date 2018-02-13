@@ -4,5 +4,9 @@ using UnityEngine;
 
 namespace ChessGlobals
 {
-    public enum PIECE_TYPES { Pawn, Rook, Knight, Bishop, Queen, King };
+   public static class Globals
+    {
+        public const bool BLACK = false;
+        public const bool WHITE = true;
+    }
 }
