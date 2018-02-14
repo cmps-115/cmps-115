@@ -9,7 +9,7 @@ public class BoardTest
 	private Board board = null;
 	public BoardTest (Board board)
 	{
-		this.board = board;
+		this.board = (Board)board.Clone();//shallow copy
 	}
 	public void ValidateMark()
 	{
@@ -37,7 +37,7 @@ public class BoardTest
 			Assert.AreEqual (board.IsOccupied (row, col), false);
 		}
 	}
-	public void ValidateUnmark()
+	public void ValidateUnMark()
 	{
 		Assert.AreNotEqual(board, null);
 		int totalTrials = Random.Range (30, 101), ithTrial;
@@ -46,8 +46,8 @@ public class BoardTest
 		Piece p = new King();
 		for (ithTrial = 0; ithTrial < totalTrials; ++ithTrial) 
 		{
-			row = Random.Range (0, 7);
-			col = Random.Range (0, 7);
+			row = Random.Range(0, 7);
+			col = Random.Range(0, 7);
 			board.UnMark(row,col);
 			Assert.AreEqual(board.IsOccupied(row, col), false);
 		}
@@ -86,9 +86,7 @@ public class BoardTest
 					Assert.AreEqual (board.IsOccupied (row, col), false);
 				}
 			}
-			 
 		}
-
 	}
 	public void ValidateGetPieceAt()
 	{
@@ -97,7 +95,7 @@ public class BoardTest
 		Piece p1 = null;
 		board.Mark(pos,p);
 		p1 = board.GetPieceAt(pos);
-		Assert.AreEqual (p, p1);
+		Assert.AreEqual(p, p1);
 	}
 	public void ValidateInitialPiecePositions()
 	{
@@ -210,23 +208,6 @@ public class BoardTest
 				}
 			}
 		}
-		/*for (row = 6; row < 8; ++row) 
-		{
-			for (col = 6; col < 6; ++col) 
-			{
-				if (row == 6) //pawns
-				{ 
-					Assert.AreEqual (board.IsOccupied (row, col), true);//a piece should occupy here
-					Assert.AreEqual (board.GetPieceAt(row, col).GetTeam(),ChessGlobals.COLOR.BLACK);//correct team
-					Assert.AreEqual (board.GetPieceAt(row, col).GetType(), Pawn);//correct type of piece
-				} 
-				else 
-				{
-				}
-			}
-		}*/
-
 	}
-
 }
 

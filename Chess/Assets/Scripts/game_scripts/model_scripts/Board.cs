@@ -4,14 +4,15 @@
  * */
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 using ChessGlobals;
-public class Board
+public class Board : ICloneable
 {
 	private const int rows = 8;
     	private const int cols = 8;
     	private Square[,] squares;
 	public Board()
-    	{
+    {
 		squares = new Square[rows, cols];
         	//initialze to null
 		for (int i = 0; i < rows; ++i)
@@ -19,7 +20,7 @@ public class Board
 				UnMark (i, j);
 	}
 	public void Mark(Vector2 position, Piece piece)
-    	{
+    {
 		if (IsOccupied (position)) 
 		{
 			squares [(int)position.x, (int)position.y].SetPosition (position);
@@ -65,7 +66,11 @@ public class Board
 	{
 		return GetPieceAt (new Vector2 (x, y));
 	}
-	public void Print()
+	public object Clone()
+	{
+		return this.MemberwiseClone();
+	}
+	public string ToString()
 	{
 		string debug = null;
 		for (int i = 0; i < rows; ++i) 
@@ -87,5 +92,6 @@ public class Board
 			}
 			MonoBehaviour.print ("\n");
 		}
+		return "";
 	}
 }
