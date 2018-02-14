@@ -1,5 +1,6 @@
-﻿	using System.Collections.Generic;
-	using ChessGlobals;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using ChessGlobals;
 	public class AI: Player{
 	private int depth;
 	private ChessGameController chessGame;
@@ -38,7 +39,7 @@
 	{
 		return 0;
 	}
-	public int getScoreForSquare(Position square)
+	public int getScoreForSquare(Vector2 square)
 	{
 		return 0;
 	}

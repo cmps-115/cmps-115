@@ -1,24 +1,25 @@
 ﻿/*
- * Name: Akobir Khamidov
- * 
+ * Name: Akobir Khamidov & Arom Zinhart DeGraca
+ * =
  * */
 using UnityEngine;
-public class Board{
-
-    private Square[,] squares;
-
-    public Board()
-    {
-        squares = new Square[8, 8];
-
-        //initialze to null
-        for (int i = 0; i < 8; i++)
-            for (int j = 0; j < 8; j++)
-                squares[i, j] = null;
-    }
-
-    public void Mark(Vector2 position, Piece piece)
-    {
+using UnityEngine.UI;
+using ChessGlobals;
+public class Board
+{
+	private const int rows = 8;
+    	private const int cols = 8;
+    	private Square[,] squares;
+	public Board()
+    	{
+		squares = new Square[rows, cols];
+        	//initialze to null
+		for (int i = 0; i < rows; ++i)
+			for (int j = 0; j < cols; ++j)
+				UnMark (i, j);
+	}
+	public void Mark(Vector2 position, Piece piece)
+    	{
 		if (IsOccupied (position)) 
 		{
 			squares [(int)position.x, (int)position.y].SetPosition (position);
@@ -26,18 +27,29 @@ public class Board{
 		}
 		else
 			squares[(int)position.x, (int)position.y] = new Square(position, piece);
-    }
-
-    public void UnMark(Vector2 position)
-    {
-		
-		squares[(int)position.x, (int)position.y] = null;
-    }
-
-    public bool IsOccupied (Vector2 position)
-    {
+	}
+	public void Mark(int x, int y, Piece piece)
+	{
+		Mark (new Vector2 (x, y), piece);
+	}
+	public void UnMark(Vector2 position)
+	{
+		UnMark ( (int)position.x, (int)position.y );
+	}
+	public void UnMark(int x, int y)
+	{
+		squares[x, y] = null;
+	}
+	public void Clear()
+	{
+		for (int i = 0; i < rows; ++i)
+			for (int j = 0; j < cols; ++j)
+				UnMark (i, j);
+	}
+	public bool IsOccupied (Vector2 position)
+    	{
 		return IsOccupied ((int)position.x, (int)position.y);
-    }
+    	}
 	public bool IsOccupied (int x, int y)
 	{
 		return squares[x, y] != null;
@@ -51,14 +63,29 @@ public class Board{
 	}
 	public Piece GetPieceAt(int x, int y)
 	{
-		Vector2 pos = new Vector2 (x, y);
-		return GetPieceAt (pos);
+		return GetPieceAt (new Vector2 (x, y));
 	}
-
-
-   /* public bool IsOccupied(Vector2Int coords)
-    {
-        return squares[coords] != null; 
-    }
-   */
+	public void Print()
+	{
+		string debug = null;
+		for (int i = 0; i < rows; ++i) 
+		{
+			for (int j = 0; j < cols; ++j) 
+			{
+				Piece piece = GetPieceAt(i, j);
+				if (IsOccupied(i, j)) 
+				{
+					if (piece.GetTeam () == false)
+						debug = "Team: Black Piece type: " + piece.GetType () + " Position: " + piece.GetPiecePosition();
+					else
+						debug = "Team: White Piece type: " + piece.GetType () + " Position: " + piece.GetPiecePosition();
+					MonoBehaviour.print (debug +" ");// can use get type to determine which kind subclass is piece
+					
+				}
+				else
+					MonoBehaviour.print ("Empty Square at: " + new Vector2(i,j)+"\n");
+			}
+			MonoBehaviour.print ("\n");
+		}
+	}
 }
