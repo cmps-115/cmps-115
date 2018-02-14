@@ -114,7 +114,7 @@ public class DrawPiece : MonoBehaviour {
                     else if (x == 4)
                     {
                         model = Spawn(x, y, queen);
-						Tuple2<PIECE_TYPES,Vector2> typeAndPos = new Tuple2<PIECE_TYPES,Vector2> (PIECE_TYPES.PAWN, new Vector2 (x, y));
+						Tuple2<PIECE_TYPES,Vector2> typeAndPos = new Tuple2<PIECE_TYPES,Vector2> (PIECE_TYPES.QUEEN, new Vector2 (x, y));
 						positions.Add (typeAndPos);
 						MonoBehaviour.print ("Queen Coords: " + new Vector2 (x, y) + "\n");
                     }
