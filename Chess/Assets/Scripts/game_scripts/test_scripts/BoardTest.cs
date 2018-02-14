@@ -4,15 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 using ChessGlobals;
-public class BoardTest
+public static class BoardTest
 {
-	private Board board = null;
+	/*private Board board = null;
 	public BoardTest (Board board)
 	{
 		this.board = (Board)board.Clone();//shallow copy
-	}
-	public void ValidateMark()
+	}*/
+	public static void ValidateMark(Board b)
 	{
+		Board board = (Board)b.Clone();
 		Assert.AreNotEqual(board, null);
 		int totalTrials = Random.Range (30, 101), ithTrial = 0;
 		int row = 0;
@@ -37,8 +38,9 @@ public class BoardTest
 			Assert.AreEqual (board.IsOccupied (row, col), false);
 		}
 	}
-	public void ValidateUnMark()
+	public static void ValidateUnMark(Board b)
 	{
+		Board board = (Board)b.Clone();
 		Assert.AreNotEqual(board, null);
 		int totalTrials = Random.Range (30, 101), ithTrial;
 		int row = 0;
@@ -64,8 +66,9 @@ public class BoardTest
 		}
 	}
 	//if Unmark is good then so is Clear 
-	public void ValidateClear()
+	public static void ValidateClear(Board b)
 	{
+		Board board = (Board)b.Clone();
 		Assert.AreNotEqual(board, null);
 		int row = 0, col = 0, maxRow = 8, maxCol = 8;
 		int totalTrials = Random.Range(10, 101), totalSquares = row * col, ithTrial, ithSquare;
@@ -88,8 +91,9 @@ public class BoardTest
 			}
 		}
 	}
-	public void ValidateGetPieceAt()
+	public static void ValidateGetPieceAt(Board b)
 	{
+		Board board = (Board)b.Clone();
 		Vector2 pos = new Vector2( Random.Range(0, 7), Random.Range(0, 7));
 		Piece p = new King();
 		Piece p1 = null;
@@ -97,10 +101,9 @@ public class BoardTest
 		p1 = board.GetPieceAt(pos);
 		Assert.AreEqual(p, p1);
 	}
-	public void ValidateInitialPiecePositions()
+	public static void ValidateInitialPiecePositions(Board b)
 	{
-		const int maxRow = 8;
-		const int maxCol = 8;
+		Board board = (Board)b.Clone();
 		int x, y;
 		Pawn pawn = new Pawn();
 		Rook rook = new Rook();
