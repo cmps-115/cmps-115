@@ -24,9 +24,9 @@ public class DrawPiece : MonoBehaviour {
     private static bool clicked = false;
 
     private const float MODEL_OFFSET = 0.5f;
-    private const int BOARD_MINIMUM = 0;
+    /*private const int BOARD_MINIMUM = 0;
     private const int BOARD_MAXIMUM = 7;
-    private const int TEAM_ROWS = 2;
+    private const int TEAM_ROWS = 2;*/
 
     /// <summary>
     /// Returns the positions of the last chess piece clicked.
@@ -69,10 +69,10 @@ public class DrawPiece : MonoBehaviour {
     {
 		MonoBehaviour.print ("Initial White Piece Position\n");
 		List< Tuple2<PIECE_TYPES,Vector2> > positions = new List<Tuple2<PIECE_TYPES,Vector2>>();
-        for (int y = BOARD_MINIMUM; y < TEAM_ROWS; ++y)
+		for (int y = ChessGlobals.BoardConstants.BOARD_MINIMUM; y < ChessGlobals.BoardConstants.TEAM_ROWS; ++y)
         {
             GameObject model = null;
-            for (int x = BOARD_MINIMUM; x <= BOARD_MAXIMUM; ++x)
+			for (int x = ChessGlobals.BoardConstants.BOARD_MINIMUM; x <= ChessGlobals.BoardConstants.BOARD_MAXIMUM; ++x)
             {
                 if (y == 1)
                 {
@@ -129,10 +129,10 @@ public class DrawPiece : MonoBehaviour {
     {
 		MonoBehaviour.print ("Initial Black Piece Positions\n");
 		List<Tuple2<PIECE_TYPES,Vector2>> positions = new List<Tuple2<PIECE_TYPES,Vector2>>();
-        for (int y = BOARD_MAXIMUM; y > BOARD_MAXIMUM - TEAM_ROWS; --y)
+		for (int y = ChessGlobals.BoardConstants.BOARD_MAXIMUM; y > ChessGlobals.BoardConstants.BOARD_MAXIMUM - ChessGlobals.BoardConstants.TEAM_ROWS; --y)
         {
             GameObject model = null;
-            for (int x = BOARD_MINIMUM; x <= 7; ++x)
+			for (int x = ChessGlobals.BoardConstants.BOARD_MINIMUM; x <= ChessGlobals.BoardConstants.BOARD_MAXIMUM; ++x)
             {
                 if (y == 6)
                 {

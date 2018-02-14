@@ -103,57 +103,114 @@ public class BoardTest
 	{
 		const int maxRow = 8;
 		const int maxCol = 8;
-		int row, col;
+		int x, y;
+		Pawn pawn = new Pawn();
+		Rook rook = new Rook();
+		Knight knight = new Knight();
+		Bishop bishop = new Bishop();
+		King king = new King();
+		Queen queen = new Queen();
+		var pawn_type = pawn.GetType();
+		var rook_type = rook.GetType();
+		var knight_type = knight.GetType();
+		var bishop_type = bishop.GetType ();
+		var king_type = king.GetType ();
+		var queen_type = queen.GetType();
 		//Check white pieces
-		for (row = 0; row < 2; ++row) 
+		for (y = ChessGlobals.BoardConstants.BOARD_MINIMUM; y < ChessGlobals.BoardConstants.TEAM_ROWS; ++y)
 		{
-			for (col = 0; col < maxCol; ++col) 
+			for (x = ChessGlobals.BoardConstants.BOARD_MINIMUM; x <= ChessGlobals.BoardConstants.BOARD_MAXIMUM; ++x)
 			{
-				if (row == 1) //pawns
+				if (y == 1) //pawns
 				{ 
-					Assert.AreEqual (board.IsOccupied (row, col), true);//a piece should occupy here
-					Assert.AreEqual (board.GetPieceAt(row, col).GetTeam(),ChessGlobals.COLOR.WHITE);//correct team
-					Assert.AreEqual (board.GetPieceAt(row, col).GetType(), Pawn);//correct type of piece
+					Assert.AreEqual (board.IsOccupied(x, y), true);//a piece should occupy here
+					Assert.AreEqual (board.GetPieceAt(x, y).GetTeam(),ChessGlobals.COLOR.WHITE);//correct team
+					Assert.AreEqual (board.GetPieceAt(x, y).GetType(), pawn_type);//correct type of piece
 				} 
 				else 
 				{
-					if (row == 0 || row == 7) 
+					if (x == 0 || x == 7) 
 					{
-						Assert.AreEqual (board.IsOccupied (row, col), true);//a piece should occupy here
-						Assert.AreEqual (board.GetPieceAt (row, col).GetTeam (), ChessGlobals.COLOR.WHITE);//correct team
-						Assert.AreEqual (board.GetPieceAt (row, col).GetType (), Rook);//correct type of piece
+						Assert.AreEqual (board.IsOccupied (x, y), true);//a piece should occupy here
+						Assert.AreEqual (board.GetPieceAt (x, y).GetTeam (), ChessGlobals.COLOR.WHITE);//correct team
+						Assert.AreEqual (board.GetPieceAt (x, y).GetType (), rook_type);//correct type of piece
 					} 
-					else if (row == 1 || row == 6) 
+					else if (x == 1 || x == 6) 
 					{
-						Assert.AreEqual (board.IsOccupied (row, col), true);//a piece should occupy here
-						Assert.AreEqual (board.GetPieceAt (row, col).GetTeam (), ChessGlobals.COLOR.WHITE);//correct team
-						Assert.AreEqual (board.GetPieceAt (row, col).GetType (), Knight);//correct type of piece
+						Assert.AreEqual (board.IsOccupied (x, y), true);//a piece should occupy here
+						Assert.AreEqual (board.GetPieceAt (x, y).GetTeam (), ChessGlobals.COLOR.WHITE);//correct team
+						Assert.AreEqual (board.GetPieceAt (x, y).GetType (), knight_type);//correct type of piece
 					} 
-					else if (row == 2 || row == 5) 
+					else if (x == 2 || x == 5) 
 					{
-						Assert.AreEqual (board.IsOccupied (row, col), true);//a piece should occupy here
-						Assert.AreEqual (board.GetPieceAt (row, col).GetTeam (), ChessGlobals.COLOR.WHITE);//correct team
-						Assert.AreEqual (board.GetPieceAt (row, col).GetType (), Bishop);//correct type of piece
+						Assert.AreEqual (board.IsOccupied (x, y), true);//a piece should occupy here
+						Assert.AreEqual (board.GetPieceAt (x, y).GetTeam (), ChessGlobals.COLOR.WHITE);//correct team
+						Assert.AreEqual (board.GetPieceAt (x, y).GetType (), bishop_type);//correct type of piece
 					} 
-					else if (row == 3) 
+					else if (x == 3) 
 					{
-						Assert.AreEqual (board.IsOccupied (row, col), true);//a piece should occupy here
-						Assert.AreEqual (board.GetPieceAt (row, col).GetTeam (), ChessGlobals.COLOR.WHITE);//correct team
-						Assert.AreEqual (board.GetPieceAt (row, col).GetType (), King);//correct type of piece
+						Assert.AreEqual (board.IsOccupied (x, y), true);//a piece should occupy here
+						Assert.AreEqual (board.GetPieceAt (x, y).GetTeam (), ChessGlobals.COLOR.WHITE);//correct team
+						Assert.AreEqual (board.GetPieceAt (x, y).GetType (), king_type);//correct type of piece
 					}
-					else if (row == 4) 
+					else if (x == 4) 
 					{
-						Assert.AreEqual (board.IsOccupied (row, col), true);//a piece should occupy here
-						Assert.AreEqual (board.GetPieceAt (row, col).GetTeam (), ChessGlobals.COLOR.WHITE);//correct team
-						Assert.AreEqual (board.GetPieceAt (row, col).GetType (), Queen);//correct type of piece
+						Assert.AreEqual (board.IsOccupied (x, y), true);//a piece should occupy here
+						Assert.AreEqual (board.GetPieceAt (x, y).GetTeam (), ChessGlobals.COLOR.WHITE);//correct team
+						Assert.AreEqual (board.GetPieceAt (x, y).GetType (), queen_type);//correct type of piece
 					}
 				}
 			}
 		}
-
+ 
 
 		//Check black pieces 
-		for (row = 6; row < 8; ++row) 
+		for (y = ChessGlobals.BoardConstants.BOARD_MAXIMUM; y > ChessGlobals.BoardConstants.BOARD_MAXIMUM - ChessGlobals.BoardConstants.TEAM_ROWS; --y) 
+		{
+			for (x = ChessGlobals.BoardConstants.BOARD_MINIMUM; x <= 7; ++x) 
+			{
+				if (y == 6) 
+				{
+					Assert.AreEqual (board.IsOccupied(x, y), true);//a piece should occupy here
+					Assert.AreEqual (board.GetPieceAt(x, y).GetTeam(),ChessGlobals.COLOR.BLACK);//correct team
+					Assert.AreEqual (board.GetPieceAt(x, y).GetType(), pawn_type);//correct type of piece
+				} 
+				else 
+				{
+					if (x == 0 || x == 7) 
+					{
+						Assert.AreEqual (board.IsOccupied (x, y), true);//a piece should occupy here
+						Assert.AreEqual (board.GetPieceAt (x, y).GetTeam (), ChessGlobals.COLOR.BLACK);//correct team
+						Assert.AreEqual (board.GetPieceAt (x, y).GetType (), rook_type);//correct type of piece
+					} 
+					else if (x == 1 || x == 6) 
+					{
+						Assert.AreEqual (board.IsOccupied (x, y), true);//a piece should occupy here
+						Assert.AreEqual (board.GetPieceAt (x, y).GetTeam (), ChessGlobals.COLOR.BLACK);//correct team
+						Assert.AreEqual (board.GetPieceAt (x, y).GetType (), knight_type);//correct type of piece
+					} 
+					else if (x == 2 || x == 5) 
+					{
+						Assert.AreEqual (board.IsOccupied (x, y), true);//a piece should occupy here
+						Assert.AreEqual (board.GetPieceAt (x, y).GetTeam (), ChessGlobals.COLOR.BLACK);//correct team
+						Assert.AreEqual (board.GetPieceAt (x, y).GetType (), bishop_type);//correct type of piece
+					} 
+					else if (x == 3) 
+					{
+						Assert.AreEqual (board.IsOccupied (x, y), true);//a piece should occupy here
+						Assert.AreEqual (board.GetPieceAt (x, y).GetTeam (), ChessGlobals.COLOR.BLACK);//correct team
+						Assert.AreEqual (board.GetPieceAt (x, y).GetType (), king_type);//correct type of piece
+					}
+					else if (x == 4) 
+					{
+						Assert.AreEqual (board.IsOccupied (x, y), true);//a piece should occupy here
+						Assert.AreEqual (board.GetPieceAt (x, y).GetTeam (), ChessGlobals.COLOR.BLACK);//correct team
+						Assert.AreEqual (board.GetPieceAt (x, y).GetType (), queen_type);//correct type of piece
+					}
+				}
+			}
+		}
+		/*for (row = 6; row < 8; ++row) 
 		{
 			for (col = 6; col < 6; ++col) 
 			{
@@ -167,7 +224,7 @@ public class BoardTest
 				{
 				}
 			}
-		}
+		}*/
 
 	}
 
