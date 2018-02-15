@@ -7,7 +7,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ChessGlobals;
-
 public class DrawPiece : MonoBehaviour {
 
     public GameObject king;

@@ -32,7 +32,7 @@ public class MoveModel : MonoBehaviour {
     /// <param name="from"></param>
     /// <param name="to"></param>
     /// <param name="height"></param>
-    public void MovePiece(Vector2 from, Vector2 to, int height = 2)
+    public void MovePiece(Vector2 from, Vector2 to, int height = 2)//to is where they click
     {
         if (height < 0) throw new System.Exception("Error in MoveModel: MovePiece() height parameter must be greater than zero.");
         if (from.x < BOARD_MINIMUM || to.x < BOARD_MINIMUM || from.y > BOARD_MAXIMUM || to.y > BOARD_MAXIMUM) throw new System.Exception("Error in MoveModel: MovePiece() coordinates out of range.");
