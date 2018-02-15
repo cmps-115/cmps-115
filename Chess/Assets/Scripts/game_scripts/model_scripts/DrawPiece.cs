@@ -7,6 +7,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ChessGlobals;
+
+//Shorten Declarationsm & Clarify Declarations
+using PieceTypeAndPosition = ChessGlobals.Tuple2<ChessGlobals.PIECE_TYPES,UnityEngine.Vector2>;
+using ListOfPieceTypesAndPositions =  System.Collections.Generic.List< ChessGlobals.Tuple2<ChessGlobals.PIECE_TYPES,UnityEngine.Vector2> >;
+
+
 public class DrawPiece : MonoBehaviour {
 
     public GameObject king;
@@ -23,9 +29,6 @@ public class DrawPiece : MonoBehaviour {
     private static bool clicked = false;
 
     private const float MODEL_OFFSET = 0.5f;
-    /*private const int BOARD_MINIMUM = 0;
-    private const int BOARD_MAXIMUM = 7;
-    private const int TEAM_ROWS = 2;*/
 
     /// <summary>
     /// Returns the positions of the last chess piece clicked.
@@ -51,11 +54,11 @@ public class DrawPiece : MonoBehaviour {
         //InitPieces();
     }
 
-	public Tuple2<  List< Tuple2<PIECE_TYPES,Vector2> >, List< Tuple2<PIECE_TYPES,Vector2> >  > InitPieces()
+	public Tuple2<  ListOfPieceTypesAndPositions, ListOfPieceTypesAndPositions  > InitPieces()
     {
-		List< Tuple2<PIECE_TYPES,Vector2> > initialWhiteTeamPositions = PlaceWhiteTeam();
-		List< Tuple2<PIECE_TYPES,Vector2> > initialBlackTeamPositions = PlaceBlackTeam();
-		return new Tuple2<  List< Tuple2<PIECE_TYPES,Vector2> >, List< Tuple2<PIECE_TYPES,Vector2> >  >(initialBlackTeamPositions, initialWhiteTeamPositions);
+		ListOfPieceTypesAndPositions initialWhiteTeamPositions = PlaceWhiteTeam();
+		ListOfPieceTypesAndPositions initialBlackTeamPositions = PlaceBlackTeam();
+		return new Tuple2<  ListOfPieceTypesAndPositions, ListOfPieceTypesAndPositions  >(initialBlackTeamPositions, initialWhiteTeamPositions);
     }
 
     #region Place Teams
@@ -64,10 +67,10 @@ public class DrawPiece : MonoBehaviour {
         return Instantiate(model, new Vector3(x + MODEL_OFFSET, 0, y + MODEL_OFFSET), model.transform.rotation);
     }
 
-	private List< Tuple2<PIECE_TYPES,Vector2> > PlaceWhiteTeam()
+	private ListOfPieceTypesAndPositions PlaceWhiteTeam()
     {
 		MonoBehaviour.print ("Initial White Piece Position\n");
-		List< Tuple2<PIECE_TYPES,Vector2> > positions = new List<Tuple2<PIECE_TYPES,Vector2>>();
+		ListOfPieceTypesAndPositions positions = new ListOfPieceTypesAndPositions();
 		for (int y = ChessGlobals.BoardConstants.BOARD_MINIMUM; y < ChessGlobals.BoardConstants.TEAM_ROWS; ++y)
         {
             GameObject model = null;
@@ -76,7 +79,7 @@ public class DrawPiece : MonoBehaviour {
                 if (y == 1)
                 {
                     model = Spawn(x, y, pawn);
-					Tuple2<PIECE_TYPES,Vector2> typeAndPos = new Tuple2<PIECE_TYPES,Vector2> (PIECE_TYPES.PAWN, new Vector2 (x, y));
+					PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.PAWN, new Vector2 (x, y));
 					positions.Add (typeAndPos);
 					MonoBehaviour.print("Pawn Coords: " + new Vector2 (x, y) + "\n");
                 }
@@ -85,35 +88,35 @@ public class DrawPiece : MonoBehaviour {
                     if (x == 0 || x == 7)
                     {
                         model = Spawn(x, y, castle);
-						Tuple2<PIECE_TYPES,Vector2> typeAndPos = new Tuple2<PIECE_TYPES,Vector2> (PIECE_TYPES.ROOK, new Vector2 (x, y));
+						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.ROOK, new Vector2 (x, y));
 						positions.Add (typeAndPos);
 						MonoBehaviour.print ("Rook Coords: " + new Vector2 (x, y) + "\n");
                     }
                     else if (x == 1 || x == 6)
                     {
                         model = Spawn(x, y, knight);
-						Tuple2<PIECE_TYPES,Vector2> typeAndPos = new Tuple2<PIECE_TYPES,Vector2> (PIECE_TYPES.KNIGHT, new Vector2 (x, y));
+						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.KNIGHT, new Vector2 (x, y));
 						positions.Add (typeAndPos);
 						MonoBehaviour.print ("Knight Coords: " + new Vector2 (x, y) + "\n");
                     }
                     else if (x == 2 || x == 5)
                     {
                         model = Spawn(x, y, bishop);
-						Tuple2<PIECE_TYPES,Vector2> typeAndPos = new Tuple2<PIECE_TYPES,Vector2> (PIECE_TYPES.BISHOP, new Vector2 (x, y));
+						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.BISHOP, new Vector2 (x, y));
 						positions.Add (typeAndPos);
 						MonoBehaviour.print ("Bishop Coords: " + new Vector2 (x, y) + "\n");
                     }
                     else if (x == 3)
                     {
                         model = Spawn(x, y, king);
-						Tuple2<PIECE_TYPES,Vector2> typeAndPos = new Tuple2<PIECE_TYPES,Vector2> (PIECE_TYPES.KING, new Vector2 (x, y));
+						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.KING, new Vector2 (x, y));
 						positions.Add (typeAndPos);
 						MonoBehaviour.print ("King Coords: " + new Vector2 (x, y) + "\n");
                     }
                     else if (x == 4)
                     {
                         model = Spawn(x, y, queen);
-						Tuple2<PIECE_TYPES,Vector2> typeAndPos = new Tuple2<PIECE_TYPES,Vector2> (PIECE_TYPES.QUEEN, new Vector2 (x, y));
+						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.QUEEN, new Vector2 (x, y));
 						positions.Add (typeAndPos);
 						MonoBehaviour.print ("Queen Coords: " + new Vector2 (x, y) + "\n");
                     }
@@ -124,7 +127,7 @@ public class DrawPiece : MonoBehaviour {
 		return positions;
     }
 
-	private List< Tuple2<PIECE_TYPES,Vector2> > PlaceBlackTeam()
+	private ListOfPieceTypesAndPositions PlaceBlackTeam()
     {
 		MonoBehaviour.print ("Initial Black Piece Positions\n");
 		List<Tuple2<PIECE_TYPES,Vector2>> positions = new List<Tuple2<PIECE_TYPES,Vector2>>();
@@ -136,7 +139,7 @@ public class DrawPiece : MonoBehaviour {
                 if (y == 6)
                 {
                     model = Spawn(x, y, pawn);
-					Tuple2<PIECE_TYPES,Vector2> typeAndPos = new Tuple2<PIECE_TYPES,Vector2> (PIECE_TYPES.PAWN, new Vector2 (x, y));
+					PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.PAWN, new Vector2 (x, y));
 					positions.Add (typeAndPos);
 					MonoBehaviour.print ("Pawn Coords: " + new Vector2 (x, y) + "\n");
                 }
@@ -145,35 +148,35 @@ public class DrawPiece : MonoBehaviour {
                     if (x == 0 || x == 7)
                     {
                         model = Spawn(x, y, castle);
-						Tuple2<PIECE_TYPES,Vector2> typeAndPos = new Tuple2<PIECE_TYPES,Vector2> (PIECE_TYPES.ROOK, new Vector2 (x, y));
+						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.ROOK, new Vector2 (x, y));
 						positions.Add (typeAndPos);
 						MonoBehaviour.print ("Castle Coords: " + new Vector2 (x, y) + "\n");
                     }
                     else if (x == 1 || x == 6)
                     {
                         model = Spawn(x, y, knight);
-						Tuple2<PIECE_TYPES,Vector2> typeAndPos = new Tuple2<PIECE_TYPES,Vector2> (PIECE_TYPES.KNIGHT, new Vector2 (x, y));
+						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.KNIGHT, new Vector2 (x, y));
 						positions.Add (typeAndPos);
 						MonoBehaviour.print ("Knight Coords: " + new Vector2 (x, y) + "\n");
                     }
                     else if (x == 2 || x == 5)
                     {
                         model = Spawn(x, y, bishop);
-						Tuple2<PIECE_TYPES,Vector2> typeAndPos = new Tuple2<PIECE_TYPES,Vector2> (PIECE_TYPES.BISHOP, new Vector2 (x, y));
+						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.BISHOP, new Vector2 (x, y));
 						positions.Add (typeAndPos);
 						MonoBehaviour.print ("Bishop Coords: " + new Vector2 (x, y) + "\n");
                     }
                     else if (x == 3)
                     {
                         model = Spawn(x, y, king);
-						Tuple2<PIECE_TYPES,Vector2> typeAndPos = new Tuple2<PIECE_TYPES,Vector2> (PIECE_TYPES.KING, new Vector2 (x, y));
+						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.KING, new Vector2 (x, y));
 						positions.Add (typeAndPos);
 						MonoBehaviour.print ("King Coords: " + new Vector2 (x, y) + "\n");
                     }
                     else if (x == 4)
                     {
                         model = Spawn(x, y, queen);
-						Tuple2<PIECE_TYPES,Vector2> typeAndPos = new Tuple2<PIECE_TYPES,Vector2> (PIECE_TYPES.QUEEN, new Vector2 (x, y));
+						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.QUEEN, new Vector2 (x, y));
 						positions.Add (typeAndPos);
 						MonoBehaviour.print ("Queen Coords: " + new Vector2 (x, y) + "\n");
                     }
