@@ -1,8 +1,9 @@
 ﻿//Piece.cs
+//Writen by: Austin Harmon
 //A piece class that defines the atributes of a generic chess piece
-//Each type of piece is classified by an enumeration(the corisponding int value is referenced below)
-//Piece uses the position class to define a pieces current position
-//*****UNFINISHED*****
+//Each type of piece is a sub class of the generic piece
+//Leagal move check functions are enclosed in each subclass
+
 
 using System.Collections;
 using System.Collections.Generic;
