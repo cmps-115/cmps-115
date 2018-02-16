@@ -11,7 +11,7 @@ Shader "StandardOutline"
         _MainTex("Albedo", 2D) = "white" {}
 
 		_OutlineColor("Outline", Color) = (0, 0, 0, 1)
-		_OutlineWidth("Outline Width", Range(0.0, 0.04)) = 0.03
+		_OutlineWidth("Outline Width", Range(0.0, 0.1)) = 0.03
 
         _Cutoff("Alpha Cutoff", Range(0.0, 1.0)) = 0.5
 
@@ -94,7 +94,7 @@ Shader "StandardOutline"
 			Name "OUTLINE"
 			Tags { "Queue" = "Transparent" }
 			Cull Front
-			ZWrite On
+			ZWrite Off
 			Blend SrcAlpha OneMinusSrcAlpha
 
 
