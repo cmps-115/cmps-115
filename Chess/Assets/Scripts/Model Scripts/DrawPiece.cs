@@ -20,12 +20,38 @@ public class DrawPiece : MonoBehaviour {
     public Material secondTeam;
 
     private static Vector2 piecePosition = new Vector2(-1, -1);
+    private static Renderer pieceRenderer;
     private static bool clicked = false;
 
     private const float MODEL_OFFSET = 0.5f;
+    private const float MODEL_OFFSET_Y = 0.05f;
     private const int BOARD_MINIMUM = 0;
     private const int BOARD_MAXIMUM = 7;
     private const int TEAM_ROWS = 2;
+
+    private const int RENDERQUEUE = 3000;
+
+    public static void HighlightPiece(float OutlineThickness = 1.25f)
+    {
+        if (pieceRenderer == null)
+            throw new System.Exception("Error in DrawPiece: Cannot Highlight a piece because a piece has not been clicked");
+
+        var mat = pieceRenderer.material;
+        mat.shader = Shader.Find("StandardOutline");
+        mat.SetFloat("_OutlineWidth", OutlineThickness);
+        mat.renderQueue = RENDERQUEUE + 1;
+    }
+
+    public static void ClearHighlight()
+    {
+        if (pieceRenderer == null)
+            throw new System.Exception("Error in DrawPiece: Cannot ClearHighlight because a piece has not been clicked");
+
+        var mat = pieceRenderer.material;
+        mat.shader = Shader.Find("StandardOutline");
+        mat.SetFloat("_OutlineWidth", 0);
+        mat.renderQueue = RENDERQUEUE;
+    }
 
     /// <summary>
     /// Returns the positions of the last chess piece clicked.
@@ -60,7 +86,7 @@ public class DrawPiece : MonoBehaviour {
     #region Place Teams
     private GameObject Spawn(int x, int y, GameObject model)
     {
-        return Instantiate(model, new Vector3(x + MODEL_OFFSET, 0, y + MODEL_OFFSET), model.transform.rotation);
+        return Instantiate(model, new Vector3(x + MODEL_OFFSET, MODEL_OFFSET_Y, y + MODEL_OFFSET), model.transform.rotation);
     }
 
     private void PlaceFirstTeam()
@@ -161,6 +187,7 @@ public class DrawPiece : MonoBehaviour {
             {
                 if (hit.transform.tag == "ChessPiece")
                 {
+                    pieceRenderer = hit.transform.GetComponent<Renderer>();
                     piecePosition = new Vector2Int((int)hit.transform.position.x, (int)hit.transform.position.z);
                     clicked = true;
                     return;
