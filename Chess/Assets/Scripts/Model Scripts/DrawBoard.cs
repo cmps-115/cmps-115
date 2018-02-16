@@ -40,7 +40,7 @@ public class DrawBoard : MonoBehaviour
     private const int LAYER_ZERO = 0;
     private const int LAYER_ONE = 1;
 
-    public void HighLightGrid(Vector2 pos)
+    public void HighLightGrid(Vector3 pos)
     {
         int[] tri;
         List<int> triCopy;
@@ -68,9 +68,9 @@ public class DrawBoard : MonoBehaviour
         mesh.SetTriangles(triCopy, submesh);
     }
 
-    public void HighLightGrid(Vector2[] positions)
+    public void HighLightGrid(List<Vector3> positions)
     {
-        foreach (Vector2 pos in positions)
+        foreach (Vector3 pos in positions)
         {
             HighLightGrid(pos);
         }

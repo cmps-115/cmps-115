@@ -65,7 +65,11 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+<<<<<<< HEAD
     - _OutlineWidth: 0.0875
+=======
+    - _OutlineWidth: 0.08
+>>>>>>> c0934d741ef005fa6f08ba397b9b84d3bd34423d
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -75,4 +79,8 @@ Material:
     m_Colors:
     - _Color: {r: 0.7941176, g: 0.7941176, b: 0.7941176, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+<<<<<<< HEAD
     - _OutlineColor: {r: 0.031898767, g: 0.86764705, b: 0.21057613, a: 1}
+=======
+    - _OutlineColor: {r: 0.24683297, g: 0.9044118, b: 0.19285254, a: 1}
+>>>>>>> c0934d741ef005fa6f08ba397b9b84d3bd34423d

@@ -11,7 +11,11 @@ Shader "StandardOutline"
         _MainTex("Albedo", 2D) = "white" {}
 
 		_OutlineColor("Outline", Color) = (0, 0, 0, 1)
+<<<<<<< HEAD
 		_OutlineWidth("Outline Width", Range(0.0, 0.1)) = 0.03
+=======
+		_OutlineWidth("Outline Width", Range(0.0, 0.1)) = 0.08
+>>>>>>> c0934d741ef005fa6f08ba397b9b84d3bd34423d
 
         _Cutoff("Alpha Cutoff", Range(0.0, 1.0)) = 0.5
 

@@ -161,7 +161,7 @@ public class DrawPiece : MonoBehaviour {
             {
                 if (hit.transform.tag == "ChessPiece")
                 {
-                    piecePosition = new Vector2(hit.transform.position.x - MODEL_OFFSET, hit.transform.position.z - MODEL_OFFSET);
+                    piecePosition = new Vector2Int((int)hit.transform.position.x, (int)hit.transform.position.z);
                     clicked = true;
                     return;
                 }
