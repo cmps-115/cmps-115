@@ -36,4 +36,19 @@ public class Board
         else
             return false;
     }
+
+    public bool IsOccupied(int xCord, int yCord)
+    {
+        if (squares[xCord, yCord] != null)
+            return true;
+
+        else
+            return false;
+
+    }
+
+    public Piece GetPieceAt(int xCord, int yCord)
+    {
+        return squares[xCord, yCord].GetPiece();
+    }
 }
