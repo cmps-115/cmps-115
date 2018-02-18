@@ -1,4 +1,6 @@
-﻿using UnityEngine.Assertions;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Assertions;
 using ChessGlobals; 
 public class Human: Player 
 {
@@ -23,9 +25,9 @@ public class Human: Player
 	{
 		return lastMove;
 	}
-	public bool isMoveSuccessfullyExcecuted(Move move)
+	public List<Vector2> generateLegalMoves (Piece piece)
 	{
-		
-		return false;
+		Assert.AreNotEqual (piece, null);
+		return piece.LegalMoves(cgs.getBoard());
 	}
 }

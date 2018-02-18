@@ -35,7 +35,11 @@ public class Piece
 		team = p_team;
         PiecePosition = new Vector2( xCord, yCord);
     }
-
+	public virtual List<Vector2> LegalMoves(Board chessBoard)
+	{
+		//if a call ever returns null then its the base class LegalMoves
+		return null;
+	}
     //*****Accessors*****
     //returns cureent position on board of the given piece
     public Vector2 GetPiecePosition()
@@ -92,7 +96,7 @@ public class King : Piece
     public King(bool p_team, int xCord, int yCord) 
         : base(p_team,xCord,yCord){}
 
-    public List<Vector2> LegalMoves(Board chessBoard)
+    public override List<Vector2> LegalMoves(Board chessBoard)
     {
         List<Vector2> positions = new List<Vector2>();
 
@@ -226,7 +230,7 @@ public class Knight : Piece
     public Knight(bool p_team, int xCord, int yCord)
         : base(p_team, xCord, yCord){}
 
-    public List<Vector2> LegalMoves(Board chessBoard)
+	public override List<Vector2> LegalMoves(Board chessBoard)
     {
         List<Vector2> positions = new List<Vector2>();
 
@@ -367,7 +371,7 @@ public class Queen : Piece
     public Queen(bool p_team, int xCord, int yCord)
         : base (p_team, xCord, yCord)
     {}
-    public List<Vector2> LegalMoves(Board chessBoard)
+	public override List<Vector2> LegalMoves(Board chessBoard)
     {
         Rook tempRook = new Rook(GetTeam(), GetPiecePositionX(), GetPiecePositionX());
         Bishop tempBishop = new Bishop(GetTeam(), GetPiecePositionX(), GetPiecePositionY());
@@ -392,7 +396,7 @@ public class Pawn : Piece
         : base (p_team, xCord, yCord)
     {}
 
-    public List<Vector2> LegalMoves(Board chessBoard)
+	public override List<Vector2> LegalMoves(Board chessBoard)
     {
         bool team = GetTeam();
         List<Vector2> positions = new List<Vector2>();
@@ -522,7 +526,7 @@ public class Rook : Piece
         : base (p_team,xCord,yCord)
     {}
 
-    public List<Vector2> LegalMoves(Board chessBoard)
+	public override List<Vector2> LegalMoves(Board chessBoard)
     {
         List<Vector2> positions = new List<Vector2>();
 
@@ -677,7 +681,7 @@ public class Rook : Piece
             // if the prev is occupied by a black piece
             if (i1 >= ChessGlobals.BoardConstants.BOARD_MINIMUM)
             {
-				if (chessBoard.IsOccupied (i1, yCord)) // not sure about this one Austin
+				if (chessBoard.IsOccupied (i1, yCord))  
 				{
 					if(chessBoard.GetPieceAt(i1, yCord).GetTeam() != GetTeam())
 						positions.Add (new Vector2 (i1, yCord));
@@ -697,7 +701,7 @@ public class Bishop : Piece
         :base(p_team,xCord,yCord)
     {}
 
-    public List<Vector2> LegalMoves(Board chessBoard)
+	public override List<Vector2> LegalMoves(Board chessBoard)
     {
         
         int xc, yc;

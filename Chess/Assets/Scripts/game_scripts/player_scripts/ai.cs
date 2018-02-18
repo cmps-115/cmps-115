@@ -25,9 +25,10 @@ public class AI: Player
 	{
 		return lastMove;
 	}
-	public bool isMoveSuccessfullyExcecuted(Move move)
+	public List<Vector2> generateLegalMoves (Piece piece)
 	{
-		return false;
+		Assert.AreNotEqual (piece, null);
+		return piece.LegalMoves(cgs.getBoard());
 	}
 	public Move getBestMove()
 	{
