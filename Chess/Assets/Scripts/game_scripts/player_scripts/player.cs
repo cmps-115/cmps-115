@@ -1,8 +1,7 @@
-﻿ public abstract class Player{
-	public int id;
-	public char color;
-	abstract public Move getMove ();
-	abstract public bool moveSuccessfullyExcecuted ();
-	abstract public int getId ();
-	abstract public char getColor ();
+﻿using ChessGlobals;  
+public interface Player{
+	void setMove (Move move);
+	Move getMove();
+	Move getLastMove();
+	bool isMoveSuccessfullyExcecuted (Move move);
 }

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ChessGlobals;
 
-//Shorten Declarationsm & Clarify Declarations
+//Shorten & Clarify Declarations 
 using PieceTypeAndPosition = ChessGlobals.Tuple2<ChessGlobals.PIECE_TYPES,UnityEngine.Vector2>;
 using ListOfPieceTypesAndPositions =  System.Collections.Generic.List< ChessGlobals.Tuple2<ChessGlobals.PIECE_TYPES,UnityEngine.Vector2> >;
 

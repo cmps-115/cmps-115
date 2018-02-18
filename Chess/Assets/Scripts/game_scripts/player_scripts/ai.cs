@@ -1,26 +1,31 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 using ChessGlobals;
-	public class AI: Player{
+public class AI: Player
+{
+	private Move lastMove;
 	private int depth;
-	private ChessGameController chessGame;
-	public AI(ChessGameController chessGame, int depth)//Rules now in each piece
+	private ChessGameController cgs;
+	public AI(ChessGameController cgs, int depth)//Rules now in each piece
+	{
+		Assert.AreNotEqual (cgs, null);
+		this.cgs = cgs;
+		this.depth = depth;
+		lastMove = null;
+	}
+	public void setMove (Move move)
 	{
 	}
-	public override Move getMove()
+	public Move getMove()
 	{
-		Move x = new Move();
-		return x;
+		return new Move();
 	}
-	public override int getId()
+	public Move getLastMove()
 	{
-		return 0;
+		return lastMove;
 	}
-	public override char getColor()
-	{
-		return '0';
-	}
-	public override bool moveSuccessfullyExcecuted()
+	public bool isMoveSuccessfullyExcecuted(Move move)
 	{
 		return false;
 	}

@@ -1,8 +1,9 @@
 ﻿//Piece.cs
+//Writen by: Austin Harmon
 //A piece class that defines the atributes of a generic chess piece
-//Each type of piece is classified by an enumeration(the corisponding int value is referenced below)
-//Piece uses the position class to define a pieces current position
-//*****UNFINISHED*****
+//Each type of piece is a sub class of the generic piece
+//Leagal move check functions are enclosed in each subclass
+
 
 using System.Collections;
 using System.Collections.Generic;
@@ -102,19 +103,10 @@ public class King : Piece
 
 
         //Checks availability of the 3 posible squares to move to +1 on the X-axis of the board
-        if (xCord + 1 <= 7)
+        if (xCord + 1 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM)
         {
-            if (yCord + 1 <= 7)
+            if (yCord + 1 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM)
             {
-                /*if (chessBoard.squares[xCord + 1, yCord + 1] == null)
-                {
-                    positions.Add(new Vector2Int(xCord + 1, yCord + 1));
-                }
-                else
-                {
-                    if (chessBoard.squares[xCord + 1, yCord + 1].GetPiece().GetTeam() != GetTeam())
-                        positions.Add(new Vector2Int(xCord + 1, yCord + 1));
-                }*/
 				if (chessBoard.IsOccupied (xCord + 1, yCord + 1) == false) 
 				{
 					positions.Add (new Vector2 (xCord + 1, yCord + 1));
@@ -126,18 +118,8 @@ public class King : Piece
 				}
             }
 
-            if (yCord - 1 >= 0)
+            if (yCord - 1 >= ChessGlobals.BoardConstants.BOARD_MINIMUM)
             {
-                /*if (chessBoard.squares[xCord + 1, yCord - 1] == null)
-                {
-                    positions.Add(new Vector2Int(xCord + 1, yCord - 1));
-                }
-                else
-                {
-                    if (chessBoard.squares[xCord + 1, yCord - 1].GetPiece().GetTeam() != GetTeam()) 
-                    positions.Add(new Vector2Int(xCord + 1, yCord - 1));
-                }
-                */
 				if (chessBoard.IsOccupied (xCord + 1, yCord - 1) == false) 
 				{
 					positions.Add (new Vector2 (xCord + 1, yCord - 1));
@@ -149,15 +131,6 @@ public class King : Piece
 				}
 				
             }
-
-            /*if (chessBoard.squares[xCord + 1, yCord] == null)
-            {
-                positions.Add(new Vector2Int(xCord + 1, yCord));
-            }
-            else
-            {
-                if (chessBoard.squares[xCord + 1, yCord].GetPiece().GetTeam() != GetTeam()) positions.Add(new Vector2Int(xCord + 1, yCord));
-            }*/
 			if (chessBoard.IsOccupied (xCord + 1, yCord) == false) 
 			{
 				positions.Add (new Vector2 (xCord + 1, yCord));
@@ -172,18 +145,10 @@ public class King : Piece
         }
 
         //Checks the same things as the previous block, but -1 on the X-axis 
-        if (xCord - 1 >= 0)
+        if (xCord - 1 >= ChessGlobals.BoardConstants.BOARD_MINIMUM)
         {
-            if (yCord + 1 <= 7)
+            if (yCord + 1 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM)
             {
-                /*if (chessBoard.squares[xCord - 1, yCord + 1] == null)
-                {
-                    positions.Add(new Vector2Int(xCord - 1, yCord + 1));
-                }
-                else
-                {
-                    if (chessBoard.squares[xCord - 1, yCord + 1].GetPiece().GetTeam() != GetTeam()) positions.Add(new Vector2Int(xCord - 1, yCord + 1));
-                }*/
 				if (chessBoard.IsOccupied (xCord - 1, yCord + 1) == false) 
 				{
 					positions.Add (new Vector2 (xCord - 1, yCord + 1));
@@ -195,16 +160,9 @@ public class King : Piece
 				}
             }
 
-            if (yCord - 1 >= 0)
+            if (yCord - 1 >= ChessGlobals.BoardConstants.BOARD_MINIMUM)
             {
-                /*if (chessBoard.squares[xCord - 1, yCord - 1] == null)
-                {
-                    positions.Add(new Vector2Int(xCord - 1, yCord - 1));
-                }
-                else
-                {
-                    if (chessBoard.squares[xCord - 1, yCord - 1].GetPiece().GetTeam() != GetTeam()) positions.Add(new Vector2Int(xCord - 1, yCord - 1));
-                }*/
+
 				if (chessBoard.IsOccupied (xCord - 1, yCord - 1) == false) 
 				{
 					positions.Add (new Vector2 (xCord - 1, yCord - 1));
@@ -216,14 +174,6 @@ public class King : Piece
 				}
             }
 
-            /*if (chessBoard.squares[xCord - 1, yCord] == null)
-            {
-                positions.Add(new Vector2Int(xCord - 1, yCord));
-            }
-            else
-            {
-                if (chessBoard.squares[xCord - 1, yCord].GetPiece().GetTeam() != GetTeam()) positions.Add(new Vector2Int(xCord - 1, yCord));
-            }*/
 			if (chessBoard.IsOccupied (xCord - 1, yCord) == false) 
 			{
 				positions.Add (new Vector2 (xCord - 1, yCord));
@@ -237,16 +187,8 @@ public class King : Piece
         }
 
         //Checks only the square +1 on the Y-axis from the kings posision
-        if (yCord + 1 <= 7)
+        if (yCord + 1 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM)
         {
-            /*if (chessBoard.squares[xCord, yCord + 1] == null)
-            {
-                positions.Add(new Vector2Int(xCord, yCord + 1));
-            }
-            else
-            {
-                if (chessBoard.squares[xCord, yCord + 1].GetPiece().GetTeam() != GetTeam()) positions.Add(new Vector2Int(xCord, yCord + 1));
-            }*/
 			if (chessBoard.IsOccupied (xCord, yCord + 1) == false) 
 			{
 				positions.Add (new Vector2 (xCord, yCord + 1));
@@ -259,16 +201,8 @@ public class King : Piece
         }
 
         //Same as previous block, but -1 on the Y-axis from the kings position
-       if (yCord - 1 >= 0)
+       if (yCord - 1 >= ChessGlobals.BoardConstants.BOARD_MINIMUM)
         {
-			/*if (chessBoard.squares[xCord, yCord - 1] == null)
-            {
-                positions.Add(new Vector2Int(xCord, yCord - 1));
-            }
-            else
-            {
-                if (chessBoard.squares[xCord, yCord - 1].GetPiece().GetTeam() != GetTeam()) positions.Add(new Vector2Int(xCord, yCord - 1));
-            }*/
 			if (chessBoard.IsOccupied (xCord, yCord - 1) == false) 
 			{
 				positions.Add (new Vector2 (xCord, yCord - 1));
@@ -303,18 +237,10 @@ public class Knight : Piece
 
         //Checks the 2 moves in the positive x direction
         //Does not record the position if the square is ocupied by another piece of the same team
-        if (xCord + 2 <= 7)
+        if (xCord + 2 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM)
         {
-            if (yCord + 1 <= 7)
+            if (yCord + 1 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM)
             {
-                /*if (chessBoard.squares[xCord + 2, yCord + 1] == null)
-                {
-                    positions.Add(new Vector2Int(xCord + 2, yCord + 1));
-                }
-                else
-                {
-                    if (chessBoard.squares[xCord + 2, yCord + 1].GetPiece().GetTeam() != GetTeam()) positions.Add(new Vector2Int(xCord + 2, yCord + 1));
-                }*/
 				if (chessBoard.IsOccupied (xCord + 2, yCord + 1) == false) 
 				{
 					positions.Add (new Vector2 (xCord + 2, yCord + 1));
@@ -326,16 +252,8 @@ public class Knight : Piece
 				}
             }
 
-            if (yCord - 1 >= 0)
+            if (yCord - 1 >= ChessGlobals.BoardConstants.BOARD_MINIMUM)
             {
-                /*if (chessBoard.squares[xCord + 2, yCord - 1] == null)
-                {
-                    positions.Add(new Vector2Int(xCord + 2, yCord - 1));
-                }
-                else
-                {
-                    if (chessBoard.squares[xCord + 2, yCord - 1].GetPiece().GetTeam() != GetTeam()) positions.Add(new Vector2Int(xCord + 2, yCord - 1));
-                }*/
 				if (chessBoard.IsOccupied (xCord + 2, yCord - 1) == false) 
 				{
 					positions.Add (new Vector2 (xCord + 2, yCord - 1));
@@ -349,18 +267,10 @@ public class Knight : Piece
         }
 
         //Same function as the previous loop in different direction
-        if (xCord - 2 >= 0)
+        if (xCord - 2 >= ChessGlobals.BoardConstants.BOARD_MINIMUM)
         {
-            if (yCord + 1 <= 7)
+            if (yCord + 1 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM)
             {
-                /*if (chessBoard.squares[xCord - 2, yCord + 1] == null)
-                {
-                    positions.Add(new Vector2Int(xCord - 2, yCord + 1));
-                }
-                else
-                {
-                    if (chessBoard.squares[xCord - 2, yCord + 1].GetPiece().GetTeam() != GetTeam()) positions.Add(new Vector2Int(xCord - 2, yCord + 1));
-                }*/
 				if (chessBoard.IsOccupied (xCord - 2, yCord + 1) == false) 
 				{
 					positions.Add (new Vector2 (xCord - 2, yCord + 1));
@@ -372,17 +282,8 @@ public class Knight : Piece
 				}
             }
 
-            if (yCord - 1 >= 0)
+            if (yCord - 1 >= ChessGlobals.BoardConstants.BOARD_MINIMUM)
             {
-                /*if (chessBoard.squares[xCord - 2, yCord - 1] == null)
-                {
-                    positions.Add(new Vector2Int(xCord - 2, yCord - 1));
-                }
-                else
-                {
-                    if (chessBoard.squares[xCord - 2, yCord - 1].GetPiece().GetTeam() != GetTeam()) positions.Add(new Vector2Int(xCord - 2, yCord - 1));
-                }*/
-
 				if (chessBoard.IsOccupied (xCord - 2, yCord - 1) == false) 
 				{
 					positions.Add (new Vector2 (xCord - 2, yCord - 1));
@@ -397,18 +298,10 @@ public class Knight : Piece
         }
 
         //Same function as the previous loop in different direction
-        if (yCord + 2 <= 7)
+        if (yCord + 2 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM)
         {
-            if (xCord + 1 <= 7)
+            if (xCord + 1 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM)
             {
-                /*if (chessBoard.squares[xCord + 1, yCord + 2] == null)
-                {
-                    positions.Add(new Vector2Int(xCord + 1, yCord + 2));
-                }
-                else
-                {
-                    if (chessBoard.squares[xCord + 1, yCord + 2].GetPiece().GetTeam() != GetTeam()) positions.Add(new Vector2Int(xCord + 1, yCord + 2));
-                }*/
 				if (chessBoard.IsOccupied (xCord + 1, yCord + 2) == false) 
 				{
 					positions.Add (new Vector2 (xCord + 1, yCord + 2));
@@ -420,16 +313,8 @@ public class Knight : Piece
 				}
             }
 
-            if (xCord - 1 >= 0)
+            if (xCord - 1 >= ChessGlobals.BoardConstants.BOARD_MINIMUM)
             {
-                /*if (chessBoard.squares[xCord - 1, yCord + 2] == null)
-                {
-                    positions.Add(new Vector2Int(xCord - 1, yCord + 2));
-                }
-                else
-                {
-                    if (chessBoard.squares[xCord - 1, yCord - 2].GetPiece().GetTeam() != GetTeam()) positions.Add(new Vector2Int(xCord - 1, yCord + 2));
-                }*/
 				if (chessBoard.IsOccupied (xCord - 1, yCord + 2) == false) 
 				{
 					positions.Add (new Vector2 (xCord - 1, yCord + 2));
@@ -443,18 +328,10 @@ public class Knight : Piece
         }
 
         //Same function as the previous loop in different direction
-        if (yCord - 2 >= 0)
+        if (yCord - 2 >= ChessGlobals.BoardConstants.BOARD_MINIMUM)
         {
-            if (xCord + 1 <= 7)
+            if (xCord + 1 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM)
             {
-                /*if (chessBoard.squares[xCord + 1, yCord - 2] == null)
-                {
-                    positions.Add(new Vector2Int(xCord + 1, yCord - 2));
-                }
-                else
-                {
-                    if (chessBoard.squares[xCord + 1, yCord - 2].GetPiece().GetTeam() != GetTeam()) positions.Add(new Vector2Int(xCord + 1, yCord - 2));
-                }*/
 				if (chessBoard.IsOccupied (xCord + 1, yCord - 2) == false) 
 				{
 					positions.Add (new Vector2 (xCord + 1, yCord - 2));
@@ -466,17 +343,6 @@ public class Knight : Piece
 				}
             }
 
-            /*if (xCord - 1 >= 0)
-            {
-                if (chessBoard.squares[xCord - 1, yCord - 2] == null)
-                {
-                    positions.Add(new Vector2Int(xCord - 1, yCord - 2));
-                }
-                else
-                {
-                    if (chessBoard.squares[xCord - 1, yCord - 2].GetPiece().GetTeam() != GetTeam()) positions.Add(new Vector2Int(xCord - 1, yCord - 2));
-                }
-            }*/
 			if (chessBoard.IsOccupied (xCord - 1, yCord - 2) == false) 
 			{
 				positions.Add (new Vector2 (xCord - 1, yCord - 2));
@@ -501,7 +367,7 @@ public class Queen : Piece
     public Queen(bool p_team, int xCord, int yCord)
         : base (p_team, xCord, yCord)
     {}
-    public List<Vector2> LegalMoves(Piece currentQueen, Board chessBoard)
+    public List<Vector2> LegalMoves(Board chessBoard)
     {
         Rook tempRook = new Rook(GetTeam(), GetPiecePositionX(), GetPiecePositionX());
         Bishop tempBishop = new Bishop(GetTeam(), GetPiecePositionX(), GetPiecePositionY());
@@ -526,7 +392,7 @@ public class Pawn : Piece
         : base (p_team, xCord, yCord)
     {}
 
-    List<Vector2> LegalMoves(Board chessBoard)
+    public List<Vector2> LegalMoves(Board chessBoard)
     {
         bool team = GetTeam();
         List<Vector2> positions = new List<Vector2>();
@@ -535,23 +401,15 @@ public class Pawn : Piece
 		int xCord = GetPiecePositionX();
 		int yCord = GetPiecePositionY();
 
-        //assuming for the board that 0 = free , 1 = black, = 2 = white
+        //assuming for the board that ChessGlobals.BoardConstants.BOARD_MINIMUM = free , 1 = black, = 2 = white
 
-        //assuming that white starts at the rows 0,1
+        //assuming that white starts at the rows ChessGlobals.BoardConstants.BOARD_MINIMUM,1
         if (team == ChessGlobals.COLOR.WHITE)//Where are you getting this from Austin?
         {
 
             //to make sure it doesnt go past 
-            if (yCord < 7)
+            if (yCord < ChessGlobals.BoardConstants.BOARD_MAXIMUM)
             {
-                //if the square ahead if empty 
-                /*if (chessBoard.squares[xCord, yCord + 1] == null)
-                {
-                    positions.Add(new Vector2Int(xCord, yCord + 1));
-                }
-                //if square is occupied by opposite team
-                else if (chessBoard.squares[xCord, yCord + 1].GetPiece().GetTeam() == Globals.BLACK)
-                    positions.Add(new Vector2Int(xCord, yCord + 1));*/
 				if (chessBoard.IsOccupied (xCord, yCord + 1) == false) 
 				{
 					positions.Add (new Vector2 (xCord, yCord + 1));
@@ -563,17 +421,9 @@ public class Pawn : Piece
 				}
             }
 
-            //to make sure its doesnt go past 16
-            if (yCord < 6)
+            //Checks if the piece is on the second row
+            if (yCord == 1)
             {
-                //if square that is at y+2 is empty and at starting position
-                /*if (chessBoard.squares[xCord,yCord + 2] == null && yCord == 1)
-                {
-                    positions.Add(new Vector2Int(xCord, yCord + 2));
-                }
-                //if square is occupied by opposite team
-                else if (chessBoard.squares[xCord,yCord + 2].GetPiece().GetTeam() == Globals.BLACK && yCord == 1)
-                    positions.Add(new Vector2Int(xCord, yCord + 2));*/
 				if (chessBoard.IsOccupied (xCord, yCord + 2) == false) 
 				{
 					positions.Add (new Vector2 (xCord, yCord + 2));
@@ -586,52 +436,31 @@ public class Pawn : Piece
             }
 
             //diagonal to left
-            if (xCord > 0 && yCord < 7)
+            if (xCord > ChessGlobals.BoardConstants.BOARD_MINIMUM && yCord < ChessGlobals.BoardConstants.BOARD_MAXIMUM)
             {
-                    
-               /* if (chessBoard.squares[xCord - 1,yCord + 1] != null)
-                {
-                    if(chessBoard.squares[xCord - 1, yCord + 1].GetPiece().GetTeam() == Globals.BLACK)
-                        positions.Add(new Vector2Int(xCord - 1, yCord + 1));
-                }*/
-				if (chessBoard.IsOccupied (xCord - 1, yCord + 1) == false) 
+				if (chessBoard.IsOccupied (xCord - 1, yCord + 1)) 
 				{
 					if (chessBoard.GetPieceAt (xCord - 1, yCord + 1).GetTeam () == ChessGlobals.COLOR.BLACK)
 						positions.Add (new Vector2 (xCord - 1, yCord + 1));
-					positions.Add (new Vector2 (xCord - 1, yCord + 1));
 				} 
             }
 
             //diagonal to right
-            if (xCord < 7 && yCord < 7)
+            if (xCord < ChessGlobals.BoardConstants.BOARD_MAXIMUM && yCord < ChessGlobals.BoardConstants.BOARD_MAXIMUM)
             {
-                /*if (chessBoard.squares[xCord + 1,yCord + 1] != null)
-                {
-                    if(chessBoard.squares[xCord + 1, yCord + 1].GetPiece().GetTeam() == Globals.BLACK)
-                        positions.Add(new Vector2Int(xCord + 1, yCord + 1));
-                }*/
-				if (chessBoard.IsOccupied (xCord + 1, yCord + 1) == false) 
+				if (chessBoard.IsOccupied (xCord + 1, yCord + 1)) 
 				{
 					if (chessBoard.GetPieceAt (xCord + 1, yCord + 1).GetTeam () == ChessGlobals.COLOR.BLACK)
 						positions.Add (new Vector2 (xCord + 1, yCord + 1));
-					positions.Add (new Vector2 (xCord + 1, yCord + 1));
 				} 
             }
 
         }
         else
         {
-            //to make sure it doesnt go past 0
-            if (yCord > 0)
+            //to make sure it doesnt go past ChessGlobals.BoardConstants.BOARD_MINIMUM
+            if (yCord > ChessGlobals.BoardConstants.BOARD_MINIMUM)
             {
-                //if the square ahead if empty 
-                /*if (chessBoard.squares[xCord,yCord - 1] == null)
-                {
-                    positions.Add(new Vector2Int(xCord, yCord - 1));
-                }
-                //if square is occupied by opposite team
-                else if (chessBoard.squares[xCord,yCord - 1].GetPiece().GetTeam() == Globals.WHITE)
-                    positions.Add(new Vector2Int(xCord, yCord - 1));*/
 				if (chessBoard.IsOccupied (xCord, yCord - 1) == false) 
 				{
 					positions.Add (new Vector2 (xCord, yCord - 1));
@@ -643,35 +472,23 @@ public class Pawn : Piece
 				}
             }
 
-            //to make sure its doesnt go past 16
-            if (yCord == 1)
+            //Checks if the pawn in on its starting row
+            if (yCord == 6)
             {
-                //if square that is at y-2 is empty
-                /*if (chessBoard.squares[xCord,yCord - 2] == null && yCord == 6)
-                {
-                    positions.Add(new Vector2Int(xCord, yCord - 2));
-                }
-                //if square is occupied by opposite team
-                else if (chessBoard.squares[xCord,yCord - 2].GetPiece().GetTeam() == Globals.WHITE && yCord == 6)
-					positions.Add(new Vector2Int(xCord, yCord - 2));*/
-				if (chessBoard.IsOccupied (xCord, yCord - 2) == false && yCord == 6) 
+				if (yCord == 6 && chessBoard.IsOccupied(xCord, yCord - 2) == false) 
 				{
 					positions.Add (new Vector2 (xCord, yCord - 2));
 				} 
 				else 
 				{
-					if (chessBoard.GetPieceAt (xCord, yCord - 2).GetTeam () == ChessGlobals.COLOR.WHITE && yCord == 6)
+					if (yCord == 6 && chessBoard.GetPieceAt(xCord, yCord - 2).GetTeam() == ChessGlobals.COLOR.WHITE)
 						positions.Add (new Vector2 (xCord, yCord - 2));
 				}
             }
 
             //diagonal to left
-            if (xCord < 7 && yCord > 0)
+            if (xCord < ChessGlobals.BoardConstants.BOARD_MAXIMUM && yCord > ChessGlobals.BoardConstants.BOARD_MINIMUM)
             {
-                /*if (chessBoard.squares[xCord + 1,yCord - 1].GetPiece().GetTeam() == Globals.WHITE)
-                {
-                    positions.Add(new Vector2Int(xCord + 1, yCord - 1));
-                }*/
 				if (chessBoard.IsOccupied (xCord + 1, yCord - 1))  
 				{
 					if(chessBoard.GetPieceAt(xCord + 1, yCord - 1).GetTeam() == ChessGlobals.COLOR.WHITE)
@@ -681,12 +498,8 @@ public class Pawn : Piece
 
 
             //diagonal to right
-            if (xCord > 0 && yCord > 0)
+            if (xCord > ChessGlobals.BoardConstants.BOARD_MINIMUM && yCord > ChessGlobals.BoardConstants.BOARD_MINIMUM)
             {
-                /*if (chessBoard.squares[xCord - 1,yCord - 1].GetPiece().GetTeam() == Globals.WHITE)
-                {
-                    positions.Add(new Vector2Int(xCord - 1, yCord - 1));
-                }*/
 				if (chessBoard.IsOccupied (xCord - 1, yCord - 1)) // not sure about this one Austin
 				{
 					if(chessBoard.GetPieceAt(xCord - 1, yCord - 1).GetTeam() == ChessGlobals.COLOR.WHITE)
@@ -726,19 +539,14 @@ public class Rook : Piece
             // check for moves in front
             int i1 = yCord + 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2(xCord, i1)) && i1 < 8)
+            while (i1 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM && !chessBoard.IsOccupied(new Vector2(xCord, i1)))
             {
                 positions.Add(new Vector2(xCord, i1));
                 i1++;
             }
             // if the next is occupied by a black piece
-            if (i1 < 7)
+            if (i1 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM)
             {
-                /*if (chessBoard.squares[xCord, i1].GetPiece().GetTeam() != GetTeam())
-                {
-                    positions.Add(new Vector2Int(xCord, i1));
-                }*/
-				
 				if (chessBoard.IsOccupied (xCord, i1))  
 				{
 					if(chessBoard.GetPieceAt(xCord, i1).GetTeam() != GetTeam())
@@ -748,18 +556,14 @@ public class Rook : Piece
             // check for moves in back
             i1 = yCord - 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2(xCord, i1)) && i1 > 0)
+            while (i1 >= ChessGlobals.BoardConstants.BOARD_MINIMUM && !chessBoard.IsOccupied(new Vector2(xCord, i1)))
             {
                 positions.Add(new Vector2(xCord, i1));
                 i1--;
             }
             // if the prev is occupied by a black piece
-            if (i1 > -1)
+            if (i1 >= ChessGlobals.BoardConstants.BOARD_MINIMUM)
             {
-                /*if (chessBoard.squares[xCord, i1].GetPiece().GetTeam() != GetTeam())
-                {
-                    positions.Add(new Vector2Int(xCord, i1));
-                }*/
 				if (chessBoard.IsOccupied (xCord, i1)) // not sure about this one Austin
 				{
 					if(chessBoard.GetPieceAt(xCord, i1).GetTeam() != GetTeam())
@@ -771,18 +575,14 @@ public class Rook : Piece
             // check for moves to the right
             i1 = xCord + 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2(i1, yCord)) && i1 < 8)
+            while (i1 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM && !chessBoard.IsOccupied(new Vector2(i1, yCord)))
             {
                 positions.Add(new Vector2(i1, yCord));
                 i1++;
             }
             // if the next is occupied by a black piece
-            if (i1 < 7)
+            if (i1 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM)
             {
-                /*if (chessBoard.squares[i1, yCord].GetPiece().GetTeam() != GetTeam())
-                {
-                    positions.Add(new Vector2Int(i1, yCord));
-                }*/
 				if (chessBoard.IsOccupied (i1, yCord)) // not sure about this one Austin
 				{
 					if(chessBoard.GetPieceAt(i1, yCord).GetTeam() != GetTeam())
@@ -793,18 +593,14 @@ public class Rook : Piece
             // check for moves to the left
             i1 = xCord - 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2(i1, yCord)) && i1 > 0)
+            while (i1 >= ChessGlobals.BoardConstants.BOARD_MINIMUM && !chessBoard.IsOccupied(new Vector2(i1, yCord)))
             {
                 positions.Add(new Vector2(i1, yCord));
                 i1--;
             }
             // if the prev is occupied by a black piece
-            if (i1 > -1)
+            if (i1 >= ChessGlobals.BoardConstants.BOARD_MINIMUM)
             {
-                /*if (chessBoard.squares[i1, yCord].GetPiece().GetTeam() != GetTeam())
-                {
-                    positions.Add(new Vector2Int(i1, yCord));
-                }*/
 				if (chessBoard.IsOccupied (i1, yCord)) // not sure about this one Austin
 				{
 					if(chessBoard.GetPieceAt(i1, yCord).GetTeam() != GetTeam())
@@ -819,18 +615,14 @@ public class Rook : Piece
             // check for moves in back
             int i1 = yCord + 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2(xCord, i1)) && i1 < 8)
+            while (i1 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM && !chessBoard.IsOccupied(new Vector2(xCord, i1)))
             {
                 positions.Add(new Vector2(xCord, i1));
                 i1++;
             }
             // if the next is occupied by a white piece
-            if (i1 < 7)
+            if (i1 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM)
             {
-                /*if (chessBoard.squares[xCord, i1].GetPiece().GetTeam() != GetTeam())
-                {
-                    positions.Add(new Vector2(xCord, i1));
-                }*/
 				if (chessBoard.IsOccupied (xCord, yCord - 1)) // not sure about this one Austin
 				{
 					if(chessBoard.GetPieceAt(xCord, yCord - 1).GetTeam() != GetTeam())
@@ -840,18 +632,14 @@ public class Rook : Piece
             // check for moves in front
             i1 = yCord - 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2(xCord, i1)) && i1 > 0)
+            while (i1 >= ChessGlobals.BoardConstants.BOARD_MINIMUM && !chessBoard.IsOccupied(new Vector2(xCord, i1)))
             {
                 positions.Add(new Vector2(xCord, i1));
                 i1--;
             }
             // if the prev is occupied by a white piece
-            if (i1 > -1)
+            if (i1 >= ChessGlobals.BoardConstants.BOARD_MINIMUM)
             {
-                /*if (chessBoard.squares[xCord, i1].GetPiece().GetTeam() != GetTeam())
-                {
-                    positions.Add(new Vector2Int(xCord, i1));
-                }*/
 				if (chessBoard.IsOccupied (xCord, i1)) // not sure about this one Austin
 				{
 					if(chessBoard.GetPieceAt(xCord, i1).GetTeam() != GetTeam())
@@ -863,18 +651,14 @@ public class Rook : Piece
             // check for moves to the left
             i1 = xCord + 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2(i1, yCord)) && i1 < 8)
+            while (i1 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM && !chessBoard.IsOccupied(new Vector2(i1, yCord)))
             {
                 positions.Add(new Vector2(i1, yCord));
                 i1++;
             }
             // if the next is occupied by a black piece
-            if (i1 < 7)
+            if (i1 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM)
             {
-                /*if (chessBoard.squares[i1, yCord].GetPiece().GetTeam() != GetTeam())
-                {
-                    positions.Add(new Vector2Int(i1, yCord));
-                }*/
 				if (chessBoard.IsOccupied (i1, yCord)) // not sure about this one Austin
 				{
 					if(chessBoard.GetPieceAt(i1, yCord).GetTeam() != GetTeam())
@@ -885,18 +669,14 @@ public class Rook : Piece
             // check for moves to the right
             i1 = xCord - 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2(i1, yCord)) && i1 > 0)
+            while (i1 >= ChessGlobals.BoardConstants.BOARD_MINIMUM && !chessBoard.IsOccupied(new Vector2(i1, yCord)))
             {
                 positions.Add(new Vector2(i1, yCord));
                 i1--;
             }
             // if the prev is occupied by a black piece
-            if (i1 > -1)
+            if (i1 >= ChessGlobals.BoardConstants.BOARD_MINIMUM)
             {
-                /*if (chessBoard.squares[i1, yCord].GetPiece().GetTeam() != GetTeam())
-                {
-                    positions.Add(new Vector2Int(i1, yCord));
-                }*/
 				if (chessBoard.IsOccupied (i1, yCord)) // not sure about this one Austin
 				{
 					if(chessBoard.GetPieceAt(i1, yCord).GetTeam() != GetTeam())
@@ -919,7 +699,7 @@ public class Bishop : Piece
 
     public List<Vector2> LegalMoves(Board chessBoard)
     {
-        //bool team = GetTeam();
+        
         int xc, yc;
         List<Vector2> positions = new List<Vector2>();
 
@@ -929,29 +709,25 @@ public class Bishop : Piece
 		yc = GetPiecePositionY();
 
         // if its a white piece
-        if (GetTeam() == ChessGlobals.COLOR.WHITE)
-        {
+       // if (GetTeam() == ChessGlobals.COLOR.WHITE)
+       // {
 
             // check for moves in diagonally to the right and up
             int i1 = yc + 1;
             int i2 = xc + 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2(i2, i1)) && i1 < 8 && i2 < 8)
+            while (i1 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM && i2 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM && !chessBoard.IsOccupied(new Vector2(i2, i1)))
             {
                 positions.Add(new Vector2(i2, i1));
                 i1++;
                 i2++;
             }
             // if the next is occupied by a black piece
-            if (i1 < 7 && i2 < 7)
+            if (i1 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM && i2 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM)
             {
-                /*if (chessBoard.squares[i2, i1].GetPiece().GetTeam() == Globals.BLACK)
-                {
-                    positions.Add(new Vector2Int(i2, i1));
-                }*/
 				if (chessBoard.IsOccupied (i2, i1))  
 				{
-					if(chessBoard.GetPieceAt(i2, i1).GetTeam() == ChessGlobals.COLOR.BLACK)
+                if (chessBoard.GetPieceAt(i2, i1).GetTeam() != GetTeam())
 						positions.Add (new Vector2 (i2, i1));
 				} 
             }
@@ -959,19 +735,15 @@ public class Bishop : Piece
             i1 = yc - 1;
             i2 = xc - 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2(i2, i1)) && i1 > 0 && i2 > 0)
+            while (i1 >= ChessGlobals.BoardConstants.BOARD_MINIMUM && i2 >= ChessGlobals.BoardConstants.BOARD_MINIMUM && !chessBoard.IsOccupied(new Vector2(i2, i1)))
             {
                 positions.Add(new Vector2(i2, i1));
                 i1--;
                 i2--;
             }
             // if the prev is occupied by a black piece
-            if (i1 > -1 && i2 > -1)
+            if (i1 > ChessGlobals.BoardConstants.BOARD_MINIMUM && i2 > ChessGlobals.BoardConstants.BOARD_MINIMUM)
             {
-                /*if (chessBoard.squares[i2, i1].GetPiece().GetTeam() != team)
-                {
-                    positions.Add(new Vector2Int(i2, i1));
-                }*/
 				if (chessBoard.IsOccupied (i2, i1)) // not sure about this one Austin
 				{
 					if(chessBoard.GetPieceAt(i2, i1).GetTeam() != GetTeam())
@@ -984,19 +756,15 @@ public class Bishop : Piece
             i1 = xc + 1;
             i2 = yc - 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2(i1, i2)) && i1 < 8 && i2 > 0)
+            while (i1 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM && i2 >= ChessGlobals.BoardConstants.BOARD_MINIMUM && !chessBoard.IsOccupied(new Vector2(i1, i2)))
             {
                 positions.Add(new Vector2(i1, i2));
                 i1++;
                 i2--;
             }
             // if the next is occupied by a black piece
-            if (i1 < 7 && i2 > -1)
+            if (i1 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM && i2 >= ChessGlobals.BoardConstants.BOARD_MINIMUM)
             {
-                /*if (chessBoard.squares[i1, i2].GetPiece().GetTeam() != team)
-                {
-                    positions.Add(new Vector2Int(i1, i2));
-                }*/
 				if (chessBoard.IsOccupied (i1, i2)) // not sure about this one Austin
 				{
 					if(chessBoard.GetPieceAt(i1, i2).GetTeam() != GetTeam())
@@ -1004,23 +772,20 @@ public class Bishop : Piece
 				} 
             }
 
-            // check for moves to the left down
+            // check for moves to the up left
             i1 = xc - 1;
-            i2 = yc - 1;
+            i2 = yc + 1;
+
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2(i1, i2)) && i1 > 0 && i2 > 0)
+            while (i1 >= ChessGlobals.BoardConstants.BOARD_MINIMUM && i2 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM && !chessBoard.IsOccupied(new Vector2(i1, i2)))
             {
                 positions.Add(new Vector2(i1, i2));
                 i1--;
-                i2--;
+                i2++;
             }
             // if the prev is occupied by a black piece
-            if (i1 > -1 && i2 > -1)
+            if (i1 >= ChessGlobals.BoardConstants.BOARD_MINIMUM && i2 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM)
             {
-                /*if (chessBoard.squares[i1, i2].GetPiece().GetTeam() != team)
-                {
-                    positions.Add(new Vector2Int(i1, i2));
-                }*/
 				if (chessBoard.IsOccupied (i1, i2)) // not sure about this one Austin
 				{
 					if(chessBoard.GetPieceAt(i1, i2).GetTeam() != GetTeam())
@@ -1028,7 +793,8 @@ public class Bishop : Piece
 				} 
             }
 
-        }
+        //}
+        /*
         else
         {
 
@@ -1036,19 +802,15 @@ public class Bishop : Piece
             int i1 = yc + 1;
             int i2 = xc + 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2(i2, i1)) && i1 < 8 && i2 < 8)
+            while (i1 < 8 && i2 < 8 && !chessBoard.IsOccupied(new Vector2(i2, i1)))
             {
                 positions.Add(new Vector2(i2, i1));
                 i1++;
                 i2++;
             }
             // if the next is occupied by a white piece
-            if (i1 < 7 && i2 < 7)
+            if (i1 < ChessGlobals.BoardConstants.BOARD_MAXIMUM && i2 < ChessGlobals.BoardConstants.BOARD_MAXIMUM)
             {
-                /*if (chessBoard.squares[i2, i1].GetPiece().GetTeam() != team)
-                {
-                    positions.Add(new Vector2Int(i2, i1));
-                }*/
 				if (chessBoard.IsOccupied (i2, i1)) // not sure about this one Austin
 				{
 					if(chessBoard.GetPieceAt(i2, i1).GetTeam() != GetTeam())
@@ -1059,19 +821,15 @@ public class Bishop : Piece
             i1 = yc - 1;
             i2 = xc - 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2(i2, i1)) && i1 > 0 && i2 > 0)
+            while (i1 > ChessGlobals.BoardConstants.BOARD_MINIMUM && i2 > ChessGlobals.BoardConstants.BOARD_MINIMUM && !chessBoard.IsOccupied(new Vector2(i2, i1)))
             {
-                positions.Add(new Vector2Int(i2, i1));
+                positions.Add(new Vector2(i2, i1));
                 i1--;
                 i2--;
             }
             // if the prev is occupied by a white piece
             if (i1 > -1 && i2 > -1)
             {
-                /*if (chessBoard.squares[i2, i1].GetPiece().GetTeam() != team)
-                {
-                    positions.Add(new Vector2Int(i2, i1));
-                }*/
 				if (chessBoard.IsOccupied (i2, i1)) // not sure about this one Austin
 				{
 					if(chessBoard.GetPieceAt(i2, i1).GetTeam() != GetTeam())
@@ -1084,7 +842,7 @@ public class Bishop : Piece
             i1 = xc + 1;
             i2 = yc - 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2(i1, i2)) && i1 < 8 && i2 > 0)
+            while (i1 < 8 && i2 > ChessGlobals.BoardConstants.BOARD_MINIMUM && !chessBoard.IsOccupied(new Vector2(i1, i2)))
             {
                 positions.Add(new Vector2(i1, i2));
                 i1++;
@@ -1092,12 +850,8 @@ public class Bishop : Piece
 
             }
             // if the next is occupied by a white piece
-            if (i1 < 7 && i2 > -1)
+            if (i1 < ChessGlobals.BoardConstants.BOARD_MAXIMUM && i2 > -1)
             {
-                /*if (chessBoard.squares[i1, i2].GetPiece().GetTeam() != team)
-                {
-                    positions.Add(new Vector2Int(i1, i2));
-                }*/
 				if (chessBoard.IsOccupied (i1, i2)) // not sure about this one Austin
 				{
 					if(chessBoard.GetPieceAt(i1, i2).GetTeam() != GetTeam())
@@ -1109,7 +863,7 @@ public class Bishop : Piece
             i1 = xc - 1;
             i2 = yc - 1;
             // if its empty, it can move there
-            while (!chessBoard.IsOccupied(new Vector2(i1, i2)) && i1 > 0 && i2 > 0)
+            while (i1 > ChessGlobals.BoardConstants.BOARD_MINIMUM && i2 > ChessGlobals.BoardConstants.BOARD_MINIMUM && !chessBoard.IsOccupied(new Vector2(i1, i2)))
             {
                 positions.Add(new Vector2(i1, i2));
                 i1--;
@@ -1118,10 +872,6 @@ public class Bishop : Piece
             // if the prev is occupied by a white piece
             if (i1 > -1 && i2 > -1)
             {
-                /*if (chessBoard.squares[i1, i2].GetPiece().GetTeam() != team)
-                {
-                    positions.Add(new Vector2Int(i1, i2));
-                }*/
 				if (chessBoard.IsOccupied (i1, i2)) // not sure about this one Austin
 				{
 					if(chessBoard.GetPieceAt(i1, i2).GetTeam() != GetTeam())
@@ -1129,6 +879,7 @@ public class Bishop : Piece
 				} 
             }
         }
+        */
         return positions;
     }
 }

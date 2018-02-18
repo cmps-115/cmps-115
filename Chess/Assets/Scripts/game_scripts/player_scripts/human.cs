@@ -1,20 +1,31 @@
-﻿ public class Human: Player {
+﻿using UnityEngine.Assertions;
+using ChessGlobals; 
+public class Human: Player 
+{
 	private Move lastMove;
 	private Move currentMove;
-	public override Move getMove()
+	private ChessGameController cgs;
+	public Human(ChessGameController cgs)
+	{
+		Assert.AreNotEqual (cgs, null);
+		this.cgs = cgs;
+		lastMove = null;
+	}
+	public void setMove (Move move)
+	{
+		currentMove = move;
+	}
+	public Move getMove()
 	{
 		return new Move();
 	}
-	public override bool moveSuccessfullyExcecuted()
+	public Move getLastMove()
 	{
+		return lastMove;
+	}
+	public bool isMoveSuccessfullyExcecuted(Move move)
+	{
+		
 		return false;
-	}
-	public override int getId()
-	{
-		return 0;
-	}
-	public override char getColor()
-	{
-		return '0';
 	}
 }
