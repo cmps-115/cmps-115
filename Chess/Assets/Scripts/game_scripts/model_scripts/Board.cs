@@ -19,6 +19,10 @@ public class Board : ICloneable
 			for (int j = 0; j < cols; ++j)
 				UnMark (i, j);
 	}
+	public void Mark(Move move)
+	{
+		Mark (move.des, move.piece);
+	}
 	public void Mark(Vector2 position, Piece piece)
     {
 		if (IsOccupied (position)) 

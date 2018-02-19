@@ -28,35 +28,52 @@ public class AI: Player
 	{
 		return lastMove;
 	}
+	private void executeMove(Move move)
+	{
+		this.cgs.movePiece (move);
+	}
+	private void undoMove(Move move)
+	{
+		this.cgs.undoMove (move);
+	}
 	public Move getBestMove()
 	{
-		
 		//get all possible valid moves
 		List<Move> allMoves = generateAllLegalMoves();
 		int bestResult = Int32.MinValue;
 		Move bestMove = null;
 		foreach(Move move in allMoves)
 		{
-			/*executeMove(move)
-			int evaluationResult = -1 * negaMax(this.maxDepth,"");
-			//System.out.println("result: "+evaluationResult);
-			undoMove(move);
-			if( evaluationResult > bestResult){
+			executeMove (move);
+			int evaluationResult = -1 * negMax (this.depth);
+			undoMove (move);
+			if (evaluationResult > bestResult)
+			{
 				bestResult = evaluationResult;
 				bestMove = move;
-			}*/
-			int evaluationResult = -1 * negMax (this.depth);
+			}
 		}
 		//foreach move call negmax
 		return bestMove;
 	}
 	public int negMax(int depth)
 	{
-		return 0;
+		if (depth <= 0 || this.cgs.getGameState () == ChessGlobals.GAME_STATE.BLACK_WIN || this.cgs.getGameState () == ChessGlobals.GAME_STATE.WHITE_WIN)
+			return evaluateGameState ();
+		List<Move> moves = generateAllLegalMoves();
+		int currentMax = Int32.MinValue;
+		foreach(Move currentMove in moves)
+		{
+			executeMove(currentMove);
+			int score = -1 * negMax(depth - 1);
+			undoMove(currentMove);
+			if(score > currentMax)
+				currentMax = score;
+		}
+		return currentMax;
 	}
 	private List<Move> generateAllLegalMoves()
 	{
-		
 		List<Piece> allPieces = cgs.getPieces ();
 		List<Move> allValidMoves = new List<Move>();
 		List<Vector2> validMovesForASinglePiece = null;
@@ -77,9 +94,6 @@ public class AI: Player
 	{
 		Assert.AreNotEqual (piece, null);
 		return piece.LegalMoves(cgs.getBoard());
-	}
-	public void DoMove(Move move)
-	{
 	}
 
 	private int evaluateGameState()
@@ -119,17 +133,17 @@ public class AI: Player
 	}
 	private int getScoreForPieceType(Piece piece)
 	{
-		if (piece is King) 
+		if (piece.GetType() == typeof(King)) 
 			return 9999;
-		else if (piece is Queen) 
+		else if (piece.GetType() == typeof(Queen)) 
 			return 90;
-		else if (piece is Knight)
+		else if (piece.GetType() == typeof(Knight))
 			return 30;
-		else if (piece is Bishop)
+		else if (piece.GetType() == typeof(Bishop))
 			return 30;
-		else if (piece is Rook) 
+		else if (piece.GetType() == typeof(Rook)) 
 			return 50;
-		else if (piece is Pawn) 
+		else if (piece.GetType() == typeof(Pawn)) 
 			return 10;
 		else  
 		{
@@ -155,6 +169,4 @@ public class AI: Player
 		};
 		return positionWeight[x,y];
 	}
-
-
 }
