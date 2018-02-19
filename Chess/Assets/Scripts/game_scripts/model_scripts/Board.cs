@@ -4,6 +4,7 @@
  * */
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Assertions;
 using System;
 using ChessGlobals;
 public class Board : ICloneable
@@ -61,10 +62,17 @@ public class Board : ICloneable
 	}
 	public Piece GetPieceAt(Vector2 pos)
 	{
-		if (IsOccupied (pos))
+		MonoBehaviour.print (squares [(int)pos.x, (int)pos.y]);
+		if (IsOccupied (pos)) {	
+			MonoBehaviour.print ("IN GET PIECE AT\n");
+			Assert.AreNotEqual (squares [(int)pos.x, (int)pos.y].GetPiece (), null);
 			return squares [(int)pos.x, (int)pos.y].GetPiece ();
-		else
+		} 
+		else 
+		{
+			MonoBehaviour.print ("IN GET PIECE AT NULL\n");
 			return null;
+		}
 	}
 	public Piece GetPieceAt(int x, int y)
 	{

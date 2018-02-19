@@ -67,7 +67,13 @@ public class DrawBoard : MonoBehaviour
 
         mesh.SetTriangles(triCopy, submesh);
     }
-
+	//aded by me
+	public void HighLightGrid(List<Vector2> positions)
+	{
+		if(positions != null)
+			foreach (Vector2 pos in positions)
+				HighLightGrid(pos);
+	}
     public void HighLightGrid(Vector2[] positions)
     {
         foreach (Vector2 pos in positions)
