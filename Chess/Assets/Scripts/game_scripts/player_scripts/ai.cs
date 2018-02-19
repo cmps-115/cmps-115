@@ -104,7 +104,7 @@ public class AI: Player
 			}
 			
 		}
-		int gameState = this.cgs.getGameState ();
+	    ChessGlobals.GAME_STATE gameState = this.cgs.getGameState ();
 		if (gameState == ChessGlobals.GAME_STATE.BLACK)
 			return blackPlayerScore - whitePlayerScore;
 		else if (gameState == ChessGlobals.GAME_STATE.WHITE)
@@ -119,17 +119,17 @@ public class AI: Player
 	}
 	private int getScoreForPieceType(Piece piece)
 	{
-		if (GetType (piece) == GetType (King)) 
+		if (piece is King) 
 			return 9999;
-		else if (GetType (piece) == GetType (Queen)) 
+		else if (piece is Queen) 
 			return 90;
-		else if (GetType (piece) == GetType (Knight))
+		else if (piece is Knight)
 			return 30;
-		else if (GetType (piece) == GetType (Bishop))
+		else if (piece is Bishop)
 			return 30;
-		else if (GetType (piece) == GetType (Rook)) 
+		else if (piece is Rook) 
 			return 50;
-		else if (GetType (piece) == GetType (Pawn)) 
+		else if (piece is Pawn) 
 			return 10;
 		else  
 		{
@@ -139,21 +139,21 @@ public class AI: Player
 	}
 	private int getScoreForPiecePosition(Vector2 pos)
 	{
-		return getScoreForPieceType((int)pos.x, (int)pos.y);
+		return getScoreForPiecePosition((int)pos.x, (int)pos.y);
 	}
 	private int getScoreForPiecePosition(int x, int y)
 	{
-		int[,] positionWeight = 
-		{ 	 {1,1,1,1,1,1,1,1}
-			,{2,2,2,2,2,2,2,2}
-			,{2,2,3,3,3,3,2,2}
-			,{2,2,3,4,4,3,2,2}
-			,{2,2,3,4,4,3,2,2}
-			,{2,2,3,3,3,3,2,2}
-			,{2,2,2,2,2,2,2,2}
-			,{1,1,1,1,1,1,1,1}
+		int[,] positionWeight = new int[,]
+		{ 	{1,1,1,1,1,1,1,1},
+			{2,2,2,2,2,2,2,2},
+			{2,2,3,3,3,3,2,2},
+			{2,2,3,4,4,3,2,2},
+			{2,2,3,4,4,3,2,2},
+			{2,2,3,3,3,3,2,2},
+			{2,2,2,2,2,2,2,2},
+			{1,1,1,1,1,1,1,1}
 		};
-		return positionWeight[x][y];
+		return positionWeight[x,y];
 	}
 
 
