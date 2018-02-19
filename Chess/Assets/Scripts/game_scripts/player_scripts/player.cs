@@ -5,5 +5,5 @@ public interface Player{
 	void setMove (Move move);
 	Move getMove();
 	Move getLastMove();
-	List<Vector2> generateLegalMoves (Piece piece);
+	//List<Move> generateAllLegalMoves (Piece piece);
 }

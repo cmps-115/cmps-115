@@ -19,14 +19,15 @@ public class Human: Player
 	}
 	public Move getMove()
 	{
-		return new Move();
+		return currentMove;
 	}
 	public Move getLastMove()
 	{
 		return lastMove;
 	}
-	public List<Vector2> generateLegalMoves (Piece piece)
+	public List<Vector2> generateAllLegalMoves (Piece piece)
 	{
+		//a null piece should never be passed 
 		Assert.AreNotEqual (piece, null);
 		return piece.LegalMoves(cgs.getBoard());
 	}
