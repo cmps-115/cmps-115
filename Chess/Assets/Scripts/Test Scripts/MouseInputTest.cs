@@ -32,7 +32,7 @@ public class MouseInputTest : MonoBehaviour {
         else if (DrawPiece.IsClicked && movePieceFrom == Vector3.down)
         {
             movePieceFrom = DrawPiece.PiecePosition;
-            DrawPiece.HighlightPiece(1.25f);
+            DrawPiece.HighlightPiece();
             drawBoard.HighLightGrid(movePieceFrom);
         }
         
