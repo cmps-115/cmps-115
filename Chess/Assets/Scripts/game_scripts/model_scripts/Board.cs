@@ -30,9 +30,12 @@ public class Board : ICloneable
 		{
 			squares [(int)position.x, (int)position.y].SetPosition (position);
 			squares [(int)position.x, (int)position.y].setPiece (piece);
+		} 
+		else 
+		{
+			piece.SetPosition (position);
+			squares [(int)position.x, (int)position.y] = new Square (position, piece);
 		}
-		else
-			squares[(int)position.x, (int)position.y] = new Square(position, piece);
 	}
 	public void Mark(int x, int y, Piece piece)
 	{
