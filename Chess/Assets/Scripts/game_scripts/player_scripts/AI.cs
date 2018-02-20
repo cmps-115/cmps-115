@@ -9,6 +9,7 @@ public class AI: Player
 	private Move currentMove;
 	private int depth;
 	private ChessGameController cgs;
+	private Board boardCopy;
 	public AI(ChessGameController cgs, int depth)//Rules now in each piece
 	{
 		Assert.AreNotEqual (cgs, null);
@@ -30,14 +31,20 @@ public class AI: Player
 	}
 	private void executeMove(Move move)
 	{
-		this.cgs.movePiece (move);
+		Assert.AreNotEqual (boardCopy, null);
+		boardCopy.Mark (move);
+		//this.cgs.movePiece (move);
 	}
 	private void undoMove(Move move)
 	{
-		this.cgs.undoMove (move);
+		Assert.AreNotEqual (boardCopy, null);
+		boardCopy.UnMark (move);
+		//this.cgs.undoMove (move);
 	}
 	public Move getBestMove()
 	{
+		//get current board
+		boardCopy = this.cgs.getBoardClone();
 		//get all possible valid moves
 		List<Move> allMoves = generateAllLegalMoves();
 		int bestResult = Int32.MinValue;
@@ -53,12 +60,11 @@ public class AI: Player
 				bestMove = move;
 			}
 		}
-		//foreach move call negmax
 		return bestMove;
 	}
 	public int negMax(int depth)
 	{
-		if (depth <= 0 || this.cgs.getGameState () == ChessGlobals.GAME_STATE.BLACK_WIN || this.cgs.getGameState () == ChessGlobals.GAME_STATE.WHITE_WIN)
+		if (depth <= 0 || this.cgs.getGameState ().getState() == ChessGlobals.GameState.BLACK_WIN || this.cgs.getGameState().getState() == ChessGlobals.GameState.WHITE_WIN)
 			return evaluateGameState ();
 		List<Move> moves = generateAllLegalMoves();
 		int currentMax = Int32.MinValue;
@@ -102,34 +108,33 @@ public class AI: Player
 		int blackPlayerScore = 0;
 		foreach (Piece piece in this.cgs.getPieces()) 
 		{
-			if (piece.GetTeam () == ChessGlobals.COLOR.BLACK) 
+			if (piece.GetTeam () ==  ChessGlobals.Teams.BLACK_TEAM) 
 			{
 				blackPlayerScore += getScoreForPieceType (piece);
 				blackPlayerScore += getScoreForPiecePosition (piece.GetPiecePosition());
 			} 
-			else if (piece.GetTeam () == ChessGlobals.COLOR.WHITE) 
+			else if (piece.GetTeam () ==  ChessGlobals.Teams.WHITE_TEAM) 
 			{
 				whitePlayerScore += getScoreForPieceType (piece);
 				whitePlayerScore += getScoreForPiecePosition (piece.GetPiecePosition());
 			} 
 			else
 			{
-				//some illegal state exception
-			}
+				Debug.Log ("Illegal team color evaluateGameState()");
 			
+			}
+
 		}
-	    ChessGlobals.GAME_STATE gameState = this.cgs.getGameState ();
-		if (gameState == ChessGlobals.GAME_STATE.BLACK)
+		ChessGlobals.GameState gameState = this.cgs.getGameState ();
+		if (gameState.getState() == ChessGlobals.GameState.BLACK_TURN)
 			return blackPlayerScore - whitePlayerScore;
-		else if (gameState == ChessGlobals.GAME_STATE.WHITE)
+		else if (gameState.getState() == ChessGlobals.GameState.WHITE_TURN)
 			return whitePlayerScore - blackPlayerScore;
-		else if (gameState == ChessGlobals.GAME_STATE.WHITE_WIN ||
-		         gameState == ChessGlobals.GAME_STATE.BLACK_WIN ||
-		         gameState == ChessGlobals.GAME_STATE.DRAW)
+		else if (gameState.getState() == ChessGlobals.GameState.WHITE_WIN || gameState.getState() == ChessGlobals.GameState.BLACK_WIN || gameState.getState() == ChessGlobals.GameState.DRAW)
 			return Int32.MinValue + 1;
-		else
-			//some illegate state exception
-			return 0;
+		//some illegate state exception, but the code should not get to this point 
+		Debug.Log ("Illegal game state in evaluateGameState()");
+		return 0;
 	}
 	private int getScoreForPieceType(Piece piece)
 	{
