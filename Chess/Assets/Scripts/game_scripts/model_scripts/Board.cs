@@ -47,9 +47,10 @@ public class Board : ICloneable
 	}
 	public void UnMark(int x, int y)
 	{
-		//squares[x, y] = null;
-		squares[x,y] = new Square();
-		squares [x, y].GetPiece () = null;
+		squares[x, y] = null;
+		/*squares[x,y] = new Square();
+		squares [x, y].setPiece (null);
+		squares [x, y].setOccupied (false);*/
 	}
 	public void Clear()
 	{
@@ -58,12 +59,13 @@ public class Board : ICloneable
 				UnMark (i, j);
 	}
 	public bool IsOccupied (Vector2 position)
-    	{
+    {
 		return IsOccupied ((int)position.x, (int)position.y);
-    	}
+	}
 	public bool IsOccupied (int x, int y)
 	{
 		return squares[x, y] != null;
+		//return squares[x,y].isSquareOccupied();
 	}
 	public Piece GetPieceAt(Vector2 pos)
 	{
