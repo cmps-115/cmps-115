@@ -709,7 +709,7 @@ public class Rook : Piece
 				{
 					if(chessBoard.GetPieceAt(i1, yCord).GetTeam() != GetTeam())
 						positions.Add (new Vector2 (i1, yCord));
-				} 
+				}  
             }
 
             // check for moves to the right
