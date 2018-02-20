@@ -12,8 +12,6 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using ChessGlobals;
 
-
-
 public class Piece
 {
     private bool taken;//represents if the piece still exists on the board
@@ -26,18 +24,6 @@ public class Piece
 		taken = false;
 		pieceTeam = null;
 	}
-	public Piece(bool p_team)
-	{
-		taken = false;
-		team = p_team;
-	}
-    public Piece(bool p_team, int xCord, int yCord)//Constructor for piece with a specific position
-    {
-		taken = false;
-		team = p_team;
-        PiecePosition = new Vector2( xCord, yCord);
-
-    }
 	public Piece(int p_team)
 	{
 		taken = false;
@@ -70,12 +56,6 @@ public class Piece
 	{
 		return (int)PiecePosition.y;
 	}
-
-    /*public bool GetTeam()
-    {
-        return team;
-    }*/
-
 	public int GetTeam()
 	{
 		return pieceTeam.getTeam ();
@@ -118,11 +98,6 @@ public class Piece
 public class King : Piece
 {
 	public King(){}
-	public King(bool p_team)
-		: base(p_team){}
-    public King(bool p_team, int xCord, int yCord) 
-        : base(p_team,xCord,yCord){}
-	
 	public King(int p_team)
 		: base(p_team){}
 	public King(int p_team, int xCord, int yCord) 
@@ -257,11 +232,6 @@ public class King : Piece
 public class Knight : Piece
 {
 	public Knight(){}
-	public Knight(bool p_team)
-		: base(p_team){}
-    public Knight(bool p_team, int xCord, int yCord)
-        : base(p_team, xCord, yCord){}
-	
 	public Knight(int p_team)
 		: base(p_team){}
 	public Knight(int p_team, int xCord, int yCord)
@@ -403,11 +373,6 @@ public class Knight : Piece
 public class Queen : Piece
 {
 	public Queen(){}
-	public Queen(bool p_team)
-		: base(p_team){}
-    public Queen(bool p_team, int xCord, int yCord)
-        : base (p_team, xCord, yCord)
-    {}
 	public Queen(int p_team)
 		: base(p_team){}
 	public Queen(int p_team, int xCord, int yCord)
@@ -432,11 +397,6 @@ public class Queen : Piece
 public class Pawn : Piece
 {
 	public Pawn(){}
-	public Pawn(bool p_team)
-		: base(p_team){}
-    public Pawn(bool p_team, int xCord, int yCord)
-        : base (p_team, xCord, yCord)
-    {}
 	public Pawn(int p_team)
 		: base(p_team){}
 	public Pawn(int p_team, int xCord, int yCord)
@@ -567,11 +527,6 @@ public class Pawn : Piece
 public class Rook : Piece
 {
 	public Rook(){}
-	public Rook(bool p_team)
-		: base(p_team){}
-    public  Rook(bool p_team, int xCord, int yCord)
-        : base (p_team,xCord,yCord)
-    {}
 	public Rook(int p_team)
 		: base(p_team){}
 	public  Rook(int p_team, int xCord, int yCord)
@@ -747,12 +702,6 @@ public class Rook : Piece
 public class Bishop : Piece
 {
 	public Bishop(){}
-	public Bishop(bool p_team)
-		: base(p_team){}
-    public Bishop(bool p_team, int xCord, int yCord)
-        :base(p_team,xCord,yCord)
-    {}
-
 	public Bishop(int p_team)
 		: base(p_team){}
 	public Bishop(int p_team, int xCord, int yCord)
@@ -851,8 +800,3 @@ public class Bishop : Piece
         return positions;
     }
 }
-
-
-
-
-

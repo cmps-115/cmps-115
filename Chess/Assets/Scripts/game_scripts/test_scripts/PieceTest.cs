@@ -12,18 +12,18 @@ public class PieceTest : MonoBehaviour {
         Board WTestBoard = new Board();
 
         //Black test Pieces
-        King BKing = new King(COLOR.BLACK, 0, 0);
-        Queen BQueen = new Queen(COLOR.BLACK, 6, 6);
-        Rook BRook = new Rook(COLOR.BLACK, 5, 3);
-        Bishop BBishop = new Bishop(COLOR.BLACK, 2, 2);
-        Knight BKnight = new Knight(COLOR.BLACK, 6, 1);
-        Pawn BPawn1 = new Pawn(COLOR.BLACK, 2, 6);
-        Pawn BPawn2 = new Pawn(COLOR.BLACK, 7, 1);
+        King BKing = new King(ChessGlobals.Teams.BLACK_TEAM, 0, 0);
+        Queen BQueen = new Queen(ChessGlobals.Teams.BLACK_TEAM, 6, 6);
+        Rook BRook = new Rook(ChessGlobals.Teams.BLACK_TEAM, 5, 3);
+        Bishop BBishop = new Bishop(ChessGlobals.Teams.BLACK_TEAM, 2, 2);
+        Knight BKnight = new Knight(ChessGlobals.Teams.BLACK_TEAM, 6, 1);
+        Pawn BPawn1 = new Pawn(ChessGlobals.Teams.BLACK_TEAM, 2, 6);
+        Pawn BPawn2 = new Pawn(ChessGlobals.Teams.BLACK_TEAM, 7, 1);
 
-        Pawn WTestPawn1 = new Pawn(COLOR.WHITE, 0, 1);
-        Pawn WTestPawn2 = new Pawn(COLOR.WHITE, 3, 1);
-        Pawn WTestPawn3 = new Pawn(COLOR.WHITE, 4, 2);
-        Pawn WTestPawn4 = new Pawn(COLOR.WHITE, 3, 5);
+        Pawn WTestPawn1 = new Pawn(ChessGlobals.Teams.WHITE_TEAM, 0, 1);
+        Pawn WTestPawn2 = new Pawn(ChessGlobals.Teams.WHITE_TEAM, 3, 1);
+        Pawn WTestPawn3 = new Pawn(ChessGlobals.Teams.WHITE_TEAM, 4, 2);
+        Pawn WTestPawn4 = new Pawn(ChessGlobals.Teams.WHITE_TEAM, 3, 5);
 
         BTestBoard.Mark(BKing.GetPiecePosition(), BKing);
         BTestBoard.Mark(BQueen.GetPiecePosition(), BQueen);
@@ -82,18 +82,18 @@ public class PieceTest : MonoBehaviour {
             print(move.ToString());
         }
 
-        King WKing = new King(COLOR.WHITE, 0, 0);
-        Queen WQueen = new Queen(COLOR.WHITE, 6, 6);
-        Rook WRook = new Rook(COLOR.WHITE, 5, 3);
-        Bishop WBishop = new Bishop(COLOR.WHITE, 2, 2);
-        Knight WKnight = new Knight(COLOR.WHITE, 6, 1);
-        Pawn WPawn1 = new Pawn(COLOR.WHITE, 5, 1);
-        Pawn WPawn2 = new Pawn(COLOR.WHITE, 2, 4);
+        King WKing = new King(ChessGlobals.Teams.WHITE_TEAM, 0, 0);
+        Queen WQueen = new Queen(ChessGlobals.Teams.WHITE_TEAM, 6, 6);
+        Rook WRook = new Rook(ChessGlobals.Teams.WHITE_TEAM, 5, 3);
+        Bishop WBishop = new Bishop(ChessGlobals.Teams.WHITE_TEAM, 2, 2);
+        Knight WKnight = new Knight(ChessGlobals.Teams.WHITE_TEAM, 6, 1);
+        Pawn WPawn1 = new Pawn(ChessGlobals.Teams.WHITE_TEAM, 5, 1);
+        Pawn WPawn2 = new Pawn(ChessGlobals.Teams.WHITE_TEAM, 2, 4);
 
-        Pawn BTestPawn1 = new Pawn(COLOR.BLACK, 0, 1);
-        Pawn BTestPawn2 = new Pawn(COLOR.BLACK, 3, 1);
-        Pawn BTestPawn3 = new Pawn(COLOR.BLACK, 4, 2);
-        Pawn BTestPawn4 = new Pawn(COLOR.BLACK, 3, 5);
+        Pawn BTestPawn1 = new Pawn(ChessGlobals.Teams.BLACK_TEAM, 0, 1);
+        Pawn BTestPawn2 = new Pawn(ChessGlobals.Teams.BLACK_TEAM, 3, 1);
+        Pawn BTestPawn3 = new Pawn(ChessGlobals.Teams.BLACK_TEAM, 4, 2);
+        Pawn BTestPawn4 = new Pawn(ChessGlobals.Teams.BLACK_TEAM, 3, 5);
 
         WTestBoard.Mark(WKing.GetPiecePosition(), WKing);
         WTestBoard.Mark(WQueen.GetPiecePosition(), WQueen);
