@@ -19,7 +19,7 @@ public class Piece
     private bool taken;//represents if the piece still exists on the board
     private Vector2 PiecePosition;
     private bool team; //false for black ture for white
-	private ChessGlobals.Teams currentTeam;
+	private ChessGlobals.Teams pieceTeam;
    
 	public Piece()
 	{
@@ -36,6 +36,18 @@ public class Piece
 		team = p_team;
         PiecePosition = new Vector2( xCord, yCord);
     }
+	public Piece(int p_team)
+	{
+		taken = false;
+		pieceTeam.setTeam (p_team);
+	}
+	public Piece(int p_team, int xCord, int yCord)//Constructor for piece with a specific position
+	{
+		taken = false;
+		pieceTeam.setTeam(p_team);
+		PiecePosition = new Vector2( xCord, yCord);
+	}
+		
 	public virtual List<Vector2> LegalMoves(Board chessBoard)
 	{
 		//if a call ever returns null then its the base class LegalMoves
@@ -61,6 +73,10 @@ public class Piece
     {
         return team;
     }
+	public int GetPieceTeam()
+	{
+		return pieceTeam.getTeam ();
+	}
 
     //*****manipulators*****
     public void TakePiece()
@@ -96,6 +112,11 @@ public class King : Piece
 		: base(p_team){}
     public King(bool p_team, int xCord, int yCord) 
         : base(p_team,xCord,yCord){}
+	
+	public King(int p_team)
+		: base(p_team){}
+	public King(int p_team, int xCord, int yCord) 
+		: base(p_team,xCord,yCord){}
 
     public override List<Vector2> LegalMoves(Board chessBoard)
     {
@@ -230,6 +251,11 @@ public class Knight : Piece
 		: base(p_team){}
     public Knight(bool p_team, int xCord, int yCord)
         : base(p_team, xCord, yCord){}
+	
+	public Knight(int p_team)
+		: base(p_team){}
+	public Knight(int p_team, int xCord, int yCord)
+		: base(p_team, xCord, yCord){}
 
 	public override List<Vector2> LegalMoves(Board chessBoard)
     {
@@ -372,6 +398,11 @@ public class Queen : Piece
     public Queen(bool p_team, int xCord, int yCord)
         : base (p_team, xCord, yCord)
     {}
+	public Queen(int p_team)
+		: base(p_team){}
+	public Queen(int p_team, int xCord, int yCord)
+		: base (p_team, xCord, yCord)
+	{}
 	public override List<Vector2> LegalMoves(Board chessBoard)
     {
         Rook tempRook = new Rook(GetTeam(), GetPiecePositionX(), GetPiecePositionX());
@@ -396,6 +427,11 @@ public class Pawn : Piece
     public Pawn(bool p_team, int xCord, int yCord)
         : base (p_team, xCord, yCord)
     {}
+	public Pawn(int p_team)
+		: base(p_team){}
+	public Pawn(int p_team, int xCord, int yCord)
+		: base (p_team, xCord, yCord)
+	{}
 
 	public override List<Vector2> LegalMoves(Board chessBoard)
     {
@@ -526,6 +562,11 @@ public class Rook : Piece
     public  Rook(bool p_team, int xCord, int yCord)
         : base (p_team,xCord,yCord)
     {}
+	public Rook(int p_team)
+		: base(p_team){}
+	public  Rook(int p_team, int xCord, int yCord)
+		: base (p_team,xCord,yCord)
+	{}
 
 	public override List<Vector2> LegalMoves(Board chessBoard)
     {
@@ -702,24 +743,24 @@ public class Bishop : Piece
         :base(p_team,xCord,yCord)
     {}
 
+	public Bishop(int p_team)
+		: base(p_team){}
+	public Bishop(int p_team, int xCord, int yCord)
+		:base(p_team,xCord,yCord)
+	{}
+
 	public override List<Vector2> LegalMoves(Board chessBoard)
     {
         
         int xc, yc;
         List<Vector2> positions = new List<Vector2>();
 
-
-
 		xc = GetPiecePositionX();
 		yc = GetPiecePositionY();
 
-        // if its a white piece
-       // if (GetTeam() == ChessGlobals.COLOR.WHITE)
-       // {
-
-            // check for moves in diagonally to the right and up
-            int i1 = yc + 1;
-            int i2 = xc + 1;
+        // check for moves in diagonally to the right and up
+		int i1 = yc + 1;
+		int i2 = xc + 1;
             // if its empty, it can move there
             while (i1 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM && i2 <= ChessGlobals.BoardConstants.BOARD_MAXIMUM && !chessBoard.IsOccupied(new Vector2(i2, i1)))
             {
@@ -797,94 +838,6 @@ public class Bishop : Piece
 						positions.Add (new Vector2 (i1, i2));
 				} 
             }
-
-        //}
-        /*
-        else
-        {
-
-            // check for moves in diagonally to the left and down 
-            int i1 = yc + 1;
-            int i2 = xc + 1;
-            // if its empty, it can move there
-            while (i1 < 8 && i2 < 8 && !chessBoard.IsOccupied(new Vector2(i2, i1)))
-            {
-                positions.Add(new Vector2(i2, i1));
-                i1++;
-                i2++;
-            }
-            // if the next is occupied by a white piece
-            if (i1 < ChessGlobals.BoardConstants.BOARD_MAXIMUM && i2 < ChessGlobals.BoardConstants.BOARD_MAXIMUM)
-            {
-				if (chessBoard.IsOccupied (i2, i1)) // not sure about this one Austin
-				{
-					if(chessBoard.GetPieceAt(i2, i1).GetTeam() != GetTeam())
-						positions.Add (new Vector2 (i2, i1));
-				} 
-            }
-            // check for moves in up right
-            i1 = yc - 1;
-            i2 = xc - 1;
-            // if its empty, it can move there
-            while (i1 > ChessGlobals.BoardConstants.BOARD_MINIMUM && i2 > ChessGlobals.BoardConstants.BOARD_MINIMUM && !chessBoard.IsOccupied(new Vector2(i2, i1)))
-            {
-                positions.Add(new Vector2(i2, i1));
-                i1--;
-                i2--;
-            }
-            // if the prev is occupied by a white piece
-            if (i1 > -1 && i2 > -1)
-            {
-				if (chessBoard.IsOccupied (i2, i1)) // not sure about this one Austin
-				{
-					if(chessBoard.GetPieceAt(i2, i1).GetTeam() != GetTeam())
-						positions.Add (new Vector2 (i2, i1));
-				} 
-            }
-
-
-            // check for moves to the left and up
-            i1 = xc + 1;
-            i2 = yc - 1;
-            // if its empty, it can move there
-            while (i1 < 8 && i2 > ChessGlobals.BoardConstants.BOARD_MINIMUM && !chessBoard.IsOccupied(new Vector2(i1, i2)))
-            {
-                positions.Add(new Vector2(i1, i2));
-                i1++;
-                i2--;
-
-            }
-            // if the next is occupied by a white piece
-            if (i1 < ChessGlobals.BoardConstants.BOARD_MAXIMUM && i2 > -1)
-            {
-				if (chessBoard.IsOccupied (i1, i2)) // not sure about this one Austin
-				{
-					if(chessBoard.GetPieceAt(i1, i2).GetTeam() != GetTeam())
-						positions.Add (new Vector2 (i1, i2));
-				} 
-            }
-
-            // check for moves to the right up
-            i1 = xc - 1;
-            i2 = yc - 1;
-            // if its empty, it can move there
-            while (i1 > ChessGlobals.BoardConstants.BOARD_MINIMUM && i2 > ChessGlobals.BoardConstants.BOARD_MINIMUM && !chessBoard.IsOccupied(new Vector2(i1, i2)))
-            {
-                positions.Add(new Vector2(i1, i2));
-                i1--;
-                i2--;
-            }
-            // if the prev is occupied by a white piece
-            if (i1 > -1 && i2 > -1)
-            {
-				if (chessBoard.IsOccupied (i1, i2)) // not sure about this one Austin
-				{
-					if(chessBoard.GetPieceAt(i1, i2).GetTeam() != GetTeam())
-						positions.Add (new Vector2 (i1, i2));
-				} 
-            }
-        }
-        */
         return positions;
     }
 }
