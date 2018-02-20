@@ -120,7 +120,8 @@ public class AI: Player
 			} 
 			else
 			{
-				//some illegal state exception
+				Debug.Log ("Illegal team color evaluateGameState()");
+			
 			}
 			
 		}
@@ -133,9 +134,9 @@ public class AI: Player
 		         gameState == ChessGlobals.GAME_STATE.BLACK_WIN ||
 		         gameState == ChessGlobals.GAME_STATE.DRAW)
 			return Int32.MinValue + 1;
-		else
-			//some illegate state exception
-			return 0;
+		//some illegate state exception, but the code should not get to this point 
+		Debug.Log ("Illegal game state in evaluateGameState()");
+		return 0;
 	}
 	private int getScoreForPieceType(Piece piece)
 	{
