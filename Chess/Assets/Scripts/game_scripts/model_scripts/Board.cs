@@ -9,34 +9,39 @@ using System;
 using ChessGlobals;
 public class Board : ICloneable
 {
-	private const int rows = 8;
-    	private const int cols = 8;
-    	private Square[,] squares;
+	private Square[,] squares;
 	public Board()
     {
+		int rows = BoardConstants.BOARD_MAXIMUM + 1;
+		int cols = BoardConstants.BOARD_MAXIMUM + 1;
 		squares = new Square[rows, cols];
-        	//initialze to null
-		for (int i = 0; i < rows; ++i)
-			for (int j = 0; j < cols; ++j)
-				UnMark (i, j);
+        //initialze to null
+		for (int row = BoardConstants.BOARD_MINIMUM; row <= BoardConstants.BOARD_MAXIMUM; ++row)
+			for (int col = BoardConstants.BOARD_MINIMUM; col <= BoardConstants.BOARD_MAXIMUM; ++col)
+				squares[row,col] = new Square();
+	}
+	//all other mark overloads are forwarded here
+	public void Mark(Vector2 position, Piece piece)
+	{
+		int row = (int)position.x;
+		int col = (int)position.y;
+		if (IsOccupied (position)) 
+		{
+			squares [row, col].SetPosition (position);
+			squares [row, col].setPiece (piece);
+			squares [row, col].setOccupied (BoardConstants.OCCUPIED_SQUARE);
+		} 
+		else 
+		{
+			piece.SetPosition (position);
+			squares [row, col] = new Square (position, piece, BoardConstants.OCCUPIED_SQUARE);
+		}
 	}
 	public void Mark(Move move)
 	{
 		Mark (move.des, move.piece);
 	}
-	public void Mark(Vector2 position, Piece piece)
-    {
-		if (IsOccupied (position)) 
-		{
-			squares [(int)position.x, (int)position.y].SetPosition (position);
-			squares [(int)position.x, (int)position.y].setPiece (piece);
-		} 
-		else 
-		{
-			piece.SetPosition (position);
-			squares [(int)position.x, (int)position.y] = new Square (position, piece);
-		}
-	}
+
 	public void Mark(int x, int y, Piece piece)
 	{
 		Mark (new Vector2 (x, y), piece);
@@ -47,30 +52,29 @@ public class Board : ICloneable
 	}
 	public void UnMark(int x, int y)
 	{
-		squares[x, y] = null;
-		/*squares[x,y] = new Square();
 		squares [x, y].setPiece (null);
-		squares [x, y].setOccupied (false);*/
+		squares [x, y].setOccupied (false);
 	}
 	public void Clear()
 	{
-		for (int i = 0; i < rows; ++i)
-			for (int j = 0; j < cols; ++j)
-				UnMark (i, j);
+		for (int row = BoardConstants.BOARD_MINIMUM; row <= BoardConstants.BOARD_MAXIMUM; ++row)
+			for (int col = BoardConstants.BOARD_MINIMUM; col <= BoardConstants.BOARD_MAXIMUM; ++col)
+				UnMark (row, col);
+	}
+	//all other overloads forwarded here
+	public bool IsOccupied (int x, int y)
+	{
+		return squares[x,y].isSquareOccupied();
 	}
 	public bool IsOccupied (Vector2 position)
     {
 		return IsOccupied ((int)position.x, (int)position.y);
 	}
-	public bool IsOccupied (int x, int y)
-	{
-		return squares[x, y] != null;
-		//return squares[x,y].isSquareOccupied();
-	}
 	public Piece GetPieceAt(Vector2 pos)
 	{
 		MonoBehaviour.print (squares [(int)pos.x, (int)pos.y]);
-		if (IsOccupied (pos)) {	
+		if (IsOccupied (pos)) 
+		{	
 			MonoBehaviour.print ("IN GET PIECE AT\n");
 			Assert.AreNotEqual (squares [(int)pos.x, (int)pos.y].GetPiece (), null);
 			return squares [(int)pos.x, (int)pos.y].GetPiece ();
@@ -91,9 +95,10 @@ public class Board : ICloneable
 	}
 	public string ToString()
 	{
-		string debug = null;
+		/*string debug = null;
 		for (int i = 0; i < rows; ++i) 
 		{
+			
 			for (int j = 0; j < cols; ++j) 
 			{
 				Piece piece = GetPieceAt(i, j);
@@ -110,7 +115,7 @@ public class Board : ICloneable
 					MonoBehaviour.print ("Empty Square at: " + new Vector2(i,j)+"\n");
 			}
 			MonoBehaviour.print ("\n");
-		}
+		}*/
 		return "";
 	}
 }
