@@ -47,7 +47,9 @@ public class Board : ICloneable
 	}
 	public void UnMark(int x, int y)
 	{
-		squares[x, y] = null;
+		//squares[x, y] = null;
+		squares[x,y] = new Square();
+		squares [x, y].GetPiece () = null;
 	}
 	public void Clear()
 	{
