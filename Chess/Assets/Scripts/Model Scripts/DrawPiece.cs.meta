@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 74c23a2030257584d945750e388f4e35
+timeCreated: 1517002912
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - king: {fileID: 1697479962958710, guid: 2aa3212572485d34ebd1c7b02fee9d55, type: 2}
+  - queen: {fileID: 1960596109958534, guid: b4c4c0171fa456e49af5d067bf3164d5, type: 2}
+  - bishop: {fileID: 1878149368459616, guid: b9dda6af9bcd1a3479f6d9d50862dd66, type: 2}
+  - knight: {fileID: 1276325296168924, guid: 8dad9960175a34a4cbdeed9b0a3ab563, type: 2}
+  - castle: {fileID: 1487059702000314, guid: 7f7996a1351b28d4d9d4cb8d79f5366c, type: 2}
+  - pawn: {fileID: 1802495202245792, guid: d968434a2bc11344ab3ba23c2c28c63c, type: 2}
+  - firstTeam: {fileID: 2100000, guid: bd85ee64cd6833048965076a4ca55360, type: 2}
+  - secondTeam: {fileID: 2100000, guid: c1f9b185a75ee2549b0ef2d358dc1958, type: 2}
+  executionOrder: 200
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
