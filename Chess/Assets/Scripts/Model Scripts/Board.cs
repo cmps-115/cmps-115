@@ -41,15 +41,22 @@ public class Board : ICloneable
 	{
 		Mark (move.des, move.piece);
 	}
-
 	public void Mark(int x, int y, Piece piece)
 	{
 		Mark (new Vector2 (x, y), piece);
+	}
+	public void UnMark(Move move)
+	{
+		UnMark (move.des);
+		Mark (move.src, move.piece);
+		//these must be the same
+		Assert.AreEqual (move.piece.GetPiecePosition (), move.src);
 	}
 	public void UnMark(Vector2 position)
 	{
 		UnMark ( (int)position.x, (int)position.y );
 	}
+
 	public void UnMark(int x, int y)
 	{
 		squares [x, y].setPiece (null);

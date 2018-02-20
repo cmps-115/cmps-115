@@ -9,6 +9,7 @@ public class AI: Player
 	private Move currentMove;
 	private int depth;
 	private ChessGameController cgs;
+	private Board boardCopy;
 	public AI(ChessGameController cgs, int depth)//Rules now in each piece
 	{
 		Assert.AreNotEqual (cgs, null);
@@ -30,14 +31,20 @@ public class AI: Player
 	}
 	private void executeMove(Move move)
 	{
-		this.cgs.movePiece (move);
+		Assert.AreNotEqual (boardCopy, null);
+		boardCopy.Mark (move);
+		//this.cgs.movePiece (move);
 	}
 	private void undoMove(Move move)
 	{
-		this.cgs.undoMove (move);
+		Assert.AreNotEqual (boardCopy, null);
+		boardCopy.UnMark (move);
+		//this.cgs.undoMove (move);
 	}
 	public Move getBestMove()
 	{
+		//get current board
+		boardCopy = this.cgs.getBoardClone();
 		//get all possible valid moves
 		List<Move> allMoves = generateAllLegalMoves();
 		int bestResult = Int32.MinValue;
@@ -53,7 +60,6 @@ public class AI: Player
 				bestMove = move;
 			}
 		}
-		//foreach move call negmax
 		return bestMove;
 	}
 	public int negMax(int depth)
