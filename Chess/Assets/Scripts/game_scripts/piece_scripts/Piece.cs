@@ -19,6 +19,7 @@ public class Piece
     private bool taken;//represents if the piece still exists on the board
     private Vector2 PiecePosition;
     private bool team; //false for black ture for white
+	private ChessGlobals.Teams currentTeam;
    
 	public Piece()
 	{

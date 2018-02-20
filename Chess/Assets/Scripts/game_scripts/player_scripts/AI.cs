@@ -126,9 +126,9 @@ public class AI: Player
 			
 		}
 	    ChessGlobals.GAME_STATE gameState = this.cgs.getGameState ();
-		if (gameState == ChessGlobals.GAME_STATE.BLACK)
+		if (gameState == ChessGlobals.GAME_STATE.BLACK_TURN)
 			return blackPlayerScore - whitePlayerScore;
-		else if (gameState == ChessGlobals.GAME_STATE.WHITE)
+		else if (gameState == ChessGlobals.GAME_STATE.WHITE_TURN)
 			return whitePlayerScore - blackPlayerScore;
 		else if (gameState == ChessGlobals.GAME_STATE.WHITE_WIN ||
 		         gameState == ChessGlobals.GAME_STATE.BLACK_WIN ||
