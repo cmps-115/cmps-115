@@ -24,6 +24,7 @@ public class Piece
 	public Piece()
 	{
 		taken = false;
+		pieceTeam = null;
 	}
 	public Piece(bool p_team)
 	{
@@ -35,16 +36,17 @@ public class Piece
 		taken = false;
 		team = p_team;
         PiecePosition = new Vector2( xCord, yCord);
+
     }
 	public Piece(int p_team)
 	{
 		taken = false;
-		pieceTeam.setTeam (p_team);
+		pieceTeam = new Teams (p_team);
 	}
 	public Piece(int p_team, int xCord, int yCord)//Constructor for piece with a specific position
 	{
 		taken = false;
-		pieceTeam.setTeam(p_team);
+		pieceTeam = new Teams (p_team);
 		PiecePosition = new Vector2( xCord, yCord);
 	}
 		
@@ -69,11 +71,12 @@ public class Piece
 		return (int)PiecePosition.y;
 	}
 
-    public bool GetTeam()
+    /*public bool GetTeam()
     {
         return team;
-    }
-	public int GetPieceTeam()
+    }*/
+
+	public int GetTeam()
 	{
 		return pieceTeam.getTeam ();
 	}
@@ -96,6 +99,13 @@ public class Piece
 	public void SetTeam(bool team)
 	{
 		this.team = team;
+	}
+	public void SetTeam(int team)
+	{
+		if (this.pieceTeam == null)
+			this.pieceTeam = new Teams (team);
+		else
+			this.pieceTeam.setTeam (team);
 	}
 	public bool IsTaken()
 	{
@@ -435,7 +445,7 @@ public class Pawn : Piece
 
 	public override List<Vector2> LegalMoves(Board chessBoard)
     {
-        bool team = GetTeam();
+        int team = GetTeam();
         List<Vector2> positions = new List<Vector2>();
 
  
@@ -445,7 +455,7 @@ public class Pawn : Piece
         //assuming for the board that ChessGlobals.BoardConstants.BOARD_MINIMUM = free , 1 = black, = 2 = white
 
         //assuming that white starts at the rows ChessGlobals.BoardConstants.BOARD_MINIMUM,1
-        if (team == ChessGlobals.COLOR.WHITE)//Where are you getting this from Austin?
+		if (team == ChessGlobals.Teams.WHITE_TEAM)//Where are you getting this from Austin?
         {
 
             //to make sure it doesnt go past 
@@ -481,7 +491,7 @@ public class Pawn : Piece
             {
 				if (chessBoard.IsOccupied (xCord - 1, yCord + 1)) 
 				{
-					if (chessBoard.GetPieceAt (xCord - 1, yCord + 1).GetTeam () == ChessGlobals.COLOR.BLACK)
+					if (chessBoard.GetPieceAt (xCord - 1, yCord + 1).GetTeam () ==  ChessGlobals.Teams.BLACK_TEAM)
 						positions.Add (new Vector2 (xCord - 1, yCord + 1));
 				} 
             }
@@ -491,7 +501,7 @@ public class Pawn : Piece
             {
 				if (chessBoard.IsOccupied (xCord + 1, yCord + 1)) 
 				{
-					if (chessBoard.GetPieceAt (xCord + 1, yCord + 1).GetTeam () == ChessGlobals.COLOR.BLACK)
+					if (chessBoard.GetPieceAt (xCord + 1, yCord + 1).GetTeam () ==  ChessGlobals.Teams.BLACK_TEAM)
 						positions.Add (new Vector2 (xCord + 1, yCord + 1));
 				} 
             }
@@ -508,7 +518,7 @@ public class Pawn : Piece
 				} 
 				else 
 				{
-					if (chessBoard.GetPieceAt (xCord, yCord - 1).GetTeam () == ChessGlobals.COLOR.WHITE)
+					if (chessBoard.GetPieceAt (xCord, yCord - 1).GetTeam () ==  ChessGlobals.Teams.WHITE_TEAM)
 						positions.Add (new Vector2 (xCord, yCord - 1));
 				}
             }
@@ -522,7 +532,7 @@ public class Pawn : Piece
 				} 
 				else 
 				{
-					if (yCord == 6 && chessBoard.GetPieceAt(xCord, yCord - 2).GetTeam() == ChessGlobals.COLOR.WHITE)
+					if (yCord == 6 && chessBoard.GetPieceAt(xCord, yCord - 2).GetTeam() ==  ChessGlobals.Teams.WHITE_TEAM)
 						positions.Add (new Vector2 (xCord, yCord - 2));
 				}
             }
@@ -532,7 +542,7 @@ public class Pawn : Piece
             {
 				if (chessBoard.IsOccupied (xCord + 1, yCord - 1))  
 				{
-					if(chessBoard.GetPieceAt(xCord + 1, yCord - 1).GetTeam() == ChessGlobals.COLOR.WHITE)
+					if(chessBoard.GetPieceAt(xCord + 1, yCord - 1).GetTeam() ==  ChessGlobals.Teams.WHITE_TEAM)
 						positions.Add (new Vector2 (xCord + 1, yCord - 1));
 				} 
             }
@@ -543,7 +553,7 @@ public class Pawn : Piece
             {
 				if (chessBoard.IsOccupied (xCord - 1, yCord - 1)) // not sure about this one Austin
 				{
-					if(chessBoard.GetPieceAt(xCord - 1, yCord - 1).GetTeam() == ChessGlobals.COLOR.WHITE)
+					if(chessBoard.GetPieceAt(xCord - 1, yCord - 1).GetTeam() ==  ChessGlobals.Teams.WHITE_TEAM)
 						positions.Add (new Vector2 (xCord - 1, yCord - 1));
 				} 
 
@@ -579,7 +589,7 @@ public class Rook : Piece
 		yCord = GetPiecePositionY();
 
         // if its a white piece
-        if (GetTeam() == ChessGlobals.COLOR.WHITE)
+        if (GetTeam() ==  ChessGlobals.Teams.WHITE_TEAM)
         {
 
             // check for moves in front

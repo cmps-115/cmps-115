@@ -64,7 +64,7 @@ public class AI: Player
 	}
 	public int negMax(int depth)
 	{
-		if (depth <= 0 || this.cgs.getGameState () == ChessGlobals.GAME_STATE.BLACK_WIN || this.cgs.getGameState () == ChessGlobals.GAME_STATE.WHITE_WIN)
+		if (depth <= 0 || this.cgs.getGameState ().getState() == ChessGlobals.GameState.BLACK_WIN || this.cgs.getGameState().getState() == ChessGlobals.GameState.WHITE_WIN)
 			return evaluateGameState ();
 		List<Move> moves = generateAllLegalMoves();
 		int currentMax = Int32.MinValue;
@@ -108,12 +108,12 @@ public class AI: Player
 		int blackPlayerScore = 0;
 		foreach (Piece piece in this.cgs.getPieces()) 
 		{
-			if (piece.GetTeam () == ChessGlobals.COLOR.BLACK) 
+			if (piece.GetTeam () ==  ChessGlobals.Teams.BLACK_TEAM) 
 			{
 				blackPlayerScore += getScoreForPieceType (piece);
 				blackPlayerScore += getScoreForPiecePosition (piece.GetPiecePosition());
 			} 
-			else if (piece.GetTeam () == ChessGlobals.COLOR.WHITE) 
+			else if (piece.GetTeam () ==  ChessGlobals.Teams.WHITE_TEAM) 
 			{
 				whitePlayerScore += getScoreForPieceType (piece);
 				whitePlayerScore += getScoreForPiecePosition (piece.GetPiecePosition());
@@ -123,16 +123,14 @@ public class AI: Player
 				Debug.Log ("Illegal team color evaluateGameState()");
 			
 			}
-			
+
 		}
-	    ChessGlobals.GAME_STATE gameState = this.cgs.getGameState ();
-		if (gameState == ChessGlobals.GAME_STATE.BLACK_TURN)
+		ChessGlobals.GameState gameState = this.cgs.getGameState ();
+		if (gameState.getState() == ChessGlobals.GameState.BLACK_TURN)
 			return blackPlayerScore - whitePlayerScore;
-		else if (gameState == ChessGlobals.GAME_STATE.WHITE_TURN)
+		else if (gameState.getState() == ChessGlobals.GameState.WHITE_TURN)
 			return whitePlayerScore - blackPlayerScore;
-		else if (gameState == ChessGlobals.GAME_STATE.WHITE_WIN ||
-		         gameState == ChessGlobals.GAME_STATE.BLACK_WIN ||
-		         gameState == ChessGlobals.GAME_STATE.DRAW)
+		else if (gameState.getState() == ChessGlobals.GameState.WHITE_WIN || gameState.getState() == ChessGlobals.GameState.BLACK_WIN || gameState.getState() == ChessGlobals.GameState.DRAW)
 			return Int32.MinValue + 1;
 		//some illegate state exception, but the code should not get to this point 
 		Debug.Log ("Illegal game state in evaluateGameState()");
