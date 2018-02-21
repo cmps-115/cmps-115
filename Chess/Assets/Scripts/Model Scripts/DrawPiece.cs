@@ -36,7 +36,7 @@ public class DrawPiece : MonoBehaviour {
 
 
 	private const int RENDERQUEUE = 3000;
-	private const float OUTLINE_THICKNESS = 1.15f;
+	private const float OUTLINE_THICKNESS = 1.20f;
 	private const int HIGHLIGHT_FREQUENCY = 5;
 
 
@@ -55,7 +55,7 @@ public class DrawPiece : MonoBehaviour {
 			throw new System.Exception("Error in DrawPiece: Cannot ClearHighlight because a piece has not been clicked");
 
 		highlighted = false;
-		mat.SetFloat("_OutlineWidth", 1);
+		mat.SetFloat("_OutlineWidth", 0);
 		mat.renderQueue = RENDERQUEUE;
 	}
 
@@ -236,6 +236,11 @@ public class DrawPiece : MonoBehaviour {
             {
                 if (hit.transform.tag == "ChessPiece")
                 {
+                    if (highlighted)
+                    {
+                        ClearHighlight();
+                    }
+
 					pieceRenderer = hit.transform.GetComponent<Renderer>();
                     piecePosition = new Vector2(hit.transform.position.x - MODEL_OFFSET, hit.transform.position.z - MODEL_OFFSET);
                     clicked = true;
