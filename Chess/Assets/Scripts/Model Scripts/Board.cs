@@ -29,32 +29,34 @@ public class Board : ICloneable
 		{
 			squares [row, col].SetPosition (position);
 			squares [row, col].setPiece (piece);
-			squares [row, col].setOccupied (BoardConstants.OCCUPIED_SQUARE);
+			squares [row, col].setOccupied(BoardConstants.OCCUPIED_SQUARE);
 		} 
 		else 
 		{
 			piece.SetPosition (position);
-			squares [row, col] = new Square (position, piece, BoardConstants.OCCUPIED_SQUARE);
+			squares [row, col] = new Square(position, piece, BoardConstants.OCCUPIED_SQUARE);
 		}
 	}
+
 	public void Mark(Move move)
 	{
 		Mark (move.des, move.piece);
 	}
+
 	public void Mark(int x, int y, Piece piece)
 	{
 		Mark (new Vector2 (x, y), piece);
 	}
+
 	public void UnMark(Move move)
 	{
 		UnMark (move.des);
 		Mark (move.src, move.piece);
-		//these must be the same
-		Assert.AreEqual (move.piece.GetPiecePosition (), move.src);
 	}
+
 	public void UnMark(Vector2 position)
 	{
-		UnMark ( (int)position.x, (int)position.y );
+		UnMark((int)position.x, (int)position.y);
 	}
 
 	public void UnMark(int x, int y)
@@ -62,6 +64,7 @@ public class Board : ICloneable
 		squares [x, y].setPiece (null);
 		squares [x, y].setOccupied (false);
 	}
+
 	public void Clear()
 	{
 		for (int row = BoardConstants.BOARD_MINIMUM; row <= BoardConstants.BOARD_MAXIMUM; ++row)
@@ -73,34 +76,35 @@ public class Board : ICloneable
 	{
 		return squares[x,y].isSquareOccupied();
 	}
+
 	public bool IsOccupied (Vector2 position)
     {
 		return IsOccupied ((int)position.x, (int)position.y);
 	}
+
 	public Piece GetPieceAt(Vector2 pos)
 	{
-		MonoBehaviour.print (squares [(int)pos.x, (int)pos.y]);
 		if (IsOccupied (pos)) 
 		{	
-			MonoBehaviour.print ("IN GET PIECE AT\n");
-			Assert.AreNotEqual (squares [(int)pos.x, (int)pos.y].GetPiece (), null);
 			return squares [(int)pos.x, (int)pos.y].GetPiece ();
 		} 
 		else 
 		{
-			MonoBehaviour.print ("IN GET PIECE AT NULL\n");
 			return null;
 		}
 	}
+
 	public Piece GetPieceAt(int x, int y)
 	{
 		return GetPieceAt (new Vector2 (x, y));
 	}
+
 	public object Clone()
 	{
 		return this.MemberwiseClone();
 	}
-	public string ToString()
+
+	public override string ToString()
 	{
 		/*string debug = null;
 		for (int i = 0; i < rows; ++i) 

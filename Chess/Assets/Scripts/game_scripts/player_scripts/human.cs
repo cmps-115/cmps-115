@@ -29,6 +29,6 @@ public class Human: Player
 	{
 		//a null piece should never be passed 
 		Assert.AreNotEqual (piece, null);
-		return piece.LegalMoves(cgs.getBoard());
+		return piece.LegalMoves(cgs.GetBoard());
 	}
 }

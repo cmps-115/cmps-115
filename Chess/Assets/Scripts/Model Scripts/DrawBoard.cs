@@ -70,10 +70,13 @@ public class DrawBoard : MonoBehaviour
 	//aded by me
 	public void HighLightGrid(List<Vector2> positions)
 	{
-		if(positions != null)
-			foreach (Vector2 pos in positions)
-				HighLightGrid(pos);
+        if (positions != null)
+        {
+            foreach (Vector2 pos in positions)
+                HighLightGrid(pos);
+        }
 	}
+
     public void HighLightGrid(Vector2[] positions)
     {
         foreach (Vector2 pos in positions)
@@ -103,20 +106,11 @@ public class DrawBoard : MonoBehaviour
 
     public static bool IsClicked
     {
-
         get
         {
             DetectClick();
             return clicked;
         }
-    }
-
-    // Use this for initialization
-    private void Start()
-    {
-       
-
-        //InitBoard();
     }
 
     public void InitBoard()
@@ -214,10 +208,8 @@ public class DrawBoard : MonoBehaviour
                 if (hit.transform.tag == "ChessBoard")
                 {
                     int triangleInd = hit.triangleIndex;
-                    if (triangleInd > TRIANGLE_INDEX)
-                        squareIndex = (triangleInd - TRIANGLE_DIFFERENCE) / 2;
-                    else
-                        squareIndex = triangleInd / 2;
+                    if (triangleInd > TRIANGLE_INDEX) squareIndex = (triangleInd - TRIANGLE_DIFFERENCE) / 2;
+                    else squareIndex = triangleInd / 2;
 
                     clicked =  true;
                     return;
