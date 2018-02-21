@@ -26,9 +26,38 @@ public class DrawPiece : MonoBehaviour {
     public Material secondTeam;
 
     private static Vector2 piecePosition = new Vector2(-1, -1);
+	private static Renderer pieceRenderer;
+	private static Material mat;
     private static bool clicked = false;
+	private static bool highlighted = false;
 
     private const float MODEL_OFFSET = 0.5f;
+	private const float MODEL_OFFSET_Y = 0.05f;
+
+
+	private const int RENDERQUEUE = 3000;
+	private const float OUTLINE_THICKNESS = 1.15f;
+	private const int HIGHLIGHT_FREQUENCY = 5;
+
+
+	public static void HighlightPiece()
+	{
+		if (pieceRenderer == null)
+			throw new System.Exception("Error in DrawPiece: Cannot Highlight a piece because a piece has not been clicked");
+
+		highlighted = true;
+		mat.renderQueue = RENDERQUEUE + 1;
+	}
+
+	public static void ClearHighlight()
+	{
+		if (pieceRenderer == null)
+			throw new System.Exception("Error in DrawPiece: Cannot ClearHighlight because a piece has not been clicked");
+
+		highlighted = false;
+		mat.SetFloat("_OutlineWidth", 1);
+		mat.renderQueue = RENDERQUEUE;
+	}
 
     /// <summary>
     /// Returns the positions of the last chess piece clicked.
@@ -64,7 +93,7 @@ public class DrawPiece : MonoBehaviour {
     #region Place Teams
     private GameObject Spawn(int x, int y, GameObject model)
     {
-        return Instantiate(model, new Vector3(x + MODEL_OFFSET, 0, y + MODEL_OFFSET), model.transform.rotation);
+        return Instantiate(model, new Vector3(x + MODEL_OFFSET, MODEL_OFFSET_Y, y + MODEL_OFFSET), model.transform.rotation);
     }
 
 	private ListOfPieceTypesAndPositions PlaceWhiteTeam()
@@ -207,12 +236,30 @@ public class DrawPiece : MonoBehaviour {
             {
                 if (hit.transform.tag == "ChessPiece")
                 {
+					pieceRenderer = hit.transform.GetComponent<Renderer>();
                     piecePosition = new Vector2(hit.transform.position.x - MODEL_OFFSET, hit.transform.position.z - MODEL_OFFSET);
                     clicked = true;
-                    return;
+					mat = pieceRenderer.material;
+					mat.shader = Shader.Find("StandardOutline");
+					return;
                 }
             }
         }
         clicked = false;
     }
+	private void Update()
+	{
+		if (highlighted)
+		{
+			HighlightBreath();
+		}
+	}
+
+	private void HighlightBreath()
+	{
+		var dThickness = (OUTLINE_THICKNESS - 1) / 2;
+		var sin = dThickness * Mathf.Sin(HIGHLIGHT_FREQUENCY * Time.time);
+		var thickness = (OUTLINE_THICKNESS - dThickness / 2) + sin;
+		mat.SetFloat("_OutlineWidth", thickness);
+	}
 }
