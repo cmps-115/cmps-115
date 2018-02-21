@@ -9,14 +9,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
-using UnityEngine.Assertions;
 using ChessGlobals;
 
 public class Piece
 {
     private bool taken;//represents if the piece still exists on the board
     private Vector2 PiecePosition;
-    private bool team; //false for black ture for white
     private ChessGlobals.Teams pieceTeam;
 
     public Piece()
@@ -76,10 +74,7 @@ public class Piece
     {
         PiecePosition = pos;
     }
-    public void SetTeam(bool team)
-    {
-        this.team = team;
-    }
+
     public void SetTeam(int team)
     {
         if (this.pieceTeam == null)

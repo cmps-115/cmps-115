@@ -64,7 +64,7 @@ public class AI: Player
 	}
 	public int negMax(int depth)
 	{
-		if (depth <= 0 || this.cgs.getGameState ().getState() == ChessGlobals.GameState.BLACK_WIN || this.cgs.getGameState().getState() == ChessGlobals.GameState.WHITE_WIN)
+		if (depth <= 0 || this.cgs.GetGameState ().getState() == ChessGlobals.GameState.BLACK_WIN || this.cgs.GetGameState().getState() == ChessGlobals.GameState.WHITE_WIN)
 			return evaluateGameState ();
 		List<Move> moves = generateAllLegalMoves();
 		int currentMax = Int32.MinValue;
@@ -80,7 +80,7 @@ public class AI: Player
 	}
 	private List<Move> generateAllLegalMoves()
 	{
-		List<Piece> allPieces = cgs.getPieces ();
+		List<Piece> allPieces = cgs.GetPieces ();
 		List<Move> allValidMoves = new List<Move>();
 		List<Vector2> validMovesForASinglePiece = null;
 		for (int i = 0; i < allPieces.Count; ++i) 
@@ -99,14 +99,14 @@ public class AI: Player
 	private List<Vector2> generateLegalMovesForAPiece (Piece piece)
 	{
 		Assert.AreNotEqual (piece, null);
-		return piece.LegalMoves(cgs.getBoard());
+		return piece.LegalMoves(cgs.GetBoard());
 	}
 
 	private int evaluateGameState()
 	{
 		int whitePlayerScore = 0;
 		int blackPlayerScore = 0;
-		foreach (Piece piece in this.cgs.getPieces()) 
+		foreach (Piece piece in this.cgs.GetPieces()) 
 		{
 			if (piece.GetTeam () ==  ChessGlobals.Teams.BLACK_TEAM) 
 			{
@@ -125,7 +125,7 @@ public class AI: Player
 			}
 
 		}
-		ChessGlobals.GameState gameState = this.cgs.getGameState ();
+		ChessGlobals.GameState gameState = this.cgs.GetGameState ();
 		if (gameState.getState() == ChessGlobals.GameState.BLACK_TURN)
 			return blackPlayerScore - whitePlayerScore;
 		else if (gameState.getState() == ChessGlobals.GameState.WHITE_TURN)
