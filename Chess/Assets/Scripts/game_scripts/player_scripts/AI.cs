@@ -44,7 +44,7 @@ public class AI: Player
 	public Move getBestMove()
 	{
 		//get current board
-		boardCopy = this.cgs.getBoardClone();
+		boardCopy = this.cgs.GetBoardClone();
 		//get all possible valid moves
 		List<Move> allMoves = generateAllLegalMoves();
 		int bestResult = Int32.MinValue;
@@ -80,7 +80,7 @@ public class AI: Player
 	}
 	private List<Move> generateAllLegalMoves()
 	{
-		List<Piece> allPieces = cgs.GetPieces ();
+		List<Piece> allPieces = cgs.GetNonCapturedPieces ();
 		List<Move> allValidMoves = new List<Move>();
 		List<Vector2> validMovesForASinglePiece = null;
 		for (int i = 0; i < allPieces.Count; ++i) 
@@ -106,7 +106,7 @@ public class AI: Player
 	{
 		int whitePlayerScore = 0;
 		int blackPlayerScore = 0;
-		foreach (Piece piece in this.cgs.GetPieces()) 
+		foreach (Piece piece in this.cgs.GetNonCapturedPieces()) 
 		{
 			if (piece.GetTeam () ==  ChessGlobals.Teams.BLACK_TEAM) 
 			{
