@@ -375,7 +375,7 @@ public class Queen : Piece
     { }
     public override List<Vector2> LegalMoves(Board chessBoard)
     {
-        Rook tempRook = new Rook(GetTeam(), GetPiecePositionX(), GetPiecePositionX());
+        Rook tempRook = new Rook(GetTeam(), GetPiecePositionX(), GetPiecePositionY());
         Bishop tempBishop = new Bishop(GetTeam(), GetPiecePositionX(), GetPiecePositionY());
         List<Vector2> positions = new List<Vector2>();
 
