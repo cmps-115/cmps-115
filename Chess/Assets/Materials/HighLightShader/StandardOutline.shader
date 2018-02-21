@@ -2,7 +2,7 @@
 // Programmer: Ari Berkson
 //
 // Made modifications to the Unity standard shader.
-// Pass "Outline" is the Pass I added to render an outline around the model.
+// Added Code in the start of the subshader and "OUTLINE" Pass.
 Shader "StandardOutline"
 {
     Properties
@@ -11,7 +11,7 @@ Shader "StandardOutline"
         _MainTex("Albedo", 2D) = "white" {}
 
 		_OutlineColor("Outline", Color) = (0, 0, 0, 1)
-		_OutlineWidth("Outline Width", Range(0.0, 0.04)) = 0.03
+		_OutlineWidth("Outline Width", Range(1, 2)) = 1
 
         _Cutoff("Alpha Cutoff", Range(0.0, 1.0)) = 0.5
 
@@ -73,7 +73,7 @@ Shader "StandardOutline"
 
 		struct v2f
 		{
-			float4 pos : POSITION;
+			float4 pos : SV_POSITION;
 		};
 
 
@@ -83,7 +83,7 @@ Shader "StandardOutline"
 		v2f vert(appdata v)
 		{
 			v2f o;
-			v.vertex.xyz += _OutlineWidth * v.normal;
+			v.vertex.xy *= _OutlineWidth;
 			o.pos = UnityObjectToClipPos(v.vertex);
 			return o;
 		}
@@ -94,8 +94,7 @@ Shader "StandardOutline"
 			Name "OUTLINE"
 			Tags { "Queue" = "Transparent" }
 			Cull Front
-			ZWrite On
-			Blend SrcAlpha OneMinusSrcAlpha
+			ZWrite Off
 
 
 			CGPROGRAM
@@ -103,7 +102,7 @@ Shader "StandardOutline"
 			#pragma vertex vert
 			#pragma fragment frag
 
-			fixed4 frag(v2f i) : COLOR
+			fixed4 frag(v2f i) : SV_Target
 			{
 				return _OutlineColor;
 			}
