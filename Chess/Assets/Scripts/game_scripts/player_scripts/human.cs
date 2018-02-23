@@ -13,15 +13,15 @@ public class Human: Player
 		this.cgs = cgs;
 		lastMove = null;
 	}
-	public void setMove (Move move)
+	public void SetMove (Move move)
 	{
 		currentMove = move;
 	}
-	public Move getMove()
+	public Move GetMove()
 	{
 		return currentMove;
 	}
-	public Move getLastMove()
+	public Move GetLastMove()
 	{
 		return lastMove;
 	}

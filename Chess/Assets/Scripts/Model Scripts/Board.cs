@@ -6,10 +6,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Assertions;
 using System;
+
 using ChessGlobals;
-public class Board : ICloneable
+
+[Serializable]
+public class Board
 {
 	private Square[,] squares;
+
 	public Board()
     {
 		int rows = BoardConstants.BOARD_MAXIMUM + 1;
@@ -20,22 +24,26 @@ public class Board : ICloneable
 			for (int col = BoardConstants.BOARD_MINIMUM; col <= BoardConstants.BOARD_MAXIMUM; ++col)
 				squares[row,col] = new Square();
 	}
+
 	//all other mark overloads are forwarded here
 	public void Mark(Vector2 position, Piece piece)
 	{
 		int row = (int)position.x;
 		int col = (int)position.y;
-		if (IsOccupied (position)) 
-		{
-			squares [row, col].SetPosition (position);
-			squares [row, col].setPiece (piece);
-			squares [row, col].setOccupied(BoardConstants.OCCUPIED_SQUARE);
-		} 
-		else 
-		{
-			piece.SetPosition (position);
-			squares [row, col] = new Square(position, piece, BoardConstants.OCCUPIED_SQUARE);
-		}
+        if (position.x >= BoardConstants.BOARD_MINIMUM && position.y >= BoardConstants.BOARD_MINIMUM && position.x <= BoardConstants.BOARD_MAXIMUM && position.y <= BoardConstants.BOARD_MAXIMUM)
+        {
+            if (IsOccupied(position))
+            {
+                squares[row, col].SetPosition(position);
+                squares[row, col].setPiece(piece);
+                squares[row, col].setOccupied(BoardConstants.OCCUPIED_SQUARE);
+            }
+            else
+            {
+                piece.SetPosition(position);
+                squares[row, col] = new Square(position, piece, BoardConstants.OCCUPIED_SQUARE);
+            }
+        }
 	}
 
 	public void Mark(Move move)
@@ -61,8 +69,11 @@ public class Board : ICloneable
 
 	public void UnMark(int x, int y)
 	{
-		squares [x, y].setPiece (null);
-		squares [x, y].setOccupied (false);
+        if (x >= BoardConstants.BOARD_MINIMUM && y >= BoardConstants.BOARD_MINIMUM && x <= BoardConstants.BOARD_MAXIMUM && y <= BoardConstants.BOARD_MAXIMUM)
+        {
+            squares[x, y].setPiece(null);
+            squares[x, y].setOccupied(false);
+        }
 	}
 
 	public void Clear()
@@ -74,12 +85,16 @@ public class Board : ICloneable
 	//all other overloads forwarded here
 	public bool IsOccupied (int x, int y)
 	{
-		return squares[x,y].isSquareOccupied();
+        if (x >= BoardConstants.BOARD_MINIMUM && y >= BoardConstants.BOARD_MINIMUM && x <= BoardConstants.BOARD_MAXIMUM && y <= BoardConstants.BOARD_MAXIMUM)
+            return squares[x, y].isSquareOccupied();
+        else return false;
 	}
 
 	public bool IsOccupied (Vector2 position)
     {
-		return IsOccupied ((int)position.x, (int)position.y);
+        if (position.x >= BoardConstants.BOARD_MINIMUM && position.y >= BoardConstants.BOARD_MINIMUM && position.x <= BoardConstants.BOARD_MAXIMUM && position.y <= BoardConstants.BOARD_MAXIMUM)
+            return IsOccupied((int)position.x, (int)position.y);
+        else return false;
 	}
 
 	public Piece GetPieceAt(Vector2 pos)
@@ -99,34 +114,24 @@ public class Board : ICloneable
 		return GetPieceAt (new Vector2 (x, y));
 	}
 
-	public object Clone()
-	{
-		return this.MemberwiseClone();
-	}
+    public Board Clone()
+    {
+        //for testing
+        return DeepCopy.Copy(this) as Board;
+    }
 
 	public override string ToString()
 	{
-		/*string debug = null;
-		for (int i = 0; i < rows; ++i) 
-		{
-			
-			for (int j = 0; j < cols; ++j) 
-			{
-				Piece piece = GetPieceAt(i, j);
-				if (IsOccupied(i, j)) 
-				{
-					if (piece.GetTeam () == false)
-						debug = "Team: Black Piece type: " + piece.GetType () + " Position: " + piece.GetPiecePosition();
-					else
-						debug = "Team: White Piece type: " + piece.GetType () + " Position: " + piece.GetPiecePosition();
-					MonoBehaviour.print (debug +" ");// can use get type to determine which kind subclass is piece
-					
-				}
-				else
-					MonoBehaviour.print ("Empty Square at: " + new Vector2(i,j)+"\n");
-			}
-			MonoBehaviour.print ("\n");
-		}*/
-		return "";
+        string b = "";
+        for (int i = BoardConstants.BOARD_MINIMUM; i <= BoardConstants.BOARD_MAXIMUM; ++i)
+        {
+            for (int j = BoardConstants.BOARD_MINIMUM; j <= BoardConstants.BOARD_MAXIMUM; ++j)
+            {
+                b += GetPieceAt(j, i) != null ? GetPieceAt(j, i).ToString() : "empty";
+                b += " at: " + i + " " + j + "\n";
+            }
+        }
+        return b;
 	}
 }
+

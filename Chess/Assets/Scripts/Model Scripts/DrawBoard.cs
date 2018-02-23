@@ -5,6 +5,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using ChessGlobals;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshRenderer))]
@@ -73,7 +74,10 @@ public class DrawBoard : MonoBehaviour
         if (positions != null)
         {
             foreach (Vector2 pos in positions)
-                HighLightGrid(pos);
+            {
+                if (pos.x >= BoardConstants.BOARD_MINIMUM && pos.y >= BoardConstants.BOARD_MINIMUM && pos.x <= BoardConstants.BOARD_MAXIMUM && pos.y <= BoardConstants.BOARD_MAXIMUM)
+                    HighLightGrid(pos);
+            }
         }
 	}
 
