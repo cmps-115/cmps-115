@@ -28,15 +28,22 @@ public class Board
 	//all other mark overloads are forwarded here
 	public void Mark(Vector2 position, Piece piece)
 	{
-		int row = (int)position.x;
+        if (piece == null)
+        {
+            Debug.Log("tried to mark null");
+            return;
+        }
+
+        int row = (int)position.x;
 		int col = (int)position.y;
         if (position.x >= BoardConstants.BOARD_MINIMUM && position.y >= BoardConstants.BOARD_MINIMUM && position.x <= BoardConstants.BOARD_MAXIMUM && position.y <= BoardConstants.BOARD_MAXIMUM)
         {
             if (IsOccupied(position))
             {
+                piece.SetPosition(position);
                 squares[row, col].SetPosition(position);
                 squares[row, col].setPiece(piece);
-                squares[row, col].setOccupied(BoardConstants.OCCUPIED_SQUARE);
+                //squares[row, col].setOccupied(BoardConstants.OCCUPIED_SQUARE);
             }
             else
             {
@@ -116,7 +123,6 @@ public class Board
 
     public Board Clone()
     {
-        //for testing
         return DeepCopy.Copy(this) as Board;
     }
 
@@ -128,7 +134,7 @@ public class Board
             for (int j = BoardConstants.BOARD_MINIMUM; j <= BoardConstants.BOARD_MAXIMUM; ++j)
             {
                 b += GetPieceAt(j, i) != null ? GetPieceAt(j, i).ToString() : "empty";
-                b += " at: " + i + " " + j + "\n";
+                b += " at: " + j + " " + i + "\n";
             }
         }
         return b;

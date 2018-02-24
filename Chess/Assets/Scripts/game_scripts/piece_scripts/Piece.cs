@@ -361,16 +361,18 @@ public class Knight : Piece
                 }
             }
 
-            if (chessBoard.IsOccupied(xCord - 1, yCord - 2) == false)
+            if (xCord - 1 >= ChessGlobals.BoardConstants.BOARD_MINIMUM)
             {
-                positions.Add(new Vector2(xCord - 1, yCord - 2));
-            }
-            else
-            {
-                if (chessBoard.GetPieceAt(xCord - 1, yCord - 2).GetTeam() != GetTeam())
+                if (chessBoard.IsOccupied(xCord - 1, yCord - 2) == false)
+                {
                     positions.Add(new Vector2(xCord - 1, yCord - 2));
+                }
+                else
+                {
+                    if (chessBoard.GetPieceAt(xCord - 1, yCord - 2).GetTeam() != GetTeam())
+                        positions.Add(new Vector2(xCord - 1, yCord - 2));
+                }
             }
-
         }
         return positions;
     }
@@ -433,11 +435,6 @@ public class Pawn : Piece
                 {
                     positions.Add(new Vector2(xCord, yCord + 1));
                 }
-                else
-                {
-                    if (chessBoard.GetPieceAt(xCord, yCord + 1).GetTeam() != GetTeam())
-                        positions.Add(new Vector2(xCord, yCord + 1));
-                }
             }
 
             //Checks if the piece is on the second row
@@ -448,11 +445,6 @@ public class Pawn : Piece
                     if (chessBoard.IsOccupied(xCord, yCord + 2) == false)
                     {
                         positions.Add(new Vector2(xCord, yCord + 2));
-                    }
-                    else
-                    {
-                        if (chessBoard.GetPieceAt(xCord, yCord + 2).GetTeam() != GetTeam())
-                            positions.Add(new Vector2(xCord, yCord + 2));
                     }
                 }
             }
@@ -487,11 +479,6 @@ public class Pawn : Piece
                 {
                     positions.Add(new Vector2(xCord, yCord - 1));
                 }
-                else
-                {
-                    if (chessBoard.GetPieceAt(xCord, yCord - 1).GetTeam() == ChessGlobals.Teams.WHITE_TEAM)
-                        positions.Add(new Vector2(xCord, yCord - 1));
-                }
             }
 
             //Checks if the pawn in on its starting row
@@ -502,11 +489,6 @@ public class Pawn : Piece
                     if (yCord == 6 && chessBoard.IsOccupied(xCord, yCord - 2) == false)
                     {
                         positions.Add(new Vector2(xCord, yCord - 2));
-                    }
-                    else
-                    {
-                        if (yCord == 6 && chessBoard.GetPieceAt(xCord, yCord - 2).GetTeam() == ChessGlobals.Teams.WHITE_TEAM)
-                            positions.Add(new Vector2(xCord, yCord - 2));
                     }
                 }
 

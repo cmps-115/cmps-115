@@ -9,24 +9,24 @@ public class ChessGameControllerVSAI : ChessGameController
 {
 
     private AI enemyAI;
+    private bool aiMoved = false;
 
     // Use this for initialization
     protected override void Start()
     {
         base.Start();
-        enemyAI = new AI(this, 1);
+        enemyAI = new AI(this, 2);
     }
 
     // Update is called once per frame
     protected override void Update()
     {
-        if (Time.time - moveTime > waitTime && isPieceMove == true)
+        bool pieceDoneMoving = Time.time - moveTime > waitTime && isPieceMove == true;
+        if (pieceDoneMoving)
         {
-            print(gameState.getState());
             startMoveTime = Time.time;
             isPieceMove = false;
             SwitchTurn();
-            print(gameState.getState());
         }
 
         if (gameState.getState() == GameState.WHITE_TURN)
@@ -50,20 +50,8 @@ public class ChessGameControllerVSAI : ChessGameController
                             return;
                         }
                     }
-                    Vector2 chosenMove = movePieceTo;
-                    var found = false;
-                    foreach (Vector2 pos in legalMovesForAPiece)
-                    {
-                        if (pos == chosenMove)
-                        {
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (found == false)
-                    {
-                        movePieceTo = Vector3.down;
-                    }
+                    else drawBoard.ClearHighlights();
+                    if (!legalMovesForAPiece.Contains(movePieceTo)) movePieceTo = Vector3.down;
                 }
             }
             //handles clicking a piece
@@ -76,18 +64,27 @@ public class ChessGameControllerVSAI : ChessGameController
             if (movePieceFrom != Vector3.down && movePieceTo != Vector3.down)
             {
                 MovePieceModel(movePieceFrom, movePieceTo);
+                aiMoved = false;
             }
         }
-        else if (gameState.getState() == GameState.BLACK_TURN)
+        else if (gameState.getState() == GameState.BLACK_TURN && !aiMoved)
         {
-            print("black turn");
-            print(enemyAI.GetBestMove().src);
-            print(enemyAI.GetBestMove().des);
-            var from = enemyAI.GetBestMove().src;
-            var to = enemyAI.GetBestMove().des;
-            currentlySelectedPiece = board.GetPieceAt(from);
-            SwitchTurn();
-            MovePieceModel(from, to);
+            GetAIMove();
         }
+        else if (gameState.getState() == GameState.BLACK_TURN && aiMoved)
+        {
+            if (movePieceFrom != Vector3.down && movePieceTo != Vector3.down)
+            {
+                MovePieceModel(movePieceFrom, movePieceTo);
+            }
+        }
+    }
+
+    private void GetAIMove()
+    {
+        aiMoved = true;
+        movePieceFrom = enemyAI.GetBestMove().src;
+        movePieceTo = enemyAI.GetBestMove().des;
+        currentlySelectedPiece = board.GetPieceAt(movePieceFrom);
     }
 }

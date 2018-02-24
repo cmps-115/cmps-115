@@ -35,7 +35,8 @@ public class AI: Player
 	private void ExecuteMove(Move move)
 	{
 		Assert.AreNotEqual (boardCopy, null);
-		boardCopy.Mark (move);
+		boardCopy.Mark (move.des, move.piece);
+        boardCopy.UnMark(move.src);
 		//this.cgs.movePiece (move);
 	}
 	private void UndoMove(Move move)
@@ -47,7 +48,7 @@ public class AI: Player
 	public Move GetBestMove()
 	{
 		//get current board
-		boardCopy = this.cgs.GetBoardClone();
+		boardCopy = cgs.GetBoardClone();
 		//get all possible valid moves
 		List<Move> allMoves = GenerateAllLegalMoves();
 		int bestResult = Int32.MinValue;
@@ -90,14 +91,17 @@ public class AI: Player
 		List<Vector2> validMovesForASinglePiece = null;
 		for (int i = 0; i < allPieces.Count; ++i) 
 		{
-			Move move = null;
-			//generate LegalMoves for every piece in the game
-			validMovesForASinglePiece = GenerateLegalMovesForAPiece(allPieces[i]);
-			for(int j = 0; j < validMovesForASinglePiece.Count; ++j)
-			{
-				move = new Move (allPieces [i], validMovesForASinglePiece [j]);
-				allValidMoves.Add (move);
-			}
+            if (allPieces[i].GetTeam() == GameState.BLACK_TURN)
+            {
+                Move move = null;
+                //generate LegalMoves for every piece in the game
+                validMovesForASinglePiece = GenerateLegalMovesForAPiece(allPieces[i]);
+                for (int j = 0; j < validMovesForASinglePiece.Count; ++j)
+                {
+                    move = new Move(allPieces[i], validMovesForASinglePiece[j]);
+                    allValidMoves.Add(move);
+                }
+            }
 		}
 		return allValidMoves;
 	}
@@ -127,7 +131,6 @@ public class AI: Player
 			else
 			{
 				Debug.Log ("Illegal team color evaluateGameState()");
-			
 			}
 
 		}

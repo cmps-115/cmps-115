@@ -17,6 +17,7 @@ public class MoveModel : MonoBehaviour {
     private Vector3 finalPos;
 
     private bool moving = false;
+    private bool overlapped = false;
     private float timeStarted = 0;
 
     private float movementTime = 1;
@@ -60,6 +61,11 @@ public class MoveModel : MonoBehaviour {
     public bool isMoving
     {
         get { return moving; }
+    }
+
+    public bool Overlapped
+    {
+        get { return overlapped; }
     }
 
     // Update is called once per frame
@@ -120,8 +126,13 @@ public class MoveModel : MonoBehaviour {
         {
             foreach (Collider c in cols)
             {
-                if (c.transform.tag == "ChessPiece") otherObj = c.gameObject;
+                if (c.transform.tag == "ChessPiece")
+                {
+                    otherObj = c.gameObject;
+                    overlapped = true;
+                }
             }
         }
+        else overlapped = false;
     }
 }

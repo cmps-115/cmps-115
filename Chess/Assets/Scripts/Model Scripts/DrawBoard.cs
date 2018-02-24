@@ -91,8 +91,10 @@ public class DrawBoard : MonoBehaviour
 
     public void ClearHighlights()
     {
-        triCopy1.Clear();
-        triCopy2.Clear();
+        if (triCopy1.Count > 0)
+            triCopy1.Clear();
+        if (triCopy2.Count > 0)
+            triCopy2.Clear();
 
         mesh.SetTriangles(triCopy1, LAYER_ZERO);
         mesh.SetTriangles(triCopy1, LAYER_ONE);
