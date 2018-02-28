@@ -6,6 +6,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ChessGlobals;
+
+//Shorten & Clarify Declarations 
+using PieceTypeAndPosition = ChessGlobals.Tuple2<ChessGlobals.PIECE_TYPES,UnityEngine.Vector2>;
+using ListOfPieceTypesAndPositions =  System.Collections.Generic.List< ChessGlobals.Tuple2<ChessGlobals.PIECE_TYPES,UnityEngine.Vector2> >;
+
 
 public class DrawPiece : MonoBehaviour {
 
@@ -20,6 +26,7 @@ public class DrawPiece : MonoBehaviour {
     public Material secondTeam;
 
     private static Vector2 piecePosition = new Vector2(-1, -1);
+<<<<<<< HEAD
     private static Renderer pieceRenderer;
     private static Material mat;
     private static bool clicked = false;
@@ -30,6 +37,40 @@ public class DrawPiece : MonoBehaviour {
     private const int BOARD_MINIMUM = 0;
     private const int BOARD_MAXIMUM = 7;
     private const int TEAM_ROWS = 2;
+=======
+	private static Renderer pieceRenderer;
+	private static Material mat;
+    private static bool clicked = false;
+	private static bool highlighted = false;
+
+    private const float MODEL_OFFSET = 0.5f;
+	private const float MODEL_OFFSET_Y = 0.05f;
+
+
+	private const int RENDERQUEUE = 3000;
+	private const float OUTLINE_THICKNESS = 1.20f;
+	private const int HIGHLIGHT_FREQUENCY = 5;
+
+
+	public static void HighlightPiece()
+	{
+        if (pieceRenderer != null)
+        {
+            highlighted = true;
+            mat.renderQueue = RENDERQUEUE + 1;
+        }
+	}
+
+	public static void ClearHighlight()
+	{
+        if (pieceRenderer != null)
+        {
+            highlighted = false;
+            mat.SetFloat("_OutlineWidth", 0);
+            mat.renderQueue = RENDERQUEUE;
+        }
+	}
+>>>>>>> Master
 
     private const int RENDERQUEUE = 3000;
     private const float OUTLINE_THICKNESS = 1.15f;
@@ -64,8 +105,7 @@ public class DrawPiece : MonoBehaviour {
     }
 
     public static bool IsClicked
-    {
-        
+    { 
         get
         {
             DetectClick();
@@ -73,16 +113,11 @@ public class DrawPiece : MonoBehaviour {
         }
     }
 
-    // Use this for initialization
-    private void Start ()
+	public Tuple2<ListOfPieceTypesAndPositions, ListOfPieceTypesAndPositions> InitPieces()
     {
-        InitPieces();
-    }
-
-    private void InitPieces()
-    {
-        PlaceFirstTeam();
-        PlaceSecondTeam();
+		var initialWhiteTeamPositions = PlaceWhiteTeam();
+		var initialBlackTeamPositions = PlaceBlackTeam();
+		return new Tuple2<ListOfPieceTypesAndPositions, ListOfPieceTypesAndPositions>(initialBlackTeamPositions, initialWhiteTeamPositions);
     }
 
     #region Place Teams
@@ -91,82 +126,110 @@ public class DrawPiece : MonoBehaviour {
         return Instantiate(model, new Vector3(x + MODEL_OFFSET, MODEL_OFFSET_Y, y + MODEL_OFFSET), model.transform.rotation);
     }
 
-    private void PlaceFirstTeam()
+	private ListOfPieceTypesAndPositions PlaceWhiteTeam()
     {
-        for (int y = BOARD_MINIMUM; y < TEAM_ROWS; ++y)
+		ListOfPieceTypesAndPositions positions = new ListOfPieceTypesAndPositions();
+		for (int y = ChessGlobals.BoardConstants.BOARD_MINIMUM; y < ChessGlobals.BoardConstants.TEAM_ROWS; ++y)
         {
             GameObject model = null;
-            for (int x = BOARD_MINIMUM; x <= BOARD_MAXIMUM; ++x)
+			for (int x = ChessGlobals.BoardConstants.BOARD_MINIMUM; x <= ChessGlobals.BoardConstants.BOARD_MAXIMUM; ++x)
             {
                 if (y == 1)
                 {
                     model = Spawn(x, y, pawn);
+					PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.PAWN, new Vector2 (x, y));
+					positions.Add (typeAndPos);
                 }
                 else
                 {
                     if (x == 0 || x == 7)
                     {
                         model = Spawn(x, y, castle);
+						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.ROOK, new Vector2 (x, y));
+						positions.Add (typeAndPos);
                     }
                     else if (x == 1 || x == 6)
                     {
                         model = Spawn(x, y, knight);
+						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.KNIGHT, new Vector2 (x, y));
+						positions.Add (typeAndPos);
                     }
                     else if (x == 2 || x == 5)
                     {
                         model = Spawn(x, y, bishop);
+						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.BISHOP, new Vector2 (x, y));
+						positions.Add (typeAndPos);
                     }
                     else if (x == 3)
                     {
                         model = Spawn(x, y, king);
+						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.KING, new Vector2 (x, y));
+						positions.Add (typeAndPos);
                     }
                     else if (x == 4)
                     {
                         model = Spawn(x, y, queen);
+						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.QUEEN, new Vector2 (x, y));
+						positions.Add (typeAndPos);
                     }
                 }
                 model.GetComponent<MeshRenderer>().material = firstTeam;
             }
         }
+		return positions;
     }
 
-    private void PlaceSecondTeam()
+	private ListOfPieceTypesAndPositions PlaceBlackTeam()
     {
-        for (int y = BOARD_MAXIMUM; y > BOARD_MAXIMUM - TEAM_ROWS; --y)
+		List<Tuple2<PIECE_TYPES,Vector2>> positions = new List<Tuple2<PIECE_TYPES,Vector2>>();
+		for (int y = ChessGlobals.BoardConstants.BOARD_MAXIMUM; y > ChessGlobals.BoardConstants.BOARD_MAXIMUM - ChessGlobals.BoardConstants.TEAM_ROWS; --y)
         {
             GameObject model = null;
-            for (int x = BOARD_MINIMUM; x <= 7; ++x)
+			for (int x = ChessGlobals.BoardConstants.BOARD_MINIMUM; x <= ChessGlobals.BoardConstants.BOARD_MAXIMUM; ++x)
             {
                 if (y == 6)
                 {
                     model = Spawn(x, y, pawn);
+					PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.PAWN, new Vector2 (x, y));
+					positions.Add(typeAndPos);
                 }
                 else
                 {
                     if (x == 0 || x == 7)
                     {
                         model = Spawn(x, y, castle);
+						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.ROOK, new Vector2 (x, y));
+						positions.Add (typeAndPos);
                     }
                     else if (x == 1 || x == 6)
                     {
                         model = Spawn(x, y, knight);
+						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.KNIGHT, new Vector2 (x, y));
+						positions.Add (typeAndPos);
                     }
                     else if (x == 2 || x == 5)
                     {
                         model = Spawn(x, y, bishop);
+						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.BISHOP, new Vector2 (x, y));
+						positions.Add (typeAndPos);
                     }
                     else if (x == 3)
                     {
                         model = Spawn(x, y, king);
+						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.KING, new Vector2 (x, y));
+						positions.Add (typeAndPos);
                     }
                     else if (x == 4)
                     {
                         model = Spawn(x, y, queen);
+						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.QUEEN, new Vector2 (x, y));
+						positions.Add (typeAndPos);
                     }
                 }
                 model.GetComponent<MeshRenderer>().material = secondTeam;
             }
         }
+		return positions;
     }
     #endregion
 
@@ -189,17 +252,32 @@ public class DrawPiece : MonoBehaviour {
             {
                 if (hit.transform.tag == "ChessPiece")
                 {
+<<<<<<< HEAD
                     pieceRenderer = hit.transform.GetComponent<Renderer>();
                     piecePosition = new Vector2Int((int)hit.transform.position.x, (int)hit.transform.position.z);
                     clicked = true;
                     mat = pieceRenderer.material;
                     mat.shader = Shader.Find("StandardOutline");
                     return;
+=======
+                    if (highlighted)
+                    {
+                        ClearHighlight();
+                    }
+
+					pieceRenderer = hit.transform.GetComponent<Renderer>();
+                    piecePosition = new Vector2(hit.transform.position.x - MODEL_OFFSET, hit.transform.position.z - MODEL_OFFSET);
+                    clicked = true;
+					mat = pieceRenderer.material;
+					mat.shader = Shader.Find("StandardOutline");
+					return;
+>>>>>>> Master
                 }
             }
         }
         clicked = false;
     }
+<<<<<<< HEAD
 
     private void Update()
     {
@@ -216,4 +294,21 @@ public class DrawPiece : MonoBehaviour {
         var thickness = (OUTLINE_THICKNESS - dThickness / 2) + sin;
         mat.SetFloat("_OutlineWidth", thickness);
     }
+=======
+	private void Update()
+	{
+		if (highlighted)
+		{
+			HighlightBreath();
+		}
+	}
+
+	private void HighlightBreath()
+	{
+		var dThickness = (OUTLINE_THICKNESS - 1) / 2;
+		var sin = dThickness * Mathf.Sin(HIGHLIGHT_FREQUENCY * Time.time);
+		var thickness = (OUTLINE_THICKNESS - dThickness / 2) + sin;
+		mat.SetFloat("_OutlineWidth", thickness);
+	}
+>>>>>>> Master
 }
