@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 33129529334594942}
   - component: {fileID: 23293391165898974}
   - component: {fileID: 65156717970886100}
+  - component: {fileID: 114040199300379052}
+  - component: {fileID: 114020818112741530}
   m_Layer: 0
   m_Name: Knight
   m_TagString: ChessPiece
@@ -95,3 +97,56 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.3212357, y: 1.439956, z: 23.181469}
   m_Center: {x: -0.033588894, y: -0.047904555, z: 10.590736}
+--- !u!114 &114020818112741530
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1276325296168924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
+--- !u!114 &114040199300379052
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1276325296168924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 141
+    i1: 173
+    i2: 153
+    i3: 96
+    i4: 23
+    i5: 90
+    i6: 52
+    i7: 164
+    i8: 203
+    i9: 222
+    i10: 237
+    i11: 155
+    i12: 10
+    i13: 58
+    i14: 181
+    i15: 99
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1

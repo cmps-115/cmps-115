@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 33446602503888032}
   - component: {fileID: 23517210927182658}
   - component: {fileID: 65512170662041622}
+  - component: {fileID: 114216371498700280}
+  - component: {fileID: 114789080498346728}
   m_Layer: 0
   m_Name: Bishop
   m_TagString: ChessPiece
@@ -95,3 +97,56 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.8364629, y: 0.7484598, z: 84.57547}
   m_Center: {x: -0.005265036, y: 0.048564564, z: 41.287735}
+--- !u!114 &114216371498700280
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1878149368459616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 185
+    i1: 221
+    i2: 166
+    i3: 175
+    i4: 155
+    i5: 205
+    i6: 26
+    i7: 52
+    i8: 121
+    i9: 246
+    i10: 217
+    i11: 213
+    i12: 8
+    i13: 98
+    i14: 221
+    i15: 102
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
+--- !u!114 &114789080498346728
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1878149368459616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
