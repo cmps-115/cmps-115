@@ -10,12 +10,14 @@ public class ChessGameControllerVSAI : ChessGameController
 
     private AI enemyAI;
     private bool aiMoved = false;
+    private const int AI_DIFFICULTY = 3;
 
     // Use this for initialization
     protected override void Start()
     {
         base.Start();
-        enemyAI = new AI(this, 5);
+        enemyAI = gameObject.AddComponent<AI>();
+        enemyAI.Init(this, AI_DIFFICULTY);
     }
 
     // Update is called once per frame
@@ -26,7 +28,7 @@ public class ChessGameControllerVSAI : ChessGameController
         {
             startMoveTime = Time.time;
             isPieceMove = false;
-            SwitchTurn();
+            SwitchTurnDisplay();
         }
 
         if (gameState.getState() == GameState.WHITE_TURN)
@@ -69,11 +71,19 @@ public class ChessGameControllerVSAI : ChessGameController
         }
         else if (gameState.getState() == GameState.BLACK_TURN && !aiMoved)
         {
+            //SwitchTurnDisplay();
             GetAIMove();
         }
         else if (gameState.getState() == GameState.BLACK_TURN && aiMoved)
         {
-            if (movePieceFrom != Vector3.down && movePieceTo != Vector3.down)
+            bool choseMove = movePieceFrom != Vector3.down && movePieceTo != Vector3.down;
+            if (!enemyAI.IsThinking() && !choseMove)
+            {
+                movePieceFrom = enemyAI.GetBestMove().src;
+                movePieceTo = enemyAI.GetBestMove().des;
+                currentlySelectedPiece = board.GetPieceAt(movePieceFrom);
+            }
+            else if (choseMove)
             {
                 MovePieceModel(movePieceFrom, movePieceTo);
             }
@@ -83,8 +93,6 @@ public class ChessGameControllerVSAI : ChessGameController
     private void GetAIMove()
     {
         aiMoved = true;
-        movePieceFrom = enemyAI.GetBestMove().src;
-        movePieceTo = enemyAI.GetBestMove().des;
-        currentlySelectedPiece = board.GetPieceAt(movePieceFrom);
+        enemyAI.CalculateMove();
     }
 }
