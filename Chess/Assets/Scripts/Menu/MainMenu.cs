@@ -9,6 +9,12 @@ public class MainMenu : MonoBehaviour {
     {
         SceneManager.LoadScene(1);
     }
+
+    /*public void PlayVsAIHard()
+    {
+        SceneManager.LoadScene(2);
+        DiffcultyManager.Level = 6;
+    }*/
    
     public void QuitGame()
     {
