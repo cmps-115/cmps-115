@@ -15,7 +15,7 @@ public class ChessGameControllerVSAI : ChessGameController
     protected override void Start()
     {
         base.Start();
-        enemyAI = new AI(this, 2);
+        enemyAI = new AI(this, 5);
     }
 
     // Update is called once per frame

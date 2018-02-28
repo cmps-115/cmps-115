@@ -56,7 +56,7 @@ public class AI: Player
 		foreach(Move move in allMoves)
 		{
 			ExecuteMove (move);
-			int evaluationResult = -1 * NegMax (this.depth);
+			int evaluationResult = -1 * NegMax (this.depth, Int32.MinValue, Int32.MaxValue);
 			UndoMove (move);
 			if (evaluationResult > bestResult)
 			{
@@ -67,7 +67,7 @@ public class AI: Player
 		return bestMove;
 	}
 
-	public int NegMax(int depth)
+	public int NegMax(int depth, int alpha, int beta)
 	{
 		if (depth <= 0 || this.cgs.GetGameState ().getState() == ChessGlobals.GameState.BLACK_WIN || this.cgs.GetGameState().getState() == ChessGlobals.GameState.WHITE_WIN)
 			return EvaluateGameState ();
@@ -76,10 +76,13 @@ public class AI: Player
 		foreach(Move currentMove in moves)
 		{
 			ExecuteMove(currentMove);
-			int score = -1 * NegMax(depth - 1);
+			int score = -1 * NegMax(depth - 1,-beta,-alpha);
 			UndoMove(currentMove);
 			if(score > currentMax)
 				currentMax = score;
+			alpha = (score > alpha) ? score : alpha;
+			if (alpha >= beta)
+				break;
 		}
 		return currentMax;
 	}
