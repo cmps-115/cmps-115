@@ -17,6 +17,7 @@ public class MoveModel : MonoBehaviour {
     private Vector3 finalPos;
 
     private bool moving = false;
+    private bool overlapped = false;
     private float timeStarted = 0;
 
     private float movementTime = 1;
@@ -32,7 +33,7 @@ public class MoveModel : MonoBehaviour {
     /// <param name="from"></param>
     /// <param name="to"></param>
     /// <param name="height"></param>
-    public void MovePiece(Vector2 from, Vector2 to, int height = 2)
+    public void MovePiece(Vector2 from, Vector2 to, int height = 2)//to is where they click
     {
         if (height < 0) throw new System.Exception("Error in MoveModel: MovePiece() height parameter must be greater than zero.");
         if (from.x < BOARD_MINIMUM || to.x < BOARD_MINIMUM || from.y > BOARD_MAXIMUM || to.y > BOARD_MAXIMUM) throw new System.Exception("Error in MoveModel: MovePiece() coordinates out of range.");
@@ -60,6 +61,11 @@ public class MoveModel : MonoBehaviour {
     public bool isMoving
     {
         get { return moving; }
+    }
+
+    public bool Overlapped
+    {
+        get { return overlapped; }
     }
 
     // Update is called once per frame
@@ -120,8 +126,13 @@ public class MoveModel : MonoBehaviour {
         {
             foreach (Collider c in cols)
             {
-                if (c.transform.tag == "ChessPiece") otherObj = c.gameObject;
+                if (c.transform.tag == "ChessPiece")
+                {
+                    otherObj = c.gameObject;
+                    overlapped = true;
+                }
             }
         }
+        else overlapped = false;
     }
 }

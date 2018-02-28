@@ -5,6 +5,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using ChessGlobals;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshRenderer))]
@@ -40,7 +41,7 @@ public class DrawBoard : MonoBehaviour
     private const int LAYER_ZERO = 0;
     private const int LAYER_ONE = 1;
 
-    public void HighLightGrid(Vector3 pos)
+    public void HighLightGrid(Vector2 pos)
     {
         int[] tri;
         List<int> triCopy;
@@ -67,10 +68,22 @@ public class DrawBoard : MonoBehaviour
 
         mesh.SetTriangles(triCopy, submesh);
     }
+	//aded by me
+	public void HighLightGrid(List<Vector2> positions)
+	{
+        if (positions != null)
+        {
+            foreach (Vector2 pos in positions)
+            {
+                if (pos.x >= BoardConstants.BOARD_MINIMUM && pos.y >= BoardConstants.BOARD_MINIMUM && pos.x <= BoardConstants.BOARD_MAXIMUM && pos.y <= BoardConstants.BOARD_MAXIMUM)
+                    HighLightGrid(pos);
+            }
+        }
+	}
 
-    public void HighLightGrid(List<Vector3> positions)
+    public void HighLightGrid(Vector2[] positions)
     {
-        foreach (Vector3 pos in positions)
+        foreach (Vector2 pos in positions)
         {
             HighLightGrid(pos);
         }
@@ -78,8 +91,10 @@ public class DrawBoard : MonoBehaviour
 
     public void ClearHighlights()
     {
-        triCopy1.Clear();
-        triCopy2.Clear();
+        if (triCopy1.Count > 0)
+            triCopy1.Clear();
+        if (triCopy2.Count > 0)
+            triCopy2.Clear();
 
         mesh.SetTriangles(triCopy1, LAYER_ZERO);
         mesh.SetTriangles(triCopy1, LAYER_ONE);
@@ -97,7 +112,6 @@ public class DrawBoard : MonoBehaviour
 
     public static bool IsClicked
     {
-
         get
         {
             DetectClick();
@@ -105,22 +119,16 @@ public class DrawBoard : MonoBehaviour
         }
     }
 
-    // Use this for initialization
-    private void Start()
+    public void InitBoard()
     {
-        meshRenderer = GetComponent<MeshRenderer>();
-        meshCollider = GetComponent<MeshCollider>();
-        meshFilter = GetComponent<MeshFilter>();
-        mesh = new Mesh();
+		meshRenderer = GetComponent<MeshRenderer>();
+		meshCollider = GetComponent<MeshCollider>();
+		meshFilter = GetComponent<MeshFilter>();
+		mesh = new Mesh();
 
-        rows = size;
-        columns = size;
+		rows = size;
+		columns = size;
 
-        InitBoard();
-    }
-
-    private void InitBoard()
-    {
         DrawMesh();
         TintMaterials();
         meshFilter.mesh = mesh;
@@ -206,10 +214,8 @@ public class DrawBoard : MonoBehaviour
                 if (hit.transform.tag == "ChessBoard")
                 {
                     int triangleInd = hit.triangleIndex;
-                    if (triangleInd > TRIANGLE_INDEX)
-                        squareIndex = (triangleInd - TRIANGLE_DIFFERENCE) / 2;
-                    else
-                        squareIndex = triangleInd / 2;
+                    if (triangleInd > TRIANGLE_INDEX) squareIndex = (triangleInd - TRIANGLE_DIFFERENCE) / 2;
+                    else squareIndex = triangleInd / 2;
 
                     clicked =  true;
                     return;
