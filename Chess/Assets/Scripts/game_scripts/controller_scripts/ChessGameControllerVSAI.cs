@@ -26,7 +26,8 @@ public class ChessGameControllerVSAI : ChessGameController
         {
             startMoveTime = Time.time;
             isPieceMove = false;
-            SwitchTurn();
+            SwitchTurnDisplay();
+            return;
         }
 
         if (gameState.getState() == GameState.WHITE_TURN)

@@ -26,18 +26,6 @@ public class DrawPiece : MonoBehaviour {
     public Material secondTeam;
 
     private static Vector2 piecePosition = new Vector2(-1, -1);
-<<<<<<< HEAD
-    private static Renderer pieceRenderer;
-    private static Material mat;
-    private static bool clicked = false;
-    private static bool highlighted = false;
-
-    private const float MODEL_OFFSET = 0.5f;
-    private const float MODEL_OFFSET_Y = 0.05f;
-    private const int BOARD_MINIMUM = 0;
-    private const int BOARD_MAXIMUM = 7;
-    private const int TEAM_ROWS = 2;
-=======
 	private static Renderer pieceRenderer;
 	private static Material mat;
     private static bool clicked = false;
@@ -45,32 +33,6 @@ public class DrawPiece : MonoBehaviour {
 
     private const float MODEL_OFFSET = 0.5f;
 	private const float MODEL_OFFSET_Y = 0.05f;
-
-
-	private const int RENDERQUEUE = 3000;
-	private const float OUTLINE_THICKNESS = 1.20f;
-	private const int HIGHLIGHT_FREQUENCY = 5;
-
-
-	public static void HighlightPiece()
-	{
-        if (pieceRenderer != null)
-        {
-            highlighted = true;
-            mat.renderQueue = RENDERQUEUE + 1;
-        }
-	}
-
-	public static void ClearHighlight()
-	{
-        if (pieceRenderer != null)
-        {
-            highlighted = false;
-            mat.SetFloat("_OutlineWidth", 0);
-            mat.renderQueue = RENDERQUEUE;
-        }
-	}
->>>>>>> Master
 
     private const int RENDERQUEUE = 3000;
     private const float OUTLINE_THICKNESS = 1.15f;
@@ -252,14 +214,6 @@ public class DrawPiece : MonoBehaviour {
             {
                 if (hit.transform.tag == "ChessPiece")
                 {
-<<<<<<< HEAD
-                    pieceRenderer = hit.transform.GetComponent<Renderer>();
-                    piecePosition = new Vector2Int((int)hit.transform.position.x, (int)hit.transform.position.z);
-                    clicked = true;
-                    mat = pieceRenderer.material;
-                    mat.shader = Shader.Find("StandardOutline");
-                    return;
-=======
                     if (highlighted)
                     {
                         ClearHighlight();
@@ -271,30 +225,12 @@ public class DrawPiece : MonoBehaviour {
 					mat = pieceRenderer.material;
 					mat.shader = Shader.Find("StandardOutline");
 					return;
->>>>>>> Master
                 }
             }
         }
         clicked = false;
     }
-<<<<<<< HEAD
 
-    private void Update()
-    {
-        if (highlighted)
-        {
-            HighlightBreath();
-        }
-    }
-
-    private void HighlightBreath()
-    {
-        var dThickness = (OUTLINE_THICKNESS - 1) / 2;
-        var sin = dThickness * Mathf.Sin(HIGHLIGHT_FREQUENCY * Time.time);
-        var thickness = (OUTLINE_THICKNESS - dThickness / 2) + sin;
-        mat.SetFloat("_OutlineWidth", thickness);
-    }
-=======
 	private void Update()
 	{
 		if (highlighted)
@@ -310,5 +246,4 @@ public class DrawPiece : MonoBehaviour {
 		var thickness = (OUTLINE_THICKNESS - dThickness / 2) + sin;
 		mat.SetFloat("_OutlineWidth", thickness);
 	}
->>>>>>> Master
 }
