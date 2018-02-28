@@ -11,10 +11,11 @@ using System;
 using UnityEngine;
 using ChessGlobals;
 
+[Serializable]
 public class Piece
 {
     private bool taken;//represents if the piece still exists on the board
-    private Vector2 PiecePosition;
+    private Vector2 piecePosition;
     private ChessGlobals.Teams pieceTeam;
 
     public Piece()
@@ -31,7 +32,7 @@ public class Piece
     {
         taken = false;
         pieceTeam = new Teams(p_team);
-        PiecePosition = new Vector2(xCord, yCord);
+        piecePosition = new Vector2(xCord, yCord);
     }
 
     public virtual List<Vector2> LegalMoves(Board chessBoard)
@@ -43,16 +44,16 @@ public class Piece
     //returns cureent position on board of the given piece
     public Vector2 GetPiecePosition()
     {
-        return PiecePosition;
+        return piecePosition;
     }
     //With GetXCoord and GetYCoord we will have the casting take place in one spot
     public int GetPiecePositionX()
     {
-        return (int)PiecePosition.x;
+        return (int)piecePosition.x;
     }
     public int GetPiecePositionY()
     {
-        return (int)PiecePosition.y;
+        return (int)piecePosition.y;
     }
     public int GetTeam()
     {
@@ -62,17 +63,17 @@ public class Piece
     //*****manipulators*****
     public void TakePiece()
     {
-        PiecePosition = new Vector2(-1, -1);
+        piecePosition = new Vector2(-1, -1);
         taken = true;
     }
 
     public void SetPosition(int xCord, int yCord)
     {
-        PiecePosition = new Vector2(xCord, yCord);
+        piecePosition = new Vector2(xCord, yCord);
     }
     public void SetPosition(Vector2 pos)
     {
-        PiecePosition = pos;
+        piecePosition = pos;
     }
 
     public void SetTeam(int team)
@@ -82,14 +83,24 @@ public class Piece
         else
             this.pieceTeam.setTeam(team);
     }
+
     public bool IsTaken()
     {
         return taken != false;
     }
 
+    public System.Object Clone()
+    {
+        return new Piece
+        {
+            taken = taken,
+            piecePosition = piecePosition,
+            pieceTeam = pieceTeam
+        };
+    }
 }
 
-
+[Serializable]
 public class King : Piece
 {
     public King() { }
@@ -224,6 +235,7 @@ public class King : Piece
     }
 }
 
+[Serializable]
 public class Knight : Piece
 {
     public Knight() { }
@@ -349,22 +361,24 @@ public class Knight : Piece
                 }
             }
 
-            if (chessBoard.IsOccupied(xCord - 1, yCord - 2) == false)
+            if (xCord - 1 >= ChessGlobals.BoardConstants.BOARD_MINIMUM)
             {
-                positions.Add(new Vector2(xCord - 1, yCord - 2));
-            }
-            else
-            {
-                if (chessBoard.GetPieceAt(xCord - 1, yCord - 2).GetTeam() != GetTeam())
+                if (chessBoard.IsOccupied(xCord - 1, yCord - 2) == false)
+                {
                     positions.Add(new Vector2(xCord - 1, yCord - 2));
+                }
+                else
+                {
+                    if (chessBoard.GetPieceAt(xCord - 1, yCord - 2).GetTeam() != GetTeam())
+                        positions.Add(new Vector2(xCord - 1, yCord - 2));
+                }
             }
-
         }
         return positions;
     }
 }
 
-
+[Serializable]
 public class Queen : Piece
 {
     public Queen() { }
@@ -389,6 +403,7 @@ public class Queen : Piece
     }
 }
 
+[Serializable]
 public class Pawn : Piece
 {
     public Pawn() { }
@@ -420,11 +435,6 @@ public class Pawn : Piece
                 {
                     positions.Add(new Vector2(xCord, yCord + 1));
                 }
-                else
-                {
-                    if (chessBoard.GetPieceAt(xCord, yCord + 1).GetTeam() != GetTeam())
-                        positions.Add(new Vector2(xCord, yCord + 1));
-                }
             }
 
             //Checks if the piece is on the second row
@@ -435,11 +445,6 @@ public class Pawn : Piece
                     if (chessBoard.IsOccupied(xCord, yCord + 2) == false)
                     {
                         positions.Add(new Vector2(xCord, yCord + 2));
-                    }
-                    else
-                    {
-                        if (chessBoard.GetPieceAt(xCord, yCord + 2).GetTeam() != GetTeam())
-                            positions.Add(new Vector2(xCord, yCord + 2));
                     }
                 }
             }
@@ -474,11 +479,6 @@ public class Pawn : Piece
                 {
                     positions.Add(new Vector2(xCord, yCord - 1));
                 }
-                else
-                {
-                    if (chessBoard.GetPieceAt(xCord, yCord - 1).GetTeam() == ChessGlobals.Teams.WHITE_TEAM)
-                        positions.Add(new Vector2(xCord, yCord - 1));
-                }
             }
 
             //Checks if the pawn in on its starting row
@@ -489,11 +489,6 @@ public class Pawn : Piece
                     if (yCord == 6 && chessBoard.IsOccupied(xCord, yCord - 2) == false)
                     {
                         positions.Add(new Vector2(xCord, yCord - 2));
-                    }
-                    else
-                    {
-                        if (yCord == 6 && chessBoard.GetPieceAt(xCord, yCord - 2).GetTeam() == ChessGlobals.Teams.WHITE_TEAM)
-                            positions.Add(new Vector2(xCord, yCord - 2));
                     }
                 }
 
@@ -523,7 +518,7 @@ public class Pawn : Piece
     }
 }
 
-
+[Serializable]
 public class Rook : Piece
 {
     public Rook() { }
@@ -699,6 +694,7 @@ public class Rook : Piece
     }
 }
 
+[Serializable]
 public class Bishop : Piece
 {
     public Bishop() { }

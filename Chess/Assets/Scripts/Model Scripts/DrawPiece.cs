@@ -42,21 +42,21 @@ public class DrawPiece : MonoBehaviour {
 
 	public static void HighlightPiece()
 	{
-		if (pieceRenderer == null)
-			throw new System.Exception("Error in DrawPiece: Cannot Highlight a piece because a piece has not been clicked");
-
-		highlighted = true;
-		mat.renderQueue = RENDERQUEUE + 1;
+        if (pieceRenderer != null)
+        {
+            highlighted = true;
+            mat.renderQueue = RENDERQUEUE + 1;
+        }
 	}
 
 	public static void ClearHighlight()
 	{
-		if (pieceRenderer == null)
-			throw new System.Exception("Error in DrawPiece: Cannot ClearHighlight because a piece has not been clicked");
-
-		highlighted = false;
-		mat.SetFloat("_OutlineWidth", 0);
-		mat.renderQueue = RENDERQUEUE;
+        if (pieceRenderer != null)
+        {
+            highlighted = false;
+            mat.SetFloat("_OutlineWidth", 0);
+            mat.renderQueue = RENDERQUEUE;
+        }
 	}
 
     /// <summary>

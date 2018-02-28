@@ -2,8 +2,8 @@
 using UnityEngine;
 using ChessGlobals;  
 public interface Player{
-	void setMove (Move move);
-	Move getMove();
-	Move getLastMove();
+	void SetMove (Move move);
+	Move GetMove();
+	Move GetLastMove();
 	//List<Move> generateAllLegalMoves (Piece piece);
 }
