@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ChessPiece
   - ChessBoard
+  - Queen
   layers:
   - Default
   - TransparentFX
