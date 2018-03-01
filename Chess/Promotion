@@ -1,0 +1,52 @@
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+
+public class Promotion : MonoBehaviour
+{
+	//Queen
+	//Rook
+	//Bishop
+	//Knight
+	public bool isPromote(Pawn piece)
+	{
+		int promotePosition = 0;
+		//black
+		if (piece.GetTeam () == false)
+		{
+			if (piece.GetPiecePositionY () == promotePosition)
+				return true;
+		} else 
+		{
+			//for white
+			promotePosition = 7;
+			if (piece.GetPiecePositionY () == promotePosition)
+				return true;
+		}
+		return false;
+
+	}
+	public Piece Promotes(string choice , Pawn piece)
+	{	
+		Piece newPiece = null;
+		if (choice == "Rook") 
+		{
+			newPiece = new Rook (piece.GetTeam (), piece.GetPiecePositionX (), piece.GetPiecePositionY ());
+		} else if (choice == "Bishop")
+		{
+			newPiece = new Bishop (piece.GetTeam (), piece.GetPiecePositionX (), piece.GetPiecePositionY ());
+		} else if (choice == "Queen") 
+		{
+			newPiece = new Queen (piece.GetTeam (), piece.GetPiecePositionX (), piece.GetPiecePositionY ());
+		} else 
+		{
+			newPiece = new Knight (piece.GetTeam (), piece.GetPiecePositionX (), piece.GetPiecePositionY ());
+		}
+
+		return newPiece;
+
+	}
+		
+}
+
