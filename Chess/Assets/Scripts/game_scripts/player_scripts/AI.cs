@@ -3,23 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 using ChessGlobals;
-public class AI: Player
+using System.Collections;
+
+public class AI: MonoBehaviour
 {
 	private Move lastMove;
 	private Move currentMove;
 	private int depth;
 	private ChessGameController cgs;
 	private Board boardCopy;
+    private Move bestMove;
+    private bool thinking;
 
-	public AI(ChessGameController cgs, int depth)//Rules now in each piece
+	/*public AI(ChessGameController cgs, int depth)//Rules now in each piece
 	{
 		Assert.AreNotEqual (cgs, null);
 		this.cgs = cgs;
 		this.depth = depth;
 		lastMove = null;
-	}
+	}*/
 
-	public void SetMove (Move move)
+    public void Init(ChessGameController cgs, int depth)
+    {
+        this.cgs = cgs;
+        this.depth = depth;
+        lastMove = null;
+        bestMove = null;
+        thinking = false;
+    }
+
+    public void SetMove (Move move)
 	{
 		currentMove = move;
 	}
@@ -28,10 +41,17 @@ public class AI: Player
 	{
 		return currentMove;
 	}
+
 	public Move GetLastMove()
 	{
 		return lastMove;
 	}
+
+    public bool IsThinking()
+    {
+        return thinking;
+    }
+
 	private void ExecuteMove(Move move)
 	{
 		Assert.AreNotEqual (boardCopy, null);
@@ -48,24 +68,35 @@ public class AI: Player
 	public Move GetBestMove()
 	{
 		//get current board
-		boardCopy = cgs.GetBoardClone();
-		//get all possible valid moves
-		List<Move> allMoves = GenerateAllLegalMoves();
-		int bestResult = Int32.MinValue;
-		Move bestMove = null;
-		foreach(Move move in allMoves)
-		{
-			ExecuteMove (move);
-			int evaluationResult = -1 * NegMax (this.depth, Int32.MinValue, Int32.MaxValue);
-			UndoMove (move);
-			if (evaluationResult > bestResult)
-			{
-				bestResult = evaluationResult;
-				bestMove = move;
-			}
-		}
 		return bestMove;
 	}
+
+    public void CalculateMove()
+    {
+        boardCopy = cgs.GetBoardClone();
+        List<Move> allMoves = GenerateAllLegalMoves();
+        //get all possible valid moves
+        thinking = true;
+        StartCoroutine(Thinking(allMoves));
+    }
+
+    private IEnumerator Thinking(List<Move> allMoves)
+    {
+        int bestResult = Int32.MinValue;
+        foreach (Move move in allMoves)
+        {
+            ExecuteMove(move);
+            int evaluationResult = -1 * NegMax(this.depth, Int32.MinValue, Int32.MaxValue);
+            UndoMove(move);
+            if (evaluationResult > bestResult)
+            {
+                bestResult = evaluationResult;
+                bestMove = move;
+            }
+            yield return null;
+        }
+        thinking = false;
+    }
 
 	public int NegMax(int depth, int alpha, int beta)
 	{
@@ -86,6 +117,7 @@ public class AI: Player
 		}
 		return currentMax;
 	}
+
 
 	private List<Move> GenerateAllLegalMoves()
 	{
