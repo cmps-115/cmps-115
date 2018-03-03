@@ -14,15 +14,6 @@ public class AI: MonoBehaviour
 	private Board boardCopy;
     private Move bestMove;
     private bool thinking;
-
-	/*public AI(ChessGameController cgs, int depth)//Rules now in each piece
-	{
-		Assert.AreNotEqual (cgs, null);
-		this.cgs = cgs;
-		this.depth = depth;
-		lastMove = null;
-	}*/
-
     public void Init(ChessGameController cgs, int depth)
     {
         this.cgs = cgs;
@@ -57,13 +48,11 @@ public class AI: MonoBehaviour
 		Assert.AreNotEqual (boardCopy, null);
 		boardCopy.Mark (move.des, move.piece);
         boardCopy.UnMark(move.src);
-		//this.cgs.movePiece (move);
 	}
 	private void UndoMove(Move move)
 	{
 		Assert.AreNotEqual (boardCopy, null);
 		boardCopy.UnMark (move);
-		//this.cgs.undoMove (move);
 	}
 	public Move GetBestMove()
 	{
@@ -176,7 +165,6 @@ public class AI: MonoBehaviour
 			return whitePlayerScore - blackPlayerScore;
 		else if (gameState.getState() == ChessGlobals.GameState.WHITE_WIN || gameState.getState() == ChessGlobals.GameState.BLACK_WIN || gameState.getState() == ChessGlobals.GameState.DRAW)
 			return Int32.MinValue + 1;
-		//some illegate state exception, but the code should not get to this point 
 		Debug.Log ("Illegal game state in evaluateGameState()");
 		return 0;
 	}
@@ -197,7 +185,7 @@ public class AI: MonoBehaviour
 			return 10;
 		else  
 		{
-			//some invalid state exception
+			Debug.Log ("Illegal piece type");
 		}
 		return 0;
 	}
