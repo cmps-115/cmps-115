@@ -10,12 +10,16 @@ public class MainMenu : MonoBehaviour {
         SceneManager.LoadScene(1);
     }
 
-    /*public void PlayVsAIHard()
+    public void PlayVsPlayer()
     {
-        SceneManager.LoadScene(2);
-        DiffcultyManager.Level = 6;
-    }*/
-   
+        SceneManager.LoadScene("ChessBoard");
+    }
+
+    public void PlayVsAI()
+    {
+        SceneManager.LoadScene("PlayVSAI");
+    }
+
     public void QuitGame()
     {
         Debug.Log("QUIT!!!");
