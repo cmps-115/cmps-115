@@ -7,7 +7,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ChessGlobals;
-using UnityEngine.Networking;
 
 //Shorten & Clarify Declarations 
 using PieceTypeAndPosition = ChessGlobals.Tuple2<ChessGlobals.PIECE_TYPES,UnityEngine.Vector2>;
@@ -84,26 +83,11 @@ public class DrawPiece : MonoBehaviour {
 		return new Tuple2<ListOfPieceTypesAndPositions, ListOfPieceTypesAndPositions>(initialBlackTeamPositions, initialWhiteTeamPositions);
     }
 
-	public Tuple2<ListOfPieceTypesAndPositions, ListOfPieceTypesAndPositions> NetworkInitPieces()
-	{
-		var initialWhiteTeamPositions = NetworkPlaceWhiteTeam();
-		var initialBlackTeamPositions = NetworkPlaceBlackTeam();
-		return new Tuple2<ListOfPieceTypesAndPositions, ListOfPieceTypesAndPositions>(initialBlackTeamPositions, initialWhiteTeamPositions);
-	}
-
     #region Place Teams
     private GameObject Spawn(int x, int y, GameObject model)
     {
         return Instantiate(model, new Vector3(x + MODEL_OFFSET, MODEL_OFFSET_Y, y + MODEL_OFFSET), model.transform.rotation);
     }
-
-	private GameObject NetworkSpawn(int x, int y, GameObject model)
-	{
-		GameObject piece = Instantiate(model, new Vector3(x + MODEL_OFFSET, MODEL_OFFSET_Y, y + MODEL_OFFSET), model.transform.rotation);
-		NetworkServer.Spawn (piece);
-		return piece;
-	}
-
 
 	private ListOfPieceTypesAndPositions PlaceWhiteTeam()
     {
@@ -210,112 +194,6 @@ public class DrawPiece : MonoBehaviour {
         }
 		return positions;
     }
-
-	private ListOfPieceTypesAndPositions NetworkPlaceWhiteTeam()
-	{
-		ListOfPieceTypesAndPositions positions = new ListOfPieceTypesAndPositions();
-		for (int y = ChessGlobals.BoardConstants.BOARD_MINIMUM; y < ChessGlobals.BoardConstants.TEAM_ROWS; ++y)
-		{
-			GameObject model = null;
-			for (int x = ChessGlobals.BoardConstants.BOARD_MINIMUM; x <= ChessGlobals.BoardConstants.BOARD_MAXIMUM; ++x)
-			{
-				if (y == 1)
-				{
-					model = NetworkSpawn(x, y, pawn);
-					PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.PAWN, new Vector2 (x, y));
-					positions.Add (typeAndPos);
-				}
-				else
-				{
-					if (x == 0 || x == 7)
-					{
-						model = NetworkSpawn(x, y, castle);
-						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.ROOK, new Vector2 (x, y));
-						positions.Add (typeAndPos);
-					}
-					else if (x == 1 || x == 6)
-					{
-						model = NetworkSpawn(x, y, knight);
-						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.KNIGHT, new Vector2 (x, y));
-						positions.Add (typeAndPos);
-					}
-					else if (x == 2 || x == 5)
-					{
-						model = NetworkSpawn(x, y, bishop);
-						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.BISHOP, new Vector2 (x, y));
-						positions.Add (typeAndPos);
-					}
-					else if (x == 3)
-					{
-						model = NetworkSpawn(x, y, king);
-						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.KING, new Vector2 (x, y));
-						positions.Add (typeAndPos);
-					}
-					else if (x == 4)
-					{
-						model = NetworkSpawn(x, y, queen);
-						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.QUEEN, new Vector2 (x, y));
-						positions.Add (typeAndPos);
-					}
-				}
-				model.GetComponent<MeshRenderer>().material = firstTeam;
-			}
-		}
-		return positions;
-	}
-
-	private ListOfPieceTypesAndPositions NetworkPlaceBlackTeam()
-	{
-		List<Tuple2<PIECE_TYPES,Vector2>> positions = new List<Tuple2<PIECE_TYPES,Vector2>>();
-		for (int y = ChessGlobals.BoardConstants.BOARD_MAXIMUM; y > ChessGlobals.BoardConstants.BOARD_MAXIMUM - ChessGlobals.BoardConstants.TEAM_ROWS; --y)
-		{
-			GameObject model = null;
-			for (int x = ChessGlobals.BoardConstants.BOARD_MINIMUM; x <= ChessGlobals.BoardConstants.BOARD_MAXIMUM; ++x)
-			{
-				if (y == 6)
-				{
-					model = NetworkSpawn(x, y, pawn);
-					PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.PAWN, new Vector2 (x, y));
-					positions.Add(typeAndPos);
-				}
-				else
-				{
-					if (x == 0 || x == 7)
-					{
-						model = NetworkSpawn(x, y, castle);
-						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.ROOK, new Vector2 (x, y));
-						positions.Add (typeAndPos);
-					}
-					else if (x == 1 || x == 6)
-					{
-						model = NetworkSpawn(x, y, knight);
-						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.KNIGHT, new Vector2 (x, y));
-						positions.Add (typeAndPos);
-					}
-					else if (x == 2 || x == 5)
-					{
-						model = NetworkSpawn(x, y, bishop);
-						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.BISHOP, new Vector2 (x, y));
-						positions.Add (typeAndPos);
-					}
-					else if (x == 3)
-					{
-						model = NetworkSpawn(x, y, king);
-						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.KING, new Vector2 (x, y));
-						positions.Add (typeAndPos);
-					}
-					else if (x == 4)
-					{
-						model = NetworkSpawn(x, y, queen);
-						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.QUEEN, new Vector2 (x, y));
-						positions.Add (typeAndPos);
-					}
-				}
-				model.GetComponent<MeshRenderer>().material = secondTeam;
-			}
-		}
-		return positions;
-	}
     #endregion
 
 

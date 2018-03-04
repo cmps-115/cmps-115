@@ -5,316 +5,410 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine.Assertions;
 using ChessGlobals;
+
 public class ChessGameControllerLAN : NetworkBehaviour
 {
 
+    [SerializeField]
+    private DrawBoard drawBoard;
+    private Board board;
+    private List<Piece> pieces;
 
-	[SerializeField] private DrawBoard drawBoard;
-	[SerializeField] private DrawPiece drawPiece;
-	private MoveModel moveModel;
-	public Text turnDisplay;
+    private NetworkMoveModel moveModel;
 
-	private Board board;
-	public Player whitePlayer;
-	public Player blackPlayer;
-	public Player activePlayer;
-	private ChessGlobals.GameState gameState;
-	private List<Piece> pieces;
-	private List<Piece> capturedPieces;
-	// Initialize positions to spots the user cannot choose. I chose Vector3.down because it contains a negative value and be unity has a shorthand for it.
-	private Vector3 movePieceFrom = Vector3.down;
-	private Vector3 movePieceTo = Vector3.down;
-	private List<Vector2> legalMovesForAPiece;
-	private bool isPieceMove = false;
-	private Piece currentlySelectedPiece;
+    public Text turnDisplay;
+
+    public Player whitePlayer;
+    public Player blackPlayer;
+    public Player activePlayer;
+    private static GameState gameState;
+    private List<Piece> capturedPieces;
+    // Initialize positions to spots the user cannot choose. I chose Vector3.down because it contains a negative value and be unity has a shorthand for it.
+    [SyncVar] private Vector3 movePieceFrom = Vector3.down;
+    [SyncVar] private Vector3 movePieceTo = Vector3.down;
+    private Vector3 localFrom = Vector3.down;
+    private Vector3 localTo = Vector3.down;
+    private List<Vector2> legalMovesForAPiece;
+    private bool isPieceMove = false;
+    private Piece currentlySelectedPiece;
 
 
-	private float startMoveTime = -1;
-	private float moveTime = 0;
-	private const float waitTime = 1.2f;
-	private const int negativeTime = -1;
+   // private float startMoveTime = -1;
+    private float moveTime = 0;
+    private const float waitTime = 1.2f;
+    private const int negativeTime = -1;
 
-	private Vector3 firstCameraPos;
-	private Vector3 secondCameraPos;
-	private float firstCameraRot;
-	private float secondCameraRot;
+    private Vector3 secondCameraPos;
+    private Vector3 secondCameraRot;
 
-	// Use this for initialization
-	private void Start () 
-	{
-		legalMovesForAPiece = new List<Vector2>();
-		gameState = new GameState(ChessGlobals.GameState.WHITE_TURN);
-		//Initialize Model
-		board = new Board();
-		pieces = new List<Piece> ();
-		//Initialize Movement Model
-		moveModel = gameObject.AddComponent<MoveModel> ();
-		capturedPieces = new List<Piece> ();
+    public override void OnStartLocalPlayer()
+    {
+        secondCameraPos = Camera.main.transform.position;
+        secondCameraRot = Camera.main.transform.eulerAngles;
+        if (!isServer)
+        {
+            secondCameraPos.z = 13;
+            secondCameraRot.y = 180;
+        }
+        Camera.main.transform.position = secondCameraPos;
+        Camera.main.transform.eulerAngles = secondCameraRot;
+    }
 
-		//Initialize View
-		drawBoard.InitBoard();
-		var startingPositions = drawPiece.NetworkInitPieces ();
-		for (int i = 0; i < startingPositions.t1.Count; ++i) 
-		{
-			Piece blackPiece = CreatePieceAt(startingPositions.t1[i].t1, startingPositions.t1[i].t2, ChessGlobals.Teams.BLACK_TEAM);
-			Piece whitePiece = CreatePieceAt(startingPositions.t2[i].t1, startingPositions.t2[i].t2, ChessGlobals.Teams.WHITE_TEAM);
+    private void Start()
+    {
 
-			board.Mark(blackPiece.GetPiecePosition(), blackPiece);
-			board.Mark(whitePiece.GetPiecePosition(), whitePiece);
+        if (gameState == null)
+            gameState = new GameState(GameState.WHITE_TURN);
 
-			pieces.Add (whitePiece);
-			pieces.Add (blackPiece);
-		}
- 
-	}
+        drawBoard = GameObject.Find("Draw Board").GetComponent<DrawBoard>();
+        turnDisplay = GameObject.Find("Text").GetComponent<Text>();
+        board = NetworkBoard.GetBoard;
+        pieces = NetworkBoard.GetPieces;
 
-	// Update is called once per frame
-	private void Update () 
-	{	
-		CmdUpdate ();
-	}
+        legalMovesForAPiece = new List<Vector2>();
 
-	[Command]
-	private void CmdUpdate()
-	{
+        //Initialize Movement Model
+        moveModel = GetComponent<NetworkMoveModel>();
+        capturedPieces = new List<Piece>();
+    }
 
-		bool pieceDoneMoving = Time.time - moveTime > waitTime && isPieceMove == true;
-		if (pieceDoneMoving)
-		{
-			startMoveTime = Time.time;
-			isPieceMove = false;
-			SwitchTurnDisplay();
-		}
-		//handles moving a piece
-		if ((DrawBoard.IsClicked || DrawPiece.IsClicked) && movePieceFrom != Vector3.down) 
-		{
-			//here must disallow moving pieces to anywhere other than a legal square
-			if (legalMovesForAPiece != null)
-			{
-				movePieceTo = DrawBoard.IsClicked ? DrawBoard.SquarePosition : DrawPiece.PiecePosition;
-				DrawPiece.ClearHighlight();
-				if (board.IsOccupied (movePieceTo)) 
-				{
-					//if the color of the piece matches the current turn
-					if (board.GetPieceAt (movePieceTo).GetTeam () == gameState.getState())
-					{
-						movePieceTo = Vector3.down;
-						movePieceFrom = Vector3.down;
-						drawBoard.ClearHighlights();
-						return;
-					}	
-				}
-				else drawBoard.ClearHighlights();
-				if (!legalMovesForAPiece.Contains(movePieceTo)) movePieceTo = Vector3.down;
-			}
-		}
-		//handles clicking a piece
-		else if (DrawPiece.IsClicked)
-		{
-			SelectPiece ();
-		} 
-		// If the user has clicked on a space to move and a piece to move, move the piece and reset the vectors to numbers the user cannot choose.
-		// In the real game we would also have to check if it is a valid move.
-		if (movePieceFrom != Vector3.down && movePieceTo != Vector3.down)
-		{
-			MovePieceModel(movePieceFrom, movePieceTo);
-		}
-	}
 
-	private void SelectPiece()
-	{
-		movePieceFrom = DrawBoard.IsClicked ? DrawBoard.SquarePosition : DrawPiece.PiecePosition;
-		if (board.GetPieceAt(movePieceFrom) == null)
-		{
-			movePieceTo = movePieceFrom = Vector3.down;
-			return;
-		}
+    // Update is called once per frame
+    private void Update()
+    {
+        if (!isLocalPlayer)
+            return;
 
-		if (board.GetPieceAt(movePieceFrom).GetTeam() == gameState.getState())
-		{
-			DrawPiece.HighlightPiece();
-			drawBoard.HighLightGrid(movePieceFrom);
-			currentlySelectedPiece = board.GetPieceAt(new Vector2(movePieceFrom.x, movePieceFrom.y));
-			legalMovesForAPiece = currentlySelectedPiece.LegalMoves(this.board);
-			drawBoard.HighLightGrid(legalMovesForAPiece);
-		}
-		else
-		{
-			movePieceFrom = Vector3.down;
-		}
-	}
+        bool pieceDoneMoving = Time.time - moveTime > waitTime && isPieceMove == true;
+        if (pieceDoneMoving)
+        {
+            //startMoveTime = Time.time;
+            isPieceMove = false;
+            if (isServer)
+                RpcMsg();
+            else
+                CmdMsg();
+        }
 
-	private void MovePieceModel(Vector3 from, Vector3 to)
-	{
-		if (currentlySelectedPiece == null)
-			return;
+        if (isServer)
+            RpcUpdate();
+        else
+            CmdUpdate();
+    }
 
-		moveModel.MovePiece(from, to);
-		TookPiece();
-		board.Mark(to, currentlySelectedPiece);
-		board.UnMark(from);
+    [ClientRpc]
+    void RpcMsg()
+    {
+        SwitchTurnDisplay();
+    }
 
-		currentlySelectedPiece.SetPosition(to);
-		movePieceTo = movePieceFrom = Vector3.down;
-		moveTime = Time.time;
-		isPieceMove = true;
+    [Command]
+    void CmdMsg()
+    {
+        RpcMsg();
+    }
 
-		DrawPiece.ClearHighlight();
-		drawBoard.ClearHighlights();
-	}
+    [Command]
+    void CmdUpdate()
+    {
+        RpcUpdate();
+    }
 
-	private void TookPiece()
-	{
-		if (moveModel.Overlapped)
-		{
-			var pieceBeingTaken = board.GetPieceAt(movePieceTo);
-			pieces.Remove(pieceBeingTaken);
-			capturedPieces.Add(pieceBeingTaken);
-		}
-	}
+    [ClientRpc]
+    private void RpcUpdate()
+    {
+        //handles moving a piece
+        if ((DrawBoard.IsClicked || DrawPiece.IsClicked) && (movePieceFrom != Vector3.down || localFrom != Vector3.down))
+        {
+            currentlySelectedPiece = board.GetPieceAt(localFrom);
+            //here must disallow moving pieces to anywhere other than a legal square
+            if (legalMovesForAPiece != null)
+            {
+                movePieceTo = DrawBoard.IsClicked ? DrawBoard.SquarePosition : DrawPiece.PiecePosition;
+                localTo = movePieceTo;
+                DrawPiece.ClearHighlight();
+                if (board.IsOccupied(localTo))
+                {
+                    //if the color of the piece matches the current turn
+                    if (board.GetPieceAt(movePieceTo).GetTeam() == gameState.getState())
+                    {
+                        movePieceTo = movePieceFrom = localTo = localFrom = Vector3.down;
+                        drawBoard.ClearHighlights();
+                        return;
+                    }
+                }
+                else drawBoard.ClearHighlights();
+                if (!legalMovesForAPiece.Contains(localTo))
+                {
+                    movePieceTo =  localTo = Vector3.down;
+                }
+            }
+        }
+        //handles clicking a piece
+        else if (DrawPiece.IsClicked)
+        {
+            if (isLocalPlayer)
+            {
+                if (isServer)
+                { 
+                    RpcSelectPiece();
+                }
+                else
+                {
+                    CmdSelectPiece();
+                }
+            }
+        }
+        // If the user has clicked on a space to move and a piece to move, move the piece and reset the vectors to numbers the user cannot choose.
+        // In the real game we would also have to check if it is a valid move.
+        if (movePieceFrom != Vector3.down && movePieceTo != Vector3.down && isServer)
+        {
+            RpcMovePieceModel(movePieceFrom, movePieceTo);
+        }
+        else if (localFrom != Vector3.down && localTo != Vector3.down && !isServer)
+        {
+            CmdMovePieceModel(localFrom, localTo);
+        }
+    }
 
-	private void SwitchTurn()
-	{
-		if (gameState.getState() == ChessGlobals.GameState.WHITE_TURN) 
-		{
-			gameState.setState( ChessGlobals.GameState.BLACK_TURN);
-		}
-		else if (gameState.getState() == ChessGlobals.GameState.BLACK_TURN)
-		{
-			gameState.setState(ChessGlobals.GameState.WHITE_TURN);
-		}
-	}
+    [Command]
+    private void CmdSelectPiece()
+    {
+        movePieceFrom = DrawBoard.IsClicked ? DrawBoard.SquarePosition : DrawPiece.PiecePosition;
+        localFrom = movePieceFrom;
+        RpcSelectPiece();
+    }
 
-	private void SwitchTurnDisplay()
-	{
-		if (gameState.getState() == ChessGlobals.GameState.WHITE_TURN) 
-		{
-			turnDisplay.text = "Black Turn";
-			SwitchTurn();
-		} 
-		else if (gameState.getState() == ChessGlobals.GameState.BLACK_TURN) 
-		{
-			turnDisplay.text = "White Turn";
-			SwitchTurn();
-		}
-	}
+    [ClientRpc]
+    private void RpcSelectPiece()
+    {
+        movePieceFrom = DrawBoard.IsClicked ? DrawBoard.SquarePosition : DrawPiece.PiecePosition;
+        localFrom = movePieceFrom;
+        if (board.GetPieceAt(movePieceFrom) == null)
+        {
+            movePieceTo = movePieceFrom = Vector3.down;
+            return;
+        }
 
-	private Piece CreatePiece(PIECE_TYPES pieceType)
-	{
-		if (pieceType == PIECE_TYPES.KING) 
-		{
-			return new King();
-		}
-		else if (pieceType == PIECE_TYPES.QUEEN) 
-		{
-			return new Queen();
-		}
-		else if (pieceType == PIECE_TYPES.ROOK) 
-		{
-			return new Rook();
-		}
-		else if (pieceType == PIECE_TYPES.BISHOP) 
-		{
-			return new Bishop();
-		}
-		else if (pieceType == PIECE_TYPES.KNIGHT) 
-		{
-			return new Knight();
-		}
-		else //if (pieceType == PIECE_TYPES.PAWN) 
-		{
-			return new Pawn();
-		}
-	}
+        bool selectedTeamPiece = board.GetPieceAt(movePieceFrom).GetTeam() == gameState.getState();
+        bool playersTurn = System.Convert.ToBoolean(board.GetPieceAt(movePieceFrom).GetTeam()) == isServer;
 
-	private Piece CreatePieceAt(PIECE_TYPES pieceType, Vector2 pos, bool team)
-	{
-		var piece = CreatePiece (pieceType);
-		piece.SetPosition ( (int)pos.x, (int)pos.y);
-		return piece;
-	}
+        if (selectedTeamPiece && playersTurn)
+        {
+            DrawPiece.HighlightPiece();
+            drawBoard.HighLightGrid(movePieceFrom);
+            currentlySelectedPiece = board.GetPieceAt(movePieceFrom);
+            legalMovesForAPiece = currentlySelectedPiece.LegalMoves(board);
+            drawBoard.HighLightGrid(legalMovesForAPiece);
+        }
+        else
+        {
+            movePieceFrom = Vector3.down;
+        }
+    }
 
-	public Piece CreatePieceAt(PIECE_TYPES pieceType, Vector2 pos, int team)
-	{
-		Piece piece = CreatePiece (pieceType);
-		piece.SetPosition ( (int)pos.x, (int)pos.y);
-		piece.SetTeam(team);
-		return piece;
-	}
+    [Command]
+    private void CmdMovePieceModel(Vector3 from, Vector3 to)
+    {
+        moveModel.MovePiece(from, to);
+        RpcMovePieceModel(from, to);
+    }
 
-	public void SwapActivePlayer()
-	{
-		if (activePlayer == whitePlayer)
-			activePlayer = blackPlayer;
-		else if (activePlayer == blackPlayer)
-			activePlayer = whitePlayer;
-	}
+    [ClientRpc]
+    private void RpcMovePieceModel(Vector3 from, Vector3 to)
+    {
+        if (currentlySelectedPiece == null)
+            return;
 
-	public void SetPlayer(Player whitePlayer, Player blackPlayer)
-	{
-		this.whitePlayer = whitePlayer;
-		this.blackPlayer = blackPlayer;
-	}
+        moveModel.MovePiece(from, to);
+        TookPiece();
 
-	public List<Piece> GetPieces()
-	{
-		return pieces;
-	}
+        if (isServer)
+            RpcMark(from, to);
+        else
+            CmdMark(from, to);
 
-	public Board GetBoard()
-	{
-		//because some bs with c# and const, cloneing will definently prevent unintentional modifications to the game board 
-		return board;
-	}
+        currentlySelectedPiece.SetPosition(to);
+        moveTime = Time.time;
+        isPieceMove = true;
 
-	public Board GetBoardClone()
-	{
-		return DeepCopy.Copy(board) as Board;
-	}
+        DrawPiece.ClearHighlight();
+        drawBoard.ClearHighlights();
+    }
 
-	public Move MovePiece(Move move)
-	{
-		return null;
-	}
+    [ClientRpc]
+    private void RpcMark(Vector3 from, Vector3 to)
+    {
+        currentlySelectedPiece = board.GetPieceAt(from);
+        board.Mark(to, currentlySelectedPiece);
+        board.UnMark(from);
+        movePieceTo = movePieceFrom = localFrom = localTo = Vector3.down;
+    }
 
-	public void UndoMove(Move move)
-	{
-	}
-	public bool EndConditionReached()
-	{
-		return false;
-	}
+    [Command]
+    private void CmdMark(Vector3 from, Vector3 to)
+    {
+        RpcMark(from, to);
+    }
 
-	//not sure if this is needed
-	public Vector2 GetNonCapturedPieceAt(Vector2 pos)
-	{
-		if (IsNonCapturedPieceAt (pos)) 
-		{
-			return pos;
-		}
-		return new Vector2 (-1, -1);//invalid position for now
-	}
+    private void TookPiece()
+    {
+        if (moveModel.Overlapped)
+        {
+            var pieceBeingTaken = board.GetPieceAt(movePieceTo);
+            pieces.Remove(pieceBeingTaken);
+            capturedPieces.Add(pieceBeingTaken);
+        }
+    }
 
-	public bool IsNonCapturedPieceAt(Vector2 pos)
-	{
-		if (board.IsOccupied (pos)) 
-		{
-			var p = board.GetPieceAt (pos);
-			if (p == null)
-				return false;
-			else
-				if (!p.IsTaken ())
-					return true;
-		}
-		return false;
-	}
-	public GameState GetGameState()
-	{
-		return gameState;
-	} 
+    private void SwitchTurn()
+    {
+        if (gameState.getState() == ChessGlobals.GameState.WHITE_TURN)
+        {
+            gameState.setState(ChessGlobals.GameState.BLACK_TURN);
+        }
+        else if (gameState.getState() == ChessGlobals.GameState.BLACK_TURN)
+        {
+            gameState.setState(ChessGlobals.GameState.WHITE_TURN);
+        }
+    }
 
-	private int GetStateOfGame()
-	{
-		return gameState.getState ();
-	}
+    private void SwitchTurnDisplay()
+    {
+        if (gameState.getState() == ChessGlobals.GameState.WHITE_TURN)
+        {
+            turnDisplay.text = "Black Turn";
+            SwitchTurn();
+        }
+        else if (gameState.getState() == ChessGlobals.GameState.BLACK_TURN)
+        {
+            turnDisplay.text = "White Turn";
+            SwitchTurn();
+        }
+    }
+
+    private Piece CreatePiece(PIECE_TYPES pieceType)
+    {
+        if (pieceType == PIECE_TYPES.KING)
+        {
+            return new King();
+        }
+        else if (pieceType == PIECE_TYPES.QUEEN)
+        {
+            return new Queen();
+        }
+        else if (pieceType == PIECE_TYPES.ROOK)
+        {
+            return new Rook();
+        }
+        else if (pieceType == PIECE_TYPES.BISHOP)
+        {
+            return new Bishop();
+        }
+        else if (pieceType == PIECE_TYPES.KNIGHT)
+        {
+            return new Knight();
+        }
+        else //if (pieceType == PIECE_TYPES.PAWN) 
+        {
+            return new Pawn();
+        }
+    }
+
+    private Piece CreatePieceAt(PIECE_TYPES pieceType, Vector2 pos, bool team)
+    {
+        var piece = CreatePiece(pieceType);
+        piece.SetPosition((int)pos.x, (int)pos.y);
+        return piece;
+    }
+
+    public Piece CreatePieceAt(PIECE_TYPES pieceType, Vector2 pos, int team)
+    {
+        Piece piece = CreatePiece(pieceType);
+        piece.SetPosition((int)pos.x, (int)pos.y);
+        piece.SetTeam(team);
+        return piece;
+    }
+
+    public void SwapActivePlayer()
+    {
+        if (activePlayer == whitePlayer)
+            activePlayer = blackPlayer;
+        else if (activePlayer == blackPlayer)
+            activePlayer = whitePlayer;
+    }
+
+    public void SetPlayer(Player whitePlayer, Player blackPlayer)
+    {
+        this.whitePlayer = whitePlayer;
+        this.blackPlayer = blackPlayer;
+    }
+
+    public List<Piece> GetPieces()
+    {
+        return pieces;
+    }
+
+    public Board GetBoard()
+    {
+        //because some bs with c# and const, cloneing will definently prevent unintentional modifications to the game board 
+        return board;
+    }
+
+    public Board GetBoardClone()
+    {
+        return DeepCopy.Copy(board) as Board;
+    }
+
+    public Move MovePiece(Move move)
+    {
+        return null;
+    }
+
+    public void UndoMove(Move move)
+    {
+    }
+
+    public bool EndConditionReached()
+    {
+        return false;
+    }
+
+    //not sure if this is needed
+    public Vector2 GetNonCapturedPieceAt(Vector2 pos)
+    {
+        if (IsNonCapturedPieceAt(pos))
+        {
+            return pos;
+        }
+        return new Vector2(-1, -1);//invalid position for now
+    }
+
+    public bool IsNonCapturedPieceAt(Vector2 pos)
+    {
+        if (board.IsOccupied(pos))
+        {
+            var p = board.GetPieceAt(pos);
+            if (p == null)
+                return false;
+            else
+                if (!p.IsTaken())
+                return true;
+        }
+        return false;
+    }
+    /* public GameState GetGameState()
+     {
+         return gameState;
+     }
+
+     private int GetStateOfGame()
+     {
+         return gameState.getState();
+     }*/
+
+    void OnDisconnectedFromServer(NetworkDisconnection info)
+    {
+        Debug.Log("asdfa");
+    }
 }
