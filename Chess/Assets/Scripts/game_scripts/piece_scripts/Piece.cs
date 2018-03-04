@@ -98,6 +98,42 @@ public class Piece
             pieceTeam = pieceTeam
         };
     }
+
+    //*****Helper*****
+    public bool CheckMove(Board cloneChessBoard, Vector2 testMove)
+    {
+
+        cloneChessBoard.Mark(testMove, this);
+        cloneChessBoard.UnMark(GetPiecePosition());
+
+        cloneChessBoard.UpdateBoardThreat();
+
+        if (GetTeam() == Teams.WHITE_TEAM)
+        {
+            return KingInCheck.IsWhiteInCheck();
+        }
+        else
+        {
+            return KingInCheck.IsBlackInCheck();
+        }
+    }
+
+    public List<Vector2> CheckLegalMoves(Board boardClone, List<Vector2> currentLegalMoves)
+    {
+        List<Vector2> newLegalMoves = new List<Vector2>();
+        Board boardCopy = DeepCopy.Copy(boardClone);
+
+            foreach (Vector2 move in currentLegalMoves)
+            {
+                //When checkMove is false, the current teams king is not in check and the move is valid
+                if (CheckMove(boardCopy, move) == false)
+                {
+                    newLegalMoves.Add(move);
+                }
+            }
+        return newLegalMoves;
+    }
+
 }
 
 [Serializable]
@@ -231,7 +267,39 @@ public class King : Piece
             }
         }
 
-        return positions;
+
+
+        return LegalMovesCheck(chessBoard, positions);
+    }
+
+    public List<Vector2> LegalMovesCheck(Board chessBoard, List<Vector2> positionsBeforeCheck)
+    {
+
+        List<Vector2> positionsAfterCheck = new List<Vector2>();
+
+        //For Black King
+        if (GetTeam() == Teams.BLACK_TEAM)
+        {
+            foreach (Vector2 move in positionsBeforeCheck)
+            {
+                if (chessBoard.GetSquare(move).getWhiteThreat() == false)
+                {
+                    positionsAfterCheck.Add(move);
+                }
+            }
+        }
+        //For White King
+        else
+        {
+            foreach (Vector2 move in positionsBeforeCheck)
+            {
+                if (chessBoard.GetSquare(move).getBlackThreat() == false)
+                {
+                    positionsAfterCheck.Add(move);
+                }
+            }
+        }
+        return positionsAfterCheck;
     }
 }
 
@@ -247,7 +315,7 @@ public class Knight : Piece
     public override List<Vector2> LegalMoves(Board chessBoard)
     {
         List<Vector2> positions = new List<Vector2>();
-
+        List<Vector2> validPositions = new List<Vector2>();
 
 
         int xCord = GetPiecePositionX();
@@ -374,6 +442,7 @@ public class Knight : Piece
                 }
             }
         }
+
         return positions;
     }
 }

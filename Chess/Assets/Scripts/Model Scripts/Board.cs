@@ -1,24 +1,29 @@
 ﻿/*
  * Name: Akobir Khamidov & Arom Zinhart DeGraca
- * =
  * */
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Assertions;
 using System;
-
+using System.Collections.Generic;
 using ChessGlobals;
+
+
 
 [Serializable]
 public class Board
 {
 	private Square[,] squares;
+    private List<Piece> capturedPieces;
+    private List<Piece> activePieces;
 
 	public Board()
     {
 		int rows = BoardConstants.BOARD_MAXIMUM + 1;
 		int cols = BoardConstants.BOARD_MAXIMUM + 1;
 		squares = new Square[rows, cols];
+        capturedPieces = new List<Piece>();
+        activePieces = new List<Piece>();
         //initialze to null
 		for (int row = BoardConstants.BOARD_MINIMUM; row <= BoardConstants.BOARD_MAXIMUM; ++row)
 			for (int col = BoardConstants.BOARD_MINIMUM; col <= BoardConstants.BOARD_MAXIMUM; ++col)
@@ -121,9 +126,35 @@ public class Board
 		return GetPieceAt (new Vector2 (x, y));
 	}
 
+    public Square GetSquare(int xCord, int yCord)
+    {
+        return squares[xCord, yCord];
+    }
+
+    public Square GetSquare(Vector2 position)
+    {
+		return GetSquare ((int)position.x, (int)position.y);
+    }
+        
     public Board Clone()
     {
         return DeepCopy.Copy(this) as Board;
+    }
+
+    public List<Piece> GetActivePieces()
+    {
+        return activePieces;
+    }
+
+    public void AddActivePiece(Piece newPiece)
+    {
+        activePieces.Add(newPiece);
+    }
+
+    public void CaptureActivePiece(Piece takenPiece)
+    {
+        activePieces.Remove(takenPiece);
+        capturedPieces.Add(takenPiece);
     }
 
 	public override string ToString()
@@ -139,5 +170,31 @@ public class Board
         }
         return b;
 	}
+
+    public void UpdateBoardThreat()
+    {
+        List<Piece> activePieces = new List<Piece>();
+        activePieces.AddRange(GetActivePieces());
+
+        for (int row = BoardConstants.BOARD_MINIMUM; row <= BoardConstants.BOARD_MAXIMUM; row++)
+        {
+            for (int column = BoardConstants.BOARD_MINIMUM; column <= BoardConstants.BOARD_MAXIMUM; column++)
+            {
+                GetSquare(row, column).setBlackThreat(false);
+                GetSquare(row, column).setWhiteThreat(false);
+            }
+        }
+
+        foreach (Piece inPlay in activePieces)
+        {
+            foreach (Vector2 moves in inPlay.LegalMoves(this))
+            {
+                if (inPlay.GetTeam() == Teams.BLACK_TEAM)
+                    GetSquare(moves).setBlackThreat(true);
+                else
+                    GetSquare(moves).setWhiteThreat(true);
+            }
+        }
+    }
 }
 
