@@ -92,7 +92,7 @@ public class MoveModel : MonoBehaviour {
         }
     }
 
-    private Collider[] GetOverLappingColliders(Vector3 position)
+    private static Collider[] GetOverLappingColliders(Vector3 position)
     {
         return Physics.OverlapSphere(new Vector3(position.x + MODEL_OFFSET, MODEL_OFFSET, position.y + MODEL_OFFSET), MODEL_OFFSET);
     }
@@ -134,5 +134,21 @@ public class MoveModel : MonoBehaviour {
             }
         }
         else overlapped = false;
+    }
+
+    public static GameObject CheckAt(Vector2 at)
+    {
+        Collider[] cols = GetOverLappingColliders(at);
+        if (cols.Length > 0)
+        {
+            foreach (Collider c in cols)
+            {
+                if (c.transform.tag == "ChessPiece")
+                {
+                    return c.gameObject;
+                }
+            }
+        }
+        return null;
     }
 }

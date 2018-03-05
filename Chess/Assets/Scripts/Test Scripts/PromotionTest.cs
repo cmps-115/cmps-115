@@ -6,18 +6,19 @@ public class PromotionTest : MonoBehaviour {
 
     public GameObject PromoteMenu;
     public GameObject PromoteButton;
-    public void promote()
+
+    public void Promote()
     {
-        pauseGame();
+        PauseGame();
     }
 
-    public void button_clicked(string name)
+    public void Button_clicked(string name)
     {
         Debug.Log(name + " button was clicked");
-        resumeGame();
+        ResumeGame();
     }
 
-    public void pauseGame()
+    public void PauseGame()
     {
         Time.timeScale = 0f;
         PromoteMenu.SetActive(true);
@@ -25,7 +26,7 @@ public class PromotionTest : MonoBehaviour {
         Input.GetKeyDown(KeyCode.Escape);
     }
 
-    public void resumeGame()
+    public void ResumeGame()
     {
         Time.timeScale = 1f;
         PromoteMenu.SetActive(false);

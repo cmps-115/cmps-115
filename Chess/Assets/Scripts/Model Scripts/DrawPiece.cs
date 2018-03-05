@@ -83,6 +83,39 @@ public class DrawPiece : MonoBehaviour {
 		return new Tuple2<ListOfPieceTypesAndPositions, ListOfPieceTypesAndPositions>(initialBlackTeamPositions, initialWhiteTeamPositions);
     }
 
+    public void ChangeModelType(Vector2 pos, string type, int team)
+    {
+        GameObject new_Model = null;
+        if (type == "Rook")
+        {
+            new_Model = castle;
+        }
+        else if (type == "Bishop")
+        {
+            new_Model = bishop;
+        }
+        else if (type == "Queen")
+        {
+            new_Model = queen;
+        }
+        else if (type == "Knight")
+        {
+            new_Model = knight;
+        }
+
+        Material mat = firstTeam;
+        if (team == Teams.BLACK_TEAM)
+        {
+            mat = secondTeam;
+        }
+
+        Vector3 newPos = new Vector3(pos.x + MODEL_OFFSET, MODEL_OFFSET_Y, pos.y + MODEL_OFFSET);
+        Destroy(MoveModel.CheckAt(pos));
+        new_Model.transform.position = newPos;
+        new_Model.GetComponent<MeshRenderer>().material = mat;
+        Instantiate(new_Model);
+    }
+
     #region Place Teams
     private GameObject Spawn(int x, int y, GameObject model)
     {
