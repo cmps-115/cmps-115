@@ -102,11 +102,12 @@ public class Piece
     //*****Helper*****
     public bool CheckMove(Board cloneChessBoard, Vector2 testMove)
     {
+        Debug.Log("Current piece position: " + GetPiecePosition() + " Move being tested: " + testMove);
 
-        cloneChessBoard.Mark(testMove, this);
-        cloneChessBoard.UnMark(GetPiecePosition());
-
-        cloneChessBoard.UpdateBoardThreat();
+        cloneChessBoard.UpdateBoardThreat(this, testMove);
+        
+        Debug.Log("White Check: " + KingInCheck.IsWhiteInCheck());
+        Debug.Log("Black check: " + KingInCheck.IsBlackInCheck());
 
         if (GetTeam() == Teams.WHITE_TEAM)
         {
@@ -122,15 +123,29 @@ public class Piece
     {
         List<Vector2> newLegalMoves = new List<Vector2>();
         Board boardCopy = DeepCopy.Copy(boardClone);
+        bool wasBlackinCheck = KingInCheck.IsBlackInCheck();
+        bool wasWhiteinCheck = KingInCheck.IsWhiteInCheck();
 
+
+        int selectedPiece = boardClone.GetActivePieces().IndexOf(this);
+        Piece selectedCopy = boardCopy.GetActivePieces()[selectedPiece];
+        
+
+        Debug.Log("Current legal moves are: ");
             foreach (Vector2 move in currentLegalMoves)
             {
+            Debug.Log(move);
                 //When checkMove is false, the current teams king is not in check and the move is valid
-                if (CheckMove(boardCopy, move) == false)
+                if (selectedCopy.CheckMove(boardCopy, move) == false)
                 {
                     newLegalMoves.Add(move);
                 }
             }
+
+        KingInCheck.SetBlackCheck(wasBlackinCheck);
+        KingInCheck.SetWhiteCheck(wasWhiteinCheck);
+
+
         return newLegalMoves;
     }
 
@@ -268,10 +283,10 @@ public class King : Piece
         }
 
 
-
-        return LegalMovesCheck(chessBoard, positions);
+        return positions;
+        //return LegalMovesCheck(chessBoard, positions);
     }
-
+    /*
     public List<Vector2> LegalMovesCheck(Board chessBoard, List<Vector2> positionsBeforeCheck)
     {
 
@@ -301,6 +316,7 @@ public class King : Piece
         }
         return positionsAfterCheck;
     }
+    */
 }
 
 [Serializable]
@@ -315,8 +331,6 @@ public class Knight : Piece
     public override List<Vector2> LegalMoves(Board chessBoard)
     {
         List<Vector2> positions = new List<Vector2>();
-        List<Vector2> validPositions = new List<Vector2>();
-
 
         int xCord = GetPiecePositionX();
         int yCord = GetPiecePositionY();

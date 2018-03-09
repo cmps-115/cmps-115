@@ -1,6 +1,5 @@
 ﻿/*
  * Name: Akobir Khamidov & Arom Zinhart DeGraca
- * =
  * */
 using UnityEngine;
 using UnityEngine.UI;
@@ -134,9 +133,9 @@ public class Board
 
     public Square GetSquare(Vector2 position)
     {
-        return squares[(int)position.x, (int)position.y];
+		return GetSquare ((int)position.x, (int)position.y);
     }
-        
+            
     public Board Clone()
     {
         return DeepCopy.Copy(this) as Board;
@@ -145,6 +144,11 @@ public class Board
     public List<Piece> GetActivePieces()
     {
         return activePieces;
+    }
+
+    public List<Piece> GetInactivePieces()
+    {
+        return capturedPieces;
     }
 
     public void AddActivePiece(Piece newPiece)
@@ -172,10 +176,39 @@ public class Board
         return b;
 	}
 
-    public void UpdateBoardThreat()
+    public void UpdateBoardThreat(Piece testPiece, Vector2 testMove)
     {
         List<Piece> activePieces = new List<Piece>();
         activePieces.AddRange(GetActivePieces());
+        Debug.Log("updateBoard Called");
+        Vector2 originalPosition = Vector2.down;
+        Piece tempRemovedPiece = new Piece();
+
+
+        if (testPiece != null)
+        {
+            Debug.Log("Piece position is updated");
+            originalPosition = testPiece.GetPiecePosition();
+
+           
+            if (IsOccupied(testMove))
+            {
+                Debug.Log("Square is ocupied");
+                Debug.Log("capacity before remove section" + activePieces.Capacity);
+                tempRemovedPiece = GetPieceAt(testMove);
+                activePieces.Remove(tempRemovedPiece);
+                Debug.Log("capacity after remove section" + activePieces.Capacity);
+            }
+
+            testPiece.SetPosition(testMove);
+            Mark(testMove, testPiece);
+            UnMark(originalPosition);
+
+
+                      
+            Debug.Log(testPiece.GetPiecePosition());
+            Debug.Log(this);
+        }
 
         for (int row = BoardConstants.BOARD_MINIMUM; row <= BoardConstants.BOARD_MAXIMUM; row++)
         {
@@ -185,17 +218,61 @@ public class Board
                 GetSquare(row, column).setWhiteThreat(false);
             }
         }
+        Debug.Log("Reseting check values to false");
+        KingInCheck.SetBlackCheck(false);
+        KingInCheck.SetWhiteCheck(false);
 
         foreach (Piece inPlay in activePieces)
         {
+           
             foreach (Vector2 moves in inPlay.LegalMoves(this))
             {
+                
                 if (inPlay.GetTeam() == Teams.BLACK_TEAM)
-                    GetSquare(moves).setBlackThreat(true);
+                {
+                    squares[(int)moves.x, (int)moves.y].setBlackThreat(true);
+                    //GetSquare(moves).setBlackThreat(true);
+                    if(GetSquare(moves).isSquareOccupied())
+                    {
+                        if (GetSquare(moves).GetPiece().GetType() == typeof(King) && (GetSquare(moves).getBlackThreat() == true))
+                        {
+                            Debug.Log("Position of king being checked: " + inPlay.GetPiecePosition());
+                            Debug.Log("Move that threatens king: " + moves);
+                            Debug.Log("Set White check to true in update");
+                            KingInCheck.SetWhiteCheck(true);
+                        }    
+                    }
+                }
                 else
-                    GetSquare(moves).setWhiteThreat(true);
+                {
+                    squares[(int)moves.x, (int)moves.y].setWhiteThreat(true);
+                    //GetSquare(moves).setWhiteThreat(true);
+                    if(GetSquare(moves).isSquareOccupied())
+                    {
+                        if (GetSquare(moves).GetPiece().GetType() == typeof(King) && (GetSquare(moves).getWhiteThreat() == true))
+                        {
+                            Debug.Log("Position of king being checked: " + inPlay.GetPiecePosition());
+                            Debug.Log("Move that threatens king: " + moves);
+                            Debug.Log("Set black Check to true in update");
+                            KingInCheck.SetBlackCheck(true);
+                        }
+                    }
+                }
             }
         }
+        if(testPiece != null)
+        {
+            testPiece.SetPosition(originalPosition);
+            UnMark(testMove);
+            Mark(originalPosition, testPiece);
+            if (IsOccupied((int)testMove.x, (int)testMove.y))
+            {
+                activePieces.Add(tempRemovedPiece);
+            }
+        }
+
+
+
     }
 }
 
