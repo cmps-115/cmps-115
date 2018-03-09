@@ -119,7 +119,7 @@ public class DrawBoard : MonoBehaviour
         }
     }
 
-    public void Start()
+    public void InitBoard()
     {
 		meshRenderer = GetComponent<MeshRenderer>();
 		meshCollider = GetComponent<MeshCollider>();

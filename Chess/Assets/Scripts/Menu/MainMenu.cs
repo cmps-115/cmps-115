@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour {
     {
         SceneManager.LoadScene(1);
     }
+
     public void PlayVsPlayer()
     {
         SceneManager.LoadScene("ChessBoard");
@@ -18,7 +19,7 @@ public class MainMenu : MonoBehaviour {
     {
         SceneManager.LoadScene("PlayVSAI");
     }
-		
+
     public void QuitGame()
     {
         Debug.Log("QUIT!!!");

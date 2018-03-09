@@ -22,8 +22,6 @@ GameObject:
   - component: {fileID: 33935703594698738}
   - component: {fileID: 23375384360993590}
   - component: {fileID: 65059747833233786}
-  - component: {fileID: 114649033310806434}
-  - component: {fileID: 114680105511574632}
   m_Layer: 0
   m_Name: Castle
   m_TagString: ChessPiece
@@ -97,56 +95,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2440531, y: 1.3446132, z: 59.244568}
   m_Center: {x: -0.00000011377565, y: -0.04799572, z: 28.622278}
---- !u!114 &114649033310806434
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1487059702000314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 127
-    i1: 121
-    i2: 150
-    i3: 161
-    i4: 53
-    i5: 27
-    i6: 40
-    i7: 212
-    i8: 217
-    i9: 212
-    i10: 203
-    i11: 141
-    i12: 121
-    i13: 245
-    i14: 54
-    i15: 108
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
---- !u!114 &114680105511574632
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1487059702000314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.033333335
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1

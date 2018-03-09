@@ -14,15 +14,6 @@ public class AI: MonoBehaviour
 	private Board boardCopy;
     private Move bestMove;
     private bool thinking;
- 
-	/*public AI(ChessGameController cgs, int depth)//Rules now in each piece
-	{
-		Assert.AreNotEqual (cgs, null);
-		this.cgs = cgs;
-		this.depth = depth;
-		lastMove = null;
-	}*/
-
     public void Init(ChessGameController cgs, int depth)
     {
         this.cgs = cgs;
@@ -31,7 +22,6 @@ public class AI: MonoBehaviour
         bestMove = null;
         thinking = false;
     }
-
 
     public void SetMove (Move move)
 	{
