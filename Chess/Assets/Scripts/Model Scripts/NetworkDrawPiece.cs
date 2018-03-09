@@ -24,8 +24,8 @@ public class NetworkDrawPiece : NetworkBehaviour {
     public GameObject black_castle;
     public GameObject black_pawn;
 
-    public Material firstTeam;
-    public Material secondTeam;
+   // public Material firstTeam;
+   // public Material secondTeam;
 
     private static Vector2 piecePosition = new Vector2(-1, -1);
     private static Renderer pieceRenderer;
@@ -91,10 +91,10 @@ public class NetworkDrawPiece : NetworkBehaviour {
     }
 
     #region Place Teams
-    private GameObject Spawn(int x, int y, GameObject model, Material mat)
+    private GameObject Spawn(int x, int y, GameObject model/*, Material mat*/)
     {
         GameObject obj = Instantiate(model, new Vector3(x + MODEL_OFFSET, MODEL_OFFSET_Y, y + MODEL_OFFSET), model.transform.rotation);
-        obj.GetComponent<MeshRenderer>().material = mat;
+        //obj.GetComponent<MeshRenderer>().material = mat;
         CmdNetworkSpawn(obj);
         return obj;
     }
@@ -116,7 +116,7 @@ public class NetworkDrawPiece : NetworkBehaviour {
                 if (y == 1)
                 {
                     if (isServer)
-                        model = Spawn(x, y, white_pawn, firstTeam);
+                        model = Spawn(x, y, white_pawn/*, firstTeam*/);
                     PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition(PIECE_TYPES.PAWN, new Vector2(x, y));
                     positions.Add(typeAndPos);
                 }
@@ -125,35 +125,35 @@ public class NetworkDrawPiece : NetworkBehaviour {
                     if (x == 0 || x == 7)
                     {
                         if (isServer)
-                            model = Spawn(x, y, white_castle, firstTeam);
+                            model = Spawn(x, y, white_castle/*, firstTeam*/);
                         PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition(PIECE_TYPES.ROOK, new Vector2(x, y));
                         positions.Add(typeAndPos);
                     }
                     else if (x == 1 || x == 6)
                     {
                         if (isServer)
-                            model = Spawn(x, y, white_knight, firstTeam);
+                            model = Spawn(x, y, white_knight/*, firstTeam*/);
                         PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition(PIECE_TYPES.KNIGHT, new Vector2(x, y));
                         positions.Add(typeAndPos);
                     }
                     else if (x == 2 || x == 5)
                     {
                         if (isServer)
-                            model = Spawn(x, y, white_bishop, firstTeam);
+                            model = Spawn(x, y, white_bishop/*, firstTeam*/);
                         PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition(PIECE_TYPES.BISHOP, new Vector2(x, y));
                         positions.Add(typeAndPos);
                     }
                     else if (x == 3)
                     {
                         if (isServer)
-                            model = Spawn(x, y, white_king, firstTeam);
+                            model = Spawn(x, y, white_king/*, firstTeam*/);
                         PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition(PIECE_TYPES.KING, new Vector2(x, y));
                         positions.Add(typeAndPos);
                     }
                     else if (x == 4)
                     {
                         if (isServer)
-                            model = Spawn(x, y, white_queen, firstTeam);
+                            model = Spawn(x, y, white_queen/*, firstTeam*/);
                         PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition(PIECE_TYPES.QUEEN, new Vector2(x, y));
                         positions.Add(typeAndPos);
                     }
@@ -174,7 +174,7 @@ public class NetworkDrawPiece : NetworkBehaviour {
                 if (y == 6)
                 {
                     if (isServer)
-                        model = Spawn(x, y, black_pawn, secondTeam);
+                        model = Spawn(x, y, black_pawn/*, secondTeam*/);
                     PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition(PIECE_TYPES.PAWN, new Vector2(x, y));
                     positions.Add(typeAndPos);
                 }
@@ -183,35 +183,35 @@ public class NetworkDrawPiece : NetworkBehaviour {
                     if (x == 0 || x == 7)
                     {
                         if (isServer)
-                            model = Spawn(x, y, black_castle, secondTeam);
+                            model = Spawn(x, y, black_castle/*, secondTeam*/);
                         PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition(PIECE_TYPES.ROOK, new Vector2(x, y));
                         positions.Add(typeAndPos);
                     }
                     else if (x == 1 || x == 6)
                     {
                         if (isServer)
-                            model = Spawn(x, y, black_knight, secondTeam);
+                            model = Spawn(x, y, black_knight/*, secondTeam*/);
                         PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition(PIECE_TYPES.KNIGHT, new Vector2(x, y));
                         positions.Add(typeAndPos);
                     }
                     else if (x == 2 || x == 5)
                     {
                         if (isServer)
-                            model = Spawn(x, y, black_bishop, secondTeam);
+                            model = Spawn(x, y, black_bishop/*, secondTeam*/);
                         PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition(PIECE_TYPES.BISHOP, new Vector2(x, y));
                         positions.Add(typeAndPos);
                     }
                     else if (x == 3)
                     {
                         if (isServer)
-                            model = Spawn(x, y, black_king, secondTeam);
+                            model = Spawn(x, y, black_king/*, secondTeam*/);
                         PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition(PIECE_TYPES.KING, new Vector2(x, y));
                         positions.Add(typeAndPos);
                     }
                     else if (x == 4)
                     {
                         if (isServer)
-                            model = Spawn(x, y, black_queen, secondTeam);
+                            model = Spawn(x, y, black_queen/*, secondTeam*/);
                         PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition(PIECE_TYPES.QUEEN, new Vector2(x, y));
                         positions.Add(typeAndPos);
                     }
