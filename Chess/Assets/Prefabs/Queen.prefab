@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 33701479271759838}
   - component: {fileID: 23582531101166442}
   - component: {fileID: 65062779534529538}
+  - component: {fileID: 114962409482364820}
+  - component: {fileID: 114633767055306792}
   m_Layer: 0
   m_Name: Queen
   m_TagString: ChessPiece
@@ -95,3 +97,56 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5341113, y: 0.9140383, z: 26.153843}
   m_Center: {x: 0.015482041, y: 0.006744143, z: 12.0769205}
+--- !u!114 &114633767055306792
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1960596109958534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.033333335
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
+--- !u!114 &114962409482364820
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1960596109958534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 180
+    i1: 196
+    i2: 192
+    i3: 23
+    i4: 31
+    i5: 164
+    i6: 86
+    i7: 228
+    i8: 154
+    i9: 245
+    i10: 208
+    i11: 103
+    i12: 191
+    i13: 49
+    i14: 100
+    i15: 213
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
