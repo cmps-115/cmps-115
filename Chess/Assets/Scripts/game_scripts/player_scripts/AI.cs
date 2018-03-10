@@ -14,6 +14,7 @@ public class AI: MonoBehaviour
 	private Board boardCopy;
     private Move bestMove;
     private bool thinking;
+
     public void Init(ChessGameController cgs, int depth)
     {
         this.cgs = cgs;
@@ -49,11 +50,13 @@ public class AI: MonoBehaviour
 		boardCopy.Mark (move.des, move.piece);
         boardCopy.UnMark(move.src);
 	}
+
 	private void UndoMove(Move move)
 	{
 		Assert.AreNotEqual (boardCopy, null);
 		boardCopy.UnMark (move);
 	}
+
 	public Move GetBestMove()
 	{
 		//get current board
@@ -110,7 +113,7 @@ public class AI: MonoBehaviour
 
 	private List<Move> GenerateAllLegalMoves()
 	{
-		List<Piece> allPieces = cgs.GetPieces ();
+		List<Piece> allPieces = cgs.GetPieces(boardCopy);
 		List<Move> allValidMoves = new List<Move>();
 		List<Vector2> validMovesForASinglePiece = null;
 		for (int i = 0; i < allPieces.Count; ++i) 
@@ -140,7 +143,7 @@ public class AI: MonoBehaviour
 	{
 		int whitePlayerScore = 0;
 		int blackPlayerScore = 0;
-		foreach (Piece piece in this.cgs.GetPieces()) 
+		foreach (Piece piece in cgs.GetPieces(boardCopy)) 
 		{
 			if (piece.GetTeam () ==  ChessGlobals.Teams.BLACK_TEAM) 
 			{
@@ -158,7 +161,7 @@ public class AI: MonoBehaviour
 			}
 
 		}
-		ChessGlobals.GameState gameState = this.cgs.GetGameState ();
+		ChessGlobals.GameState gameState = cgs.GetGameState ();
 		if (gameState.getState() == ChessGlobals.GameState.BLACK_TURN)
 			return blackPlayerScore - whitePlayerScore;
 		else if (gameState.getState() == ChessGlobals.GameState.WHITE_TURN)

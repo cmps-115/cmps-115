@@ -9,8 +9,9 @@ using ChessGlobals;
 public class ChessGameControllerLAN : NetworkBehaviour
 {
 
-    [SerializeField]
-    private DrawBoard drawBoard;
+    [SerializeField] private DrawBoard drawBoard;
+    public GameObject promoteMenu;
+    private DrawPiece drawPiece;
     private Board board;
     private List<Piece> pieces;
 
@@ -41,14 +42,20 @@ public class ChessGameControllerLAN : NetworkBehaviour
     private Vector3 secondCameraPos;
     private Vector3 secondCameraRot;
 
+    protected bool promoteMenuActive = false;
+    protected string promoteType = "";
+
+    private const int SECOND_CAMERA_DIST = 13;
+    private const int SECOND_CAMERA_ROT = 180;
+
     public override void OnStartLocalPlayer()
     {
         secondCameraPos = Camera.main.transform.position;
         secondCameraRot = Camera.main.transform.eulerAngles;
         if (!isServer)
         {
-            secondCameraPos.z = 13;
-            secondCameraRot.y = 180;
+            secondCameraPos.z = SECOND_CAMERA_DIST;
+            secondCameraRot.y = SECOND_CAMERA_ROT;
         }
         Camera.main.transform.position = secondCameraPos;
         Camera.main.transform.eulerAngles = secondCameraRot;
@@ -61,7 +68,8 @@ public class ChessGameControllerLAN : NetworkBehaviour
             gameState = new GameState(GameState.WHITE_TURN);
 
         drawBoard = GameObject.Find("Draw Board").GetComponent<DrawBoard>();
-        turnDisplay = GameObject.Find("Text").GetComponent<Text>();
+        turnDisplay = GameObject.FindGameObjectWithTag("Text").GetComponent<Text>();
+        promoteMenu = GameObject.FindGameObjectWithTag("PromoteMenu");
         board = NetworkBoard.GetBoard;
         pieces = NetworkBoard.GetPieces;
 
@@ -70,6 +78,9 @@ public class ChessGameControllerLAN : NetworkBehaviour
         //Initialize Movement Model
         moveModel = GetComponent<NetworkMoveModel>();
         capturedPieces = new List<Piece>();
+
+        //if (isLocalPlayer)
+            //promoteMenu.SetActive(false);
     }
 
 
@@ -82,18 +93,13 @@ public class ChessGameControllerLAN : NetworkBehaviour
         bool pieceDoneMoving = Time.time - moveTime > waitTime && isPieceMove == true;
         if (pieceDoneMoving)
         {
-            //startMoveTime = Time.time;
             isPieceMove = false;
-            if (isServer)
-                RpcMsg();
-            else
-                CmdMsg();
+            if (isServer) RpcMsg();
+            else CmdMsg();
         }
 
-        if (isServer)
-            RpcUpdate();
-        else
-            CmdUpdate();
+        if (isServer) RpcUpdate();
+        else CmdUpdate();
     }
 
     [ClientRpc]
@@ -124,6 +130,9 @@ public class ChessGameControllerLAN : NetworkBehaviour
             //here must disallow moving pieces to anywhere other than a legal square
             if (legalMovesForAPiece != null)
             {
+                foreach(Vector3 move in legalMovesForAPiece)
+                    Debug.Log(move);
+
                 movePieceTo = DrawBoard.IsClicked ? DrawBoard.SquarePosition : DrawPiece.PiecePosition;
                 localTo = movePieceTo;
                 DrawPiece.ClearHighlight();
@@ -140,6 +149,7 @@ public class ChessGameControllerLAN : NetworkBehaviour
                 else drawBoard.ClearHighlights();
                 if (!legalMovesForAPiece.Contains(localTo))
                 {
+                    currentlySelectedPiece = null;
                     movePieceTo = localTo = Vector3.down;
                 }
             }
@@ -149,14 +159,8 @@ public class ChessGameControllerLAN : NetworkBehaviour
         {
             if (isLocalPlayer)
             {
-                if (isServer)
-                {
-                    RpcSelectPiece();
-                }
-                else
-                {
-                    CmdSelectPiece();
-                }
+                if (isServer) RpcSelectPiece();
+                else CmdSelectPiece();
             }
         }
         // If the user has clicked on a space to move and a piece to move, move the piece and reset the vectors to numbers the user cannot choose.
@@ -200,10 +204,34 @@ public class ChessGameControllerLAN : NetworkBehaviour
             currentlySelectedPiece = board.GetPieceAt(movePieceFrom);
             legalMovesForAPiece = currentlySelectedPiece.LegalMoves(board);
             drawBoard.HighLightGrid(legalMovesForAPiece);
+
+            CheckingForCheck();
+
+            //TogglePromoteMenu(); //does not work for multiplayer.
         }
         else
         {
             movePieceFrom = Vector3.down;
+        }
+    }
+
+    protected void CheckingForCheck()
+    {
+        if (currentlySelectedPiece.GetTeam() == Teams.BLACK_TEAM)
+        {
+            if (KingInCheck.IsBlackInCheck() == true || board.GetSquare(currentlySelectedPiece.GetPiecePosition()).getWhiteThreat() == true || currentlySelectedPiece.GetType() == typeof(King))
+            {
+                print("Black King in check, or Square is thretened");
+                legalMovesForAPiece = currentlySelectedPiece.CheckLegalMoves(board, legalMovesForAPiece);
+            }
+        }
+        else
+        {
+            if (KingInCheck.IsWhiteInCheck() == true || board.GetSquare(currentlySelectedPiece.GetPiecePosition()).getBlackThreat() == true || currentlySelectedPiece.GetType() == typeof(King))
+            {
+                print("White King is in check, or square is threatened");
+                legalMovesForAPiece = currentlySelectedPiece.CheckLegalMoves(board, legalMovesForAPiece);
+            }
         }
     }
 
@@ -223,10 +251,8 @@ public class ChessGameControllerLAN : NetworkBehaviour
         moveModel.MovePiece(from, to);
         TookPiece();
 
-        if (isServer)
-            RpcMark(from, to);
-        else
-            CmdMark(from, to);
+        if (isServer) RpcMark(from, to);
+        else CmdMark(from, to);
 
         currentlySelectedPiece.SetPosition(to);
         moveTime = Time.time;
@@ -234,12 +260,18 @@ public class ChessGameControllerLAN : NetworkBehaviour
 
         DrawPiece.ClearHighlight();
         drawBoard.ClearHighlights();
+
+        board.UpdateBoardThreat(null, Vector2.down);
     }
 
     [ClientRpc]
     private void RpcMark(Vector3 from, Vector3 to)
     {
         currentlySelectedPiece = board.GetPieceAt(from);
+
+        if (currentlySelectedPiece == null)
+            return;
+
         board.Mark(to, currentlySelectedPiece);
         board.UnMark(from);
         movePieceTo = movePieceFrom = localFrom = localTo = Vector3.down;
@@ -256,10 +288,41 @@ public class ChessGameControllerLAN : NetworkBehaviour
         if (moveModel.Overlapped)
         {
             var pieceBeingTaken = board.GetPieceAt(movePieceTo);
-            pieces.Remove(pieceBeingTaken);
-            capturedPieces.Add(pieceBeingTaken);
+            board.CaptureActivePiece(pieceBeingTaken);
         }
     }
+
+    protected void TogglePromoteMenu()
+    {
+        if (Promote.IsPromotable(currentlySelectedPiece))
+        {
+            promoteMenu.SetActive(true);
+        }
+        else
+        {
+            promoteMenu.SetActive(false);
+        }
+    }
+
+    protected virtual void PromoteMenuSelect()
+    {
+        print(currentlySelectedPiece.GetPiecePosition());
+        if (currentlySelectedPiece.GetTeam() == -1) return;
+
+        board.Mark(currentlySelectedPiece.GetPiecePosition(), Promote.Promotes(promoteType, (Pawn)currentlySelectedPiece));
+        drawPiece.ChangeModelType(currentlySelectedPiece.GetPiecePosition(), promoteType, currentlySelectedPiece.GetTeam());
+        DrawPiece.ClearHighlight();
+        promoteMenu.SetActive(false);
+        SwitchTurnDisplay();
+    }
+
+    public void PromoteMenuListener(string button_name)
+    {
+        print("dfgds");
+        promoteType = button_name;
+        PromoteMenuSelect();
+    }
+
 
     private void SwitchTurn()
     {
@@ -344,9 +407,9 @@ public class ChessGameControllerLAN : NetworkBehaviour
         this.blackPlayer = blackPlayer;
     }
 
-    public List<Piece> GetPieces()
+    public List<Piece> GetPieces(Board chessBoard)
     {
-        return pieces;
+        return chessBoard.GetActivePieces();
     }
 
     public Board GetBoard()

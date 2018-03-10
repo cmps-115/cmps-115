@@ -7,6 +7,8 @@ TagManager:
   - ChessPiece
   - ChessBoard
   - Queen
+  - Text
+  - PromoteMenu
   layers:
   - Default
   - TransparentFX

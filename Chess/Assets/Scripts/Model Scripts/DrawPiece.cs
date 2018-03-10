@@ -88,19 +88,19 @@ public class DrawPiece : MonoBehaviour {
         GameObject new_Model = null;
         if (type == "Rook")
         {
-            new_Model = castle;
+            new_Model = Instantiate(castle);
         }
         else if (type == "Bishop")
         {
-            new_Model = bishop;
+            new_Model = Instantiate(bishop);
         }
         else if (type == "Queen")
         {
-            new_Model = queen;
+            new_Model = Instantiate(queen);
         }
         else if (type == "Knight")
         {
-            new_Model = knight;
+            new_Model = Instantiate(knight);
         }
 
         Material mat = firstTeam;
@@ -112,8 +112,7 @@ public class DrawPiece : MonoBehaviour {
         Vector3 newPos = new Vector3(pos.x + MODEL_OFFSET, MODEL_OFFSET_Y, pos.y + MODEL_OFFSET);
         Destroy(MoveModel.CheckAt(pos));
         new_Model.transform.position = newPos;
-        new_Model.GetComponent<MeshRenderer>().material = mat;
-        Instantiate(new_Model);
+        new_Model.GetComponent<Renderer>().material = mat;
     }
 
     #region Place Teams

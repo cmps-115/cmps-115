@@ -65,6 +65,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawBoard: {fileID: 0}
+  drawPiece: {fileID: 0}
+  promoteMenu: {fileID: 0}
   turnDisplay: {fileID: 0}
 --- !u!114 &114721885333950790
 MonoBehaviour:

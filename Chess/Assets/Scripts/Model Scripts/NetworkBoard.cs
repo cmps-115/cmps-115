@@ -25,8 +25,8 @@ public class NetworkBoard : NetworkBehaviour
             board.Mark(blackPiece.GetPiecePosition(), blackPiece);
             board.Mark(whitePiece.GetPiecePosition(), whitePiece);
 
-            pieces.Add(whitePiece);
-            pieces.Add(blackPiece);
+            board.AddActivePiece(whitePiece);
+            board.AddActivePiece(blackPiece);
         }
     }
 

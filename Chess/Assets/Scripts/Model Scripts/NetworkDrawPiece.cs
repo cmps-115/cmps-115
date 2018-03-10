@@ -94,7 +94,7 @@ public class NetworkDrawPiece : NetworkBehaviour {
     private GameObject Spawn(int x, int y, GameObject model, Material mat)
     {
         GameObject obj = Instantiate(model, new Vector3(x + MODEL_OFFSET, MODEL_OFFSET_Y, y + MODEL_OFFSET), model.transform.rotation);
-        obj.GetComponent<MeshRenderer>().material = mat;
+        obj.GetComponent<Renderer>().material = mat;
         CmdNetworkSpawn(obj);
         return obj;
     }

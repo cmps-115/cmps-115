@@ -61,4 +61,11 @@ public class ChessGameControllerPVP : ChessGameController
     {
         Camera.main.transform.position = Vector3.Lerp(firstCameraPos, secondCameraPos, dTime);
     }
+
+    protected override void PromoteMenuSelect()
+    {
+        base.PromoteMenuSelect();
+        startMoveTime = Time.time;
+        SwitchCamera();
+    }
 }

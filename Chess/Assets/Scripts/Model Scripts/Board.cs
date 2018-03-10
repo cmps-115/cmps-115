@@ -13,26 +13,26 @@ using ChessGlobals;
 [Serializable]
 public class Board
 {
-	private Square[,] squares;
+    private Square[,] squares;
     private List<Piece> capturedPieces;
     private List<Piece> activePieces;
 
-	public Board()
+    public Board()
     {
-		int rows = BoardConstants.BOARD_MAXIMUM + 1;
-		int cols = BoardConstants.BOARD_MAXIMUM + 1;
-		squares = new Square[rows, cols];
+        int rows = BoardConstants.BOARD_MAXIMUM + 1;
+        int cols = BoardConstants.BOARD_MAXIMUM + 1;
+        squares = new Square[rows, cols];
         capturedPieces = new List<Piece>();
         activePieces = new List<Piece>();
         //initialze to null
-		for (int row = BoardConstants.BOARD_MINIMUM; row <= BoardConstants.BOARD_MAXIMUM; ++row)
-			for (int col = BoardConstants.BOARD_MINIMUM; col <= BoardConstants.BOARD_MAXIMUM; ++col)
-				squares[row,col] = new Square();
-	}
+        for (int row = BoardConstants.BOARD_MINIMUM; row <= BoardConstants.BOARD_MAXIMUM; ++row)
+            for (int col = BoardConstants.BOARD_MINIMUM; col <= BoardConstants.BOARD_MAXIMUM; ++col)
+                squares[row, col] = new Square();
+    }
 
-	//all other mark overloads are forwarded here
-	public void Mark(Vector2 position, Piece piece)
-	{
+    //all other mark overloads are forwarded here
+    public void Mark(Vector2 position, Piece piece)
+    {
         if (piece == null)
         {
             Debug.Log("tried to mark null");
@@ -40,7 +40,7 @@ public class Board
         }
 
         int row = (int)position.x;
-		int col = (int)position.y;
+        int col = (int)position.y;
         if (position.x >= BoardConstants.BOARD_MINIMUM && position.y >= BoardConstants.BOARD_MINIMUM && position.x <= BoardConstants.BOARD_MAXIMUM && position.y <= BoardConstants.BOARD_MAXIMUM)
         {
             if (IsOccupied(position))
@@ -56,75 +56,75 @@ public class Board
                 squares[row, col] = new Square(position, piece, BoardConstants.OCCUPIED_SQUARE);
             }
         }
-	}
+    }
 
-	public void Mark(Move move)
-	{
-		Mark (move.des, move.piece);
-	}
+    public void Mark(Move move)
+    {
+        Mark(move.des, move.piece);
+    }
 
-	public void Mark(int x, int y, Piece piece)
-	{
-		Mark (new Vector2 (x, y), piece);
-	}
+    public void Mark(int x, int y, Piece piece)
+    {
+        Mark(new Vector2(x, y), piece);
+    }
 
-	public void UnMark(Move move)
-	{
-		UnMark (move.des);
-		Mark (move.src, move.piece);
-	}
+    public void UnMark(Move move)
+    {
+        UnMark(move.des);
+        Mark(move.src, move.piece);
+    }
 
-	public void UnMark(Vector2 position)
-	{
-		UnMark((int)position.x, (int)position.y);
-	}
+    public void UnMark(Vector2 position)
+    {
+        UnMark((int)position.x, (int)position.y);
+    }
 
-	public void UnMark(int x, int y)
-	{
+    public void UnMark(int x, int y)
+    {
         if (x >= BoardConstants.BOARD_MINIMUM && y >= BoardConstants.BOARD_MINIMUM && x <= BoardConstants.BOARD_MAXIMUM && y <= BoardConstants.BOARD_MAXIMUM)
         {
             squares[x, y].setPiece(null);
             squares[x, y].setOccupied(false);
         }
-	}
+    }
 
-	public void Clear()
-	{
-		for (int row = BoardConstants.BOARD_MINIMUM; row <= BoardConstants.BOARD_MAXIMUM; ++row)
-			for (int col = BoardConstants.BOARD_MINIMUM; col <= BoardConstants.BOARD_MAXIMUM; ++col)
-				UnMark (row, col);
-	}
-	//all other overloads forwarded here
-	public bool IsOccupied (int x, int y)
-	{
+    public void Clear()
+    {
+        for (int row = BoardConstants.BOARD_MINIMUM; row <= BoardConstants.BOARD_MAXIMUM; ++row)
+            for (int col = BoardConstants.BOARD_MINIMUM; col <= BoardConstants.BOARD_MAXIMUM; ++col)
+                UnMark(row, col);
+    }
+    //all other overloads forwarded here
+    public bool IsOccupied(int x, int y)
+    {
         if (x >= BoardConstants.BOARD_MINIMUM && y >= BoardConstants.BOARD_MINIMUM && x <= BoardConstants.BOARD_MAXIMUM && y <= BoardConstants.BOARD_MAXIMUM)
             return squares[x, y].isSquareOccupied();
         else return false;
-	}
+    }
 
-	public bool IsOccupied (Vector2 position)
+    public bool IsOccupied(Vector2 position)
     {
         if (position.x >= BoardConstants.BOARD_MINIMUM && position.y >= BoardConstants.BOARD_MINIMUM && position.x <= BoardConstants.BOARD_MAXIMUM && position.y <= BoardConstants.BOARD_MAXIMUM)
             return IsOccupied((int)position.x, (int)position.y);
         else return false;
-	}
+    }
 
-	public Piece GetPieceAt(Vector2 pos)
-	{
-		if (IsOccupied (pos)) 
-		{	
-			return squares [(int)pos.x, (int)pos.y].GetPiece ();
-		} 
-		else 
-		{
-			return null;
-		}
-	}
+    public Piece GetPieceAt(Vector2 pos)
+    {
+        if (IsOccupied(pos))
+        {
+            return squares[(int)pos.x, (int)pos.y].GetPiece();
+        }
+        else
+        {
+            return null;
+        }
+    }
 
-	public Piece GetPieceAt(int x, int y)
-	{
-		return GetPieceAt (new Vector2 (x, y));
-	}
+    public Piece GetPieceAt(int x, int y)
+    {
+        return GetPieceAt(new Vector2(x, y));
+    }
 
     public Square GetSquare(int xCord, int yCord)
     {
@@ -133,9 +133,9 @@ public class Board
 
     public Square GetSquare(Vector2 position)
     {
-		return GetSquare ((int)position.x, (int)position.y);
+        return GetSquare((int)position.x, (int)position.y);
     }
-        
+
     public Board Clone()
     {
         return DeepCopy.Copy(this) as Board;
@@ -144,6 +144,11 @@ public class Board
     public List<Piece> GetActivePieces()
     {
         return activePieces;
+    }
+
+    public List<Piece> GetInactivePieces()
+    {
+        return capturedPieces;
     }
 
     public void AddActivePiece(Piece newPiece)
@@ -157,8 +162,8 @@ public class Board
         capturedPieces.Add(takenPiece);
     }
 
-	public override string ToString()
-	{
+    public override string ToString()
+    {
         string b = "";
         for (int i = BoardConstants.BOARD_MINIMUM; i <= BoardConstants.BOARD_MAXIMUM; ++i)
         {
@@ -169,12 +174,32 @@ public class Board
             }
         }
         return b;
-	}
+    }
 
-    public void UpdateBoardThreat()
+    public void UpdateBoardThreat(Piece testPiece, Vector2 testMove)
     {
         List<Piece> activePieces = new List<Piece>();
         activePieces.AddRange(GetActivePieces());
+        Vector2 originalPosition = Vector2.down;
+        Piece tempRemovedPiece = new Piece();
+
+
+        if (testPiece != null)
+        {
+            originalPosition = testPiece.GetPiecePosition();
+
+
+            if (IsOccupied(testMove))
+            {
+                tempRemovedPiece = GetPieceAt(testMove);
+                activePieces.Remove(tempRemovedPiece);
+            }
+
+            testPiece.SetPosition(testMove);
+            Mark(testMove, testPiece);
+            UnMark(originalPosition);
+
+        }
 
         for (int row = BoardConstants.BOARD_MINIMUM; row <= BoardConstants.BOARD_MAXIMUM; row++)
         {
@@ -185,16 +210,53 @@ public class Board
             }
         }
 
+        KingInCheck.SetBlackCheck(false);
+        KingInCheck.SetWhiteCheck(false);
+
         foreach (Piece inPlay in activePieces)
         {
+
             foreach (Vector2 moves in inPlay.LegalMoves(this))
             {
+
                 if (inPlay.GetTeam() == Teams.BLACK_TEAM)
-                    GetSquare(moves).setBlackThreat(true);
+                {
+                    squares[(int)moves.x, (int)moves.y].setBlackThreat(true);
+                    //GetSquare(moves).setBlackThreat(true);
+                    if (GetSquare(moves).isSquareOccupied())
+                    {
+                        if (GetSquare(moves).GetPiece().GetType() == typeof(King) && (GetSquare(moves).getBlackThreat() == true))
+                        {
+                            KingInCheck.SetWhiteCheck(true);
+                        }
+                    }
+                }
                 else
-                    GetSquare(moves).setWhiteThreat(true);
+                {
+                    squares[(int)moves.x, (int)moves.y].setWhiteThreat(true);
+                    //GetSquare(moves).setWhiteThreat(true);
+                    if (GetSquare(moves).isSquareOccupied())
+                    {
+                        if (GetSquare(moves).GetPiece().GetType() == typeof(King) && (GetSquare(moves).getWhiteThreat() == true))
+                        {
+                            KingInCheck.SetBlackCheck(true);
+                        }
+                    }
+                }
             }
         }
+        if (testPiece != null)
+        {
+            testPiece.SetPosition(originalPosition);
+            UnMark(testMove);
+            Mark(originalPosition, testPiece);
+            if (IsOccupied((int)testMove.x, (int)testMove.y))
+            {
+                activePieces.Add(tempRemovedPiece);
+            }
+        }
+
+
+
     }
 }
-
