@@ -264,6 +264,7 @@ public class DrawPiece : MonoBehaviour {
         }
         clicked = false;
     }
+
 	private void Update()
 	{
 		if (highlighted)
@@ -278,5 +279,5 @@ public class DrawPiece : MonoBehaviour {
 		var sin = dThickness * Mathf.Sin(HIGHLIGHT_FREQUENCY * Time.time);
 		var thickness = (OUTLINE_THICKNESS - dThickness / 2) + sin;
 		mat.SetFloat("_OutlineWidth", thickness);
-	}
+    }
 }

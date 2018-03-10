@@ -44,6 +44,7 @@ public class NetworkDrawPiece : NetworkBehaviour {
 
     public static void HighlightPiece()
     {
+        print(pieceRenderer);
         if (pieceRenderer != null)
         {
             highlighted = true;

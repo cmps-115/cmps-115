@@ -199,14 +199,15 @@ public class ChessGameControllerLAN : NetworkBehaviour
 
         if (selectedTeamPiece && playersTurn)
         {
-            DrawPiece.HighlightPiece();
-            drawBoard.HighLightGrid(movePieceFrom);
+
             currentlySelectedPiece = board.GetPieceAt(movePieceFrom);
             legalMovesForAPiece = currentlySelectedPiece.LegalMoves(board);
+            DrawPiece.HighlightPiece();
+            drawBoard.HighLightGrid(movePieceFrom);
             drawBoard.HighLightGrid(legalMovesForAPiece);
 
             CheckingForCheck();
-
+         
             //TogglePromoteMenu(); //does not work for multiplayer.
         }
         else

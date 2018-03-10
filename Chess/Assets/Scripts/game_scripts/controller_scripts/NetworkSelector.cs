@@ -16,8 +16,6 @@ public class NetworkSelector : MonoBehaviour {
 
         manager = GetComponent<NetworkManagerHUD>();
 
-        print(UINetworkManager.Host);
-
         if (UINetworkManager.Host)
             manager.manager.StartHost();
         else
