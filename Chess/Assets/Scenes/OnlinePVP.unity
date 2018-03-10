@@ -1908,6 +1908,7 @@ GameObject:
   - component: {fileID: 1172243412}
   - component: {fileID: 1172243411}
   - component: {fileID: 1172243413}
+  - component: {fileID: 1172243414}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -1972,6 +1973,18 @@ MonoBehaviour:
     i15: 0
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &1172243414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1172243410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b8f12042c68efc48a7777d65562504a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 0}
 --- !u!1 &1246375162
 GameObject:
   m_ObjectHideFlags: 0
@@ -2932,6 +2945,7 @@ GameObject:
   - component: {fileID: 1949047321}
   - component: {fileID: 1949047320}
   - component: {fileID: 1949047319}
+  - component: {fileID: 1949047322}
   m_Layer: 0
   m_Name: Network Manager
   m_TagString: Untagged
@@ -2951,7 +2965,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 0}
-  showGUI: 1
+  showGUI: 0
   offsetX: 0
   offsetY: 0
 --- !u!114 &1949047320
@@ -3061,3 +3075,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1949047322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1949047318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b8f12042c68efc48a7777d65562504a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 1949047319}
