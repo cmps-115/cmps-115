@@ -5,12 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Menu.unity
     guid: e51b06405e9c7644694021c3ec75d5a7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ChessBoard.unity
     guid: da834bd2a18289e4dba3802c8bfe08d4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PlayVSAI.unity
     guid: b373cc3da4f79ee4ea9eeccdbfa7313a
+  - enabled: 1
+    path: Assets/Scenes/OnlinePVP.unity
+    guid: 04b08bd039dc9470e94da69505ad038a

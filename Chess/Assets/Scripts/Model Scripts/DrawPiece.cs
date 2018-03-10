@@ -9,9 +9,9 @@ using UnityEngine;
 using ChessGlobals;
 
 //Shorten & Clarify Declarations 
-using PieceTypeAndPosition = ChessGlobals.Tuple2<ChessGlobals.PIECE_TYPES,UnityEngine.Vector2>;
-using ListOfPieceTypesAndPositions =  System.Collections.Generic.List< ChessGlobals.Tuple2<ChessGlobals.PIECE_TYPES,UnityEngine.Vector2> >;
-
+using PieceTypeAndPosition = ChessGlobals.Tuple2<ChessGlobals.PIECE_TYPES, UnityEngine.Vector2>;
+using ListOfPieceTypesAndPositions = System.Collections.Generic.List<ChessGlobals.Tuple2<ChessGlobals.PIECE_TYPES, UnityEngine.Vector2>>;
+using System;
 
 public class DrawPiece : MonoBehaviour {
 
@@ -227,6 +227,7 @@ public class DrawPiece : MonoBehaviour {
         }
 		return positions;
     }
+
     #endregion
 
 

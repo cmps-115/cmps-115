@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 33874830260939024}
   - component: {fileID: 23663916529378564}
   - component: {fileID: 65433859936135796}
+  - component: {fileID: 114887685733648906}
+  - component: {fileID: 114444783802317252}
   m_Layer: 0
   m_Name: King
   m_TagString: ChessPiece
@@ -95,3 +97,56 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.9827869, y: 0.99890155, z: 39.634823}
   m_Center: {x: -0.0068080714, y: 0.043013185, z: 18.817415}
+--- !u!114 &114444783802317252
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1697479962958710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.033333335
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
+--- !u!114 &114887685733648906
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1697479962958710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 42
+    i1: 163
+    i2: 33
+    i3: 37
+    i4: 114
+    i5: 72
+    i6: 93
+    i7: 52
+    i8: 235
+    i9: 209
+    i10: 199
+    i11: 176
+    i12: 47
+    i13: 238
+    i14: 157
+    i15: 85
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1

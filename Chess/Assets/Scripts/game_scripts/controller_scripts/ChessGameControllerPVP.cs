@@ -32,13 +32,6 @@ public class ChessGameControllerPVP : ChessGameController
             SwitchCamera();
     }
 
-    protected override void PromoteMenuSelect()
-    {
-        base.PromoteMenuSelect();
-        startMoveTime = Time.time;
-        SwitchCamera();
-    }
-
     protected void SwitchCamera()
     {
         var deltaTime = Time.time - startMoveTime;

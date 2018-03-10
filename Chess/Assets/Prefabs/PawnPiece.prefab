@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 33078588366783494}
   - component: {fileID: 23169139585530046}
   - component: {fileID: 65390043225314122}
+  - component: {fileID: 114253816076643822}
+  - component: {fileID: 114138744490371444}
   m_Layer: 0
   m_Name: PawnPiece
   m_TagString: ChessPiece
@@ -95,3 +97,56 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0347791, y: 0.61538696, z: 36.674118}
   m_Center: {x: -0.003751714, y: -0.0016440935, z: 17.337059}
+--- !u!114 &114138744490371444
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1802495202245792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.033333335
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
+--- !u!114 &114253816076643822
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1802495202245792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 217
+    i1: 104
+    i2: 67
+    i3: 74
+    i4: 43
+    i5: 193
+    i6: 19
+    i7: 68
+    i8: 171
+    i9: 59
+    i10: 162
+    i11: 60
+    i12: 44
+    i13: 40
+    i14: 198
+    i15: 60
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
