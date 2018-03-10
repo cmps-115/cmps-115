@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.29715562, g: 0.24628273, b: 0.23252651, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2359,8 +2359,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawBoard: {fileID: 1200306486}
   drawPiece: {fileID: 918973864}
-  PromoteMenu: {fileID: 0}
-  turnDisplay: {fileID: 0}
+  PromoteMenu: {fileID: 1979282543}
+  turnDisplay: {fileID: 1304103618}
 --- !u!4 &1857079510
 Transform:
   m_ObjectHideFlags: 0
