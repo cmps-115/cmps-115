@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4408252709609680}
   - component: {fileID: 114721885333950790}
   - component: {fileID: 114138395437881688}
+  - component: {fileID: 114570777804308322}
   m_Layer: 0
   m_Name: ChessController
   m_TagString: Untagged
@@ -52,6 +53,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d973d623864be114bae3d611a64d55ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114570777804308322
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1416531342394892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17be8169c8db7b949850689c5b70efbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawBoard: {fileID: 0}
+  turnDisplay: {fileID: 0}
 --- !u!114 &114721885333950790
 MonoBehaviour:
   m_ObjectHideFlags: 1
