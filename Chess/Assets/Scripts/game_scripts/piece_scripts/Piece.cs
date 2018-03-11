@@ -129,7 +129,6 @@ public class Piece
         Debug.Log("Current legal moves are: ");
         foreach (Vector2 move in currentLegalMoves)
         {
-            Debug.Log(move);
             //When checkMove is false, the current teams king is not in check and the move is valid
             if (selectedCopy.CheckMove(boardCopy, move) == false)
             {
