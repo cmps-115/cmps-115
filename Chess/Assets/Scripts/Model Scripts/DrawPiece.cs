@@ -155,13 +155,13 @@ public class DrawPiece : MonoBehaviour {
 						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.BISHOP, new Vector2 (x, y));
 						positions.Add (typeAndPos);
                     }
-                    else if (x == 3)
+                    else if (x == 4)
                     {
                         model = Spawn(x, y, king);
 						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.KING, new Vector2 (x, y));
 						positions.Add (typeAndPos);
                     }
-                    else if (x == 4)
+                    else if (x == 3)
                     {
                         model = Spawn(x, y, queen);
 						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.QUEEN, new Vector2 (x, y));
@@ -208,13 +208,13 @@ public class DrawPiece : MonoBehaviour {
 						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.BISHOP, new Vector2 (x, y));
 						positions.Add (typeAndPos);
                     }
-                    else if (x == 3)
+                    else if (x == 4)
                     {
                         model = Spawn(x, y, king);
 						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.KING, new Vector2 (x, y));
 						positions.Add (typeAndPos);
                     }
-                    else if (x == 4)
+                    else if (x == 3)
                     {
                         model = Spawn(x, y, queen);
 						PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition (PIECE_TYPES.QUEEN, new Vector2 (x, y));

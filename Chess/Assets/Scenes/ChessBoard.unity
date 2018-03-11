@@ -402,11 +402,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -876,7 +876,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1703796291}
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
@@ -1217,11 +1217,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -1321,7 +1321,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1703796291}
         m_MethodName: LoadMenu
         m_Mode: 1
         m_Arguments:
@@ -2312,8 +2312,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87d693c0d2499fe4da7ffc43180f477a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tint1: {fileID: 2100000, guid: 8a5f7a5bcc22a4246b1ee41616deb668, type: 2}
-  tint2: {fileID: 2100000, guid: 630a22d63b58d78419781ef1ec6e63ba, type: 2}
+  tint1: {fileID: 2100000, guid: 630a22d63b58d78419781ef1ec6e63ba, type: 2}
+  tint2: {fileID: 2100000, guid: 8a5f7a5bcc22a4246b1ee41616deb668, type: 2}
   tintColor: {r: 0.08245026, g: 0.44852942, b: 0.1304193, a: 0}
 --- !u!4 &1200306487
 Transform:
@@ -2349,10 +2349,10 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 630a22d63b58d78419781ef1ec6e63ba, type: 2}
   - {fileID: 2100000, guid: 8a5f7a5bcc22a4246b1ee41616deb668, type: 2}
-  - {fileID: 2100000, guid: 04622432660deaf45922b2858e2f408f, type: 2}
+  - {fileID: 2100000, guid: 630a22d63b58d78419781ef1ec6e63ba, type: 2}
   - {fileID: 2100000, guid: a6f54c85fc5ce684ebc98ac9c403e559, type: 2}
+  - {fileID: 2100000, guid: 04622432660deaf45922b2858e2f408f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3455,11 +3455,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
