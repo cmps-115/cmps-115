@@ -9,6 +9,7 @@ TagManager:
   - Queen
   - Text
   - PromoteMenu
+  - EndGame
   layers:
   - Default
   - TransparentFX

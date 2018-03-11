@@ -5,19 +5,21 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine.Assertions;
 using ChessGlobals;
+using TMPro;
 
 public class ChessGameControllerLAN : NetworkBehaviour
 {
 
     [SerializeField] private DrawBoard drawBoard;
     public GameObject promoteMenu;
+    private GameObject endGameMenu;
     private DrawPiece drawPiece;
     private Board board;
     private List<Piece> pieces;
 
     private NetworkMoveModel moveModel;
 
-    public Text turnDisplay;
+    public TextMeshProUGUI turnDisplay;
 
     public Player whitePlayer;
     public Player blackPlayer;
@@ -68,8 +70,9 @@ public class ChessGameControllerLAN : NetworkBehaviour
             gameState = new GameState(GameState.WHITE_TURN);
 
         drawBoard = GameObject.Find("Draw Board").GetComponent<DrawBoard>();
-        turnDisplay = GameObject.FindGameObjectWithTag("Text").GetComponent<Text>();
+        turnDisplay = GameObject.FindGameObjectWithTag("Text").GetComponent<TextMeshProUGUI>();
         promoteMenu = GameObject.FindGameObjectWithTag("PromoteMenu");
+        endGameMenu = GameObject.FindGameObjectWithTag("EndGame");
         board = NetworkBoard.GetBoard;
         pieces = NetworkBoard.GetPieces;
 
@@ -234,6 +237,32 @@ public class ChessGameControllerLAN : NetworkBehaviour
                 legalMovesForAPiece = currentlySelectedPiece.CheckLegalMoves(board, legalMovesForAPiece);
             }
         }
+    }
+
+    protected void CheckMate()
+    {
+        if (KingInCheck.IsWhiteInCheck())
+        {
+            foreach (Piece whitePiece in GetPieces(board))
+            {
+                if (whitePiece.GetTeam() == Teams.WHITE_TEAM && whitePiece.CheckLegalMoves(board, whitePiece.LegalMoves(board)).Capacity > 0)
+                    return;
+            }
+        }
+
+        if (KingInCheck.IsBlackInCheck())
+        {
+            foreach (Piece blackPiece in GetPieces(board))
+            {
+                if (blackPiece.GetTeam() == Teams.BLACK_TEAM && blackPiece.CheckLegalMoves(board, blackPiece.LegalMoves(board)).Capacity > 0)
+                    return;
+            }
+        }
+
+        endGameMenu.SetActive(true);
+        print("No legal moves were found, the game is over");
+
+        return;
     }
 
     [Command]
