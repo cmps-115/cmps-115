@@ -9,8 +9,7 @@ public void Castle(Piece king, Piece rook)
   
     int kingPosX = kingPos.GetX();
     int rookPosX = rookPos.GetX();
-  
-    // is rook to the left or to the right of king?
+      // is rook to the left or to the right of king?
     int diff = kingPosx - rookPosx;
  
     bool legal = IsCastleLegal(kingPos, rookPos, diff);
