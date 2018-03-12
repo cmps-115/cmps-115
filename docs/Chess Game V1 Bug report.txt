@@ -12,3 +12,6 @@
 * Clicks will not always register on the Online Mode
 * Promote triggeres the turn after a pawn is placed on the last row
 * After promote is triggered check considerations stop working
+* Unhandle timeout in Multiplayer UI when waiting for a Client
+* Pieces do not load on multiple play and quits in Multiplayer mode
+
