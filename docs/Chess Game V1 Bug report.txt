@@ -9,3 +9,4 @@
 * Pause menu can be opened when promote window is open
 * Selecting and deselecting a piece too quickly can sometimes cause highlights for the piece’s movements to not appear on the board, but the movements are still possible
 * Check does not work on AI because implementation caused the game to be unplayably slow against the AI with check in place
+* Clicks will not always register on the Online Mode
