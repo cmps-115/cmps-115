@@ -13,7 +13,7 @@ public class ChessGameControllerPVP : ChessGameController
         base.Start();
         //set camera
         firstCameraPos = Camera.main.transform.position;
-        secondCameraPos = new Vector3(firstCameraPos.x, firstCameraPos.y, firstCameraPos.z + 18);
+        secondCameraPos = new Vector3(firstCameraPos.x, firstCameraPos.y, firstCameraPos.z + 15);
         firstCameraRot = Camera.main.transform.eulerAngles.y;
         secondCameraRot = Camera.main.transform.eulerAngles.y + 180;
     }
