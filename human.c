@@ -1,13 +1,13 @@
 
 // Human subclass for AI
 
-GetMove(){
-
+GetMove()
+{
     return currentMove;
 }
 
-MoveSuccessfullyExecuted(Move move){
-
+MoveSuccessfullyExecuted(Move move)
+{
     bool success = 1;
     Piece piece_moved = getPiece();
     
@@ -37,13 +37,13 @@ MoveSuccessfullyExecuted(Move move){
     return success;
 }
 
-GetID(){
-
+GetID()
+{
     return id;
 }
 
-GetColor(){
-
+GetColor()
+{
     return color;
 }
 
