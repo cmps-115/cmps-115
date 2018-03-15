@@ -7,14 +7,13 @@
 * After exiting a network game, problems occur when trying to join a new game
 * During network game, Check moves are still considered, but the board will highlight all moves on board even ones that would cause check, but you can’t select them as movements
 * Pause menu can be opened when promote window is open
-* Selecting and deselecting a piece too quickly can sometimes cause highlights for the piece’s movements to not appear on the board, but the movements are still possible
 * Check does not work on AI because implementation caused the game to be unplayably slow against the AI with check in place
 * Clicks will not always register on the Online Mode (More responsive on Mac).
 * Promote triggeres the turn after a pawn is placed on the last row
 * After promote is triggered check considerations stop working
 * Unhandle timeout in Multiplayer UI when waiting for a Client
 * Pieces do not load on multiple play and quits in Multiplayer mode
-* In network play, the client can move a piece of the other team and use the turn of the host.
-* Client was able to move a pawn sideways
-*stands don't appear on Mac
-* Bishop moves for positions (x-n),(y-n) are always considered white moves
+* In network play, the client can move a piece of the other team and use the turn of the host could also take own piece.
+* Client was able to move a pawn sideways (only after bug in line 16 occurs)
+* Bishop moves for positions (x-n),(y-n) are always considered white moves (fixed in 1.1)
+* Reference error in AI after promoting a piece.
