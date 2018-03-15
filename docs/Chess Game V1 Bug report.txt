@@ -17,4 +17,4 @@
 * In network play, the client can move a piece of the other team and use the turn of the host.
 * Client was able to move a pawn sideways
 *stands don't appear on Mac
-* early check on white by a bishop doesnt register
+* Bishop moves where positions (x-n),(y-n) dont register check
