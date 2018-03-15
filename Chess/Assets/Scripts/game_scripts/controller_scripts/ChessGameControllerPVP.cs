@@ -22,7 +22,7 @@ public class ChessGameControllerPVP : ChessGameController
     {
         base.Update();
         bool pieceDoneMoving = Time.time - moveTime > waitTime && isPieceMove == true;
-        if (pieceDoneMoving)
+        if (pieceDoneMoving && !promoteMenu.activeSelf)
         {
             startMoveTime = Time.time;
             SwitchTurnDisplay();

@@ -144,14 +144,14 @@ public class NetworkDrawPiece : NetworkBehaviour {
                         PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition(PIECE_TYPES.BISHOP, new Vector2(x, y));
                         positions.Add(typeAndPos);
                     }
-                    else if (x == 3)
+                    else if (x == 4)
                     {
                         if (isServer)
                             model = Spawn(x, y, white_king, firstTeam);
                         PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition(PIECE_TYPES.KING, new Vector2(x, y));
                         positions.Add(typeAndPos);
                     }
-                    else if (x == 4)
+                    else if (x == 3)
                     {
                         if (isServer)
                             model = Spawn(x, y, white_queen, firstTeam);
@@ -202,14 +202,14 @@ public class NetworkDrawPiece : NetworkBehaviour {
                         PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition(PIECE_TYPES.BISHOP, new Vector2(x, y));
                         positions.Add(typeAndPos);
                     }
-                    else if (x == 3)
+                    else if (x == 4)
                     {
                         if (isServer)
                             model = Spawn(x, y, black_king, secondTeam);
                         PieceTypeAndPosition typeAndPos = new PieceTypeAndPosition(PIECE_TYPES.KING, new Vector2(x, y));
                         positions.Add(typeAndPos);
                     }
-                    else if (x == 4)
+                    else if (x == 3)
                     {
                         if (isServer)
                             model = Spawn(x, y, black_queen, secondTeam);

@@ -820,7 +820,7 @@ public class Bishop : Piece
             i2--;
         }
         // if the prev is occupied by a black piece
-        if (i1 > ChessGlobals.BoardConstants.BOARD_MINIMUM && i2 > ChessGlobals.BoardConstants.BOARD_MINIMUM)
+        if (i1 >= ChessGlobals.BoardConstants.BOARD_MINIMUM && i2 >= ChessGlobals.BoardConstants.BOARD_MINIMUM)
         {
             if (chessBoard.IsOccupied(i2, i1)) // not sure about this one Austin
             {
