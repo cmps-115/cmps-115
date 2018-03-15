@@ -13,7 +13,7 @@
 * After promote is triggered check considerations stop working
 * Unhandle timeout in Multiplayer UI when waiting for a Client
 * Pieces do not load on multiple play and quits in Multiplayer mode
-* In network play, the client can move a piece of the other team and use the turn of the host.
-* Client was able to move a pawn sideways
+* In network play, the client can move a piece of the other team and use the turn of the host could also take own piece.
+* Client was able to move a pawn sideways (only after bug in line 16 occurs)
 * Bishop moves for positions (x-n),(y-n) are always considered white moves (fixed in 1.1)
 * Reference error in AI after promoting a piece.
